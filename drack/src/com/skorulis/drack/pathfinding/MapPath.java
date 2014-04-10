@@ -4,12 +4,12 @@ import java.util.List;
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.map.MapSquare;
 
-public class ComputerPath {
+public class MapPath {
 
 	private List<PathNodeInfo> nodes;
 	private int nodeIndex;
 	
-	public ComputerPath(List<PathNodeInfo> nodes) {
+	public MapPath(List<PathNodeInfo> nodes) {
 		this.nodes = nodes;
 		nodeIndex = 0;
 	}

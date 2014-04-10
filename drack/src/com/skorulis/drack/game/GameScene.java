@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.avatar.Avatar;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
+import com.skorulis.drack.pathfinding.MapPath;
+import com.skorulis.drack.pathfinding.PathFinder;
 import com.skorulis.scene.SceneNode;
 
 public class GameScene implements SceneNode, Disposable {
@@ -27,7 +29,12 @@ public class GameScene implements SceneNode, Disposable {
 	public void nodeSelected(SceneNode node) {
 		if(node instanceof MapSquare) {
 			MapSquare sq = (MapSquare) node;
-			moveAvatar(sq.x(), sq.z());
+			MapSquare current = map.squareAt(avatar.absTransform().getTranslation(new Vector3()));
+			if(sq != current && sq.isPassable()) {
+				PathFinder finder = new PathFinder(map, current, sq);
+				MapPath path = finder.generatePath();
+				avatar.setPath(path);
+			}
 		}
 	}
 	

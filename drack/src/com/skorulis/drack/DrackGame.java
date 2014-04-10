@@ -91,6 +91,7 @@ public class DrackGame implements ApplicationListener {
 		float delta = Gdx.graphics.getDeltaTime();
 		
 		isoCam.update(delta);
+		scene.update(delta);
 	}
 
 	@Override

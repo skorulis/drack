@@ -22,7 +22,7 @@ public class PathFinder {
 		closedList = new ArrayList<PathNodeInfo>();
 	}
 	
-	public ComputerPath generatePath() {
+	public MapPath generatePath() {
 		PathNodeInfo pni = new PathNodeInfo(from);
 		pni.heuristic = calculateHeuristic(pni.square, to);
 		openList.add(pni);
@@ -41,14 +41,14 @@ public class PathFinder {
 		return null;
 	}
 	
-	private ComputerPath buildPath(PathNodeInfo pni) {
+	private MapPath buildPath(PathNodeInfo pni) {
 		ArrayList<PathNodeInfo> nodes = new ArrayList<PathNodeInfo>();
 		while(pni != null) {
 			nodes.add(pni);
 			pni = pni.parent;
 		}
 		Collections.reverse(nodes);
-		return new ComputerPath(nodes);
+		return new MapPath(nodes);
 	}
 	
 	private PathNodeInfo removeNext() {

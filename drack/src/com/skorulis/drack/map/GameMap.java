@@ -127,4 +127,14 @@ public class GameMap implements SceneNode, Disposable{
 		return new Vector3(this.width/2.0f, 0, this.depth/2.0f);
 	}
 	
+	public MapSquare squareAt(Vector3 loc) {
+		int x = Math.round(loc.x);
+		int z = Math.round(loc.z);
+		
+		if(x >= 0 && z >= 0 && x < width && z < depth) {
+			return squares[z][x];
+		}
+		return null;
+	}
+	
 }
