@@ -26,8 +26,6 @@ public class GameEventListener implements GestureListener {
 	public boolean tap(float x, float y, int count, int button) {
 		Ray ray = camera.cam().getPickRay(x, y);
 		SceneNode node = scene.intersect(ray, new Vector3());
-		System.out.println("RAY " + ray);
-		System.out.println("SQ " + node);
 		if(node != null) {
 			scene.nodeSelected(node);
 		}
