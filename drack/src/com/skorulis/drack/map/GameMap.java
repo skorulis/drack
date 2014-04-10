@@ -3,8 +3,10 @@ package com.skorulis.drack.map;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.scene.SceneNode;
 
@@ -45,6 +47,25 @@ public class GameMap implements SceneNode, Disposable{
 				squares[i][j].render(batch, environment);
 			}
 		}
+	}
+	
+	public MapSquare intersectRay(Ray ray) {
+		float bestDist = 100000;
+		MapSquare best = null;
+		Vector3 point = new Vector3();
+		for(int i = 0; i < depth; ++i) {
+			for(int j = 0; j < width; ++j) {
+				if(Intersector.intersectRayBounds(ray, squares[i][j].boundingBox(), point)) {
+					float dist = point.sub(ray.origin).len();
+					if(dist < bestDist) {
+						bestDist = dist;
+						best = squares[i][j];
+					}
+				}
+				
+			}
+		}
+		return best;
 	}
 
 	@Override

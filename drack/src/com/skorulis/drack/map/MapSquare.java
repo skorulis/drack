@@ -7,12 +7,14 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.skorulis.scene.SceneNode;
 
 public class MapSquare implements SceneNode {
 
 	private ModelInstance groundInstance;
 	private ModelInstance buildingInstance;
+	private BoundingBox boundingBox;
 	private final int x;
 	private final int z;
 	
@@ -20,16 +22,13 @@ public class MapSquare implements SceneNode {
 		this.x = x;
 		this.z = z;
 		groundInstance = new ModelInstance(assets.get("block", Model.class));
-		groundInstance.transform.setToTranslation(new Vector3(x, 0.5f, z));
-		
-		
+		groundInstance.transform.setToTranslation(new Vector3(x, -0.5f, z));
 		
 		if(x == 0 && z == 0) {
 			buildingInstance = new ModelInstance(assets.get("data/sphere.g3db",Model.class));
 			buildingInstance.transform.setToTranslation(x, 3, z);
-			
 		}
-		 
+		boundingBox = new BoundingBox(new Vector3(x-0.5f,-1,z-0.5f), new Vector3(x+0.5f,0,z+0.5f));
 	}
 	
 	@Override
@@ -56,6 +55,14 @@ public class MapSquare implements SceneNode {
 	
 	public int z() {
 		return z;
+	}
+	
+	public BoundingBox boundingBox() {
+		return boundingBox;
+	}
+	
+	public String toString() {
+		return "MS " + x + "," + z;
 	}
 	
 }

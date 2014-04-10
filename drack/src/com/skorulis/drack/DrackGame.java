@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.input.GestureDetector;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.gdx.SKAssetManager;
@@ -25,7 +26,8 @@ public class DrackGame implements ApplicationListener {
 	private GameMap level;
 	private DefManager def;
     
-    public InputMultiplexer inputPlexer;
+    private InputMultiplexer inputPlexer;
+    private GameEventListener eventListener;
 	
 	@Override
 	public void create() {
@@ -42,9 +44,11 @@ public class DrackGame implements ApplicationListener {
         loading = true;
         
         isoCam = new IsoPerspectiveCamera();
+        eventListener = new GameEventListener(isoCam);
+        inputPlexer = new InputMultiplexer(new GestureDetector(eventListener));
         
         //inputPlexer = new InputMultiplexer(isoCam);
-        //Gdx.input.setInputProcessor(inputPlexer);
+        Gdx.input.setInputProcessor(inputPlexer);
         
 	}
 	
@@ -52,6 +56,7 @@ public class DrackGame implements ApplicationListener {
         loading = false;
         assets.addAllModels(def.buildModels(assets));
         level = new GameMap(50,50,assets);
+        eventListener.setMap(level);
     }
 
 	@Override
