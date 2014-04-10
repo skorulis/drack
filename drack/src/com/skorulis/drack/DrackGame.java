@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
-import com.skorulis.drack.map.GameLevel;
+import com.skorulis.drack.map.GameMap;
 
 public class DrackGame implements ApplicationListener {
 	
@@ -22,7 +22,7 @@ public class DrackGame implements ApplicationListener {
     public AssetManager assets;
     public boolean loading;
     
-    public GameLevel level;
+    public GameMap level;
     
     public InputMultiplexer inputPlexer;
 	
@@ -35,7 +35,7 @@ public class DrackGame implements ApplicationListener {
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 
-        level = new GameLevel(25,25);
+        level = new GameMap(25,25);
                 
         loading = true;
         
