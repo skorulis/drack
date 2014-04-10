@@ -1,41 +1,50 @@
 package com.skorulis.drack;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.Material;
+import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.map.GameMap;
+import com.skorulis.gdx.SKAssetManager;
 
 public class DrackGame implements ApplicationListener {
 	
-	public IsoPanCamera isoCam;
-    public ModelBatch modelBatch;
-    public Environment environment;
-    public AssetManager assets;
-    public boolean loading;
+	private IsoPanCamera isoCam;
+	private ModelBatch modelBatch;
+	private Environment environment;
+	private SKAssetManager assets;
+	private boolean loading;
     
-    public GameMap level;
+	private GameMap level;
+	private DefManager def;
     
     public InputMultiplexer inputPlexer;
 	
 	@Override
 	public void create() {
 		modelBatch = new ModelBatch();
-		assets = new AssetManager();
-        
+		def = new DefManager();
+		assets = new SKAssetManager();
+		assets.load("data/cube1.g3db", Model.class);
+		assets.loadAll(def.allTextures(), Texture.class);
+		
         environment = new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
-
-        level = new GameMap(25,25);
                 
         loading = true;
         
@@ -48,6 +57,8 @@ public class DrackGame implements ApplicationListener {
 	
 	private void doneLoading() {
         loading = false;
+        assets.addAllModels(def.buildModels(assets));
+        level = new GameMap(25,25,assets);
     }
 
 	@Override
