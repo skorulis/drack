@@ -2,14 +2,17 @@ package com.skorulis.drack;
 
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
+import com.skorulis.scene.SceneNode;
 
 public class GameEventListener implements GestureListener {
 
 	private IsoPerspectiveCamera camera;
-	private GameMap map;
+	private GameScene scene;
 	
 	public GameEventListener(IsoPerspectiveCamera camera) {
 		this.camera = camera;
@@ -24,9 +27,9 @@ public class GameEventListener implements GestureListener {
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
 		Ray ray = camera.cam().getPickRay(x, y);
-		MapSquare square = map.intersectRay(ray);
+		SceneNode node = scene.intersect(ray, new Vector3());
 		System.out.println("RAY " + ray);
-		System.out.println("SQ " + square);
+		System.out.println("SQ " + node);
 		return false;
 	}
 
@@ -67,8 +70,8 @@ public class GameEventListener implements GestureListener {
 		return false;
 	}
 	
-	public void setMap(GameMap map) {
-		this.map = map;
+	public void setScene(GameScene scene) {
+		this.scene = scene;
 	}
 
 }

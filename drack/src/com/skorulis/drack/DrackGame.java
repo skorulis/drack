@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector;
 import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.gdx.SKAssetManager;
 
@@ -22,12 +23,12 @@ public class DrackGame implements ApplicationListener {
 	private Environment environment;
 	private SKAssetManager assets;
 	private boolean loading;
-    
-	private GameMap level;
+   
 	private DefManager def;
     
     private InputMultiplexer inputPlexer;
     private GameEventListener eventListener;
+    private GameScene scene;
 	
 	@Override
 	public void create() {
@@ -55,14 +56,14 @@ public class DrackGame implements ApplicationListener {
 	private void doneLoading() {
         loading = false;
         assets.addAllModels(def.buildModels(assets));
-        level = new GameMap(50,50,assets);
-        eventListener.setMap(level);
+        
+        scene = new GameScene(assets);
+        eventListener.setScene(scene);
     }
 
 	@Override
 	public void dispose() {
 		modelBatch.dispose();
-		level.dispose();
 		assets.clear();
 	}
 
@@ -82,7 +83,7 @@ public class DrackGame implements ApplicationListener {
 		
         isoCam.cam().update();
         modelBatch.begin(isoCam.cam());
-        level.render(modelBatch, environment);
+        scene.render(modelBatch, environment);
         modelBatch.end();
         
         update();
