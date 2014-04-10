@@ -11,30 +11,43 @@ import com.skorulis.scene.SceneNode;
 
 public class MapSquare implements SceneNode {
 
-	private ModelInstance instance;
+	private ModelInstance groundInstance;
+	private ModelInstance buildingInstance;
 	private final int x;
 	private final int z;
 	
 	public MapSquare(AssetManager assets,int x, int z) {
 		this.x = x;
 		this.z = z;
-		instance = new ModelInstance(assets.get("block", Model.class));
-		instance.transform.setToTranslation(new Vector3(x, 0.5f, z));
+		groundInstance = new ModelInstance(assets.get("block", Model.class));
+		groundInstance.transform.setToTranslation(new Vector3(x, 0.5f, z));
+		
+		
+		
+		if(x == 0 && z == 0) {
+			buildingInstance = new ModelInstance(assets.get("data/sphere.g3db",Model.class));
+			buildingInstance.transform.setToTranslation(x, 3, z);
+			
+		}
+		 
 	}
 	
 	@Override
 	public Matrix4 absTransform() {
-		return instance.transform;
+		return groundInstance.transform;
 	}
 
 	@Override
 	public Matrix4 relTransform() {
-		return instance.transform;
+		return groundInstance.transform;
 	}
 
 	@Override
 	public void render(ModelBatch batch, Environment environment) {
-		batch.render(instance,environment);
+		batch.render(groundInstance,environment);
+		if(buildingInstance != null) {
+			batch.render(buildingInstance, environment);
+		}
 	}
 
 	public int x() {

@@ -32,8 +32,8 @@ public class DrackGame implements ApplicationListener {
 		modelBatch = new ModelBatch();
 		def = new DefManager();
 		assets = new SKAssetManager();
-		assets.load("data/cube1.g3db", Model.class);
 		assets.loadAll(def.allTextures(), Texture.class);
+		assets.loadAll(def.allModels(), Model.class);
 		
         environment = new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
@@ -51,7 +51,7 @@ public class DrackGame implements ApplicationListener {
 	private void doneLoading() {
         loading = false;
         assets.addAllModels(def.buildModels(assets));
-        level = new GameMap(25,25,assets);
+        level = new GameMap(50,50,assets);
     }
 
 	@Override

@@ -23,6 +23,7 @@ public class IsoPanCamera implements InputProcessor {
 	
 	public void resizeViewport() {
 		cam = new OrthographicCamera(20, 20 * Gdx.graphics.getHeight() / Gdx.graphics.getWidth());
+		
         cam.near = 0.1f;
         cam.far = 100f;
         cam.position.set(5, 5, 10);

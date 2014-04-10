@@ -36,4 +36,15 @@ public class DefManager {
 		return textures;
 	}
 	
+	public Set<String> allModels() {
+		HashSet<String> models = new HashSet<String>();
+		models.add("data/cube1.g3db");
+		models.add("data/sphere.g3db");
+		models.add("data/hull1.g3db");
+		
+		return models;
+	}
+	
+	
+	
 }
