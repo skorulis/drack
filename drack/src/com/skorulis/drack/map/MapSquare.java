@@ -79,5 +79,11 @@ public class MapSquare implements SceneNode {
 		return buildingInstance == null;
 	}
 	
+	public Vector3 getCentreLoc() {
+		return new Vector3(x(), 0, z());
+	}
+	
+	
+	
 	
 }

@@ -1,5 +1,7 @@
 package com.skorulis.drack.map;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
@@ -90,6 +92,26 @@ public class GameMap implements SceneNode, Disposable{
 		}
 		
 		return best;
+	}
+	
+	public ArrayList<MapSquare> adjacentSquares(MapSquare square) {
+		int x = square.x();
+		int y = square.z();
+		
+		ArrayList<MapSquare> ret = new ArrayList<MapSquare>();
+		
+		for(int i = y - 1; i <= y + 1; ++i) {
+			for(int j = x - 1; j <= x + 1; ++j) {
+				if(i < 0 || i >= depth || j < 0 || j >= width) {
+					continue;
+				}
+				if(i == y && j == x) {
+					continue;
+				}
+				ret.add(squares[i][j]);
+			}
+		}
+		return ret;
 	}
 
 	@Override
