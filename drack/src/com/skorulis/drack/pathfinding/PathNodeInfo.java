@@ -7,8 +7,8 @@ public class PathNodeInfo {
 	
 	public PathNodeInfo parent;
 	public MapSquare square;
-	public int value;
-	public int heuristic;
+	public float value;
+	public float heuristic;
 	
 	public PathNodeInfo(MapSquare square) {
 		this.square = square;
@@ -19,7 +19,7 @@ public class PathNodeInfo {
 		this.parent = parent;
 	}
 	
-	public int score() {
+	public float score() {
 		return value + heuristic;
 	}
 	

@@ -111,20 +111,20 @@ public class PathFinder {
 		return s1.x() == s2.x() && s1.z() == s2.z();
 	}
 	
-	private int calculateHeuristic(MapSquare square, MapSquare dest) {
+	private float calculateHeuristic(MapSquare square, MapSquare dest) {
 		if(square == null) { throw new IllegalArgumentException("Missing from"); }
 		if(dest == null) { throw new IllegalArgumentException("Missing dest"); }
-		int x = (int) (dest.x() - square.x());
-		int y = (int) (dest.z() - square.z());
+		float x =  (dest.x() - square.x());
+		float y =  (dest.z() - square.z());
 		x = Math.abs(x);
 		y = Math.abs(y);
 		
-		int min = Math.min(x, y);
-		int max = Math.max(x, y);
+		float min = Math.min(x, y);
+		float max = Math.max(x, y);
 		
-		int diff = max - min;
+		float diff = max - min;
 		
-		return (int)(diff + (max - diff) * 1.4);
+		return (diff + (max - diff) * 1.41f);
 	}
 	
 }
