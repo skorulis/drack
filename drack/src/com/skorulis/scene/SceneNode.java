@@ -12,6 +12,7 @@ public interface SceneNode {
 	public Matrix4 relTransform();
 	public void render(ModelBatch batch, Environment environment);
 	public SceneNode intersect(Ray ray, Vector3 point);
+	public void update(float delta);
 	
 }
 

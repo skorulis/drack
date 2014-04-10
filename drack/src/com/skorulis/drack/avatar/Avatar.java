@@ -8,14 +8,27 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.skorulis.drack.pathfinding.ComputerPath;
+import com.skorulis.drack.pathfinding.MovementInfo;
 import com.skorulis.scene.SceneNode;
 
 public class Avatar implements SceneNode{
 
 	private ModelInstance instance;
+	private ComputerPath path;
+	private MovementInfo movement;
+	
+	private float speed = 2;
 	
 	public Avatar(AssetManager assets) {
 		instance = new ModelInstance(assets.get("data/cube1.g3db", Model.class));
+	}
+	
+	public void setPath(ComputerPath path) {
+		this.path = path;
+		if (movement == null) {
+			movement = path.getMovement(speed);
+		}
 	}
 	
 	@Override
@@ -31,6 +44,22 @@ public class Avatar implements SceneNode{
 	@Override
 	public void render(ModelBatch batch, Environment environment) {
 		batch.render(instance,environment);
+	}
+	
+	public void update(float delta) {
+		instance.transform.setTranslation(movement.update(delta));
+		if (movement.finished()) {
+			if (path.finished()) {
+				movement = null;
+				path = null;
+			} else {
+				if (movement.destSquare == path.nextNode()) {
+					movement = path.next(speed);
+				} else {
+					movement = path.getMovement(speed);
+				}
+			}
+		}
 	}
 
 	@Override

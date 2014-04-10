@@ -59,6 +59,10 @@ public class GameScene implements SceneNode, Disposable {
 		avatar.render(batch, environment);
 	}
 	
+	public void update(float delta) {
+		avatar.update(delta);
+	}
+	
 	public SceneNode intersect(Ray ray, Vector3 point) {
 		return map.intersect(ray, point);
 	}

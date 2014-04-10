@@ -51,6 +51,10 @@ public class MapSquare implements SceneNode {
 			batch.render(buildingInstance, environment);
 		}
 	}
+	
+	public void update(float delta) {
+		
+	}
 
 	public int x() {
 		return x;

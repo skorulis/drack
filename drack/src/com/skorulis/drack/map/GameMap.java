@@ -51,6 +51,10 @@ public class GameMap implements SceneNode, Disposable{
 		}
 	}
 	
+	public void update(float delta) {
+		
+	}
+	
 	public MapSquare intersectRay(Ray ray) {
 		float bestDist = 100000;
 		MapSquare best = null;
