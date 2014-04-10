@@ -43,7 +43,7 @@ public class GameMap implements SceneNode, Disposable{
 		modelInstance = new ModelInstance(model);
 		
 		Material material = new Material();
-		Texture texture = new Texture(Gdx.files.internal("data/square.png"));
+		Texture texture = new Texture(Gdx.files.internal("data/floor.png"));
 		material.set(new TextureAttribute(TextureAttribute.Diffuse, texture));
 		
 		ModelBuilder builder = new ModelBuilder();
@@ -85,7 +85,7 @@ public class GameMap implements SceneNode, Disposable{
         mesh.setIndices(new short[] { 0, 1, 2, 2, 3, 0 });
         
         Material material = new Material();
-		Texture texture = new Texture(Gdx.files.internal("data/square.png"));
+		Texture texture = new Texture(Gdx.files.internal("data/floor.png"));
 		texture.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
 		material.set(new TextureAttribute(TextureAttribute.Diffuse, texture));
         
