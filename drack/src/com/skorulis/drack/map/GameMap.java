@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
-import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
@@ -40,12 +38,7 @@ public class GameMap implements SceneNode, Disposable{
 		
 		transform = new Matrix4();
 		
-		Material material = new Material();
-		Texture texture = new Texture(Gdx.files.internal("data/floor.png"));
-		material.set(new TextureAttribute(TextureAttribute.Diffuse, texture));
-		
 		blockModel = assets.get("block", Model.class);
-		//blockModel = assets.get("data/cube1.g3db", Model.class);
 		
 		walls = new ArrayList<ModelInstance>();
 		for(int i = -1; i < width + 1; ++i) {
