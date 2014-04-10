@@ -15,7 +15,7 @@ public class Avatar implements SceneNode{
 	private ModelInstance instance;
 	
 	public Avatar(AssetManager assets) {
-		instance = new ModelInstance(assets.get("data/cone.g3db", Model.class));
+		instance = new ModelInstance(assets.get("data/cube1.g3db", Model.class));
 	}
 	
 	@Override
