@@ -25,12 +25,13 @@ public class MapSquare implements SceneNode {
 		this.z = z;
 		groundInstance = new ModelInstance(assets.get("block", Model.class));
 		groundInstance.transform.setToTranslation(new Vector3(x, -0.5f, z));
+		boundingBox = new BoundingBox(new Vector3(x-0.5f,-1,z-0.5f), new Vector3(x+0.5f,0,z+0.5f));
 		
 		if(x == 0 && z == 0) {
-			buildingInstance = new ModelInstance(assets.get("data/sphere.g3db",Model.class));
-			buildingInstance.transform.setToTranslation(x, 3, z);
+			//buildingInstance = new ModelInstance(assets.get("data/sphere.g3db",Model.class));
+			//buildingInstance.transform.setToTranslation(x, 3, z);
 		}
-		boundingBox = new BoundingBox(new Vector3(x-0.5f,-1,z-0.5f), new Vector3(x+0.5f,0,z+0.5f));
+		
 	}
 	
 	@Override

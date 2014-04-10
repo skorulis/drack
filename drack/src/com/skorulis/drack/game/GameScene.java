@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.avatar.Avatar;
 import com.skorulis.drack.map.GameMap;
+import com.skorulis.drack.map.MapSquare;
 import com.skorulis.scene.SceneNode;
 
 public class GameScene implements SceneNode, Disposable {
@@ -20,8 +21,28 @@ public class GameScene implements SceneNode, Disposable {
 	public GameScene(AssetManager assets) {
 		transform = new Matrix4();
 		map = new GameMap(50,50,assets);
+		avatar = new Avatar(assets);
 	}
 
+	public void nodeSelected(SceneNode node) {
+		if(node instanceof MapSquare) {
+			MapSquare sq = (MapSquare) node;
+			moveAvatar(sq.x(), sq.z());
+		}
+	}
+	
+	public void moveAvatar(int x ,int z) {
+		avatar.relTransform().setTranslation(x, 0, z);
+	}
+	
+	public GameMap map() {
+		return map;
+	}
+	
+	public Avatar avatar() {
+		return avatar;
+	}
+	
 	@Override
 	public Matrix4 absTransform() {
 		return transform;
@@ -35,10 +56,7 @@ public class GameScene implements SceneNode, Disposable {
 	@Override
 	public void render(ModelBatch batch, Environment environment) {
 		map.render(batch, environment);
-	}
-	
-	public GameMap map() {
-		return map;
+		avatar.render(batch, environment);
 	}
 	
 	public SceneNode intersect(Ray ray, Vector3 point) {

@@ -5,8 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.game.GameScene;
-import com.skorulis.drack.map.GameMap;
-import com.skorulis.drack.map.MapSquare;
 import com.skorulis.scene.SceneNode;
 
 public class GameEventListener implements GestureListener {
@@ -30,6 +28,10 @@ public class GameEventListener implements GestureListener {
 		SceneNode node = scene.intersect(ray, new Vector3());
 		System.out.println("RAY " + ray);
 		System.out.println("SQ " + node);
+		if(node != null) {
+			scene.nodeSelected(node);
+		}
+		
 		return false;
 	}
 
@@ -72,6 +74,7 @@ public class GameEventListener implements GestureListener {
 	
 	public void setScene(GameScene scene) {
 		this.scene = scene;
+		
 	}
 
 }

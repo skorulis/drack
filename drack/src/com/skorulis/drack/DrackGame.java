@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.game.GameScene;
-import com.skorulis.drack.map.GameMap;
 import com.skorulis.gdx.SKAssetManager;
 
 public class DrackGame implements ApplicationListener {
@@ -59,6 +58,7 @@ public class DrackGame implements ApplicationListener {
         
         scene = new GameScene(assets);
         eventListener.setScene(scene);
+        isoCam.setTracking(scene.avatar());
     }
 
 	@Override
@@ -78,8 +78,6 @@ public class DrackGame implements ApplicationListener {
 				return;
 			}
 		}
-		
-		
 		
         isoCam.cam().update();
         modelBatch.begin(isoCam.cam());
