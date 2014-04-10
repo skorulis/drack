@@ -2,54 +2,61 @@ package com.skorulis.drack;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.skorulis.drack.map.GameMap;
 
 public class DrackGame implements ApplicationListener {
+	
 	private OrthographicCamera camera;
-	private SpriteBatch batch;
-	private Texture texture;
-	private Sprite sprite;
+	private ModelBatch modelBatch;
+    private Environment environment;
+    private AssetManager assets;
+    private boolean loading = true;
+    private GameMap map;
 	
 	@Override
-	public void create() {		
+	public void create() {
+		modelBatch = new ModelBatch();
+		assets = new AssetManager();
+        
+        environment = new Environment();
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
+        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+        
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 		
 		camera = new OrthographicCamera(1, h/w);
-		batch = new SpriteBatch();
-		
-		texture = new Texture(Gdx.files.internal("data/libgdx.png"));
-		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		
-		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
-		
-		sprite = new Sprite(region);
-		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
-		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
-		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
 	}
-
-	@Override
-	public void dispose() {
-		batch.dispose();
-		texture.dispose();
+	
+	private void finishedLoading() {
+		loading = false;
+		map = new GameMap();
 	}
 
 	@Override
 	public void render() {		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		if(loading) {
+			if(assets.update()) {
+				finishedLoading();
+			} else {
+				return;
+			}
+		}
 		
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		sprite.draw(batch);
-		batch.end();
+		modelBatch.begin(camera);
+		map.render(modelBatch, environment);
+		modelBatch.end();
+		
+		
 	}
 
 	@Override
@@ -62,5 +69,10 @@ public class DrackGame implements ApplicationListener {
 
 	@Override
 	public void resume() {
+	}
+	
+	@Override
+	public void dispose() {
+		
 	}
 }
