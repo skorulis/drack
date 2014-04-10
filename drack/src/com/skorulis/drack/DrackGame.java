@@ -16,7 +16,7 @@ import com.skorulis.gdx.SKAssetManager;
 
 public class DrackGame implements ApplicationListener {
 	
-	private IsoPanCamera isoCam;
+	private IsoPerspectiveCamera isoCam;
 	private ModelBatch modelBatch;
 	private Environment environment;
 	private SKAssetManager assets;
@@ -41,10 +41,10 @@ public class DrackGame implements ApplicationListener {
                 
         loading = true;
         
-        isoCam = new IsoPanCamera();
+        isoCam = new IsoPerspectiveCamera();
         
-        inputPlexer = new InputMultiplexer(isoCam);
-        Gdx.input.setInputProcessor(inputPlexer);
+        //inputPlexer = new InputMultiplexer(isoCam);
+        //Gdx.input.setInputProcessor(inputPlexer);
         
 	}
 	
@@ -91,7 +91,7 @@ public class DrackGame implements ApplicationListener {
 
 	@Override
 	public void resize(int width, int height) {
-		isoCam.resizeViewport();
+		isoCam.resize(width, height);
 	}
 
 	@Override
