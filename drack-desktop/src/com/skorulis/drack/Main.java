@@ -7,8 +7,8 @@ public class Main {
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "drack";
-		cfg.width = 480;
-		cfg.height = 320;
+		cfg.width = 640;
+		cfg.height = 480;
 		
 		new LwjglApplication(new DrackGame(), cfg);
 	}
