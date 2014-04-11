@@ -18,20 +18,39 @@ public class DefManager {
 	public Map<String, Model> buildModels(AssetManager assets) {
 		HashMap<String, Model> ret = new HashMap<String, Model>();
 		
+		ret.put("block", buildGroundBlock(assets));
+		ret.put("field", buildFieldBlock(assets));
+		
+		return ret;
+	}
+	
+	private Model buildGroundBlock(AssetManager assets) {
 		ModelBuilder builder = new ModelBuilder();
 		Material material = new Material();
 		Texture texture = assets.get("data/floor.png",Texture.class);
 		material.set(new TextureAttribute(TextureAttribute.Diffuse, texture));
 		Model blockModel = builder.createBox(1, 1.0f, 1, material, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+		return blockModel;
+	}
+	
+	private Model buildFieldBlock(AssetManager assets) {
+		ModelBuilder builder = new ModelBuilder();
 		
-		ret.put("block", blockModel);
+		Material material = new Material();
+		Texture texture = assets.get("data/floor.png",Texture.class);
+		material.set(new TextureAttribute(TextureAttribute.Diffuse, texture));
 		
-		return ret;
+		float s = 0.5f;
+		
+		Model model = builder.createRect(-s, 0, -s, -s, s, -s, s, s, -s, s, 0, -s, 0, 0, 1, material, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+		return model;
 	}
 	
 	public Set<String> allTextures() {
 		HashSet<String> textures = new HashSet<String>();
 		textures.add("data/floor.png");
+		textures.add("data/field.png");
+		textures.add("data/field2.png");
 		
 		return textures;
 	}

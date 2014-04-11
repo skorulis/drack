@@ -3,6 +3,7 @@ package com.skorulis.drack;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Environment;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.map.MapGenerator;
+import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.SKAssetManager;
 
 public class DrackGame implements ApplicationListener {
@@ -29,6 +31,7 @@ public class DrackGame implements ApplicationListener {
     private InputMultiplexer inputPlexer;
     private GameEventListener eventListener;
     private GameScene scene;
+    private UIManager ui;
 	
 	@Override
 	public void create() {
@@ -37,6 +40,8 @@ public class DrackGame implements ApplicationListener {
 		assets = new SKAssetManager();
 		assets.loadAll(def.allTextures(), Texture.class);
 		assets.loadAll(def.allModels(), Model.class);
+		
+		ui = new UIManager();
 		
         environment = new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
@@ -85,6 +90,8 @@ public class DrackGame implements ApplicationListener {
         scene.render(modelBatch, environment);
         modelBatch.end();
         
+        ui.stage().draw();
+        
         update();
 	}
 	
@@ -93,6 +100,7 @@ public class DrackGame implements ApplicationListener {
 		
 		isoCam.update(delta);
 		scene.update(delta);
+		ui.stage().act(delta);
 	}
 
 	@Override

@@ -15,7 +15,7 @@ public class ForceField implements SceneNode{
 	private ModelInstance fieldInstance;
 	
 	public ForceField(AssetManager assets) {
-		fieldInstance = new ModelInstance(assets.get("data/cube1.g3db", Model.class));
+		fieldInstance = new ModelInstance(assets.get("field", Model.class));
 	}
 	
 	public void setPosition(Vector3 loc) {
