@@ -2,7 +2,6 @@ package com.skorulis.drack.building;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g3d.Environment;
-import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
@@ -12,10 +11,10 @@ import com.skorulis.scene.SceneNode;
 
 public class Building implements SceneNode{
 
-	private ModelInstance buildingInstance;
+	protected ModelInstance buildingInstance;
 	
 	public Building(AssetManager assets) {
-		buildingInstance = new ModelInstance(assets.get("data/cone.g3db",Model.class));
+		
 	}
 	
 	public Building(Vector3 translation, AssetManager assets) {
