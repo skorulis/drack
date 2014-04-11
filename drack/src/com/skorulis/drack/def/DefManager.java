@@ -42,7 +42,8 @@ public class DefManager {
 		
 		float s = 0.5f;
 		
-		Model model = builder.createRect(-s, 0, -s, -s, s, -s, s, s, -s, s, 0, -s, 0, 0, 1, material, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+		//Model model = builder.createRect(-s, 0, -s, -s, s, -s, s, s, -s, s, 0, -s, 0, 0, 1, material, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
+		Model model = builder.createRect(-s, 0, -s, s, 0, -s, s, s, -s, -s, s, -s, 0, 0, 1, material, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
 		return model;
 	}
 	

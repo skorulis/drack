@@ -19,7 +19,7 @@ public class ForceField implements SceneNode{
 	}
 	
 	public void setPosition(Vector3 loc) {
-		fieldInstance.transform.setTranslation(loc);
+		fieldInstance.transform.setTranslation(loc.x, 0, loc.z);
 	}
 	
 	@Override

@@ -46,9 +46,35 @@ public class GameMap implements SceneNode, Disposable{
 
 	@Override
 	public void render(ModelBatch batch, Environment environment) {
+		renderSquares(batch, environment);
+		renderBuildings(batch, environment);
+		renderFields(batch, environment);
+	}
+	
+	private void renderSquares(ModelBatch batch, Environment environment) {
 		for(int i = 0; i < depth; ++i) {
 			for(int j = 0; j < width; ++j) {
-				squares[i][j].render(batch, environment);
+				squares[i][j].renderBlock(batch, environment);
+			}
+		}
+	}
+	
+	private void renderFields(ModelBatch batch, Environment environment) {
+		for(int i = 0; i < depth; ++i) {
+			for(int j = 0; j < width; ++j) {
+				if(squares[i][j].field() != null) {
+					squares[i][j].field().render(batch, environment);
+				}
+			}
+		}
+	}
+	
+	private void renderBuildings(ModelBatch batch, Environment environment) {
+		for(int i = 0; i < depth; ++i) {
+			for(int j = 0; j < width; ++j) {
+				if(squares[i][j].building() != null) {
+					squares[i][j].building().render(batch, environment);
+				}
 			}
 		}
 	}

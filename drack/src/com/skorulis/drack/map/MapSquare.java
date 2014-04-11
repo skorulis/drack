@@ -53,6 +53,10 @@ public class MapSquare implements SceneNode {
 		}
 	}
 	
+	public void renderBlock(ModelBatch batch, Environment environment) {
+		batch.render(groundInstance,environment);
+	}
+	
 	public void update(float delta) {
 		
 	}
@@ -96,6 +100,14 @@ public class MapSquare implements SceneNode {
 	public void setForceField(ForceField field) {
 		this.field = field;
 		field.setPosition(getCentreLoc());
+	}
+	
+	public ForceField field() {
+		return this.field;
+	}
+	
+	public Building building() {
+		return this.building;
 	}
 	
 	
