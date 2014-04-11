@@ -64,6 +64,7 @@ public class DefManager {
 		models.add("data/cone.g3db");
 		models.add("data/field1.g3db");
 		models.add("data/corner.g3db");
+		models.add("data/wall_corner.g3db");
 		
 		return models;
 	}

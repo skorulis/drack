@@ -69,7 +69,7 @@ public class ForceField implements SceneNode{
 		if(type == FieldType.EDGE) {
 			fieldInstance = new ModelInstance(assets.get("data/field1.g3db", Model.class));
 		} else if(type == FieldType.CORNER) {
-			fieldInstance = new ModelInstance(assets.get("data/corner.g3db", Model.class));
+			fieldInstance = new ModelInstance(assets.get("data/wall_corner.g3db", Model.class));
 		}
 	}
 	
