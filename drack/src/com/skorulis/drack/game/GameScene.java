@@ -20,9 +20,10 @@ public class GameScene implements SceneNode, Disposable {
 	private GameMap map;
 	private Matrix4 transform;
 	
-	public GameScene(AssetManager assets) {
+	
+	public GameScene(AssetManager assets,GameMap map) {
 		transform = new Matrix4();
-		map = new GameMap(50,50,assets);
+		this.map = map;
 		avatar = new Avatar(assets);
 	}
 

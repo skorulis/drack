@@ -14,11 +14,18 @@ public class Building implements SceneNode{
 
 	private ModelInstance buildingInstance;
 	
-	public Building(Vector3 translation, AssetManager assets) {
+	public Building(AssetManager assets) {
 		buildingInstance = new ModelInstance(assets.get("data/cone.g3db",Model.class));
-		buildingInstance.transform.setToTranslation(translation.x, 0, translation.z);
 	}
 	
+	public Building(Vector3 translation, AssetManager assets) {
+		this(assets);
+		setTranslation(translation);
+	}
+	
+	public void setTranslation(Vector3 translation) {
+		buildingInstance.transform.setToTranslation(translation.x, 0, translation.z);
+	}
 	@Override
 	public Matrix4 absTransform() {
 		return buildingInstance.transform;

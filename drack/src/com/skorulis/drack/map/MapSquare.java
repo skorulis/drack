@@ -29,11 +29,6 @@ public class MapSquare implements SceneNode {
 		groundInstance.transform.setToTranslation(translation);
 		boundingBox = new BoundingBox(new Vector3(x-0.5f,-1,z-0.5f), new Vector3(x+0.5f,0,z+0.5f));
 		
-		if(Math.random() > 0.9) {
-			building = new Building(translation,assets);
-			
-		}
-		
 	}
 	
 	@Override
@@ -89,7 +84,10 @@ public class MapSquare implements SceneNode {
 		return new Vector3(x(), 0, z());
 	}
 	
-	
+	public void setBuilding(Building building) {
+		this.building = building;
+		this.building.setTranslation(groundInstance.transform.getTranslation(new Vector3()));
+	}
 	
 	
 }

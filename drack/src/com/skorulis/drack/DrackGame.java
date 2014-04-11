@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.game.GameScene;
+import com.skorulis.drack.map.MapGenerator;
 import com.skorulis.gdx.SKAssetManager;
 
 public class DrackGame implements ApplicationListener {
@@ -55,8 +56,8 @@ public class DrackGame implements ApplicationListener {
 	private void doneLoading() {
         loading = false;
         assets.addAllModels(def.buildModels(assets));
-        
-        scene = new GameScene(assets);
+        MapGenerator mapGen = new MapGenerator(50, 50, assets);
+        scene = new GameScene(assets,mapGen.map());
         eventListener.setScene(scene);
         isoCam.setTracking(scene.avatar());
     }
