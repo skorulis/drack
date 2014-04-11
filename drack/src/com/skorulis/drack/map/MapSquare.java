@@ -93,5 +93,10 @@ public class MapSquare implements SceneNode {
 		this.building.setTranslation(groundInstance.transform.getTranslation(new Vector3()));
 	}
 	
+	public void setForceField(ForceField field) {
+		this.field = field;
+		field.setPosition(getCentreLoc());
+	}
+	
 	
 }

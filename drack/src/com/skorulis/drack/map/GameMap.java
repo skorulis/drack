@@ -18,10 +18,12 @@ public class GameMap implements SceneNode, Disposable{
 
 	private int width,depth;
 	private MapSquare[][] squares;
+	private AssetManager assets;
 	
 	public GameMap(int width, int depth, AssetManager assets) {
 		this.width = width;
 		this.depth = depth;
+		this.assets = assets;
 		squares = new MapSquare[depth][width];
 		for(int i = 0; i < depth; ++i) {
 			for(int j = 0; j < width; ++j) {
@@ -117,6 +119,21 @@ public class GameMap implements SceneNode, Disposable{
 		}
 		return ret;
 	}
+	
+	public MapSquare[][] getSquareAround(Vector3 loc, int size) {
+		MapSquare[][] block = new MapSquare[size*2 + 1][size*2 + 1];
+		int x = Math.round(loc.x);
+		int z = Math.round(loc.z);
+		for(int i = z - size; i <= z + size; ++i) {
+			for(int j = x - size; j <= x + size; ++j) {
+				if(i >= 0 && j >= 0 && i < depth && j < width) {
+					block[i - z + size][j - x + size] = squares[i][j];
+				}
+			}
+		}
+		
+		return block;
+	}
 
 	@Override
 	public void dispose() {
@@ -125,6 +142,10 @@ public class GameMap implements SceneNode, Disposable{
 
 	public Vector3 center() {
 		return new Vector3(this.width/2.0f, 0, this.depth/2.0f);
+	}
+	
+	public AssetManager assets() {
+		return assets;
 	}
 	
 	public MapSquare squareAt(Vector3 loc) {

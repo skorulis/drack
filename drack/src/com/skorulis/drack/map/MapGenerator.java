@@ -2,7 +2,6 @@ package com.skorulis.drack.map;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Vector3;
-import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.CommandCentre;
 
 public class MapGenerator {
@@ -13,8 +12,10 @@ public class MapGenerator {
 		map = new GameMap(width, depth, assets);
 		
 		MapSquare square = map.squareAt(new Vector3(5, 0, 5));
-		Building b = new CommandCentre(assets);
+		CommandCentre b = new CommandCentre(assets);
+		
 		square.setBuilding(b);
+		b.generateField(b.fieldSize(), map);
 	}
 	
 	public GameMap map() {
