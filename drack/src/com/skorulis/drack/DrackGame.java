@@ -48,10 +48,8 @@ public class DrackGame implements ApplicationListener {
         
         isoCam = new IsoPerspectiveCamera();
         eventListener = new GameEventListener(isoCam);
-        inputPlexer = new InputMultiplexer(new GestureDetector(eventListener));
         
-        //inputPlexer = new InputMultiplexer(isoCam);
-        Gdx.input.setInputProcessor(inputPlexer);
+        
         
 	}
 	
@@ -70,6 +68,8 @@ public class DrackGame implements ApplicationListener {
         isoCam.setTracking(scene.avatar());
         
         ui = new UIManager(assets);
+        inputPlexer = new InputMultiplexer(ui.stage(), new GestureDetector(eventListener));
+        Gdx.input.setInputProcessor(inputPlexer);
     }
 
 	@Override

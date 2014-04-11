@@ -3,12 +3,12 @@ package com.skorulis.drack.ui;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class PlayerUI extends Group {
+public class PlayerUI extends WidgetGroup {
 	
 	private ImageButton buildButton;
 	
@@ -17,10 +17,13 @@ public class PlayerUI extends Group {
 		AtlasRegion ar = atlas.findRegion("hammer");
 		buildButton = new ImageButton(new TextureRegionDrawable(ar));
 		this.addActor(buildButton);
+		this.setFillParent(true);
 	}
 	
-	public void resized(int width, int height) {
-		buildButton.setX(width - buildButton.getWidth());
+	public void layout() {
+		buildButton.setX(getWidth() - buildButton.getWidth());
 	}
+	
+	
 	
 }
