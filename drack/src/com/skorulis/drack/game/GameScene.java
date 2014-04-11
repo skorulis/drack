@@ -35,6 +35,8 @@ public class GameScene implements SceneNode, Disposable {
 				PathFinder finder = new PathFinder(map, current, sq);
 				MapPath path = finder.generatePath();
 				avatar.setPath(path);
+			} else if(sq.building() != null) {
+				
 			}
 		}
 	}

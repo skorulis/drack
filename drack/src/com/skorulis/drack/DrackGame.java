@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
@@ -37,10 +38,7 @@ public class DrackGame implements ApplicationListener {
 		modelBatch = new ModelBatch();
 		def = new DefManager();
 		assets = new SKAssetManager();
-		assets.loadAll(def.allTextures(), Texture.class);
-		assets.loadAll(def.allModels(), Model.class);
-		
-		ui = new UIManager();
+		loadAssets();
 		
         environment = new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
@@ -57,6 +55,12 @@ public class DrackGame implements ApplicationListener {
         
 	}
 	
+	private void loadAssets() {
+		assets.loadAll(def.allTextures(), Texture.class);
+		assets.loadAll(def.allModels(), Model.class);
+		assets.loadAll(def.allTextureAtlases(),TextureAtlas.class);
+	}
+	
 	private void doneLoading() {
         loading = false;
         assets.addAllModels(def.buildModels(assets));
@@ -64,6 +68,8 @@ public class DrackGame implements ApplicationListener {
         scene = new GameScene(assets,mapGen.map());
         eventListener.setScene(scene);
         isoCam.setTracking(scene.avatar());
+        
+        ui = new UIManager(assets);
     }
 
 	@Override
@@ -105,6 +111,9 @@ public class DrackGame implements ApplicationListener {
 	@Override
 	public void resize(int width, int height) {
 		isoCam.resize(width, height);
+		if(ui != null) {
+			ui.resized(width, height);
+		}
 	}
 
 	@Override

@@ -56,6 +56,15 @@ public class DefManager {
 		return textures;
 	}
 	
+	public Set<String> allTextureAtlases() {
+		HashSet<String> textures = new HashSet<String>();
+		
+		//textures.add("data/game.png.atlas");
+		textures.add("data/ui.png.atlas");
+		
+		return textures;
+	}
+	
 	public Set<String> allModels() {
 		HashSet<String> models = new HashSet<String>();
 		models.add("data/cube1.g3db");
