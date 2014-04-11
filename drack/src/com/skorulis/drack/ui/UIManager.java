@@ -14,6 +14,9 @@ public class UIManager {
 	public UIManager() {
 		stage = new Stage(new ScreenViewport());
 		skin = new Skin(Gdx.files.internal("data/skin/uiskin.json"));
+		debugUI = new DebugUI(skin);
+		
+		stage.addActor(debugUI);
 	}
 	
 	public Stage stage() {
