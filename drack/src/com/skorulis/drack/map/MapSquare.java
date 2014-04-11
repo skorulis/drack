@@ -17,6 +17,7 @@ public class MapSquare implements SceneNode {
 
 	private ModelInstance groundInstance;
 	private Building building;
+	private ForceField field;
 	private BoundingBox boundingBox;
 	private final int x;
 	private final int z;
@@ -46,6 +47,9 @@ public class MapSquare implements SceneNode {
 		batch.render(groundInstance,environment);
 		if(building != null) {
 			building.render(batch, environment);
+		}
+		if(field != null) {
+			field.render(batch, environment);
 		}
 	}
 	
