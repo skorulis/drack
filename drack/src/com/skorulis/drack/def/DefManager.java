@@ -1,5 +1,6 @@
 package com.skorulis.drack.def;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.skorulis.drack.building.CommandCentre;
+import com.skorulis.drack.building.Tower;
 import com.skorulis.drack.building.Tree;
 import com.skorulis.drack.building.Vault;
 
@@ -43,6 +45,12 @@ public class DefManager {
 		def.isBuildable = true;
 		addDef(def);
 		
+		def = new BuildingDef("tower");
+		def.buildingClass = Tower.class;
+		def.modelName = "data/cone.g3db";
+		def.isBuildable = true;
+		addDef(def);
+		
 	}
 	
 	private void addDef(BaseDef def) {
@@ -57,7 +65,6 @@ public class DefManager {
 		HashMap<String, Model> ret = new HashMap<String, Model>();
 		
 		ret.put("block", buildGroundBlock(assets));
-		ret.put("field", buildFieldBlock(assets));
 		
 		return ret;
 	}
@@ -69,20 +76,6 @@ public class DefManager {
 		material.set(new TextureAttribute(TextureAttribute.Diffuse, texture));
 		Model blockModel = builder.createBox(1, 1.0f, 1, material, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
 		return blockModel;
-	}
-	
-	private Model buildFieldBlock(AssetManager assets) {
-		ModelBuilder builder = new ModelBuilder();
-		
-		Material material = new Material();
-		Texture texture = assets.get("data/floor.png",Texture.class);
-		material.set(new TextureAttribute(TextureAttribute.Diffuse, texture));
-		
-		float s = 0.5f;
-		
-		//Model model = builder.createRect(-s, 0, -s, -s, s, -s, s, s, -s, s, 0, -s, 0, 0, 1, material, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
-		Model model = builder.createRect(-s, 0, -s, s, 0, -s, s, s, -s, -s, s, -s, 0, 0, 1, material, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
-		return model;
 	}
 	
 	public BuildingDef getBuilding(String name) {
@@ -98,22 +91,18 @@ public class DefManager {
 		textures.add("data/floor.png");
 		textures.add("data/field.png");
 		textures.add("data/field2.png");
-		
 		return textures;
 	}
 	
 	public Set<String> allTextureAtlases() {
 		HashSet<String> textures = new HashSet<String>();
-		
-		//textures.add("data/game.png.atlas");
 		textures.add("data/ui.png.atlas");
-		
 		return textures;
 	}
 	
 	public Set<String> allModels() {
 		HashSet<String> models = new HashSet<String>();
-		
+
 		for(BuildingDef d : buildings.values()) {
 			models.add(d.modelName);
 		}
@@ -128,6 +117,15 @@ public class DefManager {
 		return models;
 	}
 	
+	public ArrayList<BuildingDef> buildableBuildings() {
+		ArrayList<BuildingDef> ret = new ArrayList<BuildingDef>();
+		for(BuildingDef def : buildings.values()) {
+			if(def.isBuildable()) {
+				ret.add(def);
+			}
+		}
+		return ret;
+	}
 	
 	
 	

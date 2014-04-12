@@ -24,7 +24,7 @@ public class PlayerUI extends WidgetGroup {
 		
 		buildButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				buildDialog = new BuildMenuDialog(ui.skin());
+				buildDialog = new BuildMenuDialog(ui.skin(),ui.def().buildableBuildings());
 				addActor(buildDialog);
 			}
 		});
