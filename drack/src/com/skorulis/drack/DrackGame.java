@@ -67,7 +67,7 @@ public class DrackGame implements ApplicationListener {
         eventListener.setScene(scene);
         isoCam.setTracking(scene.avatar());
         
-        ui = new UIManager(assets);
+        ui = new UIManager(assets,scene,def);
         inputPlexer = new InputMultiplexer(ui.stage(), new GestureDetector(eventListener));
         Gdx.input.setInputProcessor(inputPlexer);
     }

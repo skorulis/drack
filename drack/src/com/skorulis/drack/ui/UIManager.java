@@ -5,6 +5,8 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.game.GameScene;
 
 public class UIManager {
 
@@ -12,12 +14,18 @@ public class UIManager {
 	private Skin skin;
 	private DebugUI debugUI;
 	private PlayerUI playerUI;
+	private GameScene game;
+	private DefManager def;
+	private AssetManager assets;
 	
-	public UIManager(AssetManager assets) {
+	public UIManager(AssetManager assets,GameScene game,DefManager def) {
+		this.assets = assets;
+		this.game = game;
+		this.def = def;
 		stage = new Stage(new ScreenViewport());
 		skin = new Skin(Gdx.files.internal("data/skin/uiskin.json"));
 		debugUI = new DebugUI(skin);
-		playerUI = new PlayerUI(skin,assets);
+		playerUI = new PlayerUI(this);
 
 		stage.addActor(playerUI);
 		
@@ -31,6 +39,22 @@ public class UIManager {
 	
 	public void resized(int width, int height) {
 		stage.getViewport().update(width, height, true);
+	}
+	
+	public AssetManager assets() {
+		return assets;
+	}
+	
+	public Skin skin() {
+		return skin;
+	}
+	
+	public GameScene game() {
+		return game;
+	}
+	
+	public DefManager def() {
+		return def;
 	}
 	
 }

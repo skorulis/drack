@@ -7,6 +7,7 @@ public class BuildingDef extends BaseDef {
 
 	public Class<? extends Building> buildingClass;
 	public String modelName;
+	public boolean isBuildable;
 	
 	public BuildingDef(String name) {
 		super(name);
@@ -24,6 +25,10 @@ public class BuildingDef extends BaseDef {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public boolean isBuildable() {
+		return isBuildable;
 	}
 	
 }

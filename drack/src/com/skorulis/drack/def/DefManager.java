@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.skorulis.drack.building.CommandCentre;
 import com.skorulis.drack.building.Tree;
+import com.skorulis.drack.building.Vault;
 
 public class DefManager {
 
@@ -27,11 +29,18 @@ public class DefManager {
 		BuildingDef def = new BuildingDef("command");
 		def.buildingClass = CommandCentre.class;
 		def.modelName = "data/cone.g3db";
+		def.isBuildable = true;
 		addDef(def);
 		
 		def = new BuildingDef("tree");
 		def.buildingClass = Tree.class;
 		def.modelName = "data/tree1.g3db";
+		addDef(def);
+		
+		def = new BuildingDef("vault");
+		def.buildingClass = Vault.class;
+		def.modelName = "data/cone.g3db";
+		def.isBuildable = true;
 		addDef(def);
 		
 	}

@@ -1,11 +1,9 @@
 package com.skorulis.drack.ui;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -14,9 +12,11 @@ public class PlayerUI extends WidgetGroup {
 	
 	private ImageButton buildButton;
 	private BuildMenuDialog buildDialog;
+	private UIManager ui;
 	
-	public PlayerUI(final Skin skin,AssetManager assets) {
-		TextureAtlas atlas = assets.get("data/ui.png.atlas", TextureAtlas.class);
+	public PlayerUI(UIManager uiManager) {
+		this.ui = uiManager;
+		TextureAtlas atlas = uiManager.assets().get("data/ui.png.atlas", TextureAtlas.class);
 		AtlasRegion ar = atlas.findRegion("hammer");
 		buildButton = new ImageButton(new TextureRegionDrawable(ar));
 		this.addActor(buildButton);
@@ -24,7 +24,7 @@ public class PlayerUI extends WidgetGroup {
 		
 		buildButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				buildDialog = new BuildMenuDialog(skin);
+				buildDialog = new BuildMenuDialog(ui.skin());
 				addActor(buildDialog);
 			}
 		});

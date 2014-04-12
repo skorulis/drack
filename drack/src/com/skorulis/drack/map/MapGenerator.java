@@ -2,7 +2,6 @@ package com.skorulis.drack.map;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.CommandCentre;
-import com.skorulis.drack.building.Tree;
 import com.skorulis.drack.def.DefManager;
 
 public class MapGenerator {
