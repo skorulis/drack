@@ -66,11 +66,8 @@ public class GameEventListener implements GestureListener {
 			float diffX = v2.x - v1.x;
 			float diffZ = v2.z - v1.z;
 			
-			Vector3 old = scene.placingBuilding().absTransform().getTranslation(new Vector3());
-			old.x += diffX;
-			old.z += diffZ;
-			
-			scene.placingBuilding().absTransform().setTranslation(old);
+			scene.placementLocation().x += diffX;
+			scene.placementLocation().z += diffZ;
 		}
 		return false;
 	}

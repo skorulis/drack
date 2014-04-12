@@ -21,6 +21,7 @@ public class GameScene implements SceneNode, Disposable {
 	private GameMap map;
 	private Matrix4 transform;
 	private Building placingBuilding;
+	private Vector3 placementLocation;
 	
 	public GameScene(AssetManager assets,GameMap map) {
 		transform = new Matrix4();
@@ -75,6 +76,10 @@ public class GameScene implements SceneNode, Disposable {
 	
 	public void update(float delta) {
 		avatar.update(delta);
+		if(placingBuilding != null) {
+			Vector3 rounded = new Vector3(Math.round(placementLocation.x), 0, Math.round(placementLocation.z));
+			placingBuilding.absTransform().setTranslation(rounded);
+		}
 	}
 	
 	public SceneNode intersect(Ray ray, Vector3 point) {
@@ -88,6 +93,7 @@ public class GameScene implements SceneNode, Disposable {
 	
 	public void setPlacingBuilding(Building building) {
 		this.placingBuilding = building;
+		this.placementLocation = new Vector3();
 	}
 	
 	public Building placingBuilding() {
@@ -95,7 +101,13 @@ public class GameScene implements SceneNode, Disposable {
 	}
 	
 	public void placeBuilding() {
-		
+		MapSquare sq = map.squareAt(placementLocation);
+		sq.setBuilding(this.placingBuilding);
+		this.placingBuilding = null;
+	}
+	
+	public Vector3 placementLocation() {
+		return placementLocation;
 	}
 	
 }
