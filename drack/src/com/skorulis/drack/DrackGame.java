@@ -62,7 +62,7 @@ public class DrackGame implements ApplicationListener {
 	private void doneLoading() {
         loading = false;
         assets.addAllModels(def.buildModels(assets));
-        MapGenerator mapGen = new MapGenerator(50, 50, assets);
+        MapGenerator mapGen = new MapGenerator(50, 50, assets,def);
         scene = new GameScene(assets,mapGen.map());
         eventListener.setScene(scene);
         isoCam.setTracking(scene.avatar());

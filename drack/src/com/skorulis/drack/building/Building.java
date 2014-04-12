@@ -2,24 +2,26 @@ package com.skorulis.drack.building;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.skorulis.drack.def.BuildingDef;
 import com.skorulis.scene.SceneNode;
 
 public class Building implements SceneNode{
 
 	protected ModelInstance buildingInstance;
+	protected BuildingDef def;
 	
-	public Building(AssetManager assets) {
+	public Building() {
 		
 	}
 	
-	public Building(Vector3 translation, AssetManager assets) {
-		this(assets);
-		setTranslation(translation);
+	public void loadModel(AssetManager assets) {
+		buildingInstance = new ModelInstance(assets.get(def.modelName,Model.class));
 	}
 	
 	public void setTranslation(Vector3 translation) {
@@ -48,6 +50,10 @@ public class Building implements SceneNode{
 	@Override
 	public void update(float delta) {
 		
+	}
+	
+	public void setDef(BuildingDef def) {
+		this.def = def;
 	}
 
 }

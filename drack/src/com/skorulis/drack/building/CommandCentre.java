@@ -1,8 +1,5 @@
 package com.skorulis.drack.building;
 
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.map.ForceField;
 import com.skorulis.drack.map.GameMap;
@@ -13,9 +10,8 @@ public class CommandCentre extends Building {
 	private int fieldSize = 3;
 	private MapSquare[][] forceField;
 	
-	public CommandCentre(AssetManager assets) {
-		super(assets);
-		buildingInstance = new ModelInstance(assets.get("data/cone.g3db",Model.class));
+	public CommandCentre() {
+		
 	}
 	
 	public void generateField(int size, GameMap map) {
