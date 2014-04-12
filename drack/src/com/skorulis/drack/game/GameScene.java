@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.avatar.Avatar;
+import com.skorulis.drack.building.Building;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
@@ -19,6 +20,7 @@ public class GameScene implements SceneNode, Disposable {
 	private Avatar avatar;
 	private GameMap map;
 	private Matrix4 transform;
+	private Building placingBuilding;
 	
 	public GameScene(AssetManager assets,GameMap map) {
 		transform = new Matrix4();
@@ -66,6 +68,9 @@ public class GameScene implements SceneNode, Disposable {
 	public void render(ModelBatch batch, Environment environment) {
 		map.render(batch, environment);
 		avatar.render(batch, environment);
+		if(placingBuilding != null) {
+			placingBuilding.render(batch, environment);
+		}
 	}
 	
 	public void update(float delta) {
@@ -78,6 +83,18 @@ public class GameScene implements SceneNode, Disposable {
 
 	@Override
 	public void dispose() {
+		
+	}
+	
+	public void setPlacingBuilding(Building building) {
+		this.placingBuilding = building;
+	}
+	
+	public Building placingBuilding() {
+		return placingBuilding;
+	}
+	
+	public void placeBuilding() {
 		
 	}
 	

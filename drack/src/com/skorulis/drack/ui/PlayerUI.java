@@ -7,11 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.skorulis.drack.building.Building;
 
 public class PlayerUI extends WidgetGroup {
 	
 	private ImageButton buildButton;
 	private BuildMenuDialog buildDialog;
+	private BuildingPlacementUI buildingPlacement;
 	private UIManager ui;
 	
 	public PlayerUI(UIManager uiManager) {
@@ -24,10 +26,14 @@ public class PlayerUI extends WidgetGroup {
 		
 		buildButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				buildDialog = new BuildMenuDialog(ui.skin(),ui);
-				addActor(buildDialog);
+				buildClicked();
 			}
 		});
+	}
+	
+	private void buildClicked() {
+		buildDialog = new BuildMenuDialog(this, ui.skin(),ui);
+		addActor(buildDialog);
 	}
 	
 	public void layout() {
@@ -35,8 +41,19 @@ public class PlayerUI extends WidgetGroup {
 		if(buildDialog != null) {
 			//buildDialog.setBounds(0, 0, this.getWidth(), this.getHeight());
 		}
+		if(buildingPlacement != null) {
+			buildingPlacement.setBounds(200, 200, buildingPlacement.getPrefWidth(), buildingPlacement.getPrefHeight());
+		}
 	}
 	
+	public void showPlacementUI(Building building) {
+		buildingPlacement = new BuildingPlacementUI(ui, this);
+		this.addActor(buildingPlacement);
+	}
 	
+	public void placementFinished() {
+		this.removeActor(buildingPlacement);
+		this.buildingPlacement = null;
+	}
 	
 }

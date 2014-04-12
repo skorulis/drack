@@ -105,7 +105,7 @@ public class DrackGame implements ApplicationListener {
 		
 		isoCam.update(delta);
 		scene.update(delta);
-		ui.stage().act(delta);
+		ui.update(delta);
 	}
 
 	@Override

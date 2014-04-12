@@ -33,6 +33,10 @@ public class UIManager {
 		resized(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 	
+	public void update(float delta) {
+		stage.act(delta);
+	}
+	
 	public Stage stage() {
 		return stage;
 	}
