@@ -21,7 +21,7 @@ public class ModalDialog extends WidgetGroup {
 		
 		closeButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				getParent().removeActor(ModalDialog.this);
+				close();
 			}
 		});
 	}
@@ -29,6 +29,10 @@ public class ModalDialog extends WidgetGroup {
 	public void layout() {
 		layoutHelper.centreChild(this.content);
 		closeButton.setBounds(content.getRight() - closeButton.getWidth(), content.getTop(), closeButton.getPrefWidth(), closeButton.getPrefHeight());
+	}
+	
+	public void close() {
+		getParent().removeActor(this);
 	}
 	
 }

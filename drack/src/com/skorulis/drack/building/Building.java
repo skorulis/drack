@@ -15,10 +15,9 @@ public class Building implements SceneNode{
 
 	protected ModelInstance buildingInstance;
 	protected BuildingDef def;
+	protected boolean beingPlaced;
 	
-	public Building() {
-		
-	}
+	public Building() { }
 	
 	public void loadModel(AssetManager assets) {
 		buildingInstance = new ModelInstance(assets.get(def.modelName,Model.class));
