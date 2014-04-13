@@ -200,12 +200,16 @@ public class GameMap implements SceneNode, Disposable{
 		return null;
 	}
 	
-	public boolean canPlaceBuilding(Building b) {
-		MapSquare sq = this.squareAt(b.absTransform().getTranslation(new Vector3()));
-		if(sq == null) {
-			return false;
+	public boolean canPlaceBuilding(Building b, Vector3 at) {
+		for(int i = 0; i < b.def().width; ++i) {
+			for(int j = 0; j < b.def().depth; ++j) {
+				MapSquare sq = this.squareAt((int)at.x + j, (int)at.z + i);
+				if(sq == null || !sq.isPassable()) {
+					return false;
+				}
+			}
 		}
-		return sq.isPassable();
+		return true;
 	}
 	
 	public int width() {

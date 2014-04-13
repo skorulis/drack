@@ -72,19 +72,10 @@ public class BuildingPlacement implements SceneNode{
 		location.x += x;
 		location.z += z;
 		
-		Vector3 rounded = new Vector3(Math.round(location.x), 0, Math.round(location.z));
-		if(rounded.x < 0) {
-			rounded.x = 0;
-		}
-		if(rounded.z < 0) {
-			rounded.z = 0;
-		}
-		if(rounded.x >= map.width() - 1) {
-			rounded.x = map.width() - 1;
-		}
-		if(rounded.z >= map.depth() - 1) {
-			rounded.z = map.depth() - 1;
-		}
+		Vector3 rounded = roundAndClip(location);
+		
+		rounded.x += (building.def.width - 1)*0.5f;
+		rounded.z += (building.def.depth - 1)*0.5f;
 		
 		building.absTransform().setTranslation(rounded);
 		cube.transform.setTranslation(rounded);
@@ -96,8 +87,26 @@ public class BuildingPlacement implements SceneNode{
 		}
 	}
 	
+	public Vector3 roundAndClip(Vector3 location) {
+		Vector3 rounded = new Vector3(Math.round(location.x), 0, Math.round(location.z));
+		if(rounded.x < 0) {
+			rounded.x = 0;
+		}
+		if(rounded.z < 0) {
+			rounded.z = 0;
+		}
+		
+		if(rounded.x >= map.width() - building.def.width) {
+			rounded.x = map.width() - building.def.width;
+		}
+		if(rounded.z >= map.depth() - building.def.depth) {
+			rounded.z = map.depth() - building.def.depth;
+		}
+		return rounded;
+	}
+	
 	public boolean canPlace() {
-		return map.canPlaceBuilding(building);
+		return map.canPlaceBuilding(building,roundAndClip(location));
 	}
 	
 }
