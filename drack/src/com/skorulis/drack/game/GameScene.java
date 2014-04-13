@@ -33,7 +33,7 @@ public class GameScene implements SceneNode, Disposable {
 	public void nodeSelected(SceneNode node) {
 		if(node instanceof MapSquare) {
 			MapSquare sq = (MapSquare) node;
-			MapSquare current = map.squareAt(avatar.absTransform().getTranslation(new Vector3()));
+			MapSquare current = map.squareAt(avatar.currentPosition());
 			if(sq != current && sq.isPassable()) {
 				PathFinder finder = new PathFinder(map, current, sq);
 				MapPath path = finder.generatePath();

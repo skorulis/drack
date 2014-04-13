@@ -69,5 +69,12 @@ public class Avatar implements SceneNode{
 		return null;
 	}
 	
+	public Vector3 currentPosition() {
+		if(movement == null) {
+			return absTransform().getTranslation(new Vector3());
+		}
+		return movement.endLoc;
+	}
+	
 
 }
