@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
+import com.skorulis.drack.building.Building;
 import com.skorulis.scene.SceneNode;
 
 public class GameMap implements SceneNode, Disposable{
@@ -197,6 +198,19 @@ public class GameMap implements SceneNode, Disposable{
 			return squares[z][x];
 		}
 		return null;
+	}
+	
+	public boolean canPlaceBuilding(Building b) {
+		//MapSquare sq =
+		return true;
+	}
+	
+	public int width() {
+		return width;
+	}
+	
+	public int depth() {
+		return depth;
 	}
 	
 }

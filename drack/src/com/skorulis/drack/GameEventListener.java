@@ -55,11 +55,7 @@ public class GameEventListener implements GestureListener {
 			Vector3 v1 = scene.map().groundIntersection(camera.cam().getPickRay(x-deltaX, y-deltaY));
 			Vector3 v2 = scene.map().groundIntersection(camera.cam().getPickRay(x, y));
 			
-			float diffX = v2.x - v1.x;
-			float diffZ = v2.z - v1.z;
-			
-			scene.placementLocation().x += diffX;
-			scene.placementLocation().z += diffZ;
+			scene.movePlacementBuilding(v2.x - v1.x, v2.z - v1.z);
 		}
 		return false;
 	}
