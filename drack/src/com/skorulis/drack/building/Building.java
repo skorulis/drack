@@ -54,5 +54,9 @@ public class Building implements SceneNode{
 	public void setDef(BuildingDef def) {
 		this.def = def;
 	}
+	
+	public ModelInstance buildingInstance() {
+		return buildingInstance;
+	}
 
 }

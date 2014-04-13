@@ -47,7 +47,7 @@ public class DefManager {
 		
 		def = new BuildingDef("tower");
 		def.buildingClass = Tower.class;
-		def.modelName = "data/cone.g3db";
+		def.modelName = "data/tower.g3db";
 		def.isBuildable = true;
 		addDef(def);
 		

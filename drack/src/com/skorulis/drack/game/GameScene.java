@@ -1,8 +1,10 @@
 package com.skorulis.drack.game;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
@@ -93,6 +95,7 @@ public class GameScene implements SceneNode, Disposable {
 	
 	public void setPlacingBuilding(Building building) {
 		this.placingBuilding = building;
+		this.placingBuilding.buildingInstance().materials.get(0).set(ColorAttribute.createDiffuse(Color.RED));
 		this.placementLocation = new Vector3();
 	}
 	
