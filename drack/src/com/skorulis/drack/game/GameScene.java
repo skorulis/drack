@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.avatar.Avatar;
 import com.skorulis.drack.building.Building;
+import com.skorulis.drack.building.BuildingPlacement;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
@@ -22,11 +23,12 @@ public class GameScene implements SceneNode, Disposable {
 	private Avatar avatar;
 	private GameMap map;
 	private Matrix4 transform;
-	private Building placingBuilding;
-	private Vector3 placementLocation;
+	private BuildingPlacement placingBuilding;
+	private AssetManager assets;
 	
 	public GameScene(AssetManager assets,GameMap map) {
 		transform = new Matrix4();
+		this.assets = assets;
 		this.map = map;
 		avatar = new Avatar(assets);
 	}
@@ -79,8 +81,7 @@ public class GameScene implements SceneNode, Disposable {
 	public void update(float delta) {
 		avatar.update(delta);
 		if(placingBuilding != null) {
-			Vector3 rounded = new Vector3(Math.round(placementLocation.x), 0, Math.round(placementLocation.z));
-			placingBuilding.absTransform().setTranslation(rounded);
+			placingBuilding.update(delta);
 		}
 	}
 	
@@ -94,23 +95,28 @@ public class GameScene implements SceneNode, Disposable {
 	}
 	
 	public void setPlacingBuilding(Building building) {
-		this.placingBuilding = building;
-		this.placingBuilding.buildingInstance().materials.get(0).set(ColorAttribute.createDiffuse(Color.RED));
-		this.placementLocation = new Vector3();
+		if(building != null) {
+			this.placingBuilding = new BuildingPlacement(assets,building,map);
+		} else {
+			this.placingBuilding = null;
+		}
+		
 	}
 	
 	public Building placingBuilding() {
-		return placingBuilding;
+		if(placingBuilding == null) {
+			return null;
+		}
+		return placingBuilding.building();
 	}
 	
 	public void placeBuilding() {
-		MapSquare sq = map.squareAt(placementLocation);
-		sq.setBuilding(this.placingBuilding);
+		this.placingBuilding.place();
 		this.placingBuilding = null;
 	}
 	
 	public Vector3 placementLocation() {
-		return placementLocation;
+		return placingBuilding.location();
 	}
 	
 }

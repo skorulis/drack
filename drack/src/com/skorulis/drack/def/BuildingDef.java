@@ -8,6 +8,8 @@ public class BuildingDef extends BaseDef {
 	public Class<? extends Building> buildingClass;
 	public String modelName;
 	public boolean isBuildable;
+	public int width;
+	public int height;
 	
 	public BuildingDef(String name) {
 		super(name);
