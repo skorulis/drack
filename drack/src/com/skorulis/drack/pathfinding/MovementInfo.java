@@ -10,12 +10,15 @@ public class MovementInfo {
 	
 	public Vector3 startLoc;
 	public Vector3 endLoc;
+	private Vector3 direction;
 	
 	public MapSquare destSquare;
 	
 	public MovementInfo(Vector3 startLoc, Vector3 endLoc,float speed) {
 		this.startLoc = startLoc.cpy();
 		this.endLoc = endLoc.cpy();
+		this.direction = this.endLoc.cpy().sub(this.startLoc).nor();
+		direction.x *= -1;
 		this.travelTime = startLoc.cpy().sub(endLoc).len() / speed;
 	}
 	
@@ -32,6 +35,10 @@ public class MovementInfo {
 	
 	public boolean finished() {
 		return currentTime == travelTime;
+	}
+	
+	public Vector3 direction() {
+		return direction;
 	}
 	
 }

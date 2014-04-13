@@ -20,7 +20,7 @@ public class Avatar implements SceneNode{
 	private float speed = 10;
 	
 	public Avatar(AssetManager assets) {
-		instance = new ModelInstance(assets.get("data/cube1.g3db", Model.class));
+		instance = new ModelInstance(assets.get("data/models/craft1.g3db", Model.class));
 	}
 	
 	public void setPath(MapPath path) {
@@ -49,7 +49,7 @@ public class Avatar implements SceneNode{
 		if(movement == null) {
 			return;
 		}
-		instance.transform.setTranslation(movement.update(delta));
+		instance.transform.setToWorld(movement.update(delta), movement.direction(),new Vector3(0,1,0));
 		if (movement.finished()) {
 			if (path.finished()) {
 				movement = null;

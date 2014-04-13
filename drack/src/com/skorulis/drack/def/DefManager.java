@@ -22,9 +22,12 @@ import com.skorulis.drack.building.Vault;
 public class DefManager {
 
 	public Map<String, BuildingDef> buildings;
+	public Map<String, ResourceDef> resources;
 	
 	public DefManager() {
 		buildings = new HashMap<String, BuildingDef>();
+		resources = new HashMap<String, ResourceDef>();
+		createResources();
 		createBuildings();
 	}
 	
@@ -64,10 +67,19 @@ public class DefManager {
 		
 	}
 	
+	private void createResources() {
+		ResourceDef resource = new ResourceDef("iron");
+		
+		addDef(resource);
+	}
+	
 	private void addDef(BaseDef def) {
 		if(def instanceof BuildingDef) {
 			buildings.put(def.name(), (BuildingDef)def);
-		} else {
+		} else if(def instanceof ResourceDef) {
+			resources.put(def.name(), (ResourceDef)def);
+		}
+		else {
 			throw new IllegalArgumentException("Don't know where to put " + def);
 		}
 	}
@@ -123,6 +135,7 @@ public class DefManager {
 		models.add("data/hull1.g3db");
 		models.add("data/field1.g3db");
 		models.add("data/corner.g3db");
+		models.add("data/models/craft1.g3db");
 		models.add("data/wall_corner.g3db");
 		
 		return models;
