@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 
 
 public class SKAssetManager extends AssetManager {
-
+	
 	public SKAssetManager() {
 		
 	}

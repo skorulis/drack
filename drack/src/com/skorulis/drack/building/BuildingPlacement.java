@@ -29,6 +29,7 @@ public class BuildingPlacement implements SceneNode{
 		this.location.x = Math.round(this.location.x);
 		this.location.z = Math.round(this.location.z);
 		this.cube = new ModelInstance(assets.get("data/cube1.g3db", Model.class));
+		this.cube.transform.scale(def.width, 1, def.depth);
 		this.move(0, 0);
 	}
 	

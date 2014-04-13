@@ -9,10 +9,12 @@ public class BuildingDef extends BaseDef {
 	public String modelName;
 	public boolean isBuildable;
 	public int width;
-	public int height;
+	public int depth;
 	
 	public BuildingDef(String name) {
 		super(name);
+		this.width = 1;
+		this.depth = 1;
 	}
 	
 	public Building create(AssetManager assets) {
