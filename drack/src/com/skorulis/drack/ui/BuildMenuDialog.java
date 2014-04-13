@@ -2,6 +2,8 @@ package com.skorulis.drack.ui;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -38,9 +40,10 @@ public class BuildMenuDialog extends ModalDialog {
 	}
 	
 	public void build(PlayerUI playerUI, BuildingDef bd) {
-		Building building = bd.create(ui.assets());
-		ui.game().setPlacingBuilding(building);
-		playerUI.showPlacementUI(building);
+		Ray ray = ui.camera().centreRay();
+		Vector3 loc = ui.game().map().groundIntersection(ray);
+		ui.game().setPlacingBuilding(bd,loc);
+		playerUI.showPlacementUI(ui.game().placingBuilding());
 	}
 
 }

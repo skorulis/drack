@@ -26,7 +26,7 @@ public class BuildingPlacementUI extends WidgetGroup {
 		
 		cancelButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				ui.game().setPlacingBuilding(null);
+				ui.game().clearPlacingBuilding();
 				playerUI.placementFinished();
 			}
 		});

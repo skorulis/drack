@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.scene.SceneNode;
 
 public class IsoPerspectiveCamera {
@@ -39,6 +40,10 @@ public class IsoPerspectiveCamera {
 	
 	public void setTracking(SceneNode tracking) {
 		this.tracking = tracking;
+	}
+	
+	public Ray centreRay() {
+		return cam.getPickRay(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
 	}
 	
 }

@@ -1,8 +1,6 @@
 package com.skorulis.drack;
 
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
@@ -54,14 +52,8 @@ public class GameEventListener implements GestureListener {
 				return false;
 			}
 			
-			Vector3 v1 = new Vector3();
-			Vector3 v2 = new Vector3();
-			Plane plane = new Plane(new Vector3(0, 1, 0), 0);
-			
-			Ray ray1 = camera.cam().getPickRay(x-deltaX, y-deltaY);
-			Intersector.intersectRayPlane(ray1, plane, v1);
-			Ray ray2 = camera.cam().getPickRay(x, y);
-			Intersector.intersectRayPlane(ray2, plane, v2);
+			Vector3 v1 = scene.map().groundIntersection(camera.cam().getPickRay(x-deltaX, y-deltaY));
+			Vector3 v2 = scene.map().groundIntersection(camera.cam().getPickRay(x, y));
 			
 			float diffX = v2.x - v1.x;
 			float diffZ = v2.z - v1.z;

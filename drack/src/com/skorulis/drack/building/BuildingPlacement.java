@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.skorulis.drack.def.BuildingDef;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.scene.SceneNode;
@@ -21,11 +22,13 @@ public class BuildingPlacement implements SceneNode{
 	private Vector3 location;
 	private GameMap map;
 	
-	public BuildingPlacement(AssetManager assets, Building building, GameMap map) {
-		this.building = building;
-		this.location = new Vector3();
+	public BuildingPlacement(AssetManager assets, GameMap map,  BuildingDef def, Vector3 pos) {
+		this.building = def.create(assets);
+		this.location = pos;
+		this.location.x = Math.round(this.location.x);
+		this.location.z = Math.round(this.location.z);
 		this.cube = new ModelInstance(assets.get("data/cube1.g3db", Model.class));
-		
+		this.update(0);
 	}
 	
 	@Override

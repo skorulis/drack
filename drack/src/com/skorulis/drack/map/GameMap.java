@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
@@ -42,6 +43,13 @@ public class GameMap implements SceneNode, Disposable{
 	@Override
 	public Matrix4 relTransform() {
 		return transform;
+	}
+	
+	public Vector3 groundIntersection(Ray ray) {
+		Plane plane = new Plane(new Vector3(0, 1, 0), 0);
+		Vector3 ret = new Vector3();
+		Intersector.intersectRayPlane(ray, plane, ret);
+		return ret;
 	}
 
 	@Override

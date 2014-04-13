@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.skorulis.drack.IsoPerspectiveCamera;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.game.GameScene;
 
@@ -17,11 +18,13 @@ public class UIManager {
 	private GameScene game;
 	private DefManager def;
 	private AssetManager assets;
+	private IsoPerspectiveCamera camera;
 	
-	public UIManager(AssetManager assets,GameScene game,DefManager def) {
+	public UIManager(AssetManager assets,GameScene game,DefManager def, IsoPerspectiveCamera camera) {
 		this.assets = assets;
 		this.game = game;
 		this.def = def;
+		this.camera = camera;
 		stage = new Stage(new ScreenViewport());
 		skin = new Skin(Gdx.files.internal("data/skin/uiskin.json"));
 		debugUI = new DebugUI(skin);
@@ -59,6 +62,10 @@ public class UIManager {
 	
 	public DefManager def() {
 		return def;
+	}
+	
+	public IsoPerspectiveCamera camera() {
+		return camera;
 	}
 	
 }

@@ -1,10 +1,8 @@
 package com.skorulis.drack.game;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
@@ -12,6 +10,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.avatar.Avatar;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.BuildingPlacement;
+import com.skorulis.drack.def.BuildingDef;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
@@ -94,13 +93,12 @@ public class GameScene implements SceneNode, Disposable {
 		
 	}
 	
-	public void setPlacingBuilding(Building building) {
-		if(building != null) {
-			this.placingBuilding = new BuildingPlacement(assets,building,map);
-		} else {
-			this.placingBuilding = null;
-		}
-		
+	public void clearPlacingBuilding() {
+		this.placingBuilding = null;
+	}
+	
+	public void setPlacingBuilding(BuildingDef def, Vector3 pos) {
+		this.placingBuilding = new BuildingPlacement(assets,map,def,pos);
 	}
 	
 	public Building placingBuilding() {
