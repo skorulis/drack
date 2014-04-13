@@ -201,8 +201,11 @@ public class GameMap implements SceneNode, Disposable{
 	}
 	
 	public boolean canPlaceBuilding(Building b) {
-		//MapSquare sq =
-		return true;
+		MapSquare sq = this.squareAt(b.absTransform().getTranslation(new Vector3()));
+		if(sq == null) {
+			return false;
+		}
+		return sq.isPassable();
 	}
 	
 	public int width() {

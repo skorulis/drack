@@ -43,7 +43,7 @@ public class BuildMenuDialog extends ModalDialog {
 		Ray ray = ui.camera().centreRay();
 		Vector3 loc = ui.game().map().groundIntersection(ray);
 		ui.game().setPlacingBuilding(bd,loc);
-		playerUI.showPlacementUI(ui.game().placingBuilding());
+		playerUI.showPlacementUI(ui.game().placingBuilding().building());
 	}
 
 }

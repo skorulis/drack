@@ -105,20 +105,13 @@ public class GameScene implements SceneNode, Disposable {
 		this.placingBuilding.move(x,z);
 	}
 	
-	public Building placingBuilding() {
-		if(placingBuilding == null) {
-			return null;
-		}
-		return placingBuilding.building();
+	public BuildingPlacement placingBuilding() {
+		return placingBuilding;
 	}
 	
 	public void placeBuilding() {
 		this.placingBuilding.place();
 		this.placingBuilding = null;
-	}
-	
-	public Vector3 placementLocation() {
-		return placingBuilding.location();
 	}
 	
 }

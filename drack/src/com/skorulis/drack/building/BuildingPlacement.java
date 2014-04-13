@@ -29,7 +29,7 @@ public class BuildingPlacement implements SceneNode{
 		this.location.x = Math.round(this.location.x);
 		this.location.z = Math.round(this.location.z);
 		this.cube = new ModelInstance(assets.get("data/cube1.g3db", Model.class));
-		this.update(0);
+		this.move(0, 0);
 	}
 	
 	@Override
@@ -44,7 +44,6 @@ public class BuildingPlacement implements SceneNode{
 	public void render(ModelBatch batch, Environment environment) {
 		building.render(batch, environment);
 		batch.render(cube,environment);
-		this.cube.materials.get(0).set(ColorAttribute.createDiffuse(Color.RED));
 	}
 	@Override
 	public SceneNode intersect(Ray ray, Vector3 point) {
@@ -52,22 +51,7 @@ public class BuildingPlacement implements SceneNode{
 	}
 	@Override
 	public void update(float delta) {
-		Vector3 rounded = new Vector3(Math.round(location.x), 0, Math.round(location.z));
-		if(rounded.x < 0) {
-			rounded.x = 0;
-		}
-		if(rounded.z < 0) {
-			rounded.z = 0;
-		}
-		if(rounded.x >= map.width() - 1) {
-			rounded.x = map.width() - 1;
-		}
-		if(rounded.z >= map.depth() - 1) {
-			rounded.z = map.depth() - 1;
-		}
 		
-		building.absTransform().setTranslation(rounded);
-		cube.transform.setTranslation(rounded);
 	}
 	
 	public void place() {
@@ -87,6 +71,32 @@ public class BuildingPlacement implements SceneNode{
 		location.x += x;
 		location.z += z;
 		
+		Vector3 rounded = new Vector3(Math.round(location.x), 0, Math.round(location.z));
+		if(rounded.x < 0) {
+			rounded.x = 0;
+		}
+		if(rounded.z < 0) {
+			rounded.z = 0;
+		}
+		if(rounded.x >= map.width() - 1) {
+			rounded.x = map.width() - 1;
+		}
+		if(rounded.z >= map.depth() - 1) {
+			rounded.z = map.depth() - 1;
+		}
+		
+		building.absTransform().setTranslation(rounded);
+		cube.transform.setTranslation(rounded);
+		
+		if(canPlace()) {
+			this.cube.materials.get(0).set(ColorAttribute.createDiffuse(Color.GREEN));
+		} else {
+			this.cube.materials.get(0).set(ColorAttribute.createDiffuse(Color.RED));
+		}
+	}
+	
+	public boolean canPlace() {
+		return map.canPlaceBuilding(building);
 	}
 	
 }

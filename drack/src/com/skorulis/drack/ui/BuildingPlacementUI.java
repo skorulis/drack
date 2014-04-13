@@ -19,8 +19,10 @@ public class BuildingPlacementUI extends WidgetGroup {
 		
 		tickButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				ui.game().placeBuilding();
-				playerUI.placementFinished();
+				if(ui.game().placingBuilding().canPlace()) {
+					ui.game().placeBuilding();
+					playerUI.placementFinished();
+				}
 			}
 		});
 		
