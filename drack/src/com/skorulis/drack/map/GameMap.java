@@ -3,8 +3,6 @@ package com.skorulis.drack.map;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g3d.Environment;
-import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Plane;
@@ -12,6 +10,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.building.Building;
+import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 
 public class GameMap implements SceneNode, Disposable{
@@ -54,35 +53,35 @@ public class GameMap implements SceneNode, Disposable{
 	}
 
 	@Override
-	public void render(ModelBatch batch, Environment environment) {
-		renderSquares(batch, environment);
-		renderBuildings(batch, environment);
-		renderFields(batch, environment);
+	public void render(RenderInfo ri) {
+		renderSquares(ri);
+		renderBuildings(ri);
+		renderFields(ri);
 	}
 	
-	private void renderSquares(ModelBatch batch, Environment environment) {
+	private void renderSquares(RenderInfo ri) {
 		for(int i = 0; i < depth; ++i) {
 			for(int j = 0; j < width; ++j) {
-				squares[i][j].renderBlock(batch, environment);
+				squares[i][j].renderBlock(ri);
 			}
 		}
 	}
 	
-	private void renderFields(ModelBatch batch, Environment environment) {
+	private void renderFields(RenderInfo ri) {
 		for(int i = 0; i < depth; ++i) {
 			for(int j = 0; j < width; ++j) {
 				if(squares[i][j].field() != null) {
-					squares[i][j].field().render(batch, environment);
+					squares[i][j].field().render(ri);
 				}
 			}
 		}
 	}
 	
-	private void renderBuildings(ModelBatch batch, Environment environment) {
+	private void renderBuildings(RenderInfo ri) {
 		for(int i = 0; i < depth; ++i) {
 			for(int j = 0; j < width; ++j) {
 				if(squares[i][j].building() != null) {
-					squares[i][j].building().render(batch, environment);
+					squares[i][j].building().render(ri);
 				}
 			}
 		}

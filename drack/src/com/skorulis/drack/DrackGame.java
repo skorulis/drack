@@ -17,6 +17,7 @@ import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.map.MapGenerator;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.SKAssetManager;
+import com.skorulis.scene.RenderInfo;
 
 public class DrackGame implements ApplicationListener {
 	
@@ -90,9 +91,11 @@ public class DrackGame implements ApplicationListener {
 			}
 		}
 		
+		
         isoCam.cam().update();
+        RenderInfo ri = new RenderInfo(modelBatch, environment, isoCam.cam());
         modelBatch.begin(isoCam.cam());
-        scene.render(modelBatch, environment);
+        scene.render(ri);
         modelBatch.end();
         
         ui.stage().draw();

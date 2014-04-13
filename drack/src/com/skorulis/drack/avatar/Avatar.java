@@ -1,15 +1,14 @@
 package com.skorulis.drack.avatar;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.MovementInfo;
+import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 
 public class Avatar implements SceneNode{
@@ -42,8 +41,8 @@ public class Avatar implements SceneNode{
 	}
 
 	@Override
-	public void render(ModelBatch batch, Environment environment) {
-		batch.render(instance,environment);
+	public void render(RenderInfo ri) {
+		ri.batch.render(instance,ri.environment);
 	}
 	
 	public void update(float delta) {

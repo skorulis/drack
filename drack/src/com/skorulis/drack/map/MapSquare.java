@@ -1,9 +1,7 @@
 package com.skorulis.drack.map;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
@@ -11,6 +9,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.building.Building;
+import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 
 public class MapSquare implements SceneNode {
@@ -45,18 +44,18 @@ public class MapSquare implements SceneNode {
 	}
 
 	@Override
-	public void render(ModelBatch batch, Environment environment) {
-		batch.render(groundInstance,environment);
+	public void render(RenderInfo ri) {
+		ri.batch.render(groundInstance,ri.environment);
 		if(building != null) {
-			building.render(batch, environment);
+			building.render(ri);
 		}
 		if(field != null) {
-			field.render(batch, environment);
+			field.render(ri);
 		}
 	}
 	
-	public void renderBlock(ModelBatch batch, Environment environment) {
-		batch.render(groundInstance,environment);
+	public void renderBlock(RenderInfo ri) {
+		ri.batch.render(groundInstance,ri.environment);
 	}
 	
 	public void update(float delta) {
