@@ -1,14 +1,14 @@
 package com.skorulis.drack.map;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.CommandCentre;
 import com.skorulis.drack.def.DefManager;
+import com.skorulis.gdx.SKAssetManager;
 
 public class MapGenerator {
 
 	private GameMap map;
 	
-	public MapGenerator(int width , int depth, AssetManager assets,DefManager def) {
+	public MapGenerator(int width , int depth, SKAssetManager assets,DefManager def) {
 		map = new GameMap(width, depth, assets);
 		
 		MapSquare square = map.squareAt(new Vector3(5, 0, 5));

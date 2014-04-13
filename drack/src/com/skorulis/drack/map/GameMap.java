@@ -1,8 +1,6 @@
 package com.skorulis.drack.map;
 
 import java.util.ArrayList;
-
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Plane;
@@ -10,6 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.building.Building;
+import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 
@@ -19,9 +18,9 @@ public class GameMap implements SceneNode, Disposable{
 
 	private int width,depth;
 	private MapSquare[][] squares;
-	private AssetManager assets;
+	private SKAssetManager assets;
 	
-	public GameMap(int width, int depth, AssetManager assets) {
+	public GameMap(int width, int depth, SKAssetManager assets) {
 		this.width = width;
 		this.depth = depth;
 		this.assets = assets;
@@ -178,7 +177,7 @@ public class GameMap implements SceneNode, Disposable{
 		return new Vector3(this.width/2.0f, 0, this.depth/2.0f);
 	}
 	
-	public AssetManager assets() {
+	public SKAssetManager assets() {
 		return assets;
 	}
 	

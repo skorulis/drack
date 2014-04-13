@@ -1,6 +1,5 @@
 package com.skorulis.drack.game;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
@@ -12,6 +11,7 @@ import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
+import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 
@@ -21,9 +21,9 @@ public class GameScene implements SceneNode, Disposable {
 	private GameMap map;
 	private Matrix4 transform;
 	private BuildingPlacement placingBuilding;
-	private AssetManager assets;
+	private SKAssetManager assets;
 	
-	public GameScene(AssetManager assets,GameMap map) {
+	public GameScene(SKAssetManager assets,GameMap map) {
 		transform = new Matrix4();
 		this.assets = assets;
 		this.map = map;

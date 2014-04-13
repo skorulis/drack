@@ -9,6 +9,9 @@ import com.badlogic.gdx.graphics.g3d.Model;
 
 public class SKAssetManager extends AssetManager {
 	
+	private static String MODEL_DIR = "data/models/";
+	private static String MODEL_SUFFIX = "g3db";
+	
 	public SKAssetManager() {
 		
 	}
@@ -28,6 +31,18 @@ public class SKAssetManager extends AssetManager {
 		for(String s : items) {
 			super.load(s, type);
 		}
+	}
+	
+	public synchronized <T> void loadAllModels(Set<String> items) {
+		for(String s : items) {
+			String modelName = MODEL_DIR + s + "." + MODEL_SUFFIX;
+			super.load(modelName, Model.class);
+		}
+	}
+	
+	public synchronized Model getModel(String shortName) {
+		String modelName = MODEL_DIR + shortName + "." + MODEL_SUFFIX;
+		return super.get(modelName, Model.class);
 	}
 	
 	

@@ -1,6 +1,5 @@
 package com.skorulis.drack.building;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
@@ -11,6 +10,7 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.def.BuildingDef;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
+import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 
@@ -21,7 +21,7 @@ public class BuildingPlacement implements SceneNode{
 	private Vector3 location;
 	private GameMap map;
 	
-	public BuildingPlacement(AssetManager assets, GameMap map,  BuildingDef def, Vector3 pos) {
+	public BuildingPlacement(SKAssetManager assets, GameMap map,  BuildingDef def, Vector3 pos) {
 		this.map = map;
 		this.building = def.create(assets);
 		this.location = pos;

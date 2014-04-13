@@ -1,11 +1,10 @@
 package com.skorulis.drack.map;
 
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 
@@ -64,11 +63,11 @@ public class ForceField implements SceneNode{
 		}
 	}
 	
-	public void buildModel(AssetManager assets) {
+	public void buildModel(SKAssetManager assets) {
 		if(type == FieldType.EDGE) {
-			fieldInstance = new ModelInstance(assets.get("data/field1.g3db", Model.class));
+			fieldInstance = new ModelInstance(assets.getModel("field1"));
 		} else if(type == FieldType.CORNER) {
-			fieldInstance = new ModelInstance(assets.get("data/wall_corner.g3db", Model.class));
+			fieldInstance = new ModelInstance(assets.getModel("wall_corner"));
 		}
 	}
 	

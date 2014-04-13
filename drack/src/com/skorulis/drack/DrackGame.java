@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g3d.Environment;
-import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
@@ -56,7 +55,7 @@ public class DrackGame implements ApplicationListener {
 	
 	private void loadAssets() {
 		assets.loadAll(def.allTextures(), Texture.class);
-		assets.loadAll(def.allModels(), Model.class);
+		assets.loadAllModels(def.allModels());
 		assets.loadAll(def.allTextureAtlases(),TextureAtlas.class);
 	}
 	

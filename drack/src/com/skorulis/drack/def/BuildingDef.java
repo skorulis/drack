@@ -1,7 +1,7 @@
 package com.skorulis.drack.def;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.skorulis.drack.building.Building;
+import com.skorulis.gdx.SKAssetManager;
 
 public class BuildingDef extends BaseDef {
 
@@ -19,7 +19,7 @@ public class BuildingDef extends BaseDef {
 		this.replacesTerrain = false;
 	}
 	
-	public Building create(AssetManager assets) {
+	public Building create(SKAssetManager assets) {
 		try {
 			Building ret = buildingClass.newInstance();
 			ret.setDef(this);

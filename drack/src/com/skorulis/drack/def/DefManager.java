@@ -34,19 +34,19 @@ public class DefManager {
 	private void createBuildings() {
 		BuildingDef def = new BuildingDef("command");
 		def.buildingClass = CommandCentre.class;
-		def.modelName = "data/cone.g3db";
+		def.modelName = "cone";
 		def.isBuildable = true;
 		addDef(def);
 		
 		def = new BuildingDef("tree");
 		def.buildingClass = Tree.class;
-		def.modelName = "data/tree1.g3db";
+		def.modelName = "tree1";
 		addDef(def);
 		
 		def = new BuildingDef("vault");
 		def.width = def.depth = 2;
 		def.buildingClass = Vault.class;
-		def.modelName = "data/vault.g3db";
+		def.modelName = "vault";
 		def.replacesTerrain = true;
 		def.isBuildable = true;
 		
@@ -55,13 +55,13 @@ public class DefManager {
 		def = new BuildingDef("tower");
 		def.width = def.depth = 2;
 		def.buildingClass = Tower.class;
-		def.modelName = "data/tower.g3db";
+		def.modelName = "tower";
 		def.isBuildable = true;
 		addDef(def);
 		
 		def = new BuildingDef("mine");
 		def.buildingClass = Mine.class;
-		def.modelName = "data/mine.g3db";
+		def.modelName = "mine";
 		def.replacesTerrain = true;
 		addDef(def);
 		
@@ -138,13 +138,13 @@ public class DefManager {
 			models.add(d.modelName);
 		}
 		
-		models.add("data/cube1.g3db");
-		models.add("data/sphere.g3db");
-		models.add("data/hull1.g3db");
-		models.add("data/field1.g3db");
-		models.add("data/corner.g3db");
-		models.add("data/models/craft1.g3db");
-		models.add("data/wall_corner.g3db");
+		models.add("cube1");
+		models.add("sphere");
+		models.add("hull1");
+		models.add("field1");
+		models.add("corner");
+		models.add("craft1");
+		models.add("wall_corner");
 		
 		return models;
 	}

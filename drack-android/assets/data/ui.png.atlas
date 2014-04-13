@@ -10,3 +10,10 @@ hammer
   orig: 64, 64
   offset: 0, 0
   index: -1
+inventory
+  rotate: false
+  xy: 68, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
