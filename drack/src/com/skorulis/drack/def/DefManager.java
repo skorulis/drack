@@ -109,6 +109,14 @@ public class DefManager {
 		return def;
 	}
 	
+	public ResourceDef getResource(String name) {
+		ResourceDef def = resources.get(name);
+		if(def == null) {
+			throw new IllegalArgumentException("No resource named " + name);
+		}
+		return def;
+	}
+	
 	public Set<String> allTextures() {
 		HashSet<String> textures = new HashSet<String>();
 		textures.add("data/floor.png");

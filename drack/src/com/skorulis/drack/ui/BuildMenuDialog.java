@@ -26,7 +26,6 @@ public class BuildMenuDialog extends ModalDialog {
 			horizGroup.addActor(button);
 			button.addListener(new ClickListener() {
 				public void clicked(InputEvent event, float x, float y) {
-					System.out.println("CLICK " + bd.name());
 					build(playerUI, bd);
 					close();
 				}

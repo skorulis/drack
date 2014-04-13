@@ -18,7 +18,7 @@ public class MovementInfo {
 		this.startLoc = startLoc.cpy();
 		this.endLoc = endLoc.cpy();
 		this.direction = this.endLoc.cpy().sub(this.startLoc).nor();
-		direction.x *= -1;
+		direction.x *= -1; //HACK not sure why this is needed
 		this.travelTime = startLoc.cpy().sub(endLoc).len() / speed;
 	}
 	
