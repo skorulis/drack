@@ -1,7 +1,6 @@
 package com.skorulis.drack.ui;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -9,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.BuildingDef;
 
 public class BuildMenuDialog extends ModalDialog {

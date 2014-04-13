@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.avatar.Avatar;
-import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.BuildingPlacement;
 import com.skorulis.drack.def.BuildingDef;
 import com.skorulis.drack.map.GameMap;
