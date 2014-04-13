@@ -40,9 +40,11 @@ public class DefManager {
 		addDef(def);
 		
 		def = new BuildingDef("vault");
+		def.width = def.depth = 2;
 		def.buildingClass = Vault.class;
-		def.modelName = "data/cone.g3db";
+		def.modelName = "data/vault.g3db";
 		def.isBuildable = true;
+		
 		addDef(def);
 		
 		def = new BuildingDef("tower");
