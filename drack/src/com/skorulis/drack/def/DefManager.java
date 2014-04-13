@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.skorulis.drack.building.CommandCentre;
+import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.building.Tower;
 import com.skorulis.drack.building.Tree;
 import com.skorulis.drack.building.Vault;
@@ -43,6 +44,7 @@ public class DefManager {
 		def.width = def.depth = 2;
 		def.buildingClass = Vault.class;
 		def.modelName = "data/vault.g3db";
+		def.replacesTerrain = true;
 		def.isBuildable = true;
 		
 		addDef(def);
@@ -52,6 +54,12 @@ public class DefManager {
 		def.buildingClass = Tower.class;
 		def.modelName = "data/tower.g3db";
 		def.isBuildable = true;
+		addDef(def);
+		
+		def = new BuildingDef("mine");
+		def.buildingClass = Mine.class;
+		def.modelName = "data/mine.g3db";
+		def.replacesTerrain = true;
 		addDef(def);
 		
 	}

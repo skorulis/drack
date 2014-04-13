@@ -45,7 +45,7 @@ public class MapSquare implements SceneNode {
 
 	@Override
 	public void render(RenderInfo ri) {
-		ri.batch.render(groundInstance,ri.environment);
+		renderBlock(ri);
 		if(building != null) {
 			building.render(ri);
 		}
@@ -54,8 +54,20 @@ public class MapSquare implements SceneNode {
 		}
 	}
 	
+	private boolean shouldDrawBlock() {
+		if(this.building != null && this.building.def().replacesTerrain) {
+			return false;
+		}
+		if(this.sharedBuilding != null && this.sharedBuilding.def().replacesTerrain) {
+			return false;
+		}
+		return true;
+	}
+	
 	public void renderBlock(RenderInfo ri) {
-		ri.batch.render(groundInstance,ri.environment);
+		if(shouldDrawBlock()) {
+			ri.batch.render(groundInstance,ri.environment);
+		}
 	}
 	
 	public void update(float delta) {

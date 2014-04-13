@@ -17,7 +17,7 @@ public class MapGenerator {
 		square.setBuilding(b);
 		b.generateField(b.fieldSize(), map);
 		
-		map.squareAt(1,1).setBuilding(def.getBuilding("tree").create(assets));
+		map.squareAt(11,3).setBuilding(def.getBuilding("mine").create(assets));
 		map.squareAt(2,5).setBuilding(def.getBuilding("tree").create(assets));
 		map.squareAt(12,3).setBuilding(def.getBuilding("tree").create(assets));
 		map.squareAt(8,15).setBuilding(def.getBuilding("tree").create(assets));

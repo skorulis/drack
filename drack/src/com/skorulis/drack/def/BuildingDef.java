@@ -10,11 +10,13 @@ public class BuildingDef extends BaseDef {
 	public boolean isBuildable;
 	public int width;
 	public int depth;
+	public boolean replacesTerrain;
 	
 	public BuildingDef(String name) {
 		super(name);
 		this.width = 1;
 		this.depth = 1;
+		this.replacesTerrain = false;
 	}
 	
 	public Building create(AssetManager assets) {
