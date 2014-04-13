@@ -17,10 +17,12 @@ public class MapSquare implements SceneNode {
 
 	private ModelInstance groundInstance;
 	private Building building;
+	private Building sharedBuilding;
 	private ForceField field;
 	private BoundingBox boundingBox;
 	private final int x;
 	private final int z;
+	
 	
 	public MapSquare(AssetManager assets,int x, int z) {
 		this.x = x;
@@ -85,7 +87,7 @@ public class MapSquare implements SceneNode {
 	}
 	
 	public boolean isPassable() {
-		return building == null;
+		return building == null && sharedBuilding == null;
 	}
 	
 	public Vector3 getCentreLoc() {
@@ -94,7 +96,10 @@ public class MapSquare implements SceneNode {
 	
 	public void setBuilding(Building building) {
 		this.building = building;
-		this.building.setTranslation(groundInstance.transform.getTranslation(new Vector3()));
+		Vector3 translation = groundInstance.transform.getTranslation(new Vector3());
+		translation.x += (building.def().width - 1) * 0.5f;
+		translation.z += (building.def().depth - 1) * 0.5f;
+		this.building.setTranslation(translation);
 	}
 	
 	public void setForceField(ForceField field) {
@@ -108,6 +113,10 @@ public class MapSquare implements SceneNode {
 	
 	public Building building() {
 		return this.building;
+	}
+	
+	public void setSharedBuilding(Building b) {
+		this.sharedBuilding = b;
 	}
 	
 	

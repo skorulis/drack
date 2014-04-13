@@ -56,8 +56,18 @@ public class BuildingPlacement implements SceneNode{
 	}
 	
 	public void place() {
-		MapSquare sq = map.squareAt(location());
-		sq.setBuilding(building());
+		Vector3 rounded = roundAndClip(location);
+		
+		for(int i = 0; i < building.def().width; ++i) {
+			for(int j = 0; j < building.def().depth; ++j) {
+				MapSquare sq = map.squareAt((int)rounded.x + j, (int)rounded.z + i);
+				if(i == 0 && j == 0) {
+					sq.setBuilding(building);
+				} else {
+					sq.setSharedBuilding(building);
+				}
+			}
+		}
 	}
 	
 	public Building building() {
