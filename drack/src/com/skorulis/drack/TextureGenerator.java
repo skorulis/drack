@@ -1,14 +1,12 @@
 package com.skorulis.drack;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.BuildingDef;
@@ -28,13 +26,15 @@ public class TextureGenerator {
 	
 	public TextureGenerator(SKAssetManager assets,DefManager def) {
 		this.assets = assets;
-		isoCam = new IsoPerspectiveCamera(width,height);
+		isoCam = new IsoPerspectiveCamera(width,height,5);
 		modelBatch = new ModelBatch();
-		frameBuffer = new FrameBuffer(Format.RGB888,width,height,false);
+		
 		buildings = def.buildableBuildings();
+		System.out.println("Rendering " + buildings.size() + " buildings");
 	}
 	
 	public void render(Environment environment) {
+		System.out.println("RENDER");
 		BuildingDef bd = buildings.remove(0);
 		Building building = bd.create(assets);
 		
@@ -42,19 +42,21 @@ public class TextureGenerator {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         isoCam.cam().update();
         RenderInfo ri = new RenderInfo(modelBatch, environment, isoCam.cam());
+        frameBuffer = new FrameBuffer(Format.RGB888,width,height,false);
         frameBuffer.begin();
         modelBatch.begin(isoCam.cam());
         building.render(ri);
         modelBatch.end();
         frameBuffer.end();
+        System.out.println("RENDER END");
         
         Texture t = frameBuffer.getColorBufferTexture();
         assets.addAsset(bd.name() + "_icon", Texture.class, t);
-        
        
+        System.out.println("SAVE END " + bd.name() + "_icon");
 	}
 	
 	public boolean finished() {
-		return buildings.size() > 0;
+		return buildings.size() == 0;
 	}
 }

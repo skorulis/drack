@@ -11,14 +11,19 @@ public class IsoPerspectiveCamera {
 
 	private PerspectiveCamera cam;
 	private SceneNode tracking;
+	private float camHeight;
+	private float side;
 	
-	public IsoPerspectiveCamera(int width, int height) {
+	public IsoPerspectiveCamera(int width, int height,float camHeight) {
+		this.camHeight = camHeight;
+		this.side = (float) Math.sqrt(((camHeight * camHeight) / 2)); 
 		resize(width, height);
 	}
 	
 	public void resize(int width, int height) {
+		
 		cam = new PerspectiveCamera(45, width, height);
-        cam.position.set(7.07f, 10f, 7.07f);
+        cam.position.set(side, camHeight, side);
         cam.lookAt(0,0,0);
         cam.near = 1f;
         cam.far = 300f;
@@ -28,7 +33,7 @@ public class IsoPerspectiveCamera {
 	public void update(float delta) {
 		if(tracking != null) {
 			Vector3 pos = tracking.absTransform().getTranslation(new Vector3()); 
-			cam.position.set(pos.x + 7.07f, pos.y + 10, pos.z + 7.07f);
+			cam.position.set(pos.x + side, pos.y + camHeight, pos.z + side);
 			cam.lookAt(pos);
 		}
 		cam.update();

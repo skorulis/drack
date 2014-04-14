@@ -1,7 +1,6 @@
 package com.skorulis.drack.building;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Matrix4;
@@ -27,7 +26,7 @@ public class BuildingPlacement implements SceneNode{
 		this.location = pos;
 		this.location.x = Math.round(this.location.x);
 		this.location.z = Math.round(this.location.z);
-		this.cube = new ModelInstance(assets.get("data/cube1.g3db", Model.class));
+		this.cube = new ModelInstance(assets.getModel("cube1"));
 		this.cube.transform.scale(def.width, 1, def.depth);
 		this.move(0, 0);
 	}

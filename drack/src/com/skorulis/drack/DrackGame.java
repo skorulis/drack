@@ -47,7 +47,7 @@ public class DrackGame implements ApplicationListener {
                 
         loading = true;
         
-        isoCam = new IsoPerspectiveCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        isoCam = new IsoPerspectiveCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),10);
         eventListener = new GameEventListener(isoCam);
         
         
