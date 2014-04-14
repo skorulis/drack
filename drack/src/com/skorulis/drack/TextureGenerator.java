@@ -18,7 +18,6 @@ public class TextureGenerator {
 
 	private IsoPerspectiveCamera isoCam;
 	private ModelBatch modelBatch;
-	private FrameBuffer frameBuffer;
 	private static int width = 100;
 	private static int height = 100;
 	private ArrayList<BuildingDef> buildings;
@@ -34,26 +33,25 @@ public class TextureGenerator {
 	}
 	
 	public void render(Environment environment) {
-		System.out.println("RENDER");
 		BuildingDef bd = buildings.remove(0);
 		Building building = bd.create(assets);
 		
+		TransparentFrameBuffer frameBuffer = new TransparentFrameBuffer(Format.RGB888,width,height,true);
+        frameBuffer.begin();
+		
 		Gdx.gl.glViewport(0, 0, width, height);
+		Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         isoCam.cam().update();
         RenderInfo ri = new RenderInfo(modelBatch, environment, isoCam.cam());
-        frameBuffer = new FrameBuffer(Format.RGB888,width,height,false);
-        frameBuffer.begin();
+        
         modelBatch.begin(isoCam.cam());
         building.render(ri);
         modelBatch.end();
         frameBuffer.end();
-        System.out.println("RENDER END");
         
         Texture t = frameBuffer.getColorBufferTexture();
         assets.addAsset(bd.name() + "_icon", Texture.class, t);
-       
-        System.out.println("SAVE END " + bd.name() + "_icon");
 	}
 	
 	public boolean finished() {

@@ -83,8 +83,7 @@ public class DrackGame implements ApplicationListener {
 
 	@Override
 	public void render() {
-		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+		
 		if(loading) {
 			if(assets.update()) {
 				doneLoading();
@@ -97,7 +96,14 @@ public class DrackGame implements ApplicationListener {
 			return;
 		}
 		
-		
+        renderMain();
+	}
+	
+	private void renderMain() {
+		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        
         isoCam.cam().update();
         RenderInfo ri = new RenderInfo(modelBatch, environment, isoCam.cam());
         modelBatch.begin(isoCam.cam());
