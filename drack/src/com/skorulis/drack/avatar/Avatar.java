@@ -19,6 +19,7 @@ public class Avatar implements SceneNode{
 	private ModelInstance instance;
 	private MapPath path;
 	private MovementInfo movement;
+	private UnitAction action;
 	
 	private float speed = 10;
 	private ResourceBatch resources;
@@ -51,6 +52,9 @@ public class Avatar implements SceneNode{
 	}
 	
 	public void update(float delta) {
+		if(action != null) {
+			action.update(delta);
+		}
 		if(movement == null) {
 			return;
 		}
@@ -81,8 +85,16 @@ public class Avatar implements SceneNode{
 		return movement.endLoc;
 	}
 	
+	public ResourceBatch resources() {
+		return resources;
+	}
+	
 	public ArrayList<ResourceQuantity> allResources() {
 		return resources.allResources();
+	}
+	
+	public void setAction(UnitAction action) {
+		this.action = action;
 	}
 
 }

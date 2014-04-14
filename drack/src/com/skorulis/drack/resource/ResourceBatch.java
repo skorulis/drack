@@ -20,6 +20,14 @@ public class ResourceBatch {
 		}
 	}
 	
+	public void add(ResourceBatch batch) {
+		System.out.println("Adding " + batch);
+		ArrayList<ResourceQuantity> all = batch.allResources();
+		for(ResourceQuantity rq : all) {
+			add(rq);
+		}
+	}
+	
 	public float quantity(String resource) {
 		ResourceQuantity r = resources.get(resource);
 		if(r == null) {

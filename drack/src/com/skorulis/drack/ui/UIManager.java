@@ -76,6 +76,9 @@ public class UIManager {
 			buildingUI.getParent().removeActor(buildingUI);
 		}
 		buildingUI = BuildingUI.uiForBuilding(building);
+		buildingUI.init(skin, this);
+		buildingUI.setBuilding(building);
+		
 		stage.addActor(buildingUI);
 	}
 }

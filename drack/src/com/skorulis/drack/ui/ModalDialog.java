@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.skorulis.gdx.LayoutHelper;
+import com.skorulis.gdx.ui.LayoutHelper;
 
 public class ModalDialog extends WidgetGroup {
 

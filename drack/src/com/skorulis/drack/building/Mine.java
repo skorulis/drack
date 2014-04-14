@@ -2,6 +2,7 @@ package com.skorulis.drack.building;
 
 import java.util.ArrayList;
 
+import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.resource.ResourceQuantity;
 
 public class Mine extends Building {
@@ -12,9 +13,13 @@ public class Mine extends Building {
 		resources = new ArrayList<ResourceQuantity>();
 	}
 	
-	public ResourceQuantity mine(float rate) {
-		ResourceQuantity res = resources.get(0);
-		return new ResourceQuantity(res.resource(), res.quantity() * rate);
+	public ResourceBatch mine(float rate) {
+		ResourceBatch batch = new ResourceBatch();
+		for(ResourceQuantity res : resources) {
+			ResourceQuantity amount = new ResourceQuantity(res.resource(), res.quantity() * rate);
+			batch.add(amount);
+		}
+		return batch;
 	}
 	
 }

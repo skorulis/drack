@@ -1,4 +1,4 @@
-package com.skorulis.gdx;
+package com.skorulis.gdx.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
@@ -25,6 +25,14 @@ public class LayoutHelper {
 		h = Math.min(h, widget.getHeight() - padding * 2);
 		
 		actor.setBounds( (widget.getWidth() - w)/2 , (widget.getHeight() - h)/2, w, h);
+	}
+	
+	public void centreChildX(Actor actor) {
+		Layout layout = (Layout) actor;
+		float w = layout.getPrefWidth();
+		float h = layout.getPrefHeight();
+		
+		actor.setBounds( (widget.getWidth() - w)/2 , actor.getY(), w, h);
 	}
 	
 }
