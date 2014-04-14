@@ -12,23 +12,40 @@ import com.skorulis.drack.building.Building;
 public class PlayerUI extends WidgetGroup {
 	
 	private ImageButton buildButton;
+	private ImageButton inventoryButton;
 	private BuildMenuDialog buildDialog;
 	private BuildingPlacementUI buildingPlacement;
+	private InventoryDialog inventoryDialog;
 	private UIManager ui;
 	
 	public PlayerUI(UIManager uiManager) {
 		this.ui = uiManager;
 		TextureAtlas atlas = uiManager.assets().get("data/ui.png.atlas", TextureAtlas.class);
-		AtlasRegion ar = atlas.findRegion("hammer");
-		buildButton = new ImageButton(new TextureRegionDrawable(ar));
+		buildButton = new ImageButton(new TextureRegionDrawable(atlas.findRegion("hammer")));
 		this.addActor(buildButton);
-		this.setFillParent(true);
+		
 		
 		buildButton.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				buildClicked();
 			}
 		});
+		
+		inventoryButton = new ImageButton(new TextureRegionDrawable(atlas.findRegion("inventory")));
+		this.addActor(inventoryButton);
+		
+		inventoryButton.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				inventoryClicked();
+			}
+		});
+		
+		this.setFillParent(true);
+	}
+	
+	private void inventoryClicked() {
+		inventoryDialog = new InventoryDialog(ui.skin());
+		addActor(inventoryDialog);
 	}
 	
 	private void buildClicked() {
@@ -38,6 +55,8 @@ public class PlayerUI extends WidgetGroup {
 	
 	public void layout() {
 		buildButton.setX(getWidth() - buildButton.getWidth());
+		inventoryButton.setX(buildButton.getX());
+		inventoryButton.setY(buildButton.getTop());
 		if(buildDialog != null) {
 			//buildDialog.setBounds(0, 0, this.getWidth(), this.getHeight());
 		}

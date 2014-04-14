@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.CommandCentre;
 import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.building.Tower;
@@ -63,6 +64,20 @@ public class DefManager {
 		def.buildingClass = Mine.class;
 		def.modelName = "mine";
 		def.replacesTerrain = true;
+		addDef(def);
+		
+		def = new BuildingDef("smelter");
+		def.buildingClass = Building.class;
+		def.modelName = "cone";
+		def.isBuildable = true;
+		def.replacesTerrain = true;
+		addDef(def);
+		
+		def = new BuildingDef("barracks");
+		def.buildingClass = Building.class;
+		def.modelName = "cone";
+		def.replacesTerrain = true;
+		def.isBuildable = true;
 		addDef(def);
 		
 	}
