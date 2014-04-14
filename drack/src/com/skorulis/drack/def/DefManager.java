@@ -88,7 +88,27 @@ public class DefManager {
 	
 	private void createResources() {
 		ResourceDef resource = new ResourceDef("iron");
+		addDef(resource);
 		
+		resource = new ResourceDef("gold");
+		addDef(resource);
+		
+		resource = new ResourceDef("copper");
+		addDef(resource);
+		
+		resource = new ResourceDef("silver");
+		addDef(resource);
+		
+		resource = new ResourceDef("uranium");
+		addDef(resource);
+		
+		resource = new ResourceDef("titanium");
+		addDef(resource);
+		
+		resource = new ResourceDef("mercury");
+		addDef(resource);
+		
+		resource = new ResourceDef("cobalt");
 		addDef(resource);
 	}
 	

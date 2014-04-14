@@ -20,4 +20,11 @@ public class ResourceQuantity {
 		return quantity;
 	}
 	
+	public void add(float quantity) {
+		this.quantity += quantity;
+	}
+	
+	public void add(ResourceQuantity resQ) {
+		this.quantity += resQ.quantity;
+	}
 }

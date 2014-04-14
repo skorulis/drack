@@ -6,8 +6,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.skorulis.drack.IsoPerspectiveCamera;
+import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.game.GameScene;
+import com.skorulis.drack.ui.building.BuildingUI;
 
 public class UIManager {
 
@@ -19,6 +21,7 @@ public class UIManager {
 	private DefManager def;
 	private AssetManager assets;
 	private IsoPerspectiveCamera camera;
+	private BuildingUI buildingUI;
 	
 	public UIManager(AssetManager assets,GameScene game,DefManager def, IsoPerspectiveCamera camera) {
 		this.assets = assets;
@@ -68,4 +71,11 @@ public class UIManager {
 		return camera;
 	}
 	
+	public void showBuildingUI(Building building) {
+		if(buildingUI != null) {
+			buildingUI.getParent().removeActor(buildingUI);
+		}
+		buildingUI = BuildingUI.uiForBuilding(building);
+		stage.addActor(buildingUI);
+	}
 }

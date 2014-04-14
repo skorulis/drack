@@ -22,6 +22,7 @@ public class GameScene implements SceneNode, Disposable {
 	private Matrix4 transform;
 	private BuildingPlacement placingBuilding;
 	private SKAssetManager assets;
+	private GameDelegate delegate;
 	
 	public GameScene(SKAssetManager assets,GameMap map) {
 		transform = new Matrix4();
@@ -34,12 +35,15 @@ public class GameScene implements SceneNode, Disposable {
 		if(node instanceof MapSquare) {
 			MapSquare sq = (MapSquare) node;
 			MapSquare current = map.squareAt(avatar.currentPosition());
-			if(sq != current && sq.isPassable()) {
+			if(sq == current) {
+				return;
+			}
+			if(sq.isPassable()) {
 				PathFinder finder = new PathFinder(map, current, sq);
 				MapPath path = finder.generatePath();
 				avatar.setPath(path);
 			} else if(sq.building() != null) {
-				
+				this.delegate.buildingSelected(sq.building());
 			}
 		}
 	}
@@ -114,6 +118,10 @@ public class GameScene implements SceneNode, Disposable {
 	
 	public Avatar playerAvatar() {
 		return avatar;
+	}
+	
+	public void setDelegate(GameDelegate delegate) {
+		this.delegate = delegate;
 	}
 	
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.MovementInfo;
+import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
@@ -20,9 +21,11 @@ public class Avatar implements SceneNode{
 	private MovementInfo movement;
 	
 	private float speed = 10;
+	private ResourceBatch resources;
 	
 	public Avatar(SKAssetManager assets) {
 		instance = new ModelInstance(assets.getModel("craft1"));
+		resources = new ResourceBatch();
 	}
 	
 	public void setPath(MapPath path) {
@@ -79,9 +82,7 @@ public class Avatar implements SceneNode{
 	}
 	
 	public ArrayList<ResourceQuantity> allResources() {
-		ArrayList<ResourceQuantity> ret = new ArrayList<ResourceQuantity>();
-		
-		return ret;
+		return resources.allResources();
 	}
 
 }

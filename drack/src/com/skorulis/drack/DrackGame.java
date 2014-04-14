@@ -11,14 +11,16 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector;
+import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.game.GameDelegate;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.map.MapGenerator;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 
-public class DrackGame implements ApplicationListener {
+public class DrackGame implements ApplicationListener, GameDelegate {
 	
 	private IsoPerspectiveCamera isoCam;
 	private ModelBatch modelBatch;
@@ -65,6 +67,7 @@ public class DrackGame implements ApplicationListener {
         assets.addAllModels(def.buildModels(assets));
         MapGenerator mapGen = new MapGenerator(50, 50, assets,def);
         scene = new GameScene(assets,mapGen.map());
+        scene.setDelegate(this);
         eventListener.setScene(scene);
         isoCam.setTracking(scene.avatar());
         
@@ -137,5 +140,10 @@ public class DrackGame implements ApplicationListener {
 
 	@Override
 	public void resume() {
+	}
+
+	@Override
+	public void buildingSelected(Building building) {
+		ui.showBuildingUI(building);
 	}
 }
