@@ -32,6 +32,7 @@ public class DrackGame implements ApplicationListener {
     private GameEventListener eventListener;
     private GameScene scene;
     private UIManager ui;
+    private TextureGenerator textureGen;
 	
 	@Override
 	public void create() {
@@ -46,7 +47,7 @@ public class DrackGame implements ApplicationListener {
                 
         loading = true;
         
-        isoCam = new IsoPerspectiveCamera();
+        isoCam = new IsoPerspectiveCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         eventListener = new GameEventListener(isoCam);
         
         
@@ -70,6 +71,8 @@ public class DrackGame implements ApplicationListener {
         ui = new UIManager(assets,scene,def,isoCam);
         inputPlexer = new InputMultiplexer(ui.stage(), new GestureDetector(eventListener));
         Gdx.input.setInputProcessor(inputPlexer);
+        
+        textureGen = new TextureGenerator(assets, def);
     }
 
 	@Override
@@ -88,6 +91,10 @@ public class DrackGame implements ApplicationListener {
 			} else {
 				return;
 			}
+		}
+		if(!textureGen.finished()) {
+			textureGen.render(environment);
+			return;
 		}
 		
 		

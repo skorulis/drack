@@ -12,8 +12,8 @@ public class IsoPerspectiveCamera {
 	private PerspectiveCamera cam;
 	private SceneNode tracking;
 	
-	public IsoPerspectiveCamera() {
-		resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+	public IsoPerspectiveCamera(int width, int height) {
+		resize(width, height);
 	}
 	
 	public void resize(int width, int height) {
