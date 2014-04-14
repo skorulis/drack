@@ -1,6 +1,7 @@
 package com.skorulis.drack.ui;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -15,6 +17,7 @@ import com.skorulis.drack.def.BuildingDef;
 
 public class BuildMenuDialog extends ModalDialog {
 	
+	private ScrollPane scrollPane;
 	private HorizontalGroup horizGroup;
 	private UIManager ui;
 	
@@ -22,6 +25,7 @@ public class BuildMenuDialog extends ModalDialog {
 		super(skin);
 		this.ui = ui;
 		horizGroup = new HorizontalGroup();
+		
 		horizGroup.space(10);
 		ArrayList<BuildingDef> buildings = ui.def().buildableBuildings();
 		for(final BuildingDef bd : buildings) {
@@ -40,8 +44,8 @@ public class BuildMenuDialog extends ModalDialog {
 			});
 			
 		}
-		super.content = horizGroup;
-		this.addActor(horizGroup);
+		scrollPane = new ScrollPane(horizGroup);
+		this.setContent(scrollPane);
 	}
 	
 	public void build(PlayerUI playerUI, BuildingDef bd) {

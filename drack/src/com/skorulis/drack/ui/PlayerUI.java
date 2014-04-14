@@ -43,7 +43,7 @@ public class PlayerUI extends WidgetGroup {
 	}
 	
 	private void inventoryClicked() {
-		inventoryDialog = new InventoryDialog(ui.skin());
+		inventoryDialog = new InventoryDialog(ui.game().playerAvatar(), ui.skin());
 		addActor(inventoryDialog);
 	}
 	

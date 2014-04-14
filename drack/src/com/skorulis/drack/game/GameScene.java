@@ -112,4 +112,8 @@ public class GameScene implements SceneNode, Disposable {
 		this.placingBuilding = null;
 	}
 	
+	public Avatar playerAvatar() {
+		return avatar;
+	}
+	
 }

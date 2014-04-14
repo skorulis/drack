@@ -70,13 +70,17 @@ public class DefManager {
 		def.buildingClass = Building.class;
 		def.modelName = "cone";
 		def.isBuildable = true;
-		def.replacesTerrain = true;
 		addDef(def);
 		
 		def = new BuildingDef("barracks");
 		def.buildingClass = Building.class;
 		def.modelName = "cone";
-		def.replacesTerrain = true;
+		def.isBuildable = true;
+		addDef(def);
+		
+		def = new BuildingDef("wall");
+		def.buildingClass = Building.class;
+		def.modelName = "wall_corner";
 		def.isBuildable = true;
 		addDef(def);
 		

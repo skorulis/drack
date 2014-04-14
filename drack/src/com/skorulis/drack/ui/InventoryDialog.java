@@ -1,15 +1,20 @@
 package com.skorulis.drack.ui;
 
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.skorulis.drack.avatar.Avatar;
 
 public class InventoryDialog extends ModalDialog {
 
-	private VerticalGroup list;
+	private ScrollPane resourceScrollPane;
+	private VerticalGroup resourceList;
 	
-	public InventoryDialog(Skin skin) {
+	public InventoryDialog(Avatar avatar, Skin skin) {
 		super(skin);
-		list = new VerticalGroup();
+		resourceList = new VerticalGroup();
+		resourceScrollPane = new ScrollPane(resourceList);
+		this.setContent(resourceScrollPane);
 	}
 
 }

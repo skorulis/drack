@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.BuildingDef;
 import com.skorulis.drack.def.DefManager;

@@ -1,11 +1,14 @@
 package com.skorulis.drack.avatar;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.MovementInfo;
+import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
@@ -75,5 +78,10 @@ public class Avatar implements SceneNode{
 		return movement.endLoc;
 	}
 	
+	public ArrayList<ResourceQuantity> allResources() {
+		ArrayList<ResourceQuantity> ret = new ArrayList<ResourceQuantity>();
+		
+		return ret;
+	}
 
 }

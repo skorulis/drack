@@ -35,7 +35,7 @@ public class ModalDialog extends WidgetGroup {
 	}
 	
 	public void layout() {
-		layoutHelper.centreChild(this.content);
+		layoutHelper.centreChild(this.content,20);
 		closeButton.setBounds(content.getRight() - closeButton.getWidth(), content.getTop(), closeButton.getPrefWidth(), closeButton.getPrefHeight());
 		float height = closeButton.getTop() - content.getY() + padding * 2;
 		
@@ -44,6 +44,11 @@ public class ModalDialog extends WidgetGroup {
 	
 	public void close() {
 		getParent().removeActor(this);
+	}
+	
+	public void setContent(WidgetGroup widget) {
+		this.content = widget;
+		this.addActor(content);
 	}
 	
 }
