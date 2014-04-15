@@ -2,23 +2,26 @@ package com.skorulis.drack.ui.building;
 
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.ui.PlayerUI;
 import com.skorulis.drack.ui.UIManager;
+import com.skorulis.gdx.ui.LayoutHelper;
 
 public class BuildingPlacementUI extends WidgetGroup {
 
-	private final TextButton tickButton;
-	private final TextButton cancelButton;
+	private final ImageButton tickButton;
+	private final ImageButton cancelButton;
 	private final Building building;
 	private final UIManager ui;
+	private LayoutHelper helper;
 	
 	public BuildingPlacementUI(final UIManager ui, final PlayerUI playerUI,Building building) {
-		tickButton = new TextButton("CONFIRM",ui.style().defaultSkin());
-		cancelButton = new TextButton("CANCEL",ui.style().defaultSkin());
+		helper = new LayoutHelper(this);
+		tickButton = new ImageButton(ui.style().createImageStyle("check"));
+		cancelButton = new ImageButton(ui.style().createImageStyle("cross_white"));
 		this.building = building;
 		this.ui = ui;
 		
@@ -43,8 +46,8 @@ public class BuildingPlacementUI extends WidgetGroup {
 	}
 	
 	public void layout() {
-		tickButton.setBounds(100, 100, tickButton.getPrefWidth(), tickButton.getPrefHeight());
-		cancelButton.setBounds(200, 100, cancelButton.getPrefWidth(), cancelButton.getPrefHeight());
+		//tickButton.setBounds(100, 100, tickButton.getPrefWidth(), tickButton.getPrefHeight());
+		helper.alignRight(cancelButton, 0);
 	}
 	
 	public void act(float delta) {
@@ -55,11 +58,11 @@ public class BuildingPlacementUI extends WidgetGroup {
 	}
 	
 	public float getPrefHeight() {
-		return 200;
+		return 150;
 	}
 	
 	public float getPrefWidth() {
-		return 300;
+		return 150;
 	}
 	
 	

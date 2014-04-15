@@ -10,6 +10,13 @@ check
   orig: 32, 32
   offset: 0, 0
   index: -1
+cross_white
+  rotate: false
+  xy: 134, 68
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 hammer
   rotate: false
   xy: 2, 36
@@ -26,7 +33,7 @@ inventory
   index: -1
 red_button1
   rotate: false
-  xy: 134, 68
+  xy: 36, 2
   size: 32, 32
   split: 3, 3, 3, 3
   orig: 32, 32
@@ -34,7 +41,7 @@ red_button1
   index: -1
 red_dark
   rotate: false
-  xy: 36, 2
+  xy: 168, 68
   size: 32, 32
   split: 3, 3, 3, 3
   orig: 32, 32
@@ -42,7 +49,7 @@ red_dark
   index: -1
 red_dark2
   rotate: false
-  xy: 168, 68
+  xy: 70, 2
   size: 32, 32
   split: 5, 5, 5, 5
   orig: 32, 32
@@ -50,7 +57,7 @@ red_dark2
   index: -1
 red_light2
   rotate: false
-  xy: 70, 2
+  xy: 202, 68
   size: 32, 32
   split: 5, 5, 5, 5
   orig: 32, 32
