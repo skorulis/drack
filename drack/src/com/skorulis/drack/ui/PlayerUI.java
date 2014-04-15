@@ -1,13 +1,9 @@
 package com.skorulis.drack.ui;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.ui.building.BuildMenuDialog;
 import com.skorulis.drack.ui.building.BuildingPlacementUI;
@@ -27,17 +23,8 @@ public class PlayerUI extends WidgetGroup {
 	public PlayerUI(UIManager uiManager) {
 		this.ui = uiManager;
 		this.helper = new LayoutHelper(this);
-		TextureAtlas atlas = uiManager.assets().get("data/ui.png.atlas", TextureAtlas.class);
 		
-		ButtonStyle buttonStyle = uiManager.style().gameSkin().get("default",ButtonStyle.class);
-		
-		
-		TextureRegionDrawable bgUp = new TextureRegionDrawable(atlas.findRegion("red_light2"));
-		TextureRegionDrawable bgDown = new TextureRegionDrawable(atlas.findRegion("red_dark2"));
-		TextureRegionDrawable hammer = new TextureRegionDrawable(atlas.findRegion("hammer"));
-		TextureRegionDrawable inventory = new TextureRegionDrawable(atlas.findRegion("inventory"));
-		
-		buildButton = new ImageButton(new ImageButtonStyle(bgUp, bgDown,null, hammer, null, null));
+		buildButton = new ImageButton(uiManager.style().createImageStyle("hammer"));
 		this.addActor(buildButton);
 		
 		
@@ -47,7 +34,7 @@ public class PlayerUI extends WidgetGroup {
 			}
 		});
 		
-		inventoryButton = new ImageButton(new ImageButtonStyle(bgUp, bgDown,null, inventory, null, null));
+		inventoryButton = new ImageButton(uiManager.style().createImageStyle("inventory"));
 		this.addActor(inventoryButton);
 		
 		inventoryButton.addListener(new ClickListener() {

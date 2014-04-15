@@ -166,7 +166,7 @@ public class DefManager {
 	
 	public Set<String> allTextureAtlases() {
 		HashSet<String> textures = new HashSet<String>();
-		textures.add("data/ui.png.atlas");
+
 		return textures;
 	}
 	

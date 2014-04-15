@@ -1,7 +1,10 @@
 package com.skorulis.drack.ui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class StyleManager {
 
@@ -19,6 +22,13 @@ public class StyleManager {
 	
 	public Skin gameSkin() {
 		return gameSkin;
+	}
+	
+	public ImageButtonStyle createImageStyle(String imageName) {
+		ButtonStyle buttonStyle = gameSkin.get("default",ButtonStyle.class);
+		ImageButtonStyle ibs = new ImageButtonStyle(buttonStyle);
+		ibs.imageUp = ibs.imageDown = new TextureRegionDrawable(gameSkin.getRegion(imageName));
+		return ibs;
 	}
 	
 }
