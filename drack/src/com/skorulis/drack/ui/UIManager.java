@@ -74,10 +74,12 @@ public class UIManager {
 	public void showBuildingUI(Building building) {
 		clearBuildingUI();
 		buildingUI = BuildingUI.uiForBuilding(building);
-		buildingUI.init(style.defaultSkin(), this);
-		buildingUI.setBuilding(building);
+		if(buildingUI != null) {
+			buildingUI.init(style.defaultSkin(), this);
+			buildingUI.setBuilding(building);
+			stage.addActor(buildingUI);
+		}
 		
-		stage.addActor(buildingUI);
 	}
 	
 	public void clearBuildingUI() {

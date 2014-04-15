@@ -10,20 +10,30 @@ public class PathFinder {
 
 	private MapSquare from;
 	private MapSquare to;
+	private ArrayList<MapSquare> nearSquares;
 	private ArrayList<PathNodeInfo> openList;
 	private ArrayList<PathNodeInfo> closedList;
 	private GameMap map;
 	
 	public PathFinder(GameMap map, MapSquare from, MapSquare to) {
+		this(map,from,to,null);
+	}
+	
+	public PathFinder(GameMap map, MapSquare from, MapSquare to, ArrayList<MapSquare> nearSquares) {
 		this.from = from;
 		this.to = to;
 		this.map = map;
+		this.nearSquares = nearSquares;
 		openList = new ArrayList<PathNodeInfo>();
 		closedList = new ArrayList<PathNodeInfo>();
+		
 	}
 	
 	public MapPath generatePath() {
 		PathNodeInfo pni = new PathNodeInfo(from);
+		if(isAtEnd(pni)) {
+			return null;
+		}
 		pni.heuristic = calculateHeuristic(pni.square, to);
 		openList.add(pni);
 		
@@ -31,7 +41,7 @@ public class PathFinder {
 			pni = removeNext();
 			if(pni == null) {
 				break;
-			} else if(squaresEqual(pni.square, to)) {
+			} else if(isAtEnd(pni)) {
 				return buildPath(pni);
 			} else {
 				evaluate(pni);
@@ -39,6 +49,21 @@ public class PathFinder {
 		}
 		
 		return null;
+	}
+	
+	private boolean isAtEnd(PathNodeInfo pni) {
+		if(pni.square == to) {
+			return true;
+		}
+		if(nearSquares == null) {
+			return false;
+		}
+		for(MapSquare ms: nearSquares) {
+			if(pni.square == ms) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private MapPath buildPath(PathNodeInfo pni) {

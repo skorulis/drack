@@ -13,7 +13,7 @@ import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 
-public class Avatar implements SceneNode{
+public class Avatar extends Unit implements SceneNode {
 
 	private ModelInstance instance;
 	private UnitAction action;
@@ -28,6 +28,9 @@ public class Avatar implements SceneNode{
 	}
 	
 	public void setPath(MapPath path) {
+		if(path == null || path.length() == 0) {
+			return;
+		}
 		if(action != null && action instanceof MovementAction) {
 			((MovementAction)action).setPath(path);
 		} else {

@@ -39,4 +39,8 @@ public class MapPath {
 		return nodeIndex == this.nodes.size() - 2;
 	}
 	
+	public int length() {
+		return nodes.size();
+	}
+	
 }

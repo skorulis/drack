@@ -1,5 +1,7 @@
 package com.skorulis.drack.game;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
@@ -45,12 +47,19 @@ public class GameScene implements SceneNode, Disposable, AvatarDelegate {
 			if(sq == current) {
 				return;
 			}
+			ArrayList<MapSquare> near = null;
 			if(sq.isPassable()) {
-				PathFinder finder = new PathFinder(map, current, sq);
-				MapPath path = finder.generatePath();
-				avatar.setPath(path);
-				this.delegate.playerMoved();
+				
 			} else if(sq.building() != null) {
+				near = map.adjacentSquares(sq);
+			}
+			
+			PathFinder finder = new PathFinder(map, current, sq, near);
+			MapPath path = finder.generatePath();
+			avatar.setPath(path);
+			this.delegate.playerMoved();
+			
+			if(sq.building() != null) {
 				this.delegate.buildingSelected(sq.building());
 			}
 		}

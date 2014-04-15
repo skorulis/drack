@@ -19,7 +19,7 @@ public abstract class BuildingUI extends WidgetGroup {
 		if(building instanceof Mine) {
 			ret = new MineUI();
 		} else {
-			throw new IllegalArgumentException("Could not find UI for " + building);
+			//throw new IllegalArgumentException("Could not find UI for " + building);
 		}
 		
 		
