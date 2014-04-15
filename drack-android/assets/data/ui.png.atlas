@@ -33,3 +33,19 @@ red_dark
   orig: 32, 32
   offset: 0, 0
   index: -1
+red_dark2
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  split: 5, 5, 5, 5
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+red_light2
+  rotate: false
+  xy: 168, 68
+  size: 32, 32
+  split: 5, 5, 5, 5
+  orig: 32, 32
+  offset: 0, 0
+  index: -1

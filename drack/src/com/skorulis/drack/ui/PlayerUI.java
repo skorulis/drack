@@ -11,6 +11,7 @@ import com.skorulis.drack.building.Building;
 import com.skorulis.drack.ui.building.BuildMenuDialog;
 import com.skorulis.drack.ui.building.BuildingPlacementUI;
 import com.skorulis.drack.ui.inventory.InventoryDialog;
+import com.skorulis.gdx.ui.LayoutHelper;
 
 public class PlayerUI extends WidgetGroup {
 	
@@ -20,21 +21,19 @@ public class PlayerUI extends WidgetGroup {
 	private BuildingPlacementUI buildingPlacement;
 	private InventoryDialog inventoryDialog;
 	private UIManager ui;
+	private final LayoutHelper helper;
 	
 	public PlayerUI(UIManager uiManager) {
 		this.ui = uiManager;
+		this.helper = new LayoutHelper(this);
 		TextureAtlas atlas = uiManager.assets().get("data/ui.png.atlas", TextureAtlas.class);
 		
-		TextureRegionDrawable bgUp = new TextureRegionDrawable(atlas.findRegion("red_button1"));
-		TextureRegionDrawable bgDown = new TextureRegionDrawable(atlas.findRegion("red_dark"));
+		TextureRegionDrawable bgUp = new TextureRegionDrawable(atlas.findRegion("red_light2"));
+		TextureRegionDrawable bgDown = new TextureRegionDrawable(atlas.findRegion("red_dark2"));
 		TextureRegionDrawable hammer = new TextureRegionDrawable(atlas.findRegion("hammer"));
+		TextureRegionDrawable inventory = new TextureRegionDrawable(atlas.findRegion("inventory"));
 		
-		ImageButtonStyle ibs = new ImageButtonStyle();
-		ibs.down = bgDown;
-		ibs.up = bgUp;
-		ibs.imageUp = hammer;
-		
-		buildButton = new ImageButton(ibs);
+		buildButton = new ImageButton(new ImageButtonStyle(bgUp, bgDown,null, hammer, null, null));
 		this.addActor(buildButton);
 		
 		
@@ -44,7 +43,7 @@ public class PlayerUI extends WidgetGroup {
 			}
 		});
 		
-		inventoryButton = new ImageButton(new TextureRegionDrawable(atlas.findRegion("inventory")));
+		inventoryButton = new ImageButton(new ImageButtonStyle(bgUp, bgDown,null, inventory, null, null));
 		this.addActor(inventoryButton);
 		
 		inventoryButton.addListener(new ClickListener() {
@@ -67,9 +66,10 @@ public class PlayerUI extends WidgetGroup {
 	}
 	
 	public void layout() {
-		buildButton.setX(getWidth() - buildButton.getWidth());
-		inventoryButton.setX(buildButton.getX());
-		inventoryButton.setY(buildButton.getTop());
+		helper.alignBottom(buildButton, 8);
+		helper.alignRight(buildButton, 8);
+		helper.alignRight(inventoryButton, 8);
+		helper.alignTopOf(inventoryButton, buildButton, 8);
 		if(buildDialog != null) {
 			//buildDialog.setBounds(0, 0, this.getWidth(), this.getHeight());
 		}

@@ -35,4 +35,19 @@ public class LayoutHelper {
 		actor.setBounds( (widget.getWidth() - w)/2 , actor.getY(), w, h);
 	}
 	
+	public void alignRight(Actor actor, float padding) {
+		float w = actor.getWidth();
+		actor.setX(widget.getWidth() - w - padding);
+	}
+	
+	public void alignBottom(Actor actor, float padding) {
+		actor.setY(padding);
+	}
+	
+	public void alignTopOf(Actor actor, Actor to, float padding) {
+		float y = to.getTop();
+		actor.setY(y + padding);
+	}
+	
+	
 }
