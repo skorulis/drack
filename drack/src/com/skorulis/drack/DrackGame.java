@@ -164,9 +164,4 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	public void playerMoved() {
 		ui.clearBuildingUI();
 	}
-
-	@Override
-	public void showTextEffect(Vector3 loc, String text) {
-		this.info.addTextEffect(loc, text);
-	}
 }

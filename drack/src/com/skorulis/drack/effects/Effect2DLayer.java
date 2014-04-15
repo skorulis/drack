@@ -31,7 +31,6 @@ public class Effect2DLayer {
 			if(!effect.isAlive()) {
 				effects.remove(i);
 				effect.actor().remove();
-				System.out.println("Removing effect");
 			} else {
 				if(effect.movement() != null) {
 					effect.movement().updatePosition(this.camera.cam(),delta);

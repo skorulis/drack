@@ -134,8 +134,7 @@ public class GameScene implements SceneNode, Disposable, AvatarDelegate {
 
 	@Override
 	public void resourceAdded(Avatar avatar, ResourceQuantity rq) {
-		System.out.println("DO SOMETHING " + rq);
-		effects2D.addTextEffect(avatar.absTransform().getTranslation(new Vector3()), "+1");
+		effects2D.addTextEffect(avatar.absTransform().getTranslation(new Vector3()), rq.displayText());
 	}
 	
 }

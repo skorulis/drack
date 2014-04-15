@@ -27,4 +27,8 @@ public class ResourceQuantity {
 	public void add(ResourceQuantity resQ) {
 		this.quantity += resQ.quantity;
 	}
+	
+	public String displayText() {
+		return "+" + quantity + " " + resourceDef.name();
+	}
 }
