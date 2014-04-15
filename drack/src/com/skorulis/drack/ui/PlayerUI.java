@@ -24,7 +24,7 @@ public class PlayerUI extends WidgetGroup {
 		this.ui = uiManager;
 		this.helper = new LayoutHelper(this);
 		
-		buildButton = new ImageButton(uiManager.style().createImageStyle("hammer"));
+		buildButton = new ImageButton(uiManager.style().createImageStyle("hammer_dark"));
 		this.addActor(buildButton);
 		
 		
@@ -34,7 +34,7 @@ public class PlayerUI extends WidgetGroup {
 			}
 		});
 		
-		inventoryButton = new ImageButton(uiManager.style().createImageStyle("inventory"));
+		inventoryButton = new ImageButton(uiManager.style().createImageStyle("inventory_dark"));
 		this.addActor(inventoryButton);
 		
 		inventoryButton.addListener(new ClickListener() {

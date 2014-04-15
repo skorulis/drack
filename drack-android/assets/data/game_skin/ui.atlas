@@ -12,44 +12,35 @@ check
   index: -1
 cross_white
   rotate: false
-  xy: 134, 68
+  xy: 200, 68
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-hammer
+hammer_dark
   rotate: false
   xy: 2, 36
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-inventory
+hammer_white
   rotate: false
   xy: 68, 36
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-red_button1
+inventory_dark
   rotate: false
-  xy: 36, 2
-  size: 32, 32
-  split: 3, 3, 3, 3
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-red_dark
-  rotate: false
-  xy: 168, 68
-  size: 32, 32
-  split: 3, 3, 3, 3
-  orig: 32, 32
+  xy: 134, 36
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 red_dark2
   rotate: false
-  xy: 70, 2
+  xy: 36, 2
   size: 32, 32
   split: 5, 5, 5, 5
   orig: 32, 32
@@ -57,7 +48,7 @@ red_dark2
   index: -1
 red_light2
   rotate: false
-  xy: 202, 68
+  xy: 70, 2
   size: 32, 32
   split: 5, 5, 5, 5
   orig: 32, 32
