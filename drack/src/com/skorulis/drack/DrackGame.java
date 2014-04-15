@@ -11,8 +11,10 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.effects.GameInfoLayer;
 import com.skorulis.drack.game.GameDelegate;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.map.MapGenerator;
@@ -35,6 +37,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
     private GameScene scene;
     private UIManager ui;
     private TextureGenerator textureGen;
+    private GameInfoLayer info;
 	
 	@Override
 	public void create() {
@@ -76,6 +79,9 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         Gdx.input.setInputProcessor(inputPlexer);
         
         textureGen = new TextureGenerator(assets, def);
+        
+        info = new GameInfoLayer(ui.style().defaultSkin(),isoCam);
+        info.addTextEffect(new Vector3(0,0,0), "SHOW ME SOME TEXT");
     }
 
 	@Override
@@ -113,6 +119,8 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         scene.render(ri);
         modelBatch.end();
         
+        info.stage().draw();
+        
         ui.stage().draw();
         
         update();
@@ -124,6 +132,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 		isoCam.update(delta);
 		scene.update(delta);
 		ui.update(delta);
+		info.update(delta);
 	}
 
 	@Override

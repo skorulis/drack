@@ -15,7 +15,7 @@ public class MineAction extends UnitAction {
 	public void update(float delta) {
 		time += delta;
 		if(time > 1) {
-			avatar.resources().add(mine.mine(time));
+			avatar.addResources(mine.mine(time));
 			time = 0;
 		}
 	}

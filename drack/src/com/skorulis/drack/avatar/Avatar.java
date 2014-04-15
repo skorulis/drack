@@ -23,6 +23,7 @@ public class Avatar implements SceneNode{
 	
 	private float speed = 10;
 	private ResourceBatch resources;
+	private AvatarDelegate delegate;
 	
 	public Avatar(SKAssetManager assets) {
 		instance = new ModelInstance(assets.getModel("craft1"));
@@ -95,6 +96,10 @@ public class Avatar implements SceneNode{
 	
 	public void setAction(UnitAction action) {
 		this.action = action;
+	}
+	
+	public void addResources(ResourceBatch batch) {
+		this.resources.add(batch);
 	}
 
 }
