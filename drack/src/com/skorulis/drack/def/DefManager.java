@@ -74,7 +74,8 @@ public class DefManager {
 		
 		def = new BuildingDef("barracks");
 		def.buildingClass = Building.class;
-		def.modelName = "cone";
+		def.modelName = "house";
+		def.width = def.depth = 2;
 		def.isBuildable = true;
 		addDef(def);
 		
