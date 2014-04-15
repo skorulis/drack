@@ -1,0 +1,58 @@
+
+ui.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+check
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+hammer
+  rotate: false
+  xy: 2, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+inventory
+  rotate: false
+  xy: 68, 36
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+red_button1
+  rotate: false
+  xy: 134, 68
+  size: 32, 32
+  split: 3, 3, 3, 3
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+red_dark
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  split: 3, 3, 3, 3
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+red_dark2
+  rotate: false
+  xy: 168, 68
+  size: 32, 32
+  split: 5, 5, 5, 5
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+red_light2
+  rotate: false
+  xy: 70, 2
+  size: 32, 32
+  split: 5, 5, 5, 5
+  orig: 32, 32
+  offset: 0, 0
+  index: -1

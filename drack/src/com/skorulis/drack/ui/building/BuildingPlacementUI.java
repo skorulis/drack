@@ -17,8 +17,8 @@ public class BuildingPlacementUI extends WidgetGroup {
 	private final UIManager ui;
 	
 	public BuildingPlacementUI(final UIManager ui, final PlayerUI playerUI,Building building) {
-		tickButton = new TextButton("CONFIRM",ui.skin());
-		cancelButton = new TextButton("CANCEL",ui.skin());
+		tickButton = new TextButton("CONFIRM",ui.style().defaultSkin());
+		cancelButton = new TextButton("CANCEL",ui.style().defaultSkin());
 		this.building = building;
 		this.ui = ui;
 		

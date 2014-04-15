@@ -3,7 +3,6 @@ package com.skorulis.drack.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.skorulis.drack.IsoPerspectiveCamera;
 import com.skorulis.drack.building.Building;
@@ -14,7 +13,7 @@ import com.skorulis.drack.ui.building.BuildingUI;
 public class UIManager {
 
 	private Stage stage;
-	private Skin skin;
+	private StyleManager style;
 	private DebugUI debugUI;
 	private PlayerUI playerUI;
 	private GameScene game;
@@ -29,8 +28,8 @@ public class UIManager {
 		this.def = def;
 		this.camera = camera;
 		stage = new Stage(new ScreenViewport());
-		skin = new Skin(Gdx.files.internal("data/skin/uiskin.json"));
-		debugUI = new DebugUI(skin);
+		style = new StyleManager();  
+		debugUI = new DebugUI(style);
 		playerUI = new PlayerUI(this);
 
 		stage.addActor(playerUI);
@@ -55,16 +54,16 @@ public class UIManager {
 		return assets;
 	}
 	
-	public Skin skin() {
-		return skin;
-	}
-	
 	public GameScene game() {
 		return game;
 	}
 	
 	public DefManager def() {
 		return def;
+	}
+	
+	public StyleManager style() {
+		return style;
 	}
 	
 	public IsoPerspectiveCamera camera() {
@@ -74,7 +73,7 @@ public class UIManager {
 	public void showBuildingUI(Building building) {
 		clearBuildingUI();
 		buildingUI = BuildingUI.uiForBuilding(building);
-		buildingUI.init(skin, this);
+		buildingUI.init(style.defaultSkin(), this);
 		buildingUI.setBuilding(building);
 		
 		stage.addActor(buildingUI);

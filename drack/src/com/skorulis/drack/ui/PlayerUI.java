@@ -3,6 +3,7 @@ package com.skorulis.drack.ui;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -27,6 +28,9 @@ public class PlayerUI extends WidgetGroup {
 		this.ui = uiManager;
 		this.helper = new LayoutHelper(this);
 		TextureAtlas atlas = uiManager.assets().get("data/ui.png.atlas", TextureAtlas.class);
+		
+		ButtonStyle buttonStyle = uiManager.style().gameSkin().get("default",ButtonStyle.class);
+		
 		
 		TextureRegionDrawable bgUp = new TextureRegionDrawable(atlas.findRegion("red_light2"));
 		TextureRegionDrawable bgDown = new TextureRegionDrawable(atlas.findRegion("red_dark2"));
@@ -56,12 +60,12 @@ public class PlayerUI extends WidgetGroup {
 	}
 	
 	private void inventoryClicked() {
-		inventoryDialog = new InventoryDialog(ui.game().playerAvatar(), ui.skin());
+		inventoryDialog = new InventoryDialog(ui.game().playerAvatar(), ui.style().defaultSkin());
 		addActor(inventoryDialog);
 	}
 	
 	private void buildClicked() {
-		buildDialog = new BuildMenuDialog(this, ui.skin(),ui);
+		buildDialog = new BuildMenuDialog(this, ui.style().defaultSkin(),ui);
 		addActor(buildDialog);
 	}
 	
