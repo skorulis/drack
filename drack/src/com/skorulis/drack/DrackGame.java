@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.effects.Effect2DLayer;
@@ -74,7 +73,6 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         styleManager = new StyleManager();
         
         info = new Effect2DLayer(styleManager.defaultSkin(),isoCam);
-        info.addTextEffect(new Vector3(0,0,0), "SHOW ME SOME TEXT");
         
         scene = new GameScene(assets,mapGen.map(),info);
         scene.setDelegate(this);

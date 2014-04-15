@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.pathfinding.MapPath;
-import com.skorulis.drack.pathfinding.MovementInfo;
 import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.gdx.SKAssetManager;
@@ -17,8 +16,6 @@ import com.skorulis.scene.SceneNode;
 public class Avatar implements SceneNode{
 
 	private ModelInstance instance;
-	private MapPath path;
-	private MovementInfo movement;
 	private UnitAction action;
 	
 	private float speed = 10;
@@ -31,9 +28,10 @@ public class Avatar implements SceneNode{
 	}
 	
 	public void setPath(MapPath path) {
-		this.path = path;
-		if (movement == null) {
-			movement = path.getMovement(speed);
+		if(action != null && action instanceof MovementAction) {
+			((MovementAction)action).setPath(path);
+		} else {
+			action = new MovementAction(this,path);
 		}
 	}
 	
@@ -55,23 +53,11 @@ public class Avatar implements SceneNode{
 	public void update(float delta) {
 		if(action != null) {
 			action.update(delta);
-		}
-		if(movement == null) {
-			return;
-		}
-		instance.transform.setToWorld(movement.update(delta), movement.direction(),new Vector3(0,1,0));
-		if (movement.finished()) {
-			if (path.finished()) {
-				movement = null;
-				path = null;
-			} else {
-				if (movement.destSquare == path.nextNode()) {
-					movement = path.next(speed);
-				} else {
-					movement = path.getMovement(speed);
-				}
+			if(action.finished()) {
+				action = null;
 			}
 		}
+		
 	}
 
 	@Override
@@ -80,10 +66,10 @@ public class Avatar implements SceneNode{
 	}
 	
 	public Vector3 currentPosition() {
-		if(movement == null) {
-			return absTransform().getTranslation(new Vector3());
+		if(action != null && action instanceof MovementAction) {
+			return ((MovementAction) action).movingTo();
 		}
-		return movement.endLoc;
+		return absTransform().getTranslation(new Vector3());
 	}
 	
 	public ResourceBatch resources() {
@@ -108,6 +94,10 @@ public class Avatar implements SceneNode{
 	
 	public void setDelegate(AvatarDelegate delegate) {
 		this.delegate = delegate;
+	}
+	
+	public float speed() {
+		return speed;
 	}
 
 }

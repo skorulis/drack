@@ -20,4 +20,8 @@ public class MineAction extends UnitAction {
 		}
 	}
 	
+	public boolean finished() {
+		return false;
+	}
+	
 }
