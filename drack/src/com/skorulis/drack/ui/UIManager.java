@@ -12,8 +12,8 @@ import com.skorulis.drack.ui.building.BuildingUI;
 
 public class UIManager {
 
-	private Stage stage;
-	private StyleManager style;
+	private final Stage stage;
+	private final StyleManager style;
 	private DebugUI debugUI;
 	private PlayerUI playerUI;
 	private GameScene game;
@@ -22,13 +22,14 @@ public class UIManager {
 	private IsoPerspectiveCamera camera;
 	private BuildingUI buildingUI;
 	
-	public UIManager(AssetManager assets,GameScene game,DefManager def, IsoPerspectiveCamera camera) {
+	public UIManager(AssetManager assets,GameScene game,DefManager def, IsoPerspectiveCamera camera, StyleManager style) {
 		this.assets = assets;
 		this.game = game;
 		this.def = def;
 		this.camera = camera;
+		
+		this.style = new StyleManager();
 		stage = new Stage(new ScreenViewport());
-		style = new StyleManager();  
 		debugUI = new DebugUI(style);
 		playerUI = new PlayerUI(this);
 

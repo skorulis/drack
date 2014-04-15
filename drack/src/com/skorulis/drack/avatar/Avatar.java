@@ -100,6 +100,14 @@ public class Avatar implements SceneNode{
 	
 	public void addResources(ResourceBatch batch) {
 		this.resources.add(batch);
+		ArrayList<ResourceQuantity> all = batch.allResources();
+		for(ResourceQuantity rq : all) {
+			this.delegate.resourceAdded(this,rq);
+		}
+	}
+	
+	public void setDelegate(AvatarDelegate delegate) {
+		this.delegate = delegate;
 	}
 
 }

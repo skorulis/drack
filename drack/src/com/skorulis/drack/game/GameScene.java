@@ -5,17 +5,20 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.avatar.Avatar;
+import com.skorulis.drack.avatar.AvatarDelegate;
 import com.skorulis.drack.building.BuildingPlacement;
 import com.skorulis.drack.def.BuildingDef;
+import com.skorulis.drack.effects.GameInfoLayer;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
+import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 
-public class GameScene implements SceneNode, Disposable {
+public class GameScene implements SceneNode, Disposable, AvatarDelegate {
 
 	private Avatar avatar;
 	private GameMap map;
@@ -23,12 +26,16 @@ public class GameScene implements SceneNode, Disposable {
 	private BuildingPlacement placingBuilding;
 	private SKAssetManager assets;
 	private GameDelegate delegate;
+	private GameInfoLayer effects2D;
 	
-	public GameScene(SKAssetManager assets,GameMap map) {
-		transform = new Matrix4();
+	public GameScene(SKAssetManager assets,GameMap map, GameInfoLayer effects2D) {
 		this.assets = assets;
 		this.map = map;
+		this.effects2D = effects2D;
+		
+		transform = new Matrix4();
 		avatar = new Avatar(assets);
+		avatar.setDelegate(this);
 	}
 
 	public void nodeSelected(SceneNode node) {
@@ -123,6 +130,12 @@ public class GameScene implements SceneNode, Disposable {
 	
 	public void setDelegate(GameDelegate delegate) {
 		this.delegate = delegate;
+	}
+
+	@Override
+	public void resourceAdded(Avatar avatar, ResourceQuantity rq) {
+		System.out.println("DO SOMETHING " + rq);
+		effects2D.addTextEffect(avatar.absTransform().getTranslation(new Vector3()), "+1");
 	}
 	
 }

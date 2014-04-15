@@ -37,7 +37,6 @@ public class Effect2DNew {
 	
 	public void position(Camera camera) {
 		Vector3 screenPos = camera.project(anchor.cpy());
-		System.out.println("POS " + screenPos + " FROM " + anchor);
 		actor.setX(screenPos.x);
 		actor.setY(screenPos.y);
 	}

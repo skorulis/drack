@@ -18,6 +18,7 @@ import com.skorulis.drack.effects.GameInfoLayer;
 import com.skorulis.drack.game.GameDelegate;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.map.MapGenerator;
+import com.skorulis.drack.ui.StyleManager;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
@@ -38,6 +39,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
     private UIManager ui;
     private TextureGenerator textureGen;
     private GameInfoLayer info;
+    private StyleManager styleManager;
 	
 	@Override
 	public void create() {
@@ -54,9 +56,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         
         isoCam = new IsoPerspectiveCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),10);
         eventListener = new GameEventListener(isoCam);
-        
-        
-        
+
 	}
 	
 	private void loadAssets() {
@@ -67,21 +67,26 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	
 	private void doneLoading() {
         loading = false;
+        
         assets.addAllModels(def.buildModels(assets));
         MapGenerator mapGen = new MapGenerator(50, 50, assets,def);
-        scene = new GameScene(assets,mapGen.map());
+        
+        styleManager = new StyleManager();
+        
+        info = new GameInfoLayer(styleManager.defaultSkin(),isoCam);
+        info.addTextEffect(new Vector3(0,0,0), "SHOW ME SOME TEXT");
+        
+        scene = new GameScene(assets,mapGen.map(),info);
         scene.setDelegate(this);
         eventListener.setScene(scene);
         isoCam.setTracking(scene.avatar());
         
-        ui = new UIManager(assets,scene,def,isoCam);
+        ui = new UIManager(assets,scene,def,isoCam,styleManager);
+        
         inputPlexer = new InputMultiplexer(ui.stage(), new GestureDetector(eventListener));
         Gdx.input.setInputProcessor(inputPlexer);
         
         textureGen = new TextureGenerator(assets, def);
-        
-        info = new GameInfoLayer(ui.style().defaultSkin(),isoCam);
-        info.addTextEffect(new Vector3(0,0,0), "SHOW ME SOME TEXT");
     }
 
 	@Override
@@ -158,5 +163,10 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	
 	public void playerMoved() {
 		ui.clearBuildingUI();
+	}
+
+	@Override
+	public void showTextEffect(Vector3 loc, String text) {
+		this.info.addTextEffect(loc, text);
 	}
 }
