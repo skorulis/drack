@@ -8,7 +8,7 @@ import com.skorulis.drack.avatar.Avatar;
 import com.skorulis.drack.avatar.AvatarDelegate;
 import com.skorulis.drack.building.BuildingPlacement;
 import com.skorulis.drack.def.BuildingDef;
-import com.skorulis.drack.effects.GameInfoLayer;
+import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
@@ -26,9 +26,9 @@ public class GameScene implements SceneNode, Disposable, AvatarDelegate {
 	private BuildingPlacement placingBuilding;
 	private SKAssetManager assets;
 	private GameDelegate delegate;
-	private GameInfoLayer effects2D;
+	private Effect2DLayer effects2D;
 	
-	public GameScene(SKAssetManager assets,GameMap map, GameInfoLayer effects2D) {
+	public GameScene(SKAssetManager assets,GameMap map, Effect2DLayer effects2D) {
 		this.assets = assets;
 		this.map = map;
 		this.effects2D = effects2D;

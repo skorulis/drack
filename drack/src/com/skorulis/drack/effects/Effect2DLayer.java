@@ -10,23 +10,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.skorulis.drack.IsoPerspectiveCamera;
 
-public class GameInfoLayer {
+public class Effect2DLayer {
 
 	private final Stage stage;
 	private final Skin skin;
 	private final IsoPerspectiveCamera camera;
-	private ArrayList<Effect2DNew> effects;
+	private ArrayList<Effect2D> effects;
 	
-	public GameInfoLayer(Skin skin,IsoPerspectiveCamera camera) {
+	public Effect2DLayer(Skin skin,IsoPerspectiveCamera camera) {
 		this.skin = skin;
 		this.camera = camera;
 		stage = new Stage(new ScreenViewport());
-		this.effects = new ArrayList<Effect2DNew>();
+		this.effects = new ArrayList<Effect2D>();
 	}
 	
 	public void update(float delta) {
 		for(int i = effects.size() - 1; i >= 0; --i) {
-			Effect2DNew effect = effects.get(i);
+			Effect2D effect = effects.get(i);
 			effect.update(delta);
 			if(!effect.isAlive()) {
 				effects.remove(i);
@@ -45,7 +45,7 @@ public class GameInfoLayer {
 	
 	public void addTextEffect(Vector3 worldPos, String text) {
 		Label label = new Label(text,this.skin);
-		Effect2DNew effect = new Effect2DNew(label);
+		Effect2D effect = new Effect2D(label);
 		effect.setAnchor(worldPos);
 		
 		effect.position(camera.cam());

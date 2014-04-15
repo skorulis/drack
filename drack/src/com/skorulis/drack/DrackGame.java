@@ -14,7 +14,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
-import com.skorulis.drack.effects.GameInfoLayer;
+import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.game.GameDelegate;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.map.MapGenerator;
@@ -38,7 +38,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
     private GameScene scene;
     private UIManager ui;
     private TextureGenerator textureGen;
-    private GameInfoLayer info;
+    private Effect2DLayer info;
     private StyleManager styleManager;
 	
 	@Override
@@ -73,7 +73,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         
         styleManager = new StyleManager();
         
-        info = new GameInfoLayer(styleManager.defaultSkin(),isoCam);
+        info = new Effect2DLayer(styleManager.defaultSkin(),isoCam);
         info.addTextEffect(new Vector3(0,0,0), "SHOW ME SOME TEXT");
         
         scene = new GameScene(assets,mapGen.map(),info);
