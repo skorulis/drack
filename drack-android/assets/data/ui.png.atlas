@@ -5,15 +5,31 @@ filter: Nearest,Nearest
 repeat: none
 hammer
   rotate: false
-  xy: 2, 2
+  xy: 2, 36
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 inventory
   rotate: false
-  xy: 68, 2
+  xy: 68, 36
   size: 64, 64
   orig: 64, 64
+  offset: 0, 0
+  index: -1
+red_button1
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  split: 3, 3, 3, 3
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+red_dark
+  rotate: false
+  xy: 134, 68
+  size: 32, 32
+  split: 3, 3, 3, 3
+  orig: 32, 32
   offset: 0, 0
   index: -1

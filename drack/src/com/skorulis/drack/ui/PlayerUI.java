@@ -3,6 +3,7 @@ package com.skorulis.drack.ui;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -23,7 +24,17 @@ public class PlayerUI extends WidgetGroup {
 	public PlayerUI(UIManager uiManager) {
 		this.ui = uiManager;
 		TextureAtlas atlas = uiManager.assets().get("data/ui.png.atlas", TextureAtlas.class);
-		buildButton = new ImageButton(new TextureRegionDrawable(atlas.findRegion("hammer")));
+		
+		TextureRegionDrawable bgUp = new TextureRegionDrawable(atlas.findRegion("red_button1"));
+		TextureRegionDrawable bgDown = new TextureRegionDrawable(atlas.findRegion("red_dark"));
+		TextureRegionDrawable hammer = new TextureRegionDrawable(atlas.findRegion("hammer"));
+		
+		ImageButtonStyle ibs = new ImageButtonStyle();
+		ibs.down = bgDown;
+		ibs.up = bgUp;
+		ibs.imageUp = hammer;
+		
+		buildButton = new ImageButton(ibs);
 		this.addActor(buildButton);
 		
 		
