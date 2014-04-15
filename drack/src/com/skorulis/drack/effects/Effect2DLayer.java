@@ -33,7 +33,11 @@ public class Effect2DLayer {
 				effect.actor().remove();
 				System.out.println("Removing effect");
 			} else {
-				effect.position(camera.cam());
+				if(effect.movement() != null) {
+					effect.movement().updatePosition(this.camera.cam(),delta);
+				} else {
+					effect.position(camera.cam());
+				}
 			}
 		}
 		stage.act(delta);
@@ -45,7 +49,7 @@ public class Effect2DLayer {
 	
 	public void addTextEffect(Vector3 worldPos, String text) {
 		Label label = new Label(text,this.skin);
-		Effect2D effect = new Effect2D(label);
+		Effect2D effect = new Effect2D(label,2);
 		effect.setAnchor(worldPos);
 		
 		effect.position(camera.cam());
@@ -53,9 +57,11 @@ public class Effect2DLayer {
 		stage.addActor(effect.actor());
 		
 		AlphaAction act = new AlphaAction();
-		act.setDuration(5);
+		act.setDuration(effect.life());
 		act.setAlpha(0.0f);
 		effect.actor().addAction(act);
+		
+		effect.setMovement(new Effect2DPopUpMovement(effect.life()));
 		
 	}
 	

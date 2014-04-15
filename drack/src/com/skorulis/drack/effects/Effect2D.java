@@ -9,14 +9,19 @@ public class Effect2D {
 	private Actor actor;
 	private Vector3 anchor;
 	private float life;
+	private Effect2DMovement movement;
 	
-	public Effect2D(Actor actor) {
+	public Effect2D(Actor actor, float life) {
 		this.actor = actor;
-		this.life = 5;
+		this.life = life;
 	}
 	
 	public void update(float delta) {
 		life -= delta;
+	}
+	
+	public float life() {
+		return life;
 	}
 	
 	public boolean isAlive() {
@@ -39,6 +44,15 @@ public class Effect2D {
 		Vector3 screenPos = camera.project(anchor.cpy());
 		actor.setX(screenPos.x);
 		actor.setY(screenPos.y);
+	}
+	
+	public void setMovement(Effect2DMovement movement) {
+		this.movement = movement;
+		movement.setEffect(this);
+	}
+	
+	public Effect2DMovement movement() {
+		return movement;
 	}
 	
 }
