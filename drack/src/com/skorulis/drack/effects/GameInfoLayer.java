@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.skorulis.drack.IsoPerspectiveCamera;
 
@@ -15,22 +15,26 @@ public class GameInfoLayer {
 	private final Stage stage;
 	private final Skin skin;
 	private final IsoPerspectiveCamera camera;
-	private ArrayList<Effect2D> effects;
+	private ArrayList<Effect2DNew> effects;
 	
 	public GameInfoLayer(Skin skin,IsoPerspectiveCamera camera) {
 		this.skin = skin;
 		this.camera = camera;
 		stage = new Stage();
-		this.effects = new ArrayList<Effect2D>();
+		this.effects = new ArrayList<Effect2DNew>();
 	}
 	
 	public void update(float delta) {
 		stage.act(delta);
 		for(int i = effects.size() - 1; i >= 0; --i) {
-			if(!effects.get(i).isAlive()) {
-				Actor actor = (Actor) effects.remove(i);
-				actor.remove();
+			Effect2DNew effect = effects.get(i);
+			effect.update(delta);
+			if(!effect.isAlive()) {
+				effects.remove(i);
+				effect.actor().remove();
 				System.out.println("Removing effect");
+			} else {
+				effect.position(camera.cam());
 			}
 		}
 	}
@@ -40,22 +44,14 @@ public class GameInfoLayer {
 	}
 	
 	public void addTextEffect(Vector3 worldPos, String text) {
-		TextEffect effect = new TextEffect(text, this.skin);
+		Label label = new Label(text,this.skin);
+		Effect2DNew effect = new Effect2DNew(label);
 		effect.setAnchor(worldPos);
-		placeEffect(effect);
-		stage.addActor(effect);
-		effects.add(effect);
 		
-		MoveByAction action = new MoveByAction();
-		action.setDuration(5);
-		action.setAmount(0, 100);
-		effect.addAction(action);
-	}
-	
-	private void placeEffect(Effect2D effect) {
-		Vector3 screenPos = camera.cam().project(effect.getAnchor());
-		((Actor)effect).setX(screenPos.x);
-		((Actor)effect).setY(screenPos.y);
+		effect.position(camera.cam());
+		effects.add(effect);
+		stage.addActor(effect.actor());
+		
 	}
 	
 }
