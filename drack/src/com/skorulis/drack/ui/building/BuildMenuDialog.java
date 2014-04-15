@@ -1,4 +1,4 @@
-package com.skorulis.drack.ui;
+package com.skorulis.drack.ui.building;
 
 import java.util.ArrayList;
 
@@ -14,6 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.skorulis.drack.def.BuildingDef;
+import com.skorulis.drack.ui.ModalDialog;
+import com.skorulis.drack.ui.PlayerUI;
+import com.skorulis.drack.ui.UIManager;
 
 public class BuildMenuDialog extends ModalDialog {
 	

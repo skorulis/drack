@@ -72,13 +72,19 @@ public class UIManager {
 	}
 	
 	public void showBuildingUI(Building building) {
-		if(buildingUI != null) {
-			buildingUI.getParent().removeActor(buildingUI);
-		}
+		clearBuildingUI();
 		buildingUI = BuildingUI.uiForBuilding(building);
 		buildingUI.init(skin, this);
 		buildingUI.setBuilding(building);
 		
 		stage.addActor(buildingUI);
 	}
+	
+	public void clearBuildingUI() {
+		if(buildingUI != null) {
+			buildingUI.getParent().removeActor(buildingUI);
+		}
+		buildingUI = null;
+	}
+	
 }

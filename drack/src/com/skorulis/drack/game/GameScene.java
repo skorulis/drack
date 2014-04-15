@@ -42,6 +42,7 @@ public class GameScene implements SceneNode, Disposable {
 				PathFinder finder = new PathFinder(map, current, sq);
 				MapPath path = finder.generatePath();
 				avatar.setPath(path);
+				this.delegate.playerMoved();
 			} else if(sq.building() != null) {
 				this.delegate.buildingSelected(sq.building());
 			}

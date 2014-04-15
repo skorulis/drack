@@ -26,6 +26,7 @@ public class ResourceBatch {
 		for(ResourceQuantity rq : all) {
 			add(rq);
 		}
+		System.out.println("Final " + resources.size());
 	}
 	
 	public float quantity(String resource) {
@@ -37,7 +38,12 @@ public class ResourceBatch {
 	}
 	
 	public ArrayList<ResourceQuantity> allResources() {
+		System.out.println("ALL COUNT " + resources.values().size());
 		return new ArrayList<ResourceQuantity>(resources.values());
+	}
+	
+	public String toString() {
+		return "Batch " + resources.size();
 	}
 	
 }

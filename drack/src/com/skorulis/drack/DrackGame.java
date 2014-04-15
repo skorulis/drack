@@ -146,4 +146,8 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	public void buildingSelected(Building building) {
 		ui.showBuildingUI(building);
 	}
+	
+	public void playerMoved() {
+		ui.clearBuildingUI();
+	}
 }

@@ -7,6 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.skorulis.drack.building.Building;
+import com.skorulis.drack.ui.building.BuildMenuDialog;
+import com.skorulis.drack.ui.building.BuildingPlacementUI;
+import com.skorulis.drack.ui.inventory.InventoryDialog;
 
 public class PlayerUI extends WidgetGroup {
 	
@@ -65,7 +68,7 @@ public class PlayerUI extends WidgetGroup {
 	}
 	
 	public void showPlacementUI(Building building) {
-		buildingPlacement = new BuildingPlacementUI(ui, this);
+		buildingPlacement = new BuildingPlacementUI(ui, this,building);
 		this.addActor(buildingPlacement);
 	}
 	
