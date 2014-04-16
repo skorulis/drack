@@ -1,9 +1,7 @@
 package com.skorulis.drack.map;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Plane;
@@ -18,7 +16,6 @@ import com.skorulis.scene.SceneNode;
 public class GameMap implements SceneNode, Disposable{
 
 	private Matrix4 transform;
-
 	private int width,depth;
 	private MapSquare[][] squares;
 	private SKAssetManager assets;
@@ -153,6 +150,16 @@ public class GameMap implements SceneNode, Disposable{
 				ret.add(squares[i][j]);
 			}
 		}
+		return ret;
+	}
+	
+	public Set<MapSquare> squaresAround(Building building) {
+		Set<MapSquare> covered = building.coveredSquares();
+		HashSet<MapSquare> ret = new HashSet<MapSquare>();
+		for(MapSquare ms: covered) {
+			ret.addAll(adjacentSquares(ms));
+		}
+		ret.removeAll(covered);
 		return ret;
 	}
 	

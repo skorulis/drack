@@ -155,4 +155,9 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		return map;
 	}
 	
+	public void addUnit(Unit u, MapSquare sq) {
+		this.units.add(u);
+		u.absTransform().setTranslation(sq.getCentreLoc());
+	}
+	
 }

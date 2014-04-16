@@ -81,5 +81,9 @@ public class Building implements SceneNode{
 	public void addCoveredSquare(MapSquare ms) {
 		this.coveredSquares.add(ms);
 	}
+	
+	public Set<MapSquare> coveredSquares() {
+		return this.coveredSquares;
+	}
 
 }

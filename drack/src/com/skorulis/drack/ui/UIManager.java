@@ -9,6 +9,7 @@ import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.ui.building.BuildingUI;
+import com.skorulis.gdx.SKAssetManager;
 
 public class UIManager {
 
@@ -18,11 +19,11 @@ public class UIManager {
 	private PlayerUI playerUI;
 	private GameScene game;
 	private DefManager def;
-	private AssetManager assets;
+	private SKAssetManager assets;
 	private IsoPerspectiveCamera camera;
 	private BuildingUI buildingUI;
 	
-	public UIManager(AssetManager assets,GameScene game,DefManager def, IsoPerspectiveCamera camera, StyleManager style) {
+	public UIManager(SKAssetManager assets,GameScene game,DefManager def, IsoPerspectiveCamera camera, StyleManager style) {
 		this.assets = assets;
 		this.game = game;
 		this.def = def;
@@ -51,7 +52,7 @@ public class UIManager {
 		stage.getViewport().update(width, height, true);
 	}
 	
-	public AssetManager assets() {
+	public SKAssetManager assets() {
 		return assets;
 	}
 	

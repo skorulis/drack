@@ -1,10 +1,15 @@
 package com.skorulis.drack.ui.building;
 
+import java.util.Set;
+
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.skorulis.drack.def.UnitDef;
+import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.ui.UIManager;
+import com.skorulis.drack.unit.Unit;
 
 public class BarracksUI extends BuildingUI {
 
@@ -24,7 +29,11 @@ public class BarracksUI extends BuildingUI {
 	}
 	
 	private void hirePressed() {
-		//this.ui.game().ma
+		UnitDef def = this.ui.def().getUnit("truck");
+		Unit u = new Unit(ui.assets(), ui.game().player(),def);
+		Set<MapSquare> squares = this.ui.game().map().squaresAround(this.building);
+		
+		this.ui.game().addUnit(u, squares.iterator().next());
 	}
 	
 	public void layout() {
