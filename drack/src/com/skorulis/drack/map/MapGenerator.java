@@ -51,4 +51,11 @@ public class MapGenerator {
 		return map;
 	}
 	
+	public DefManager def() {
+		return def;
+	}
+	
+	public SKAssetManager assets() {
+		return assets;
+	}
 }

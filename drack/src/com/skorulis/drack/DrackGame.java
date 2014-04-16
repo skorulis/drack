@@ -16,8 +16,8 @@ import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.game.GameDelegate;
 import com.skorulis.drack.game.GameScene;
+import com.skorulis.drack.game.SceneGenerator;
 import com.skorulis.drack.map.MapGenerator;
-import com.skorulis.drack.player.Player;
 import com.skorulis.drack.ui.StyleManager;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.SKAssetManager;
@@ -28,11 +28,10 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	private IsoPerspectiveCamera isoCam;
 	private ModelBatch modelBatch;
 	private Environment environment;
-	private SKAssetManager assets;
-	private boolean loading;
-   
 	private DefManager def;
-    
+	private SKAssetManager assets;
+	private boolean loading = true;
+   
     private InputMultiplexer inputPlexer;
     private GameEventListener eventListener;
     private GameScene scene;
@@ -40,7 +39,6 @@ public class DrackGame implements ApplicationListener, GameDelegate {
     private TextureGenerator textureGen;
     private Effect2DLayer info;
     private StyleManager styleManager;
-    private Player player;
 	
 	@Override
 	public void create() {
@@ -52,12 +50,9 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         environment = new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
-                
-        loading = true;
         
         isoCam = new IsoPerspectiveCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),10);
         eventListener = new GameEventListener(isoCam);
-
 	}
 	
 	private void loadAssets() {
@@ -68,15 +63,15 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	
 	private void doneLoading() {
         loading = false;
+        styleManager = new StyleManager();
+        info = new Effect2DLayer(styleManager.defaultSkin(),isoCam);
         
         assets.addAllModels(def.buildModels(assets));
         MapGenerator mapGen = new MapGenerator(50, 50, assets,def);
         
-        styleManager = new StyleManager();
+        SceneGenerator sceneGen = new SceneGenerator(mapGen, info);
         
-        info = new Effect2DLayer(styleManager.defaultSkin(),isoCam);
-        
-        scene = new GameScene(def,assets,mapGen.map(),info);
+        scene = sceneGen.scene();
         scene.setDelegate(this);
         eventListener.setScene(scene);
         isoCam.setTracking(scene.player().controllUnit());

@@ -45,12 +45,6 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		transform = new Matrix4();
 		
 		units = new ArrayList<Unit>();
-		
-		Unit unit = new Unit(assets, player, this.def.getUnit("avatar"));
-		unit.setDelegate(this);
-		units.add(unit);
-		
-		player.setControllingUnit(unit);
 	}
 
 	public void nodeSelected(SceneNode node) {
