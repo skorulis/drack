@@ -28,7 +28,6 @@ public class TextureGenerator {
 		modelBatch = new ModelBatch();
 		
 		buildings = def.buildableBuildings();
-		System.out.println("Rendering " + buildings.size() + " buildings");
 	}
 	
 	public void render(Environment environment) {

@@ -21,12 +21,10 @@ public class ResourceBatch {
 	}
 	
 	public void add(ResourceBatch batch) {
-		System.out.println("Adding " + batch);
 		ArrayList<ResourceQuantity> all = batch.allResources();
 		for(ResourceQuantity rq : all) {
 			add(rq);
 		}
-		System.out.println("Final " + resources.size());
 	}
 	
 	public float quantity(String resource) {

@@ -4,7 +4,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.skorulis.drack.building.Building;
-import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.ui.LayoutHelper;
 

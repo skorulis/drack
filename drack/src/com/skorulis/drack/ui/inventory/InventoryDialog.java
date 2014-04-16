@@ -22,9 +22,7 @@ public class InventoryDialog extends ModalDialog {
 		this.setContent(resourceScrollPane);
 		
 		resources = player.resources().allResources();
-		System.out.println(" CREATING");
 		for(ResourceQuantity rq : resources) {
-			System.out.println(" CREATED " + rq);
 			ResourceCell cell = new ResourceCell(rq, skin);
 			this.resourceList.addActor(cell);
 		}
