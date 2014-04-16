@@ -1,6 +1,9 @@
 package com.skorulis.drack.map;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Plane;
@@ -133,11 +136,11 @@ public class GameMap implements SceneNode, Disposable{
 		return best;
 	}
 	
-	public ArrayList<MapSquare> adjacentSquares(MapSquare square) {
+	public Set<MapSquare> adjacentSquares(MapSquare square) {
 		int x = square.x();
 		int y = square.z();
 		
-		ArrayList<MapSquare> ret = new ArrayList<MapSquare>();
+		HashSet<MapSquare> ret = new HashSet<MapSquare>();
 		
 		for(int i = y - 1; i <= y + 1; ++i) {
 			for(int j = x - 1; j <= x + 1; ++j) {

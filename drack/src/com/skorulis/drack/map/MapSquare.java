@@ -107,6 +107,7 @@ public class MapSquare implements SceneNode {
 	
 	public void setBuilding(Building building) {
 		this.building = building;
+		building.addCoveredSquare(this);
 		Vector3 translation = groundInstance.transform.getTranslation(new Vector3());
 		translation.x += (building.def().width - 1) * 0.5f;
 		translation.z += (building.def().depth - 1) * 0.5f;
@@ -139,6 +140,7 @@ public class MapSquare implements SceneNode {
 	
 	public void setSharedBuilding(Building b) {
 		this.sharedBuilding = b;
+		b.addCoveredSquare(this);
 	}
 	
 	

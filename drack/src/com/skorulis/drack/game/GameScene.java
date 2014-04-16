@@ -1,6 +1,7 @@
 package com.skorulis.drack.game;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
@@ -59,7 +60,7 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 			if(sq == current) {
 				return;
 			}
-			ArrayList<MapSquare> near = null;
+			Set<MapSquare> near = null;
 			if(sq.isPassable()) {
 				
 			} else if(sq.anyBuilding() != null) {

@@ -2,6 +2,7 @@ package com.skorulis.drack.pathfinding;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Set;
 
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
@@ -10,7 +11,7 @@ public class PathFinder {
 
 	private MapSquare from;
 	private MapSquare to;
-	private ArrayList<MapSquare> nearSquares;
+	private Set<MapSquare> nearSquares;
 	private ArrayList<PathNodeInfo> openList;
 	private ArrayList<PathNodeInfo> closedList;
 	private GameMap map;
@@ -19,7 +20,7 @@ public class PathFinder {
 		this(map,from,to,null);
 	}
 	
-	public PathFinder(GameMap map, MapSquare from, MapSquare to, ArrayList<MapSquare> nearSquares) {
+	public PathFinder(GameMap map, MapSquare from, MapSquare to, Set<MapSquare> nearSquares) {
 		this.from = from;
 		this.to = to;
 		this.map = map;
@@ -93,7 +94,7 @@ public class PathFinder {
 	
 	private void evaluate(PathNodeInfo parentNode) {
 		closedList.add(parentNode);
-		ArrayList<MapSquare> adj = map.adjacentSquares(parentNode.square);
+		Set<MapSquare> adj = map.adjacentSquares(parentNode.square);
 		for(MapSquare cs : adj) {
 			if(!cs.isPassable()) {
 				continue;

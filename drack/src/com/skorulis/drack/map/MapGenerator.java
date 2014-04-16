@@ -1,5 +1,6 @@
 package com.skorulis.drack.map;
 import com.badlogic.gdx.math.Vector3;
+import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.CommandCentre;
 import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.def.DefManager;
@@ -8,24 +9,42 @@ import com.skorulis.gdx.SKAssetManager;
 public class MapGenerator {
 
 	private GameMap map;
+	private SKAssetManager assets;
+	private DefManager def;
 	
 	public MapGenerator(int width , int depth, SKAssetManager assets,DefManager def) {
 		map = new GameMap(width, depth, assets);
+		this.assets = assets;
+		this.def = def;
 		
-		MapSquare square = map.squareAt(new Vector3(5, 0, 5));
-		CommandCentre b = (CommandCentre) def.getBuilding("command").create(assets);
-		
-		square.setBuilding(b);
+		CommandCentre b = (CommandCentre) addBuilding("command", 5, 5);
 		b.generateField(b.fieldSize(), map);
 		
-		Mine mine = (Mine) def.getBuilding("mine").create(assets);
+		addBuilding("tree", 2, 5);
+		addBuilding("tree", 12, 3);
+		addBuilding("tree", 8, 15);
+		
+		addBuilding("barracks", 8, 8);
+		
+		Mine mine = (Mine) addBuilding("mine", 11, 3);
 		mine.addResource(def.getResource("iron"), 1);
+	}
+	
+	private Building addBuilding(String name, int x, int z) {
+		Building building = def.getBuilding(name).create(assets);
 		
-		map.squareAt(11,3).setBuilding(mine);
-		map.squareAt(2,5).setBuilding(def.getBuilding("tree").create(assets));
-		map.squareAt(12,3).setBuilding(def.getBuilding("tree").create(assets));
-		map.squareAt(8,15).setBuilding(def.getBuilding("tree").create(assets));
+		for(int i = 0; i < building.def().width; ++i) {
+			for(int j = 0; j < building.def().depth; ++j) {
+				MapSquare sq = map.squareAt(x + j, z + i);
+				if(i == 0 && j == 0) {
+					sq.setBuilding(building);
+				} else {
+					sq.setSharedBuilding(building);
+				}
+			}
+		}
 		
+		return building;
 	}
 	
 	public GameMap map() {

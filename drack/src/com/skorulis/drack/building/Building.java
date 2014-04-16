@@ -1,10 +1,14 @@
 package com.skorulis.drack.building;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.def.BuildingDef;
+import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.player.Player;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
@@ -16,8 +20,11 @@ public class Building implements SceneNode{
 	protected BuildingDef def;
 	protected boolean beingPlaced;
 	protected Player owner;
+	protected Set<MapSquare> coveredSquares;
 	
-	public Building() { }
+	public Building() {
+		coveredSquares = new HashSet<MapSquare>();
+	}
 	
 	public void loadModel(SKAssetManager assets) {
 		buildingInstance = new ModelInstance(assets.getModel(def.modelName));
@@ -69,6 +76,10 @@ public class Building implements SceneNode{
 	
 	public Player owner() {
 		return owner;
+	}
+	
+	public void addCoveredSquare(MapSquare ms) {
+		this.coveredSquares.add(ms);
 	}
 
 }

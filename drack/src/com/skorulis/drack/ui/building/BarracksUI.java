@@ -24,7 +24,7 @@ public class BarracksUI extends BuildingUI {
 	}
 	
 	private void hirePressed() {
-		System.out.println("Hire pressed");
+		//this.ui.game().ma
 	}
 	
 	public void layout() {

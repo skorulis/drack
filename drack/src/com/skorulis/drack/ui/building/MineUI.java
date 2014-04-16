@@ -13,10 +13,6 @@ public class MineUI extends BuildingUI {
 	
 	private TextButton mineButton;
 	
-	public MineUI() {
-		
-	}
-	
 	public void init(Skin skin, UIManager ui) {
 		super.init(skin,ui);
 		mineButton = new TextButton("Mine",skin);
