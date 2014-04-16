@@ -4,13 +4,14 @@ import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.skorulis.drack.game.GameLogic;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.scene.SceneNode;
 
 public class GameEventListener implements GestureListener {
 
 	private IsoPerspectiveCamera camera;
-	private GameScene scene;
+	private GameLogic logic;
 	
 	public GameEventListener(IsoPerspectiveCamera camera) {
 		this.camera = camera;
@@ -25,9 +26,9 @@ public class GameEventListener implements GestureListener {
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
 		Ray ray = camera.cam().getPickRay(x, y);
-		SceneNode node = scene.intersect(ray, new Vector3());
+		SceneNode node = logic.scene().intersect(ray, new Vector3());
 		if(node != null) {
-			scene.nodeSelected(node);
+			logic.nodeSelected(node);
 		}
 		
 		return false;
@@ -47,15 +48,15 @@ public class GameEventListener implements GestureListener {
 
 	@Override
 	public boolean pan(float x, float y, float deltaX, float deltaY) {
-		if(scene.placingBuilding() != null) {
+		if(logic.scene().placingBuilding() != null) {
 			if(deltaX == 0 && deltaY == 0) {
 				return false;
 			}
 			
-			Vector3 v1 = scene.map().groundIntersection(camera.cam().getPickRay(x-deltaX, y-deltaY));
-			Vector3 v2 = scene.map().groundIntersection(camera.cam().getPickRay(x, y));
+			Vector3 v1 = logic.map().groundIntersection(camera.cam().getPickRay(x-deltaX, y-deltaY));
+			Vector3 v2 = logic.map().groundIntersection(camera.cam().getPickRay(x, y));
 			
-			scene.movePlacementBuilding(v2.x - v1.x, v2.z - v1.z);
+			logic.scene().movePlacementBuilding(v2.x - v1.x, v2.z - v1.z);
 		}
 		return false;
 	}
@@ -79,9 +80,8 @@ public class GameEventListener implements GestureListener {
 		return false;
 	}
 	
-	public void setScene(GameScene scene) {
-		this.scene = scene;
-		
+	public void setLogic(GameLogic logic) {
+		this.logic = logic;
 	}
 
 }

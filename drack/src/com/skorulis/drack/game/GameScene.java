@@ -47,30 +47,7 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		units = new ArrayList<Unit>();
 	}
 
-	public void nodeSelected(SceneNode node) {
-		if(node instanceof MapSquare) {
-			MapSquare sq = (MapSquare) node;
-			MapSquare current = map.squareAt(player.controllUnit().currentPosition());
-			if(sq == current) {
-				return;
-			}
-			Set<MapSquare> near = null;
-			if(sq.isPassable()) {
-				
-			} else if(sq.anyBuilding() != null) {
-				near = map.adjacentSquares(sq);
-			}
-			
-			PathFinder finder = new PathFinder(map, current, sq, near);
-			MapPath path = finder.generatePath();
-			player.controllUnit().setPath(path);
-			this.delegate.playerMoved();
-			
-			if(sq.anyBuilding() != null) {
-				this.delegate.buildingSelected(sq.anyBuilding());
-			}
-		}
-	}
+	
 
 	@Override
 	public Matrix4 absTransform() {

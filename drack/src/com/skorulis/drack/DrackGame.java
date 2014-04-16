@@ -15,6 +15,7 @@ import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.game.GameDelegate;
+import com.skorulis.drack.game.GameLogic;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.game.SceneGenerator;
 import com.skorulis.drack.map.MapGenerator;
@@ -39,6 +40,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
     private TextureGenerator textureGen;
     private Effect2DLayer info;
     private StyleManager styleManager;
+    private GameLogic logic;
 	
 	@Override
 	public void create() {
@@ -73,8 +75,10 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         
         scene = sceneGen.scene();
         scene.setDelegate(this);
-        eventListener.setScene(scene);
         isoCam.setTracking(scene.player().controllUnit());
+        
+        logic = new GameLogic(scene, this);
+        eventListener.setLogic(logic);
         
         ui = new UIManager(assets,scene,def,isoCam,styleManager);
         
