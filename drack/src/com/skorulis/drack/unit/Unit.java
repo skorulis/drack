@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.skorulis.drack.def.UnitDef;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.resource.ResourceBatch;
@@ -24,8 +25,8 @@ public class Unit implements SceneNode {
 	private UnitDelegate delegate;
 	private Player owner;
 	
-	public Unit(SKAssetManager assets, Player owner) {
-		instance = new ModelInstance(assets.getModel("craft1"));
+	public Unit(SKAssetManager assets, Player owner, UnitDef def) {
+		instance = new ModelInstance(assets.getModel(def.modelName));
 		resources = new ResourceBatch();
 		this.owner = owner;
 	}

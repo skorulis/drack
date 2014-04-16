@@ -22,14 +22,27 @@ import com.skorulis.drack.building.Vault;
 
 public class DefManager {
 
-	public Map<String, BuildingDef> buildings;
-	public Map<String, ResourceDef> resources;
+	private Map<String, BuildingDef> buildings;
+	private Map<String, ResourceDef> resources;
+	private Map<String, UnitDef> units;
 	
 	public DefManager() {
 		buildings = new HashMap<String, BuildingDef>();
 		resources = new HashMap<String, ResourceDef>();
+		units = new HashMap<String, UnitDef>();
 		createResources();
 		createBuildings();
+		createUnits();
+	}
+	
+	private void createUnits() {
+		UnitDef def = new UnitDef("avatar");
+		def.modelName = "craft1";
+		addDef(def);
+		
+		def = new UnitDef("truck");
+		def.modelName = "truck";
+		addDef(def);
 	}
 	
 	private void createBuildings() {
@@ -118,6 +131,8 @@ public class DefManager {
 			buildings.put(def.name(), (BuildingDef)def);
 		} else if(def instanceof ResourceDef) {
 			resources.put(def.name(), (ResourceDef)def);
+		} else if(def instanceof UnitDef) {
+			units.put(def.name(), (UnitDef)def);
 		}
 		else {
 			throw new IllegalArgumentException("Don't know where to put " + def);
@@ -157,6 +172,14 @@ public class DefManager {
 		return def;
 	}
 	
+	public UnitDef getUnit(String name) {
+		UnitDef def = units.get(name);
+		if(def == null) {
+			throw new IllegalArgumentException("No unit named " + name);
+		}
+		return def;
+	}
+	
 	public Set<String> allTextures() {
 		HashSet<String> textures = new HashSet<String>();
 		textures.add("data/floor.png");
@@ -177,13 +200,15 @@ public class DefManager {
 		for(BuildingDef d : buildings.values()) {
 			models.add(d.modelName);
 		}
+		for(UnitDef d : units.values()) {
+			models.add(d.modelName);
+		}
 		
 		models.add("cube1");
 		models.add("sphere");
 		models.add("hull1");
 		models.add("field1");
 		models.add("corner");
-		models.add("craft1");
 		models.add("wall_corner");
 		
 		return models;

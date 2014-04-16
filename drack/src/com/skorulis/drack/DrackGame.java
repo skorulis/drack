@@ -74,7 +74,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         
         info = new Effect2DLayer(styleManager.defaultSkin(),isoCam);
         
-        scene = new GameScene(assets,mapGen.map(),info);
+        scene = new GameScene(def,assets,mapGen.map(),info);
         scene.setDelegate(this);
         eventListener.setScene(scene);
         isoCam.setTracking(scene.player().controllUnit());

@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.building.BuildingPlacement;
 import com.skorulis.drack.def.BuildingDef;
+import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
@@ -31,18 +32,20 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 	private SKAssetManager assets;
 	private GameDelegate delegate;
 	private Effect2DLayer effects2D;
+	private DefManager def;
 	
-	public GameScene(SKAssetManager assets,GameMap map, Effect2DLayer effects2D) {
+	public GameScene(DefManager def, SKAssetManager assets,GameMap map, Effect2DLayer effects2D) {
 		this.assets = assets;
 		this.map = map;
 		this.effects2D = effects2D;
 		this.player = new Player();
+		this.def = def;
 		
 		transform = new Matrix4();
 		
 		units = new ArrayList<Unit>();
 		
-		Unit unit = new Unit(assets, player);
+		Unit unit = new Unit(assets, player, this.def.getUnit("avatar"));
 		unit.setDelegate(this);
 		units.add(unit);
 		
