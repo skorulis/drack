@@ -17,6 +17,7 @@ import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.game.GameDelegate;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.map.MapGenerator;
+import com.skorulis.drack.player.Player;
 import com.skorulis.drack.ui.StyleManager;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.SKAssetManager;
@@ -39,6 +40,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
     private TextureGenerator textureGen;
     private Effect2DLayer info;
     private StyleManager styleManager;
+    private Player player;
 	
 	@Override
 	public void create() {

@@ -11,18 +11,45 @@ import com.skorulis.drack.unit.Unit;
 
 public class MineUI extends BuildingUI {
 	
+	private TextButton infoButton;
 	private TextButton mineButton;
+	private TextButton assignButton;
 	
 	public void init(Skin skin, UIManager ui) {
 		super.init(skin,ui);
+		infoButton = new TextButton("Info",skin);
 		mineButton = new TextButton("Mine",skin);
-		addActor(mineButton);
+		assignButton = new TextButton("Assign",skin);
+		
+		buttonGroup.addActor(infoButton);
+		buttonGroup.addActor(mineButton);
+		buttonGroup.addActor(assignButton);
+		
+		infoButton.addListener(new ClickListener() {
+			public void clicked (InputEvent event, float x, float y) {
+				infoClicked();
+			}
+		});
 		
 		mineButton.addListener(new ClickListener() {
 			public void clicked (InputEvent event, float x, float y) {
 				mineClicked();
 			}
 		});
+		
+		assignButton.addListener(new ClickListener() {
+			public void clicked (InputEvent event, float x, float y) {
+				assignClicked();
+			}
+		});	
+	}
+	
+	public void assignClicked() {
+		
+	}
+	
+	public void infoClicked() {
+		
 	}
 	
 	public void mineClicked() {
@@ -31,10 +58,7 @@ public class MineUI extends BuildingUI {
 		avatar.setAction(action);
 	}
 	
-	public void layout() {
-		helper.centreChildX(mineButton);
-		super.layout();
-	}
+
 	
 	public Mine mine() {
 		return (Mine) building;

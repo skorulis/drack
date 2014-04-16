@@ -1,7 +1,6 @@
 package com.skorulis.drack.ui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.skorulis.drack.IsoPerspectiveCamera;
