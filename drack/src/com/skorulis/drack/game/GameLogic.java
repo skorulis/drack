@@ -6,22 +6,25 @@ import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
+import com.skorulis.drack.player.Player;
 import com.skorulis.scene.SceneNode;
 
 public class GameLogic {
 
 	private GameScene scene;
 	private GameDelegate delegate;
+	private Player player;
 	
-	public GameLogic(GameScene scene, GameDelegate delegate) {
+	public GameLogic(GameScene scene, GameDelegate delegate, Player player) {
 		this.scene = scene;
 		this.delegate = delegate;
+		this.player = player;
 	}
 	
 	public void nodeSelected(SceneNode node) {
 		if(node instanceof MapSquare) {
 			MapSquare sq = (MapSquare) node;
-			MapSquare current = map().squareAt(scene.player().controllUnit().currentPosition());
+			MapSquare current = map().squareAt(player.controllUnit().currentPosition());
 			if(sq == current) {
 				return;
 			}
@@ -34,7 +37,7 @@ public class GameLogic {
 			
 			PathFinder finder = new PathFinder(map(), current, sq, near);
 			MapPath path = finder.generatePath();
-			scene.player().controllUnit().setPath(path);
+			player.controllUnit().setPath(path);
 			this.delegate.playerMoved();
 			
 			if(sq.anyBuilding() != null) {
@@ -49,6 +52,10 @@ public class GameLogic {
 	
 	public GameScene scene() {
 		return scene;
+	}
+	
+	public Player player() {
+		return player;
 	}
 	
 }

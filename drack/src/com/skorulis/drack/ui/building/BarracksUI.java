@@ -30,7 +30,7 @@ public class BarracksUI extends BuildingUI {
 	
 	private void hirePressed() {
 		UnitDef def = this.ui.def().getUnit("truck");
-		Unit u = new Unit(ui.assets(), ui.game().player(),def);
+		Unit u = new Unit(ui.assets(), ui.logic().player(),def);
 		Set<MapSquare> squares = this.ui.game().map().squaresAround(this.building);
 		
 		this.ui.game().addUnit(u, squares.iterator().next());

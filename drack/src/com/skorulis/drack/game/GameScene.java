@@ -1,8 +1,6 @@
 package com.skorulis.drack.game;
 
 import java.util.ArrayList;
-import java.util.Set;
-
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
@@ -13,9 +11,6 @@ import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
-import com.skorulis.drack.pathfinding.MapPath;
-import com.skorulis.drack.pathfinding.PathFinder;
-import com.skorulis.drack.player.Player;
 import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.drack.unit.UnitDelegate;
@@ -25,13 +20,11 @@ import com.skorulis.scene.SceneNode;
 
 public class GameScene implements SceneNode, Disposable, UnitDelegate {
 
-	private Player player;
 	private ArrayList<Unit> units;
 	private GameMap map;
 	private Matrix4 transform;
 	private BuildingPlacement placingBuilding;
 	private SKAssetManager assets;
-	private GameDelegate delegate;
 	private Effect2DLayer effects2D;
 	private DefManager def;
 	
@@ -39,15 +32,12 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		this.assets = assets;
 		this.map = map;
 		this.effects2D = effects2D;
-		this.player = new Player();
 		this.def = def;
 		
 		transform = new Matrix4();
 		
 		units = new ArrayList<Unit>();
 	}
-
-	
 
 	@Override
 	public Matrix4 absTransform() {
@@ -108,18 +98,10 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		this.placingBuilding.place();
 		this.placingBuilding = null;
 	}
-	
-	public void setDelegate(GameDelegate delegate) {
-		this.delegate = delegate;
-	}
 
 	@Override
 	public void resourceAdded(Unit avatar, ResourceQuantity rq) {
 		effects2D.addTextEffect(avatar.absTransform().getTranslation(new Vector3()), rq.displayText());
-	}
-	
-	public Player player() {
-		return player;
 	}
 	
 	public GameMap map() {

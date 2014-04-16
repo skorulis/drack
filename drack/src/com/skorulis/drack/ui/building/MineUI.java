@@ -53,7 +53,7 @@ public class MineUI extends BuildingUI {
 	}
 	
 	public void mineClicked() {
-		Unit avatar = this.ui.game().player().controllUnit();
+		Unit avatar = this.ui.logic().player().controllUnit();
 		MineAction action = new MineAction(avatar, mine());
 		avatar.setAction(action);
 	}

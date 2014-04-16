@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.skorulis.drack.IsoPerspectiveCamera;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.game.GameLogic;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.ui.building.BuildingUI;
 import com.skorulis.gdx.SKAssetManager;
@@ -16,15 +17,15 @@ public class UIManager {
 	private final StyleManager style;
 	private DebugUI debugUI;
 	private PlayerUI playerUI;
-	private GameScene game;
+	private GameLogic logic;
 	private DefManager def;
 	private SKAssetManager assets;
 	private IsoPerspectiveCamera camera;
 	private BuildingUI buildingUI;
 	
-	public UIManager(SKAssetManager assets,GameScene game,DefManager def, IsoPerspectiveCamera camera, StyleManager style) {
+	public UIManager(SKAssetManager assets,GameLogic logic,DefManager def, IsoPerspectiveCamera camera, StyleManager style) {
 		this.assets = assets;
-		this.game = game;
+		this.logic = logic;
 		this.def = def;
 		this.camera = camera;
 		
@@ -56,7 +57,11 @@ public class UIManager {
 	}
 	
 	public GameScene game() {
-		return game;
+		return logic.scene();
+	}
+	
+	public GameLogic logic() {
+		return logic;
 	}
 	
 	public DefManager def() {

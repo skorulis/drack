@@ -19,6 +19,7 @@ import com.skorulis.drack.game.GameLogic;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.game.SceneGenerator;
 import com.skorulis.drack.map.MapGenerator;
+import com.skorulis.drack.player.Player;
 import com.skorulis.drack.ui.StyleManager;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.SKAssetManager;
@@ -66,21 +67,21 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	private void doneLoading() {
         loading = false;
         styleManager = new StyleManager();
+        Player player = new Player();
         info = new Effect2DLayer(styleManager.defaultSkin(),isoCam);
         
         assets.addAllModels(def.buildModels(assets));
         MapGenerator mapGen = new MapGenerator(50, 50, assets,def);
         
-        SceneGenerator sceneGen = new SceneGenerator(mapGen, info);
+        SceneGenerator sceneGen = new SceneGenerator(mapGen, info, player);
         
         scene = sceneGen.scene();
-        scene.setDelegate(this);
-        isoCam.setTracking(scene.player().controllUnit());
+        isoCam.setTracking(player.controllUnit());
         
-        logic = new GameLogic(scene, this);
+        logic = new GameLogic(scene, this, player);
         eventListener.setLogic(logic);
         
-        ui = new UIManager(assets,scene,def,isoCam,styleManager);
+        ui = new UIManager(assets,logic,def,isoCam,styleManager);
         
         inputPlexer = new InputMultiplexer(ui.stage(), new GestureDetector(eventListener));
         Gdx.input.setInputProcessor(inputPlexer);

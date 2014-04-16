@@ -29,6 +29,10 @@ public class Player {
 		return resources;
 	}
 	
+	public Set<Unit> ownedUnits() {
+		return ownedUnits;
+	}
+	
 	
 	
 }
