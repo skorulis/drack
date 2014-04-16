@@ -4,11 +4,11 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.skorulis.drack.avatar.Avatar;
-import com.skorulis.drack.avatar.MineAction;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.ui.UIManager;
+import com.skorulis.drack.unit.MineAction;
+import com.skorulis.drack.unit.Unit;
 import com.skorulis.gdx.ui.LayoutHelper;
 
 public class MineUI extends BuildingUI {
@@ -41,7 +41,7 @@ public class MineUI extends BuildingUI {
 	}
 	
 	public void mineClicked() {
-		Avatar avatar = this.ui.game().playerAvatar(); 
+		Unit avatar = this.ui.game().player().controllUnit();
 		MineAction action = new MineAction(avatar, mine);
 		avatar.setAction(action);
 	}

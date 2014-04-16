@@ -1,4 +1,4 @@
-package com.skorulis.drack.avatar;
+package com.skorulis.drack.unit;
 
 import com.skorulis.drack.building.Mine;
 
@@ -7,7 +7,7 @@ public class MineAction extends UnitAction {
 	private Mine mine;
 	private float time;
 	
-	public MineAction(Avatar avatar, Mine mine) {
+	public MineAction(Unit avatar, Mine mine) {
 		super(avatar);
 		this.mine = mine;
 	}

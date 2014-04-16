@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
-import com.skorulis.drack.avatar.Avatar;
 import com.skorulis.drack.def.BuildingDef;
+import com.skorulis.drack.unit.Unit;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
@@ -15,7 +15,7 @@ public class Building implements SceneNode{
 	protected ModelInstance buildingInstance;
 	protected BuildingDef def;
 	protected boolean beingPlaced;
-	protected Avatar owner;
+	protected Unit owner;
 	
 	public Building() { }
 	
@@ -63,11 +63,11 @@ public class Building implements SceneNode{
 		return buildingInstance;
 	}
 	
-	public void setOwner(Avatar avatar) {
+	public void setOwner(Unit avatar) {
 		this.owner = avatar;
 	}
 	
-	public Avatar owner() {
+	public Unit owner() {
 		return owner;
 	}
 

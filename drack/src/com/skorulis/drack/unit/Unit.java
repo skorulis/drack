@@ -1,4 +1,4 @@
-package com.skorulis.drack.avatar;
+package com.skorulis.drack.unit;
 
 import java.util.ArrayList;
 
@@ -7,24 +7,27 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.pathfinding.MapPath;
+import com.skorulis.drack.player.Player;
 import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 
-public class Avatar extends Unit implements SceneNode {
+public class Unit implements SceneNode {
 
 	private ModelInstance instance;
 	private UnitAction action;
 	
 	private float speed = 10;
 	private ResourceBatch resources;
-	private AvatarDelegate delegate;
+	private UnitDelegate delegate;
+	private Player owner;
 	
-	public Avatar(SKAssetManager assets) {
+	public Unit(SKAssetManager assets, Player owner) {
 		instance = new ModelInstance(assets.getModel("craft1"));
 		resources = new ResourceBatch();
+		this.owner = owner;
 	}
 	
 	public void setPath(MapPath path) {
@@ -60,7 +63,6 @@ public class Avatar extends Unit implements SceneNode {
 				action = null;
 			}
 		}
-		
 	}
 
 	@Override
@@ -95,12 +97,16 @@ public class Avatar extends Unit implements SceneNode {
 		}
 	}
 	
-	public void setDelegate(AvatarDelegate delegate) {
+	public void setDelegate(UnitDelegate delegate) {
 		this.delegate = delegate;
 	}
 	
 	public float speed() {
 		return speed;
+	}
+	
+	public Player owner() {
+		return owner;
 	}
 
 }

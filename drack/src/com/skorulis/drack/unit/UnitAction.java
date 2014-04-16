@@ -1,10 +1,10 @@
-package com.skorulis.drack.avatar;
+package com.skorulis.drack.unit;
 
 public abstract class UnitAction {
 
-	protected Avatar avatar;
+	protected Unit avatar;
 	
-	public UnitAction(Avatar avatar) {
+	public UnitAction(Unit avatar) {
 		this.avatar = avatar;
 	}
 	

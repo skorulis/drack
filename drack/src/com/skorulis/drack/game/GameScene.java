@@ -6,8 +6,6 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
-import com.skorulis.drack.avatar.Avatar;
-import com.skorulis.drack.avatar.AvatarDelegate;
 import com.skorulis.drack.building.BuildingPlacement;
 import com.skorulis.drack.def.BuildingDef;
 import com.skorulis.drack.effects.Effect2DLayer;
@@ -15,14 +13,18 @@ import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
+import com.skorulis.drack.player.Player;
 import com.skorulis.drack.resource.ResourceQuantity;
+import com.skorulis.drack.unit.Unit;
+import com.skorulis.drack.unit.UnitDelegate;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 
-public class GameScene implements SceneNode, Disposable, AvatarDelegate {
+public class GameScene implements SceneNode, Disposable, UnitDelegate {
 
-	private Avatar avatar;
+	private Player player;
+	private ArrayList<Unit> units;
 	private GameMap map;
 	private Matrix4 transform;
 	private BuildingPlacement placingBuilding;
@@ -34,16 +36,23 @@ public class GameScene implements SceneNode, Disposable, AvatarDelegate {
 		this.assets = assets;
 		this.map = map;
 		this.effects2D = effects2D;
+		this.player = new Player();
 		
 		transform = new Matrix4();
-		avatar = new Avatar(assets);
-		avatar.setDelegate(this);
+		
+		units = new ArrayList<Unit>();
+		
+		Unit unit = new Unit(assets, player);
+		unit.setDelegate(this);
+		units.add(unit);
+		
+		player.setControllingUnit(unit);
 	}
 
 	public void nodeSelected(SceneNode node) {
 		if(node instanceof MapSquare) {
 			MapSquare sq = (MapSquare) node;
-			MapSquare current = map.squareAt(avatar.currentPosition());
+			MapSquare current = map.squareAt(player.controllUnit().currentPosition());
 			if(sq == current) {
 				return;
 			}
@@ -56,7 +65,7 @@ public class GameScene implements SceneNode, Disposable, AvatarDelegate {
 			
 			PathFinder finder = new PathFinder(map, current, sq, near);
 			MapPath path = finder.generatePath();
-			avatar.setPath(path);
+			player.controllUnit().setPath(path);
 			this.delegate.playerMoved();
 			
 			if(sq.building() != null) {
@@ -64,19 +73,7 @@ public class GameScene implements SceneNode, Disposable, AvatarDelegate {
 			}
 		}
 	}
-	
-	public void moveAvatar(int x ,int z) {
-		avatar.relTransform().setTranslation(x, 0, z);
-	}
-	
-	public GameMap map() {
-		return map;
-	}
-	
-	public Avatar avatar() {
-		return avatar;
-	}
-	
+
 	@Override
 	public Matrix4 absTransform() {
 		return transform;
@@ -90,14 +87,18 @@ public class GameScene implements SceneNode, Disposable, AvatarDelegate {
 	@Override
 	public void render(RenderInfo ri) {
 		map.render(ri);
-		avatar.render(ri);
+		for(Unit unit : units) {
+			unit.render(ri);
+		}
 		if(placingBuilding != null) {
 			placingBuilding.render(ri);
 		}
 	}
 	
 	public void update(float delta) {
-		avatar.update(delta);
+		for(Unit unit : units) {
+			unit.update(delta);
+		}
 		if(placingBuilding != null) {
 			placingBuilding.update(delta);
 		}
@@ -133,17 +134,21 @@ public class GameScene implements SceneNode, Disposable, AvatarDelegate {
 		this.placingBuilding = null;
 	}
 	
-	public Avatar playerAvatar() {
-		return avatar;
-	}
-	
 	public void setDelegate(GameDelegate delegate) {
 		this.delegate = delegate;
 	}
 
 	@Override
-	public void resourceAdded(Avatar avatar, ResourceQuantity rq) {
+	public void resourceAdded(Unit avatar, ResourceQuantity rq) {
 		effects2D.addTextEffect(avatar.absTransform().getTranslation(new Vector3()), rq.displayText());
+	}
+	
+	public Player player() {
+		return player;
+	}
+	
+	public GameMap map() {
+		return map;
 	}
 	
 }

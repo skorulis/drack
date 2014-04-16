@@ -1,4 +1,4 @@
-package com.skorulis.drack.avatar;
+package com.skorulis.drack.unit;
 
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.pathfinding.MapPath;
@@ -9,7 +9,7 @@ public class MovementAction extends UnitAction {
 	private MapPath path;
 	private MovementInfo movement;
 	
-	public MovementAction(Avatar avatar, MapPath path) {
+	public MovementAction(Unit avatar, MapPath path) {
 		super(avatar);
 		setPath(path);
 	}
