@@ -126,6 +126,17 @@ public class MapSquare implements SceneNode {
 		return this.building;
 	}
 	
+	public Building sharedBuilding() {
+		return sharedBuilding;
+	}
+	
+	public Building anyBuilding() {
+		if(this.building != null) {
+			return this.building;
+		}
+		return sharedBuilding;
+	}
+	
 	public void setSharedBuilding(Building b) {
 		this.sharedBuilding = b;
 	}

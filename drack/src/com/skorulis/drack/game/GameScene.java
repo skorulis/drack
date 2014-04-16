@@ -62,7 +62,7 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 			ArrayList<MapSquare> near = null;
 			if(sq.isPassable()) {
 				
-			} else if(sq.building() != null) {
+			} else if(sq.anyBuilding() != null) {
 				near = map.adjacentSquares(sq);
 			}
 			
@@ -71,8 +71,8 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 			player.controllUnit().setPath(path);
 			this.delegate.playerMoved();
 			
-			if(sq.building() != null) {
-				this.delegate.buildingSelected(sq.building());
+			if(sq.anyBuilding() != null) {
+				this.delegate.buildingSelected(sq.anyBuilding());
 			}
 		}
 	}

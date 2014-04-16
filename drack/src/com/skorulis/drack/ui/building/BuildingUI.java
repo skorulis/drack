@@ -20,17 +20,6 @@ public class BuildingUI extends WidgetGroup {
 		this.setFillParent(true);
 	}
 	
-	public static BuildingUI uiForBuilding(Building building) {
-		BuildingUI ret = null;
-		if(building instanceof Mine) {
-			ret = new MineUI();
-		} else {
-			ret = new BuildingUI();
-		}
-		
-		return ret;
-	}
-	
 	public void init(Skin skin, UIManager ui) {
 		this.ui = ui;
 		this.nameLabel = new Label("name",skin);

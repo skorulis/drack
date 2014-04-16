@@ -73,7 +73,7 @@ public class UIManager {
 	
 	public void showBuildingUI(Building building) {
 		clearBuildingUI();
-		buildingUI = BuildingUI.uiForBuilding(building);
+		buildingUI = building.def().createUI();
 		if(buildingUI != null) {
 			buildingUI.init(style.gameSkin(), this);
 			buildingUI.setBuilding(building);

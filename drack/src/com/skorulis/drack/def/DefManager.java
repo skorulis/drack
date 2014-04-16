@@ -19,6 +19,8 @@ import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.building.Tower;
 import com.skorulis.drack.building.Tree;
 import com.skorulis.drack.building.Vault;
+import com.skorulis.drack.ui.building.BarracksUI;
+import com.skorulis.drack.ui.building.MineUI;
 
 public class DefManager {
 
@@ -75,6 +77,7 @@ public class DefManager {
 		
 		def = new BuildingDef("mine");
 		def.buildingClass = Mine.class;
+		def.uiClass = MineUI.class;
 		def.modelName = "mine";
 		def.replacesTerrain = true;
 		addDef(def);
@@ -87,6 +90,7 @@ public class DefManager {
 		
 		def = new BuildingDef("barracks");
 		def.buildingClass = Building.class;
+		def.uiClass = BarracksUI.class;
 		def.modelName = "house";
 		def.width = def.depth = 2;
 		def.isBuildable = true;
