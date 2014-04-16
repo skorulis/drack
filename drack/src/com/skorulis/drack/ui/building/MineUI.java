@@ -4,24 +4,17 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.drack.unit.MineAction;
 import com.skorulis.drack.unit.Unit;
-import com.skorulis.gdx.ui.LayoutHelper;
 
 public class MineUI extends BuildingUI {
 	
 	private TextButton mineButton;
-	private LayoutHelper helper;
-	private Mine mine;
 	
 	public MineUI() {
-		helper = new LayoutHelper(this);
 		
-		
-		this.setFillParent(true);
 	}
 	
 	public void init(Skin skin, UIManager ui) {
@@ -36,18 +29,19 @@ public class MineUI extends BuildingUI {
 		});
 	}
 	
-	public void setBuilding(Building building) {
-		this.mine = (Mine) building;
-	}
-	
 	public void mineClicked() {
 		Unit avatar = this.ui.game().player().controllUnit();
-		MineAction action = new MineAction(avatar, mine);
+		MineAction action = new MineAction(avatar, mine());
 		avatar.setAction(action);
 	}
 	
 	public void layout() {
 		helper.centreChildX(mineButton);
+		super.layout();
+	}
+	
+	public Mine mine() {
+		return (Mine) building;
 	}
 	
 }

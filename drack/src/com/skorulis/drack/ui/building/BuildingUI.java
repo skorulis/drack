@@ -1,17 +1,23 @@
 package com.skorulis.drack.ui.building;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.ui.UIManager;
+import com.skorulis.gdx.ui.LayoutHelper;
 
-public abstract class BuildingUI extends WidgetGroup {
+public class BuildingUI extends WidgetGroup {
 	
 	protected UIManager ui;
+	protected Label nameLabel;
+	protected final LayoutHelper helper;
+	protected Building building;
 	
 	public BuildingUI() {
-		
+		helper = new LayoutHelper(this);
+		this.setFillParent(true);
 	}
 	
 	public static BuildingUI uiForBuilding(Building building) {
@@ -19,17 +25,26 @@ public abstract class BuildingUI extends WidgetGroup {
 		if(building instanceof Mine) {
 			ret = new MineUI();
 		} else {
-			//throw new IllegalArgumentException("Could not find UI for " + building);
+			ret = new BuildingUI();
 		}
-		
 		
 		return ret;
 	}
 	
 	public void init(Skin skin, UIManager ui) {
 		this.ui = ui;
+		this.nameLabel = new Label("name",skin);
+		this.addActor(nameLabel);
 	}
 	
-	public abstract void setBuilding(Building building);
+	public void layout() {
+		helper.centreChildX(nameLabel);
+		nameLabel.setY(50);
+	}
+	
+	public void setBuilding(Building building) {
+		this.building = building;
+		this.nameLabel.setText(building.def().name());
+	}
 	
 }

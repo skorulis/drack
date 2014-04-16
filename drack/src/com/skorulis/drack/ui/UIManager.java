@@ -75,7 +75,7 @@ public class UIManager {
 		clearBuildingUI();
 		buildingUI = BuildingUI.uiForBuilding(building);
 		if(buildingUI != null) {
-			buildingUI.init(style.defaultSkin(), this);
+			buildingUI.init(style.gameSkin(), this);
 			buildingUI.setBuilding(building);
 			stage.addActor(buildingUI);
 		}
