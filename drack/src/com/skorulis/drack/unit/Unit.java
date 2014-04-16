@@ -29,6 +29,8 @@ public class Unit implements SceneNode {
 		instance = new ModelInstance(assets.getModel(def.modelName));
 		resources = new ResourceBatch();
 		this.owner = owner;
+		
+		this.owner.addUnit(this);
 	}
 	
 	public void setPath(MapPath path) {

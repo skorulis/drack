@@ -71,7 +71,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         info = new Effect2DLayer(styleManager.defaultSkin(),isoCam);
         
         assets.addAllModels(def.buildModels(assets));
-        MapGenerator mapGen = new MapGenerator(50, 50, assets,def);
+        MapGenerator mapGen = new MapGenerator(50, 50, assets, def, player);
         
         SceneGenerator sceneGen = new SceneGenerator(mapGen, info, player);
         

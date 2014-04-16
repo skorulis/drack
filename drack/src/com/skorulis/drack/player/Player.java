@@ -17,6 +17,10 @@ public class Player {
 		ownedUnits = new HashSet<Unit>();
 	}
 	
+	public void addUnit(Unit unit) {
+		this.ownedUnits.add(unit);
+	}
+	
 	public Unit controllUnit() {
 		return controllingUnit;
 	}
@@ -33,6 +37,14 @@ public class Player {
 		return ownedUnits;
 	}
 	
+	public Unit freeUnit() {
+		for(Unit u : ownedUnits) {
+			if(u != controllingUnit) {
+				return u;
+			}
+		}
+		return null;
+	}
 	
 	
 }

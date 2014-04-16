@@ -1,9 +1,11 @@
 package com.skorulis.drack.map;
 
+import com.skorulis.drack.building.Barracks;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.CommandCentre;
 import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.player.Player;
 import com.skorulis.gdx.SKAssetManager;
 
 public class MapGenerator {
@@ -12,19 +14,21 @@ public class MapGenerator {
 	private SKAssetManager assets;
 	private DefManager def;
 	
-	public MapGenerator(int width , int depth, SKAssetManager assets,DefManager def) {
-		map = new GameMap(width, depth, assets);
+	public MapGenerator(int width , int depth, SKAssetManager assets,DefManager def, Player player) {
 		this.assets = assets;
 		this.def = def;
+		map = new GameMap(width, depth, assets);
 		
 		CommandCentre b = (CommandCentre) addBuilding("command", 5, 5);
+		b.setOwner(player);
 		b.generateField(b.fieldSize(), map);
 		
 		addBuilding("tree", 2, 5);
 		addBuilding("tree", 12, 3);
 		addBuilding("tree", 8, 15);
 		
-		addBuilding("barracks", 8, 8);
+		Barracks barracks = (Barracks) addBuilding("barracks", 8, 8);
+		barracks.setOwner(player);
 		
 		Mine mine = (Mine) addBuilding("mine", 11, 3);
 		mine.addResource(def.getResource("iron"), 1);

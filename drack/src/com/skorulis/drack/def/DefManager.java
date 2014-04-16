@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.skorulis.drack.building.Barracks;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.CommandCentre;
 import com.skorulis.drack.building.Mine;
@@ -89,7 +90,7 @@ public class DefManager {
 		addDef(def);
 		
 		def = new BuildingDef("barracks");
-		def.buildingClass = Building.class;
+		def.buildingClass = Barracks.class;
 		def.uiClass = BarracksUI.class;
 		def.modelName = "house";
 		def.width = def.depth = 2;

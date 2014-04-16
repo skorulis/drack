@@ -45,7 +45,12 @@ public class MineUI extends BuildingUI {
 	}
 	
 	public void assignClicked() {
+		Unit unit = this.ui.logic().player().freeUnit();
 		
+		MineAction action = new MineAction(unit, mine());
+		unit.setAction(action);
+		
+		System.out.println("Assigning free unit " + unit);
 	}
 	
 	public void infoClicked() {
@@ -57,8 +62,6 @@ public class MineUI extends BuildingUI {
 		MineAction action = new MineAction(avatar, mine());
 		avatar.setAction(action);
 	}
-	
-
 	
 	public Mine mine() {
 		return (Mine) building;

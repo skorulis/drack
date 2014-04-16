@@ -34,8 +34,7 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		this.effects2D = effects2D;
 		this.def = def;
 		
-		transform = new Matrix4();
-		
+		transform = new Matrix4();		
 		units = new ArrayList<Unit>();
 	}
 
@@ -110,6 +109,7 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 	
 	public void addUnit(Unit u, MapSquare sq) {
 		this.units.add(u);
+		u.setDelegate(this);
 		u.absTransform().setTranslation(sq.getCentreLoc());
 	}
 	

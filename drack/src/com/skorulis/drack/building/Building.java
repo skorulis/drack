@@ -70,8 +70,8 @@ public class Building implements SceneNode{
 		return buildingInstance;
 	}
 	
-	public void setOwner(Player avatar) {
-		this.owner = avatar;
+	public void setOwner(Player player) {
+		this.owner = player;
 	}
 	
 	public Player owner() {
