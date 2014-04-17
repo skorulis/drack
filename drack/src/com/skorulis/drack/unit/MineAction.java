@@ -6,19 +6,19 @@ public class MineAction extends UnitAction {
 
 	private Mine mine;
 	private float time;
+	private int chunkSize;
 	
 	public MineAction(Unit avatar, Mine mine) {
 		super(avatar);
 		this.mine = mine;
+		this.chunkSize = 10;
 	}
 	
 	public void update(float delta) {
 		time += delta;
-		if(time > 1) {
-			int amount = (int)time;
-			avatar.addResources(mine.mine(amount));
-			time -= amount;
-			time = 0;
+		if(time > chunkSize) {
+			avatar.addResources(mine.mine(chunkSize));
+			time -= chunkSize;
 		}
 	}
 	
