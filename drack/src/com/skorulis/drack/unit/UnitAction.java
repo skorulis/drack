@@ -10,5 +10,6 @@ public abstract class UnitAction {
 	
 	public abstract void update(float delta);
 	public abstract boolean finished();
+	public abstract boolean shouldReplace();
 	
 }

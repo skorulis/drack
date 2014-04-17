@@ -18,7 +18,7 @@ import com.skorulis.scene.SceneNode;
 public class Unit implements SceneNode {
 
 	private ModelInstance instance;
-	private UnitAction action;
+	private ArrayList<UnitAction> actions;
 	
 	private float speed = 10;
 	private ResourceBatch resources;
@@ -31,16 +31,19 @@ public class Unit implements SceneNode {
 		this.owner = owner;
 		
 		this.owner.addUnit(this);
+		this.actions = new ArrayList<UnitAction>();
 	}
 	
 	public void setPath(MapPath path) {
 		if(path == null || path.length() == 0) {
 			return;
 		}
+		UnitAction action = currentAction();
 		if(action != null && action instanceof MovementAction) {
 			((MovementAction)action).setPath(path);
 		} else {
-			action = new MovementAction(this,path);
+			UnitAction newAction = new MovementAction(this,path);
+			addAction(newAction);
 		}
 	}
 	
@@ -60,10 +63,11 @@ public class Unit implements SceneNode {
 	}
 	
 	public void update(float delta) {
+		UnitAction action = currentAction();
 		if(action != null) {
 			action.update(delta);
 			if(action.finished()) {
-				action = null;
+				actions.remove(0);
 			}
 		}
 	}
@@ -74,6 +78,7 @@ public class Unit implements SceneNode {
 	}
 	
 	public Vector3 currentPosition() {
+		UnitAction action = currentAction();
 		if(action != null && action instanceof MovementAction) {
 			return ((MovementAction) action).movingTo();
 		}
@@ -88,8 +93,11 @@ public class Unit implements SceneNode {
 		return resources.allResources();
 	}
 	
-	public void setAction(UnitAction action) {
-		this.action = action;
+	public void addAction(UnitAction action) {
+		if(action.shouldReplace()) {
+			this.actions.clear();
+		}
+		this.actions.add(action);
 	}
 	
 	public void addResources(ResourceBatch batch) {
@@ -110,6 +118,13 @@ public class Unit implements SceneNode {
 	
 	public Player owner() {
 		return owner;
+	}
+	
+	public UnitAction currentAction() {
+		if(actions.size() > 0) {
+			return actions.get(0);
+		}
+		return null;
 	}
 
 }

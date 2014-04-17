@@ -24,4 +24,8 @@ public class MineAction extends UnitAction {
 		return false;
 	}
 	
+	public boolean shouldReplace() {
+		return false;
+	}
+	
 }

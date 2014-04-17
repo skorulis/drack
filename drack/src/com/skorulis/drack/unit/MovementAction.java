@@ -48,5 +48,9 @@ public class MovementAction extends UnitAction {
 	public Vector3 movingTo() {
 		return movement.endLoc;
 	}
+	
+	public boolean shouldReplace() {
+		return true;
+	}
 
 }
