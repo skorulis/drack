@@ -113,4 +113,8 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		u.absTransform().setTranslation(sq.getCentreLoc());
 	}
 	
+	public DefManager def() {
+		return def;
+	}
+	
 }

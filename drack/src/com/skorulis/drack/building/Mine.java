@@ -13,12 +13,8 @@ public class Mine extends Building {
 	}
 	
 	public ResourceBatch mine(int rate) {
-		ResourceBatch batch = new ResourceBatch();
-		for(ResourceQuantity res : resources.allResources()) {
-			ResourceQuantity amount = new ResourceQuantity(res.resource(), res.quantity() * rate);
-			batch.add(amount);
-		}
-		return batch;
+		ResourceQuantity rq = chooseRandom();
+		return new ResourceBatch(new ResourceQuantity(rq.resource(), rq.quantity() * rate));
 	}
 	
 	public void addResource(ResourceQuantity rq) {
@@ -28,6 +24,11 @@ public class Mine extends Building {
 	public void addResource(ResourceDef def, int qty) {
 		ResourceQuantity rq = new ResourceQuantity(def, qty);
 		addResource(rq);
+	}
+	
+	private ResourceQuantity chooseRandom() {
+		int index = (int) (Math.random() * resources.count());
+		return resources.allResources().get(index);
 	}
 	
 }
