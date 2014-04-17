@@ -5,9 +5,9 @@ import com.skorulis.drack.def.ResourceDef;
 public class ResourceQuantity {
 
 	private ResourceDef resourceDef;
-	private float quantity;
+	private int quantity;
 	
-	public ResourceQuantity(ResourceDef def, float quantity) {
+	public ResourceQuantity(ResourceDef def, int quantity) {
 		this.resourceDef = def;
 		this.quantity = quantity;
 	}
@@ -16,7 +16,7 @@ public class ResourceQuantity {
 		return resourceDef;
 	}
 	
-	public float quantity() {
+	public int quantity() {
 		return quantity;
 	}
 	

@@ -65,8 +65,6 @@ public class MineUI extends BuildingUI {
 			unit.addAction(action);
 		}
 		
-		
-		System.out.println("Assigning free unit " + unit);
 	}
 	
 	public void infoClicked() {

@@ -12,7 +12,7 @@ public class Mine extends Building {
 		resources = new ResourceBatch();
 	}
 	
-	public ResourceBatch mine(float rate) {
+	public ResourceBatch mine(int rate) {
 		ResourceBatch batch = new ResourceBatch();
 		for(ResourceQuantity res : resources.allResources()) {
 			ResourceQuantity amount = new ResourceQuantity(res.resource(), res.quantity() * rate);
@@ -25,7 +25,7 @@ public class Mine extends Building {
 		resources.add(rq);
 	}
 	
-	public void addResource(ResourceDef def, float qty) {
+	public void addResource(ResourceDef def, int qty) {
 		ResourceQuantity rq = new ResourceQuantity(def, qty);
 		addResource(rq);
 	}
