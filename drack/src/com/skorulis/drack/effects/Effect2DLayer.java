@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.skorulis.drack.IsoPerspectiveCamera;
+import com.skorulis.drack.game.IsoPerspectiveCamera;
 
 public class Effect2DLayer {
 

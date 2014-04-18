@@ -51,6 +51,12 @@ public class DefManager {
 		createBuildings();
 		createUnits();
 		createCompositeUnits();
+		createHulls();
+		createCompositeUnits();
+	}
+	
+	private void createHulls() {
+		
 	}
 	
 	private void createCompositeUnits() {

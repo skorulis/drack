@@ -3,11 +3,11 @@ package com.skorulis.drack.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.skorulis.drack.IsoPerspectiveCamera;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.game.GameLogic;
 import com.skorulis.drack.game.GameScene;
+import com.skorulis.drack.game.IsoPerspectiveCamera;
 import com.skorulis.drack.ui.building.BuildingUI;
 import com.skorulis.gdx.SKAssetManager;
 

@@ -15,8 +15,10 @@ import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.game.GameDelegate;
+import com.skorulis.drack.game.GameEventListener;
 import com.skorulis.drack.game.GameLogic;
 import com.skorulis.drack.game.GameScene;
+import com.skorulis.drack.game.IsoPerspectiveCamera;
 import com.skorulis.drack.game.SceneGenerator;
 import com.skorulis.drack.map.MapGenerator;
 import com.skorulis.drack.player.Player;
@@ -121,7 +123,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         isoCam.cam().update();
         RenderInfo ri = new RenderInfo(modelBatch, environment, isoCam.cam());
         modelBatch.begin(isoCam.cam());
-        scene.render(ri);
+        //scene.render(ri);
         modelBatch.end();
         
         effects2D.stage().draw();
@@ -129,15 +131,17 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         ui.stage().draw();
         
         update();
+        logic.unitEditor().draw();
 	}
 	
 	private void update() {
 		UpdateInfo info = new UpdateInfo(Gdx.graphics.getDeltaTime(), logic);
-		
 		isoCam.update(info.delta);
 		scene.update(info);
 		ui.update(info.delta);
 		this.effects2D.update(info.delta);
+		
+		logic.unitEditor().update();
 	}
 
 	@Override

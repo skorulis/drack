@@ -5,6 +5,7 @@ import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
 import com.skorulis.drack.player.Player;
+import com.skorulis.drack.unit.UnitEditor;
 import com.skorulis.scene.SceneNode;
 
 public class GameLogic {
@@ -12,11 +13,13 @@ public class GameLogic {
 	private GameScene scene;
 	private GameDelegate delegate;
 	private Player player;
+	private UnitEditor unitEditor;
 	
 	public GameLogic(GameScene scene, GameDelegate delegate, Player player) {
 		this.scene = scene;
 		this.delegate = delegate;
 		this.player = player;
+		this.unitEditor = new UnitEditor(scene.assets());
 	}
 	
 	public void nodeSelected(SceneNode node) {
@@ -48,6 +51,10 @@ public class GameLogic {
 	
 	public Player player() {
 		return player;
+	}
+	
+	public UnitEditor unitEditor() {
+		return unitEditor;
 	}
 	
 }

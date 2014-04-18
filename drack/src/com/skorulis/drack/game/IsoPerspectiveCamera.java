@@ -1,4 +1,4 @@
-package com.skorulis.drack;
+package com.skorulis.drack.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
