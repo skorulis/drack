@@ -42,7 +42,7 @@ public class MineAction extends UnitAction {
 	public ArrayList<UnitAction> followingActions(UpdateInfo info) {
 		Building b = unit.owner().findBuilding("command", unit.currentPosition());
 		
-		PathFinder finder = new PathFinder(info.map);
+		PathFinder finder = new PathFinder(info.map());
 		
 		MapPath path1 = finder.navigate(unit, b);
 		MapPath path2 = finder.navigate(path1.finalSquare(), mine);

@@ -12,6 +12,7 @@ public class DepositAction extends UnitAction {
 	private boolean finished;
 	
 	public void update(float delta) {
+		this.unit.owner().resources().add(this.unit.resources());
 		this.unit.resources().clear();
 		this.finished = true;
 	}

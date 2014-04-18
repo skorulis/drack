@@ -73,7 +73,9 @@ public class MapSquare implements SceneNode {
 	
 	@Override
 	public void update(UpdateInfo info) {
-		
+		if(this.building != null) {
+			this.building.update(info);
+		}
 	}
 
 	public int x() {

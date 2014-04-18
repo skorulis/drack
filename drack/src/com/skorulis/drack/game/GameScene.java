@@ -68,6 +68,7 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		if(placingBuilding != null) {
 			placingBuilding.update(info);
 		}
+		map.update(info);
 	}
 	
 	public SceneNode intersect(Ray ray, Vector3 point) {
@@ -117,6 +118,10 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 	
 	public DefManager def() {
 		return def;
+	}
+	
+	public SKAssetManager assets() {
+		return assets;
 	}
 	
 }

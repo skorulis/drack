@@ -133,9 +133,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	}
 	
 	private void update() {
-		UpdateInfo info = new UpdateInfo();
-		info.delta = Gdx.graphics.getDeltaTime();
-		info.map = scene.map();
+		UpdateInfo info = new UpdateInfo(Gdx.graphics.getDeltaTime(), logic);
 		
 		isoCam.update(info.delta);
 		scene.update(info);

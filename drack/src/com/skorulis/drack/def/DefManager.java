@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.skorulis.drack.building.Barracks;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.CommandCentre;
+import com.skorulis.drack.building.DungeonTower;
 import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.building.Tower;
 import com.skorulis.drack.building.Tree;
@@ -104,6 +105,12 @@ public class DefManager {
 		def.buildingClass = Building.class;
 		def.modelName = "wall_corner";
 		def.isBuildable = true;
+		addDef(def);
+		
+		def = new BuildingDef("round tower");
+		def.buildingClass = DungeonTower.class;
+		def.modelName = "round_tower";
+		def.width = def.depth = 2;
 		addDef(def);
 		
 	}

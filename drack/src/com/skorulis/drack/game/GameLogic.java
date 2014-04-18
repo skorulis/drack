@@ -1,7 +1,5 @@
 package com.skorulis.drack.game;
 
-import java.util.Set;
-
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;

@@ -33,6 +33,8 @@ public class MapGenerator {
 		Mine mine = (Mine) addBuilding("mine", 11, 3);
 		mine.addResource(def.getResource("iron"), 1);
 		mine.addResource(def.getResource("gold"), 1);
+		
+		addBuilding("round tower", 20, 20);
 	}
 	
 	private Building addBuilding(String name, int x, int z) {

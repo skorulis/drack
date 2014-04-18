@@ -89,7 +89,11 @@ public class GameMap implements SceneNode, Disposable{
 	}
 	
 	public void update(UpdateInfo info) {
-		
+		for(int i = 0; i < depth; ++i) {
+			for(int j = 0; j < width; ++j) {
+				squares[i][j].update(info);
+			}
+		}
 	}
 	
 	public MapSquare intersectRay(Ray ray) {
