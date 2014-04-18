@@ -1,7 +1,5 @@
 package com.skorulis.drack.map;
 
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
@@ -9,6 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.building.Building;
+import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
@@ -24,11 +23,11 @@ public class MapSquare implements SceneNode {
 	private final int z;
 	
 	
-	public MapSquare(AssetManager assets,int x, int z) {
+	public MapSquare(SKAssetManager assets,int x, int z) {
 		this.x = x;
 		this.z = z;
 		Vector3 translation = new Vector3(x, -0.5f, z);
-		groundInstance = new ModelInstance(assets.get("block", Model.class));
+		groundInstance = new ModelInstance(assets.getModel("block"));
 		groundInstance.transform.setToTranslation(translation);
 		boundingBox = new BoundingBox(new Vector3(x-0.5f,-1,z-0.5f), new Vector3(x+0.5f,0,z+0.5f));
 		

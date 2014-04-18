@@ -177,26 +177,9 @@ public class DefManager {
 			throw new IllegalArgumentException("Don't know where to put " + def);
 		}
 	}
-	
-	public Map<String, Model> buildModels(AssetManager assets) {
-		HashMap<String, Model> ret = new HashMap<String, Model>();
-		
-		ret.put("block", buildGroundBlock(assets));
-		
-		return ret;
-	}
-	
-	private Model buildGroundBlock(AssetManager assets) {
-		ModelBuilder builder = new ModelBuilder();
-		Material material = new Material();
-		Texture texture = assets.get("data/floor.png",Texture.class);
-		material.set(new TextureAttribute(TextureAttribute.Diffuse, texture));
-		Model blockModel = builder.createBox(1, 1.0f, 1, material, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
-		return blockModel;
-	}
-	
+
 	public BuildingDef getBuilding(String name) {
-		return get(name,BuildingDef.class);
+		return get(name, BuildingDef.class);
 	}
 	
 	public ResourceDef getResource(String name) {
@@ -224,9 +207,7 @@ public class DefManager {
 	
 	public Set<String> allTextures() {
 		HashSet<String> textures = new HashSet<String>();
-		textures.add("data/floor.png");
-		textures.add("data/field.png");
-		textures.add("data/field2.png");
+
 		return textures;
 	}
 	
@@ -252,6 +233,7 @@ public class DefManager {
 		models.add("field1");
 		models.add("corner");
 		models.add("wall_corner");
+		models.add("block");
 		
 		return models;
 	}
