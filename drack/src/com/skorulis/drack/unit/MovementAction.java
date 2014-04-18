@@ -1,8 +1,11 @@
 package com.skorulis.drack.unit;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.MovementInfo;
+import com.skorulis.scene.UpdateInfo;
 
 public class MovementAction extends UnitAction {
 	
@@ -17,7 +20,7 @@ public class MovementAction extends UnitAction {
 	public void setPath(MapPath path) {
 		this.path = path;
 		if (movement == null) {
-			movement = path.getMovement(avatar.speed());
+			movement = path.getMovement(unit.speed());
 		}
 	}
 
@@ -26,16 +29,16 @@ public class MovementAction extends UnitAction {
 		if(movement == null) {
 			return;
 		}
-		avatar.absTransform().setToWorld(movement.update(delta), movement.direction(),new Vector3(0,1,0));
+		unit.absTransform().setToWorld(movement.update(delta), movement.direction(),new Vector3(0,1,0));
 		if (movement.finished()) {
 			if (path.finished()) {
 				movement = null;
 				path = null;
 			} else {
 				if (movement.destSquare == path.nextNode()) {
-					movement = path.next(avatar.speed());
+					movement = path.next(unit.speed());
 				} else {
-					movement = path.getMovement(avatar.speed());
+					movement = path.getMovement(unit.speed());
 				}
 			}
 		}
@@ -51,6 +54,10 @@ public class MovementAction extends UnitAction {
 	
 	public boolean shouldReplace() {
 		return true;
+	}
+	
+	public ArrayList<UnitAction> followingActions(UpdateInfo info) {
+		return new ArrayList<UnitAction>();
 	}
 
 }

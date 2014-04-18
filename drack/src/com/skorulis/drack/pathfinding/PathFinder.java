@@ -2,8 +2,10 @@ package com.skorulis.drack.pathfinding;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
+import com.skorulis.drack.building.Building;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 
@@ -12,25 +14,51 @@ public class PathFinder {
 	private MapSquare from;
 	private MapSquare to;
 	private Set<MapSquare> nearSquares;
-	private ArrayList<PathNodeInfo> openList;
-	private ArrayList<PathNodeInfo> closedList;
-	private GameMap map;
+	private final ArrayList<PathNodeInfo> openList;
+	private final ArrayList<PathNodeInfo> closedList;
+	private final GameMap map;
 	
 	public PathFinder(GameMap map, MapSquare from, MapSquare to) {
 		this(map,from,to,null);
 	}
 	
 	public PathFinder(GameMap map, MapSquare from, MapSquare to, Set<MapSquare> nearSquares) {
+		this(map);
+		this.to = to;
+		this.nearSquares = nearSquares;	
+	}
+	
+	public PathFinder(GameMap map) {
+		this.map = map;
+		openList = new ArrayList<PathNodeInfo>();
+		closedList = new ArrayList<PathNodeInfo>();	
+	}
+	
+	public MapPath navigate(MapSquare from, Building to) {
+		this.from = from;
+		
+		Set<MapSquare> squares = to.coveredSquares();
+		this.to = squares.iterator().next();
+		this.nearSquares = map.squaresAround(to);
+		
+		return generatePath();
+	}
+	
+	public MapPath navigate(MapSquare from, MapSquare to) {
 		this.from = from;
 		this.to = to;
-		this.map = map;
-		this.nearSquares = nearSquares;
-		openList = new ArrayList<PathNodeInfo>();
-		closedList = new ArrayList<PathNodeInfo>();
+		if(to.anyBuilding() != null) {
+			nearSquares = map.adjacentSquares(to);
+		} else {
+			this.nearSquares = new HashSet<MapSquare>();
+		}
 		
+		return generatePath();
 	}
 	
 	public MapPath generatePath() {
+		openList.clear();
+		closedList.clear();
 		PathNodeInfo pni = new PathNodeInfo(from);
 		if(isAtEnd(pni)) {
 			return null;

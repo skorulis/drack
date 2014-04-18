@@ -14,6 +14,7 @@ import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
+import com.skorulis.scene.UpdateInfo;
 
 public class Unit implements SceneNode {
 
@@ -64,12 +65,14 @@ public class Unit implements SceneNode {
 		ri.batch.render(instance,ri.environment);
 	}
 	
-	public void update(float delta) {
+	public void update(UpdateInfo info) {
 		UnitAction action = currentAction();
 		if(action != null) {
-			action.update(delta);
+			action.update(info.delta);
 			if(action.finished()) {
 				actions.remove(0);
+				ArrayList<UnitAction> actions = action.followingActions(info);
+				actions.addAll(0, actions);
 			}
 		}
 	}

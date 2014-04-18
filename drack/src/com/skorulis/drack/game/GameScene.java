@@ -1,6 +1,7 @@
 package com.skorulis.drack.game;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
@@ -17,6 +18,7 @@ import com.skorulis.drack.unit.UnitDelegate;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
+import com.skorulis.scene.UpdateInfo;
 
 public class GameScene implements SceneNode, Disposable, UnitDelegate {
 
@@ -59,12 +61,12 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		}
 	}
 	
-	public void update(float delta) {
+	public void update(UpdateInfo info) {
 		for(Unit unit : units) {
-			unit.update(delta);
+			unit.update(info);
 		}
 		if(placingBuilding != null) {
-			placingBuilding.update(delta);
+			placingBuilding.update(info);
 		}
 	}
 	

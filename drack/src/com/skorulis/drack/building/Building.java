@@ -13,6 +13,7 @@ import com.skorulis.drack.player.Player;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
+import com.skorulis.scene.UpdateInfo;
 
 public class Building implements SceneNode{
 
@@ -54,7 +55,7 @@ public class Building implements SceneNode{
 	}
 
 	@Override
-	public void update(float delta) {
+	public void update(UpdateInfo info) {
 		
 	}
 	

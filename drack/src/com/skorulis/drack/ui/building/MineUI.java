@@ -52,13 +52,10 @@ public class MineUI extends BuildingUI {
 	public void assignClicked() {
 		Unit unit = this.ui.logic().player().freeUnit();
 		if(unit != null) {
-			Set<MapSquare> squares = mine().coveredSquares();
-			MapSquare dest = squares.iterator().next();
 			MapSquare from = ui.logic().map().squareAt(unit.currentPosition());
-			Set<MapSquare> near = ui.logic().map().squaresAround(mine());
 			
-			PathFinder finder = new PathFinder(ui.logic().map(), from, dest, near);
-			MapPath path = finder.generatePath();
+			PathFinder finder = new PathFinder(ui.logic().map());
+			MapPath path = finder.navigate(from, building);
 			unit.setPath(path);
 			
 			MineAction action = new MineAction(unit, mine());

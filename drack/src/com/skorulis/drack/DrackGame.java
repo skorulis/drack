@@ -24,6 +24,7 @@ import com.skorulis.drack.ui.StyleManager;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
+import com.skorulis.scene.UpdateInfo;
 
 public class DrackGame implements ApplicationListener, GameDelegate {
 	
@@ -39,7 +40,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
     private GameScene scene;
     private UIManager ui;
     private TextureGenerator textureGen;
-    private Effect2DLayer info;
+    private Effect2DLayer effects2D;
     private StyleManager styleManager;
     private GameLogic logic;
 	
@@ -68,12 +69,12 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         loading = false;
         styleManager = new StyleManager();
         Player player = new Player();
-        info = new Effect2DLayer(styleManager.defaultSkin(),isoCam);
+        effects2D = new Effect2DLayer(styleManager.defaultSkin(),isoCam);
         
         assets.addAllModels(def.buildModels(assets));
         MapGenerator mapGen = new MapGenerator(50, 50, assets, def, player);
         
-        SceneGenerator sceneGen = new SceneGenerator(mapGen, info, player);
+        SceneGenerator sceneGen = new SceneGenerator(mapGen, effects2D, player);
         
         scene = sceneGen.scene();
         isoCam.setTracking(player.controllUnit());
@@ -124,7 +125,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         scene.render(ri);
         modelBatch.end();
         
-        info.stage().draw();
+        effects2D.stage().draw();
         
         ui.stage().draw();
         
@@ -132,12 +133,13 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	}
 	
 	private void update() {
-		float delta = Gdx.graphics.getDeltaTime();
+		UpdateInfo info = new UpdateInfo();
+		info.delta = Gdx.graphics.getDeltaTime(); 
 		
-		isoCam.update(delta);
-		scene.update(delta);
-		ui.update(delta);
-		info.update(delta);
+		isoCam.update(info.delta);
+		scene.update(info);
+		ui.update(info.delta);
+		this.effects2D.update(info.delta);
 	}
 
 	@Override

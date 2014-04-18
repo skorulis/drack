@@ -28,15 +28,9 @@ public class GameLogic {
 			if(sq == current) {
 				return;
 			}
-			Set<MapSquare> near = null;
-			if(sq.isPassable()) {
-				
-			} else if(sq.anyBuilding() != null) {
-				near = map().adjacentSquares(sq);
-			}
 			
-			PathFinder finder = new PathFinder(map(), current, sq, near);
-			MapPath path = finder.generatePath();
+			PathFinder finder = new PathFinder(map());
+			MapPath path = finder.navigate(current, sq);
 			player.controllUnit().setPath(path);
 			this.delegate.playerMoved();
 			

@@ -2,6 +2,7 @@ package com.skorulis.drack.map;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Plane;
@@ -12,6 +13,7 @@ import com.skorulis.drack.building.Building;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
+import com.skorulis.scene.UpdateInfo;
 
 public class GameMap implements SceneNode, Disposable{
 
@@ -86,7 +88,7 @@ public class GameMap implements SceneNode, Disposable{
 		}
 	}
 	
-	public void update(float delta) {
+	public void update(UpdateInfo info) {
 		
 	}
 	

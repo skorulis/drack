@@ -1,6 +1,10 @@
 package com.skorulis.drack.unit;
 
+import java.util.ArrayList;
+
+import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.Mine;
+import com.skorulis.scene.UpdateInfo;
 
 public class MineAction extends UnitAction {
 
@@ -18,8 +22,8 @@ public class MineAction extends UnitAction {
 	public void update(float delta) {
 		time += delta;
 		if(time > chunkSize) {
-			avatar.addResources(mine.mine(chunkSize));
-			if(avatar.resources().full()) {
+			unit.addResources(mine.mine(chunkSize));
+			if(unit.resources().full()) {
 				finished = true;
 			}
 			time -= chunkSize;
@@ -32,6 +36,15 @@ public class MineAction extends UnitAction {
 	
 	public boolean shouldReplace() {
 		return false;
+	}
+	
+	public ArrayList<UnitAction> followingActions(UpdateInfo info) {
+		Building b = unit.owner().findBuilding("command", unit.currentPosition());
+		
+		
+		
+		System.out.println("Found building " + b);
+		return new ArrayList<UnitAction>();
 	}
 	
 }

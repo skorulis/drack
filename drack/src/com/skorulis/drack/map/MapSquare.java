@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.building.Building;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
+import com.skorulis.scene.UpdateInfo;
 
 public class MapSquare implements SceneNode {
 
@@ -70,7 +71,8 @@ public class MapSquare implements SceneNode {
 		}
 	}
 	
-	public void update(float delta) {
+	@Override
+	public void update(UpdateInfo info) {
 		
 	}
 

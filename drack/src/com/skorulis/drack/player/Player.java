@@ -3,22 +3,32 @@ package com.skorulis.drack.player;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.badlogic.gdx.math.Vector3;
+import com.skorulis.drack.building.Building;
 import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.unit.Unit;
+import com.skorulis.scene.SceneHelper;
 
 public class Player {
 
 	private ResourceBatch resources;
 	private Unit controllingUnit;
 	private Set<Unit> ownedUnits;
+	private Set<Building> ownedBuildings;
 	
 	public Player() {
 		resources = new ResourceBatch();
 		ownedUnits = new HashSet<Unit>();
+		ownedBuildings = new HashSet<Building>();
 	}
 	
 	public void addUnit(Unit unit) {
 		this.ownedUnits.add(unit);
+	}
+	
+	public void addBuilding(Building building) {
+		ownedBuildings.add(building);
+		building.setOwner(this);
 	}
 	
 	public Unit controllUnit() {
@@ -44,6 +54,20 @@ public class Player {
 			}
 		}
 		return null;
+	}
+	
+	public Building findBuilding(String name, Vector3 near) {
+		Building best = null;
+		float bestDist = Float.MAX_VALUE;
+		for(Building b: ownedBuildings) {
+			if(b.def().name().equals(name)) {
+				float dist = SceneHelper.dist(b, near);
+				if(dist < bestDist) {
+					best = b;
+				}
+			}
+		}
+		return best;
 	}
 	
 	

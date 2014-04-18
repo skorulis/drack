@@ -10,7 +10,7 @@ public interface SceneNode {
 	public Matrix4 relTransform();
 	public void render(RenderInfo ri);
 	public SceneNode intersect(Ray ray, Vector3 point);
-	public void update(float delta);
+	public void update(UpdateInfo delta);
 	
 }
 

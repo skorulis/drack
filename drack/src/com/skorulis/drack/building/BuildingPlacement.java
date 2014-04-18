@@ -12,6 +12,7 @@ import com.skorulis.drack.map.MapSquare;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
+import com.skorulis.scene.UpdateInfo;
 
 public class BuildingPlacement implements SceneNode{
 	
@@ -49,7 +50,7 @@ public class BuildingPlacement implements SceneNode{
 		return null;
 	}
 	@Override
-	public void update(float delta) {
+	public void update(UpdateInfo info) {
 		
 	}
 	

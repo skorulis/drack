@@ -20,7 +20,7 @@ public class MapGenerator {
 		map = new GameMap(width, depth, assets);
 		
 		CommandCentre b = (CommandCentre) addBuilding("command", 5, 5);
-		b.setOwner(player);
+		player.addBuilding(b);
 		b.generateField(b.fieldSize(), map);
 		
 		addBuilding("tree", 2, 5);
@@ -28,7 +28,7 @@ public class MapGenerator {
 		addBuilding("tree", 8, 15);
 		
 		Barracks barracks = (Barracks) addBuilding("barracks", 8, 8);
-		barracks.setOwner(player);
+		player.addBuilding(barracks);
 		
 		Mine mine = (Mine) addBuilding("mine", 11, 3);
 		mine.addResource(def.getResource("iron"), 1);
