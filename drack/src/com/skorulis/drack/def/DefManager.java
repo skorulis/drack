@@ -41,10 +41,13 @@ public class DefManager {
 	private void createUnits() {
 		UnitDef def = new UnitDef("avatar");
 		def.modelName = "craft1";
+		def.speed = 20;
 		addDef(def);
 		
 		def = new UnitDef("truck");
 		def.modelName = "truck";
+		def.resourceCapacity = 5;
+		def.speed = 5;
 		addDef(def);
 	}
 	

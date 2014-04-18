@@ -20,15 +20,17 @@ public class Unit implements SceneNode {
 	private ModelInstance instance;
 	private ArrayList<UnitAction> actions;
 	
-	private float speed = 10;
 	private ResourceBatch resources;
 	private UnitDelegate delegate;
 	private Player owner;
+	private UnitDef def;
 	
 	public Unit(SKAssetManager assets, Player owner, UnitDef def) {
 		instance = new ModelInstance(assets.getModel(def.modelName));
 		resources = new ResourceBatch();
+		resources.setMaxQuantity(def.resourceCapacity);
 		this.owner = owner;
+		this.def = def;
 		
 		this.owner.addUnit(this);
 		this.actions = new ArrayList<UnitAction>();
@@ -101,7 +103,7 @@ public class Unit implements SceneNode {
 	}
 	
 	public void addResources(ResourceBatch batch) {
-		this.resources.add(batch);
+		this.resources.add(batch); 
 		ArrayList<ResourceQuantity> all = batch.allResources();
 		for(ResourceQuantity rq : all) {
 			this.delegate.resourceAdded(this,rq);
@@ -113,7 +115,7 @@ public class Unit implements SceneNode {
 	}
 	
 	public float speed() {
-		return speed;
+		return def.speed;
 	}
 	
 	public Player owner() {
