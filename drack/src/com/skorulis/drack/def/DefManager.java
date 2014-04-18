@@ -26,17 +26,35 @@ import com.skorulis.drack.ui.building.MineUI;
 
 public class DefManager {
 
+	private Map<Class<? extends BaseDef>, Map<String, ? extends BaseDef>> typeMapping;
 	private Map<String, BuildingDef> buildings;
 	private Map<String, ResourceDef> resources;
+	private Map<String, HullDef> hulls;
 	private Map<String, UnitDef> units;
+	private Map<String, CompositeUnitDef> compositeUnits;
 	
 	public DefManager() {
 		buildings = new HashMap<String, BuildingDef>();
 		resources = new HashMap<String, ResourceDef>();
 		units = new HashMap<String, UnitDef>();
+		compositeUnits = new HashMap<String, CompositeUnitDef>();
+		hulls = new HashMap<String, HullDef>();
+		
+		typeMapping = new HashMap<Class<? extends BaseDef>, Map<String,? extends BaseDef>>();
+		typeMapping.put(BuildingDef.class, buildings);
+		typeMapping.put(ResourceDef.class, resources);
+		typeMapping.put(UnitDef.class, units);
+		typeMapping.put(HullDef.class, hulls);
+		typeMapping.put(CompositeUnitDef.class, compositeUnits);
+		
 		createResources();
 		createBuildings();
 		createUnits();
+		createCompositeUnits();
+	}
+	
+	private void createCompositeUnits() {
+		
 	}
 	
 	private void createUnits() {
@@ -178,26 +196,29 @@ public class DefManager {
 	}
 	
 	public BuildingDef getBuilding(String name) {
-		BuildingDef def = buildings.get(name);
-		if(def == null) {
-			throw new IllegalArgumentException("No building named " + name);
-		}
-		return def;
+		return get(name,BuildingDef.class);
 	}
 	
 	public ResourceDef getResource(String name) {
-		ResourceDef def = resources.get(name);
-		if(def == null) {
-			throw new IllegalArgumentException("No resource named " + name);
-		}
-		return def;
+		return get(name,ResourceDef.class);
 	}
 	
 	public UnitDef getUnit(String name) {
-		UnitDef def = units.get(name);
+		return get(name,UnitDef.class);
+	}
+	
+	public CompositeUnitDef getCompositeUnit(String name) {
+		return get(name,CompositeUnitDef.class);
+	}
+	
+	public <T extends BaseDef> T get(String name, Class<T> type) {
+		HashMap<String, T> map = (HashMap<String, T>) typeMapping.get(type);
+		
+		T def = map.get(name);
 		if(def == null) {
-			throw new IllegalArgumentException("No unit named " + name);
+			throw new IllegalArgumentException("No " + type + " named " + name);
 		}
+		
 		return def;
 	}
 	

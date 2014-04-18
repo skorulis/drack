@@ -1,10 +1,12 @@
-package com.skorulis.drack.unit;
+package com.skorulis.drack.unit.action;
 
 import java.util.ArrayList;
+
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
+import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.UpdateInfo;
 
 public class MineAction extends UnitAction {
