@@ -71,8 +71,10 @@ public class Unit implements SceneNode {
 			action.update(info.delta);
 			if(action.finished()) {
 				actions.remove(0);
-				ArrayList<UnitAction> actions = action.followingActions(info);
-				actions.addAll(0, actions);
+				ArrayList<UnitAction> following = action.followingActions(info);
+				if(following != null) {
+					actions.addAll(0, following);
+				}
 			}
 		}
 	}

@@ -12,9 +12,8 @@ public class ResourceBatch {
 	
 	public ResourceBatch() {
 		resources = new HashMap<String, ResourceQuantity>();
-		count = 0;
-		totalQuantity = 0;
 		maxQuantity = 0;
+		clear();
 	}
 	
 	public ResourceBatch(ResourceQuantity rq) {
@@ -65,6 +64,12 @@ public class ResourceBatch {
 	
 	public ArrayList<ResourceQuantity> allResources() {
 		return new ArrayList<ResourceQuantity>(resources.values());
+	}
+	
+	public void clear() {
+		this.resources.clear();
+		count = 0;
+		totalQuantity = 0;
 	}
 	
 	public int totalQuantity() {

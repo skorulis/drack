@@ -43,4 +43,8 @@ public class MapPath {
 		return nodes.size();
 	}
 	
+	public MapSquare finalSquare() {
+		return nodes.get(nodes.size() - 1).square;
+	}
+	
 }

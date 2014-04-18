@@ -1,7 +1,5 @@
 package com.skorulis.drack.ui.building;
 
-import java.util.Set;
-
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
