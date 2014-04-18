@@ -50,6 +50,12 @@ public class DefManager {
 		def.resourceCapacity = 5;
 		def.speed = 5;
 		addDef(def);
+		
+		def = new UnitDef("enemy");
+		def.modelName = "cube_experiment";
+		def.resourceCapacity = 5;
+		def.speed = 5;
+		addDef(def);
 	}
 	
 	private void createBuildings() {
