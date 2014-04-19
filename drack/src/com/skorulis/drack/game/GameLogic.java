@@ -5,7 +5,7 @@ import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
 import com.skorulis.drack.player.Player;
-import com.skorulis.drack.unit.UnitEditor;
+import com.skorulis.drack.unit.editor.UnitEditor;
 import com.skorulis.scene.SceneNode;
 
 public class GameLogic {

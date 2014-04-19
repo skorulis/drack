@@ -86,6 +86,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         ui = new UIManager(assets,logic,def,isoCam,styleManager);
         
         inputPlexer = new InputMultiplexer(ui.stage(), new GestureDetector(eventListener));
+        inputPlexer.addProcessor(logic.unitEditor().gestureDetector());
         Gdx.input.setInputProcessor(inputPlexer);
         
         textureGen = new TextureGenerator(assets, def);

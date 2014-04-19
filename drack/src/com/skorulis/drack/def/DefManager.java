@@ -5,14 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.VertexAttributes.Usage;
-import com.badlogic.gdx.graphics.g3d.Material;
-import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
-import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.skorulis.drack.building.Barracks;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.CommandCentre;
@@ -56,7 +48,10 @@ public class DefManager {
 	}
 	
 	private void createHulls() {
+		HullDef hull = new HullDef("cube");
+		hull.modelName = "cube_drone";
 		
+		addDef(hull);
 	}
 	
 	private void createCompositeUnits() {
@@ -171,17 +166,13 @@ public class DefManager {
 		addDef(resource);
 	}
 	
-	private void addDef(BaseDef def) {
-		if(def instanceof BuildingDef) {
-			buildings.put(def.name(), (BuildingDef)def);
-		} else if(def instanceof ResourceDef) {
-			resources.put(def.name(), (ResourceDef)def);
-		} else if(def instanceof UnitDef) {
-			units.put(def.name(), (UnitDef)def);
-		}
-		else {
+	private <T extends BaseDef> void addDef(T def) {
+		@SuppressWarnings("unchecked")
+		Map<String, T> map = (Map<String, T>) typeMapping.get(def.getClass());
+		if(map == null) {
 			throw new IllegalArgumentException("Don't know where to put " + def);
 		}
+		map.put(def.name(), def);
 	}
 
 	public BuildingDef getBuilding(String name) {
@@ -201,6 +192,7 @@ public class DefManager {
 	}
 	
 	public <T extends BaseDef> T get(String name, Class<T> type) {
+		@SuppressWarnings("unchecked")
 		HashMap<String, T> map = (HashMap<String, T>) typeMapping.get(type);
 		
 		T def = map.get(name);
@@ -230,6 +222,10 @@ public class DefManager {
 			models.add(d.modelName);
 		}
 		for(UnitDef d : units.values()) {
+			models.add(d.modelName);
+		}
+		
+		for(HullDef d : hulls.values()) {
 			models.add(d.modelName);
 		}
 		
