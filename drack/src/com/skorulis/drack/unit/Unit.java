@@ -29,9 +29,9 @@ public class Unit implements SceneNode {
 	private UnitDef def;
 	
 	public Unit(SKAssetManager assets, Player owner, UnitDef def) {
-		instance = new ModelInstance(assets.getModel(def.modelName));
+		instance = new ModelInstance(assets.getModel(def.modelName()));
 		resources = new ResourceBatch();
-		resources.setMaxQuantity(def.resourceCapacity);
+		resources.setMaxQuantity(def.resourceCapacity());
 		this.owner = owner;
 		this.def = def;
 		
@@ -122,7 +122,7 @@ public class Unit implements SceneNode {
 	}
 	
 	public float speed() {
-		return def.speed;
+		return def.speed();
 	}
 	
 	public Player owner() {

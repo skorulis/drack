@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector;
+import com.skorulis.drack.def.DefManager;
 import com.skorulis.gdx.SKAssetManager;
 
 public class UnitEditor {
@@ -19,7 +20,7 @@ public class UnitEditor {
 	private UnitGestureListener ugl;
 	private GestureDetector gestureDetector;
 	
-	public UnitEditor(SKAssetManager assets) {
+	public UnitEditor(SKAssetManager assets, DefManager def) {
 		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.position.set(2f, 2f, 2f);
         cam.lookAt(0,0,0);

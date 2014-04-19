@@ -19,7 +19,7 @@ public class GameLogic {
 		this.scene = scene;
 		this.delegate = delegate;
 		this.player = player;
-		this.unitEditor = new UnitEditor(scene.assets());
+		this.unitEditor = new UnitEditor(scene.assets(),scene.def());
 	}
 	
 	public void nodeSelected(SceneNode node) {

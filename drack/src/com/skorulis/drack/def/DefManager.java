@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
 import com.skorulis.drack.building.Barracks;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.CommandCentre;
@@ -13,6 +14,7 @@ import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.building.Tower;
 import com.skorulis.drack.building.Tree;
 import com.skorulis.drack.building.Vault;
+import com.skorulis.drack.def.unit.CompositeUnitDef;
 import com.skorulis.drack.ui.building.BarracksUI;
 import com.skorulis.drack.ui.building.MineUI;
 
@@ -60,20 +62,20 @@ public class DefManager {
 	
 	private void createUnits() {
 		UnitDef def = new UnitDef("avatar");
-		def.modelName = "craft1";
-		def.speed = 10;
+		def.setModelName("craft1");
+		def.setSpeed(10);
 		addDef(def);
 		
 		def = new UnitDef("truck");
-		def.modelName = "truck";
-		def.resourceCapacity = 5;
-		def.speed = 5;
+		def.setModelName("truck");
+		def.setResourceCapacity(5);
+		def.setSpeed(5);
 		addDef(def);
 		
 		def = new UnitDef("enemy");
-		def.modelName = "cube_experiment";
-		def.resourceCapacity = 5;
-		def.speed = 5;
+		def.setModelName("cube_experiment");
+		def.setResourceCapacity(5);
+		def.setSpeed(5);
 		addDef(def);
 	}
 	
@@ -222,7 +224,7 @@ public class DefManager {
 			models.add(d.modelName);
 		}
 		for(UnitDef d : units.values()) {
-			models.add(d.modelName);
+			models.add(d.modelName());
 		}
 		
 		for(HullDef d : hulls.values()) {
