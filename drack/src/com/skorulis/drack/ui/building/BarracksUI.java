@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.skorulis.drack.def.UnitDef;
+import com.skorulis.drack.def.unit.BasicUnitDef;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.drack.unit.Unit;
@@ -29,7 +29,7 @@ public class BarracksUI extends BuildingUI {
 	}
 	
 	private void hirePressed() {
-		UnitDef def = this.ui.def().getUnit("truck");
+		BasicUnitDef def = this.ui.def().getUnit("truck");
 		Unit u = new Unit(ui.assets(), ui.logic().player(),def);
 		Set<MapSquare> squares = this.ui.game().map().squaresAround(this.building);
 		

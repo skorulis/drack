@@ -1,12 +1,11 @@
 package com.skorulis.drack.unit;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
-import com.skorulis.drack.def.UnitDef;
+import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.resource.ResourceBatch;

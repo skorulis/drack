@@ -15,6 +15,8 @@ import com.skorulis.drack.building.Tower;
 import com.skorulis.drack.building.Tree;
 import com.skorulis.drack.building.Vault;
 import com.skorulis.drack.def.unit.CompositeUnitDef;
+import com.skorulis.drack.def.unit.HullDef;
+import com.skorulis.drack.def.unit.BasicUnitDef;
 import com.skorulis.drack.ui.building.BarracksUI;
 import com.skorulis.drack.ui.building.MineUI;
 
@@ -24,20 +26,20 @@ public class DefManager {
 	private Map<String, BuildingDef> buildings;
 	private Map<String, ResourceDef> resources;
 	private Map<String, HullDef> hulls;
-	private Map<String, UnitDef> units;
+	private Map<String, BasicUnitDef> units;
 	private Map<String, CompositeUnitDef> compositeUnits;
 	
 	public DefManager() {
 		buildings = new HashMap<String, BuildingDef>();
 		resources = new HashMap<String, ResourceDef>();
-		units = new HashMap<String, UnitDef>();
+		units = new HashMap<String, BasicUnitDef>();
 		compositeUnits = new HashMap<String, CompositeUnitDef>();
 		hulls = new HashMap<String, HullDef>();
 		
 		typeMapping = new HashMap<Class<? extends BaseDef>, Map<String,? extends BaseDef>>();
 		typeMapping.put(BuildingDef.class, buildings);
 		typeMapping.put(ResourceDef.class, resources);
-		typeMapping.put(UnitDef.class, units);
+		typeMapping.put(BasicUnitDef.class, units);
 		typeMapping.put(HullDef.class, hulls);
 		typeMapping.put(CompositeUnitDef.class, compositeUnits);
 		
@@ -61,18 +63,18 @@ public class DefManager {
 	}
 	
 	private void createUnits() {
-		UnitDef def = new UnitDef("avatar");
+		BasicUnitDef def = new BasicUnitDef("avatar");
 		def.setModelName("craft1");
 		def.setSpeed(10);
 		addDef(def);
 		
-		def = new UnitDef("truck");
+		def = new BasicUnitDef("truck");
 		def.setModelName("truck");
 		def.setResourceCapacity(5);
 		def.setSpeed(5);
 		addDef(def);
 		
-		def = new UnitDef("enemy");
+		def = new BasicUnitDef("enemy");
 		def.setModelName("cube_experiment");
 		def.setResourceCapacity(5);
 		def.setSpeed(5);
@@ -185,8 +187,8 @@ public class DefManager {
 		return get(name,ResourceDef.class);
 	}
 	
-	public UnitDef getUnit(String name) {
-		return get(name,UnitDef.class);
+	public BasicUnitDef getUnit(String name) {
+		return get(name,BasicUnitDef.class);
 	}
 	
 	public CompositeUnitDef getCompositeUnit(String name) {
@@ -223,7 +225,7 @@ public class DefManager {
 		for(BuildingDef d : buildings.values()) {
 			models.add(d.modelName);
 		}
-		for(UnitDef d : units.values()) {
+		for(BasicUnitDef d : units.values()) {
 			models.add(d.modelName());
 		}
 		

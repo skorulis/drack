@@ -1,8 +1,8 @@
-package com.skorulis.drack.def;
+package com.skorulis.drack.def.unit;
 
 import java.util.ArrayList;
 
-import com.skorulis.drack.def.unit.HullPointDef;
+import com.skorulis.drack.def.BaseDef;
 
 public class HullDef extends BaseDef {
 	

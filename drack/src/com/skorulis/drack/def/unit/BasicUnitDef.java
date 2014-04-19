@@ -1,12 +1,14 @@
-package com.skorulis.drack.def;
+package com.skorulis.drack.def.unit;
 
-public class UnitDef extends BaseDef {
+import com.skorulis.drack.def.BaseDef;
+
+public class BasicUnitDef extends BaseDef implements UnitDef {
 
 	private String modelName;
 	private float speed;
 	private int resourceCapacity;
 	
-	public UnitDef(String name) {
+	public BasicUnitDef(String name) {
 		super(name);
 	}
 	

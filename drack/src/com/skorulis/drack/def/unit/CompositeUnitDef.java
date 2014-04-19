@@ -1,9 +1,9 @@
 package com.skorulis.drack.def.unit;
 
-import com.skorulis.drack.def.HullDef;
-import com.skorulis.drack.def.UnitDef;
+import com.skorulis.drack.def.BaseDef;
 
-public class CompositeUnitDef extends UnitDef {
+
+public class CompositeUnitDef extends BaseDef implements UnitDef{
 
 	public HullDef hull;
 	
@@ -17,13 +17,22 @@ public class CompositeUnitDef extends UnitDef {
 		return copy;
 	}
 	
+	@Override
 	public String modelName() {
 		return hull.modelName;
 	}
 	
+	@Override
 	public float speed() {
 		return hull.baseSpeed;
 	}
+
+	@Override
+	public int resourceCapacity() {
+		return hull.baseCapacity;
+	}
+	
+	
 	
 	
 }

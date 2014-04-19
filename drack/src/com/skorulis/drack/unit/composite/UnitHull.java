@@ -1,6 +1,6 @@
 package com.skorulis.drack.unit.composite;
 
-import com.skorulis.drack.def.HullDef;
+import com.skorulis.drack.def.unit.HullDef;
 
 public class UnitHull {
 

@@ -1,6 +1,5 @@
 package com.skorulis.drack.unit.composite;
 
-import com.skorulis.drack.def.UnitDef;
 import com.skorulis.drack.def.unit.CompositeUnitDef;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.Unit;
