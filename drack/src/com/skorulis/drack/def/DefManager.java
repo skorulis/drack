@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.Barracks;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.CommandCentre;
@@ -17,6 +18,8 @@ import com.skorulis.drack.building.Vault;
 import com.skorulis.drack.def.unit.CompositeUnitDef;
 import com.skorulis.drack.def.unit.HullDef;
 import com.skorulis.drack.def.unit.BasicUnitDef;
+import com.skorulis.drack.def.unit.HullPointDef;
+import com.skorulis.drack.def.unit.HullPointDef.HullPointType;
 import com.skorulis.drack.ui.building.BarracksUI;
 import com.skorulis.drack.ui.building.MineUI;
 
@@ -55,6 +58,9 @@ public class DefManager {
 		hull.modelName = "cube_drone";
 		hull.baseSpeed =  5;
 		hull.baseCapacity = 5;
+		
+		hull.addPoint(new HullPointDef(new Vector3(0.497f,0.7f,0), new Vector3(1,0,0), HullPointType.SMALL));
+		hull.addPoint(new HullPointDef(new Vector3(-0.497f,0.7f,0), new Vector3(-1,0,0), HullPointType.SMALL));
 		
 		addDef(hull);
 	}

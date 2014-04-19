@@ -9,7 +9,10 @@ public class CompositeUnit extends Unit {
 
 	public CompositeUnit(SKAssetManager assets, Player owner, CompositeUnitDef def) {
 		super(assets, owner, def);
-		// TODO Auto-generated constructor stub
+	}
+	
+	public CompositeUnitDef compDef() {
+		return (CompositeUnitDef) this.def;
 	}
 	
 	

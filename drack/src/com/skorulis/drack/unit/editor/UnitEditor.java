@@ -1,5 +1,8 @@
 package com.skorulis.drack.unit.editor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
@@ -8,6 +11,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector;
 import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.def.unit.HullPointDef;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.composite.CompositeUnit;
 import com.skorulis.gdx.SKAssetManager;
@@ -22,6 +26,7 @@ public class UnitEditor {
 	private UnitGestureListener ugl;
 	private GestureDetector gestureDetector;
 	private Player player;
+	public Set<HullPointNode> pointNodes;
 	
 	public UnitEditor(SKAssetManager assets, DefManager def) {
 		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -32,6 +37,11 @@ public class UnitEditor {
         cam.update();
         player = new Player();
         unit = new CompositeUnit(assets, player, def.getCompositeUnit("base"));
+        
+        pointNodes = new HashSet<HullPointNode>();
+        for(HullPointDef hpd : unit.compDef().hull.points) {
+        	pointNodes.add(new HullPointNode(assets, hpd));
+        }
         
         modelBatch = new ModelBatch();
         
@@ -51,6 +61,9 @@ public class UnitEditor {
 		modelBatch.begin(cam);
 		RenderInfo ri = new RenderInfo(modelBatch, environment, cam);
 		unit.render(ri);
+		for(HullPointNode hpn : pointNodes) {
+			hpn.render(ri);
+		}
 		modelBatch.end();
 	}
 	

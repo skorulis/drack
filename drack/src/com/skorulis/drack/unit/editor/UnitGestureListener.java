@@ -3,6 +3,7 @@ package com.skorulis.drack.unit.editor;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.Ray;
 
 public class UnitGestureListener implements GestureListener {
 
@@ -20,7 +21,14 @@ public class UnitGestureListener implements GestureListener {
 
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
-		// TODO Auto-generated method stub
+		Ray ray = editor.cam().getPickRay(x, y);
+		for(HullPointNode hpn : editor.pointNodes) {
+			if(hpn.intersect(ray, new Vector3()) != null) {
+				hpn.setSelected(true);
+			} else {
+				hpn.setSelected(false);
+			}
+		}
 		return false;
 	}
 

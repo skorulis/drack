@@ -24,8 +24,8 @@ public class Unit implements SceneNode {
 	
 	private ResourceBatch resources;
 	private UnitDelegate delegate;
-	private Player owner;
-	private UnitDef def;
+	protected Player owner;
+	protected UnitDef def;
 	
 	public Unit(SKAssetManager assets, Player owner, UnitDef def) {
 		instance = new ModelInstance(assets.getModel(def.modelName()));

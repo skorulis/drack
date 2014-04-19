@@ -1,19 +1,24 @@
 package com.skorulis.drack.def.unit;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.skorulis.drack.def.BaseDef;
 
 public class HullDef extends BaseDef {
 	
 	public String modelName;
-	public ArrayList<HullPointDef> points;
+	public Set<HullPointDef> points;
 	public int baseCapacity;
 	public float baseSpeed;
 	
 	public HullDef(String name) {
 		super(name);
-		this.points = new ArrayList<HullPointDef>();
+		this.points = new HashSet<HullPointDef>();
+	}
+	
+	public void addPoint(HullPointDef point) {
+		this.points.add(point);
 	}
 
 }
