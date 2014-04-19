@@ -46,7 +46,6 @@ public class DefManager {
 		createResources();
 		createBuildings();
 		createUnits();
-		createCompositeUnits();
 		createHulls();
 		createCompositeUnits();
 	}
@@ -54,12 +53,16 @@ public class DefManager {
 	private void createHulls() {
 		HullDef hull = new HullDef("cube");
 		hull.modelName = "cube_drone";
+		hull.baseSpeed =  5;
+		hull.baseCapacity = 5;
 		
 		addDef(hull);
 	}
 	
 	private void createCompositeUnits() {
-		
+		CompositeUnitDef def = new CompositeUnitDef("base");
+		def.hull = getHull("cube");
+		addDef(def);
 	}
 	
 	private void createUnits() {
@@ -178,6 +181,10 @@ public class DefManager {
 		}
 		map.put(def.name(), def);
 	}
+	
+	public HullDef getHull(String name) {
+		return get(name,HullDef.class);
+	}
 
 	public BuildingDef getBuilding(String name) {
 		return get(name, BuildingDef.class);
@@ -201,6 +208,7 @@ public class DefManager {
 		
 		T def = map.get(name);
 		if(def == null) {
+			System.out.println("Map contains: " + map.keySet());
 			throw new IllegalArgumentException("No " + type + " named " + name);
 		}
 		
