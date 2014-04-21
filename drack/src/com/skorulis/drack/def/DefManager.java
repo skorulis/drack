@@ -16,6 +16,7 @@ import com.skorulis.drack.building.Tower;
 import com.skorulis.drack.building.Tree;
 import com.skorulis.drack.building.Vault;
 import com.skorulis.drack.def.unit.CompositeUnitDef;
+import com.skorulis.drack.def.unit.HullAttachmentDef;
 import com.skorulis.drack.def.unit.HullDef;
 import com.skorulis.drack.def.unit.BasicUnitDef;
 import com.skorulis.drack.def.unit.HullPointDef;
@@ -31,6 +32,7 @@ public class DefManager {
 	private Map<String, HullDef> hulls;
 	private Map<String, BasicUnitDef> units;
 	private Map<String, CompositeUnitDef> compositeUnits;
+	private Map<String, HullAttachmentDef> attachments;
 	
 	public DefManager() {
 		buildings = new HashMap<String, BuildingDef>();
@@ -38,6 +40,7 @@ public class DefManager {
 		units = new HashMap<String, BasicUnitDef>();
 		compositeUnits = new HashMap<String, CompositeUnitDef>();
 		hulls = new HashMap<String, HullDef>();
+		attachments = new HashMap<String, HullAttachmentDef>();
 		
 		typeMapping = new HashMap<Class<? extends BaseDef>, Map<String,? extends BaseDef>>();
 		typeMapping.put(BuildingDef.class, buildings);
@@ -45,12 +48,20 @@ public class DefManager {
 		typeMapping.put(BasicUnitDef.class, units);
 		typeMapping.put(HullDef.class, hulls);
 		typeMapping.put(CompositeUnitDef.class, compositeUnits);
+		typeMapping.put(HullAttachmentDef.class, attachments);
 		
+		createAttachments();
 		createResources();
 		createBuildings();
 		createUnits();
 		createHulls();
 		createCompositeUnits();
+	}
+	
+	private void createAttachments() {
+		HullAttachmentDef def = new HullAttachmentDef("gun");
+		def.modelName = "gun1";
+		addDef(def);
 	}
 	
 	private void createHulls() {
@@ -188,6 +199,10 @@ public class DefManager {
 		map.put(def.name(), def);
 	}
 	
+	public HullAttachmentDef getAttachment(String name) {
+		return get(name,HullAttachmentDef.class);
+	}
+	
 	public HullDef getHull(String name) {
 		return get(name,HullDef.class);
 	}
@@ -244,6 +259,10 @@ public class DefManager {
 		}
 		
 		for(HullDef d : hulls.values()) {
+			models.add(d.modelName);
+		}
+		
+		for(HullAttachmentDef d: attachments.values()) {
 			models.add(d.modelName);
 		}
 		

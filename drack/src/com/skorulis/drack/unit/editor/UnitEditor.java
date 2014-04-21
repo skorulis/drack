@@ -26,7 +26,9 @@ public class UnitEditor {
 	private UnitGestureListener ugl;
 	private GestureDetector gestureDetector;
 	private Player player;
+	private DefManager def;
 	public Set<HullPointNode> pointNodes;
+	private SKAssetManager assets;
 	
 	public UnitEditor(SKAssetManager assets, DefManager def) {
 		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -51,6 +53,8 @@ public class UnitEditor {
         
         ugl = new UnitGestureListener(this);
         gestureDetector = new GestureDetector(ugl);
+        this.assets = assets;
+        this.def = def;
 	}
 	
 	public void update() {
@@ -75,4 +79,15 @@ public class UnitEditor {
 		return gestureDetector;
 	}
 	
+	public CompositeUnit unit() {
+		return unit;
+	}
+	
+	public SKAssetManager assets() {
+		return assets;
+	}
+	
+	public DefManager def() {
+		return def;
+	}
 }

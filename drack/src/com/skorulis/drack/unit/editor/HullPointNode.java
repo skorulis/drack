@@ -17,6 +17,7 @@ public class HullPointNode implements SceneNode {
 
 	private HullPointDef def;
 	private ModelInstance instance;
+	private boolean hidden;
 	
 	public HullPointNode(SKAssetManager assets, HullPointDef def) {
 		this.def = def;
@@ -37,7 +38,9 @@ public class HullPointNode implements SceneNode {
 
 	@Override
 	public void render(RenderInfo ri) {
-		ri.batch.render(instance,ri.environment);
+		if(!hidden) {
+			ri.batch.render(instance,ri.environment);
+		}
 	}
 
 	@Override
@@ -59,7 +62,14 @@ public class HullPointNode implements SceneNode {
 		} else {
 			this.instance.materials.get(0).set(new ColorAttribute(ColorAttribute.Diffuse,Color.BLACK));
 		}
-		
+	}
+	
+	public HullPointDef def() {
+		return def;
+	}
+	
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
 	}
 	
 }
