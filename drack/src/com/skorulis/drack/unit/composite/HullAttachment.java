@@ -16,9 +16,11 @@ public class HullAttachment implements SceneNode{
 	private HullPointDef hardPoint;
 	private HullAttachmentDef def;
 	private ModelInstance modelInstance;
+	private Matrix4 offset;
 	
 	public void loadAssets(SKAssetManager assets) {
 		modelInstance = new ModelInstance(assets.getModel(def.modelName));
+		offset = new Matrix4();
 	}
 	
 	@Override
@@ -28,7 +30,7 @@ public class HullAttachment implements SceneNode{
 
 	@Override
 	public Matrix4 relTransform() {
-		return modelInstance.transform;
+		return offset;
 	}
 
 	@Override
@@ -46,15 +48,19 @@ public class HullAttachment implements SceneNode{
 		// TODO Auto-generated method stub
 	}
 	
+	public void updatePosition(SceneNode parent) {
+		this.modelInstance.transform = parent.absTransform().cpy().mul(offset);
+	}
+	
 	public void setDef(HullAttachmentDef def) {
 		this.def = def;
 	}
 	
 	public void setHullPoint(HullPointDef hpd) {
 		this.hardPoint = hpd;
-		if(this.modelInstance != null && hpd != null) {
-			this.modelInstance.transform.setTranslation(hpd.loc);
-			this.modelInstance.transform.rotate(def.forwardAxis, hpd.rotation);
+		if(hpd != null) {
+			this.offset.setTranslation(hpd.loc);
+			this.offset.rotate(def.forwardAxis, hpd.rotation);
 		}
 	}
 	

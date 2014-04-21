@@ -3,7 +3,6 @@ package com.skorulis.drack.def.unit;
 import com.skorulis.drack.def.BaseDef;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.Unit;
-import com.skorulis.drack.unit.composite.HullAttachment;
 import com.skorulis.gdx.SKAssetManager;
 
 public class BasicUnitDef extends BaseDef implements UnitDef {

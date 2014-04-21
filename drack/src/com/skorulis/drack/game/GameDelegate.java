@@ -6,5 +6,6 @@ public interface GameDelegate {
 
 	public void buildingSelected(Building building);
 	public void playerMoved();
+	public void showUnitEditor();
 	
 }

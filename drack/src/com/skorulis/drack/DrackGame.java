@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g3d.Environment;
-import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector;
@@ -31,7 +30,6 @@ import com.skorulis.scene.UpdateInfo;
 public class DrackGame implements ApplicationListener, GameDelegate {
 	
 	private IsoPerspectiveCamera isoCam;
-	private ModelBatch modelBatch;
 	private Environment environment;
 	private DefManager def;
 	private SKAssetManager assets;
@@ -48,7 +46,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	
 	@Override
 	public void create() {
-		modelBatch = new ModelBatch();
+		
 		def = new DefManager();
 		assets = new SKAssetManager();
 		loadAssets();
@@ -94,7 +92,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 
 	@Override
 	public void dispose() {
-		modelBatch.dispose();
+		logic.dispose();
 		assets.clear();
 	}
 
@@ -122,10 +120,10 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         
         isoCam.cam().update();
-        RenderInfo ri = new RenderInfo(modelBatch, environment, isoCam.cam());
-        modelBatch.begin(isoCam.cam());
+        RenderInfo ri = new RenderInfo(logic.batch(), environment, isoCam.cam());
+        logic.batch().begin(isoCam.cam());
         scene.render(ri);
-        modelBatch.end();
+        logic.batch().end();
         
         effects2D.stage().draw();
         
@@ -168,5 +166,9 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	
 	public void playerMoved() {
 		ui.clearBuildingUI();
+	}
+	
+	public void showUnitEditor() {
+		
 	}
 }

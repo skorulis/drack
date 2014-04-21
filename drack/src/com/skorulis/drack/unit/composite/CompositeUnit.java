@@ -4,10 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.skorulis.drack.def.unit.CompositeUnitDef;
+import com.skorulis.drack.def.unit.HullPointDef;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
+import com.skorulis.scene.UpdateInfo;
 
 public class CompositeUnit extends Unit {
 
@@ -37,6 +39,30 @@ public class CompositeUnit extends Unit {
 		attachments.add(att);
 	}
 	
+	public HullAttachment attachmentAt(HullPointDef hpd) {
+		for(HullAttachment att : attachments) {
+			if(att.hardPoint() == hpd) {
+				return att;
+			}
+		}
+		return null;
+	}
+	
+	public void update(UpdateInfo ui) {
+		super.update(ui);
+		for(HullAttachment att: attachments) {
+			att.updatePosition(this);
+		}
+	}
+	
+	public HullPointDef emptyPoint() {
+		for(HullPointDef hpd: compDef().hull.points) {
+			if(attachmentAt(hpd) == null) {
+				return hpd;
+			}
+		}
+		return null;
+	}
 
 
 }

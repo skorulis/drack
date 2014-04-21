@@ -19,8 +19,8 @@ public class TextureGenerator {
 
 	private IsoPerspectiveCamera isoCam;
 	private ModelBatch modelBatch;
-	private static int width = 100;
-	private static int height = 100;
+	private static int width = 96;
+	private static int height = 96;
 	private ArrayList<BuildingDef> buildings;
 	private SKAssetManager assets;
 	
@@ -33,9 +33,6 @@ public class TextureGenerator {
 	}
 	
 	public void render(Environment environment) {
-		BuildingDef bd = buildings.remove(0);
-		Building building = bd.create(assets);
-		
 		TransparentFrameBuffer frameBuffer = new TransparentFrameBuffer(Format.RGB888,width,height,true);
         frameBuffer.begin();
 		
@@ -46,12 +43,21 @@ public class TextureGenerator {
         RenderInfo ri = new RenderInfo(modelBatch, environment, isoCam.cam());
         
         modelBatch.begin(isoCam.cam());
-        building.render(ri);
+        
+        BuildingDef bd = buildings.remove(0);
+        renderBuilding(bd, ri);
+        
         modelBatch.end();
         frameBuffer.end();
         
         Texture t = frameBuffer.getColorBufferTexture();
-        assets.addAsset(bd.name() + "_icon", Texture.class, t);
+        assets.addAsset(bd.iconName(), Texture.class, t);
+	}
+	
+	private void renderBuilding(BuildingDef def, RenderInfo ri) {
+		Building building = def.create(assets);
+		building.absTransform().translate(0, -1, 0);
+        building.render(ri);
 	}
 	
 	public boolean finished() {

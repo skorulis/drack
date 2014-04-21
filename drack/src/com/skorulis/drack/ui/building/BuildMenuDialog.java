@@ -32,7 +32,7 @@ public class BuildMenuDialog extends ModalDialog {
 		horizGroup.space(10);
 		ArrayList<BuildingDef> buildings = ui.def().buildableBuildings();
 		for(final BuildingDef bd : buildings) {
-			Texture texture = ui.assets().get(bd.name() + "_icon", Texture.class);
+			Texture texture = ui.assets().get(bd.iconName(), Texture.class);
 			TextureRegion tr = new TextureRegion(texture);
 			tr.flip(false, true);
 			TextureRegionDrawable trd = new TextureRegionDrawable(tr);

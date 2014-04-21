@@ -53,4 +53,8 @@ public class BuildingDef extends BaseDef {
 		return isBuildable;
 	}
 	
+	public String iconName() {
+		return name() + "_building_icon";
+	}
+	
 }

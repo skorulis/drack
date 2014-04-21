@@ -1,6 +1,7 @@
 package com.skorulis.drack.def;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -22,6 +23,7 @@ import com.skorulis.drack.def.unit.BasicUnitDef;
 import com.skorulis.drack.def.unit.HullPointDef;
 import com.skorulis.drack.def.unit.HullPointDef.HullPointType;
 import com.skorulis.drack.ui.building.BarracksUI;
+import com.skorulis.drack.ui.building.CommandUI;
 import com.skorulis.drack.ui.building.MineUI;
 
 public class DefManager {
@@ -67,7 +69,7 @@ public class DefManager {
 	private void createHulls() {
 		HullDef hull = new HullDef("cube");
 		hull.modelName = "cube_drone";
-		hull.baseSpeed =  5;
+		hull.baseSpeed =  10;
 		hull.baseCapacity = 5;
 		
 		hull.addPoint(new HullPointDef(new Vector3(0.497f,0.7f,0), 90, HullPointType.SMALL));
@@ -104,6 +106,7 @@ public class DefManager {
 	private void createBuildings() {
 		BuildingDef def = new BuildingDef("command");
 		def.buildingClass = CommandCentre.class;
+		def.uiClass = CommandUI.class;
 		def.modelName = "cone";
 		def.isBuildable = true;
 		addDef(def);
@@ -285,6 +288,10 @@ public class DefManager {
 			}
 		}
 		return ret;
+	}
+	
+	public Collection<HullAttachmentDef> allAttachments() {
+		return attachments.values();
 	}
 	
 	
