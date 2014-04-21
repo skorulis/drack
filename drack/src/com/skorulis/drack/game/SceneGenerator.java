@@ -13,7 +13,7 @@ public class SceneGenerator {
 	public SceneGenerator(MapGenerator mapGen, Effect2DLayer effects2D, Player player) {
 		scene = new GameScene(mapGen.def(), mapGen.assets(), mapGen.map(), effects2D);
 		
-		Unit unit = new Unit(mapGen.assets(), player, mapGen.def().getUnit("avatar"));
+		Unit unit = mapGen.def().getCompositeUnit("base").create(mapGen.assets(), player);
 		unit.setDelegate(scene);
 		MapSquare sq = scene.map().squareAt(10, 10);
 		scene.addUnit(unit, sq);

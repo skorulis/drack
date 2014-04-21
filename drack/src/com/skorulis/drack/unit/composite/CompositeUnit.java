@@ -13,6 +13,10 @@ public class CompositeUnit extends Unit {
 
 	public Set<HullAttachment> attachments;
 	
+	public CompositeUnit() {
+		this.attachments = new HashSet<HullAttachment>();
+	}
+	
 	public CompositeUnit(SKAssetManager assets, Player owner, CompositeUnitDef def) {
 		super(assets, owner, def);
 		this.attachments = new HashSet<HullAttachment>();

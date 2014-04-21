@@ -70,8 +70,8 @@ public class DefManager {
 		hull.baseSpeed =  5;
 		hull.baseCapacity = 5;
 		
-		hull.addPoint(new HullPointDef(new Vector3(0.497f,0.7f,0), new Vector3(1,0,0), HullPointType.SMALL));
-		hull.addPoint(new HullPointDef(new Vector3(-0.497f,0.7f,0), new Vector3(-1,0,0), HullPointType.SMALL));
+		hull.addPoint(new HullPointDef(new Vector3(0.497f,0.7f,0), 90, HullPointType.SMALL));
+		hull.addPoint(new HullPointDef(new Vector3(-0.497f,0.7f,0), 270, HullPointType.SMALL));
 		
 		addDef(hull);
 	}

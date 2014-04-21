@@ -54,7 +54,12 @@ public class HullAttachment implements SceneNode{
 		this.hardPoint = hpd;
 		if(this.modelInstance != null && hpd != null) {
 			this.modelInstance.transform.setTranslation(hpd.loc);
+			this.modelInstance.transform.rotate(def.forwardAxis, hpd.rotation);
 		}
+	}
+	
+	public HullPointDef hardPoint() {
+		return hardPoint;
 	}
 	
 	

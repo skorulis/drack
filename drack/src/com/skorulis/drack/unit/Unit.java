@@ -27,15 +27,31 @@ public class Unit implements SceneNode {
 	protected Player owner;
 	protected UnitDef def;
 	
-	public Unit(SKAssetManager assets, Player owner, UnitDef def) {
-		instance = new ModelInstance(assets.getModel(def.modelName()));
+	public Unit() {
 		resources = new ResourceBatch();
-		resources.setMaxQuantity(def.resourceCapacity());
-		this.owner = owner;
-		this.def = def;
-		
-		this.owner.addUnit(this);
 		this.actions = new ArrayList<UnitAction>();
+	}
+	
+	public Unit(SKAssetManager assets, Player owner, UnitDef def) {
+		this();
+		
+		setDef(def);
+		setOwner(owner);
+		loadAssets(assets);
+	}
+	
+	public void loadAssets(SKAssetManager assets) { 
+		instance = new ModelInstance(assets.getModel(def.modelName()));
+	}
+	
+	public void setOwner(Player owner) {
+		this.owner = owner;
+		this.owner.addUnit(this);
+	}
+	
+	public void setDef(UnitDef def) {
+		this.def = def;
+		resources.setMaxQuantity(def.resourceCapacity());
 	}
 	
 	public void setPath(MapPath path) {

@@ -17,12 +17,12 @@ public class HullPointDef {
 	}
 	
 	public Vector3 loc;
-	public Vector3 normal;
+	public float rotation;
 	public HullPointType type;
 	
-	public HullPointDef(Vector3 loc, Vector3 normal, HullPointType type) {
+	public HullPointDef(Vector3 loc, float rotation, HullPointType type) {
 		this.loc = loc;
-		this.normal = normal;
+		this.rotation = rotation;
 		this.type = type;
 	}
 	

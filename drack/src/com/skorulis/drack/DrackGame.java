@@ -124,7 +124,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         isoCam.cam().update();
         RenderInfo ri = new RenderInfo(modelBatch, environment, isoCam.cam());
         modelBatch.begin(isoCam.cam());
-        //scene.render(ri);
+        scene.render(ri);
         modelBatch.end();
         
         effects2D.stage().draw();
@@ -132,7 +132,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         ui.stage().draw();
         
         update();
-        logic.unitEditor().draw();
+        //logic.unitEditor().draw();
 	}
 	
 	private void update() {
