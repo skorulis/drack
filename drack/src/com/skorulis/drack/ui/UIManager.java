@@ -20,14 +20,12 @@ public class UIManager {
 	private GameLogic logic;
 	private DefManager def;
 	private SKAssetManager assets;
-	private IsoPerspectiveCamera camera;
 	private BuildingUI buildingUI;
 	
-	public UIManager(SKAssetManager assets,GameLogic logic,DefManager def, IsoPerspectiveCamera camera, StyleManager style) {
+	public UIManager(SKAssetManager assets,GameLogic logic,DefManager def, StyleManager style) {
 		this.assets = assets;
 		this.logic = logic;
 		this.def = def;
-		this.camera = camera;
 		
 		this.style = new StyleManager();
 		stage = new Stage(new ScreenViewport());
@@ -73,7 +71,7 @@ public class UIManager {
 	}
 	
 	public IsoPerspectiveCamera camera() {
-		return camera;
+		return logic.isoCam();
 	}
 	
 	public void showBuildingUI(Building building) {

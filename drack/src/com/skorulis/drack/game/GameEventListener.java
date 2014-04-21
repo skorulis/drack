@@ -8,11 +8,10 @@ import com.skorulis.scene.SceneNode;
 
 public class GameEventListener implements GestureListener {
 
-	private IsoPerspectiveCamera camera;
 	private GameLogic logic;
 	
-	public GameEventListener(IsoPerspectiveCamera camera) {
-		this.camera = camera;
+	public GameEventListener() {
+
 	}
 	
 	@Override
@@ -23,7 +22,7 @@ public class GameEventListener implements GestureListener {
 
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
-		Ray ray = camera.cam().getPickRay(x, y);
+		Ray ray = logic.isoCam().cam().getPickRay(x, y);
 		SceneNode node = logic.scene().intersect(ray, new Vector3());
 		if(node != null) {
 			logic.nodeSelected(node);
@@ -51,8 +50,8 @@ public class GameEventListener implements GestureListener {
 				return false;
 			}
 			
-			Vector3 v1 = logic.map().groundIntersection(camera.cam().getPickRay(x-deltaX, y-deltaY));
-			Vector3 v2 = logic.map().groundIntersection(camera.cam().getPickRay(x, y));
+			Vector3 v1 = logic.map().groundIntersection(logic.isoCam().cam().getPickRay(x-deltaX, y-deltaY));
+			Vector3 v2 = logic.map().groundIntersection(logic.isoCam().cam().getPickRay(x, y));
 			
 			logic.scene().movePlacementBuilding(v2.x - v1.x, v2.z - v1.z);
 		}

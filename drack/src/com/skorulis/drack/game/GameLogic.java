@@ -20,7 +20,6 @@ public class GameLogic implements Disposable {
 	private GameDelegate delegate;
 	private Player player;
 	private UnitEditor unitEditor;
-	
 	private IsoPerspectiveCamera isoCam;
 	private ModelBatch modelBatch;
 	private Environment environment;
@@ -34,6 +33,7 @@ public class GameLogic implements Disposable {
 		modelBatch = new ModelBatch();
 		createEnvironment();
 		isoCam = new IsoPerspectiveCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),10);
+		isoCam.setTracking(player.controllUnit());
 	}
 	
 	private void createEnvironment() {
@@ -83,6 +83,10 @@ public class GameLogic implements Disposable {
 	
 	public ModelBatch batch() {
 		return modelBatch;
+	}
+	
+	public Environment environment() {
+		return environment;
 	}
 	
 	public void dispose() {

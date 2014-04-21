@@ -14,12 +14,11 @@ public class Effect2DLayer {
 
 	private final Stage stage;
 	private final Skin skin;
-	private final IsoPerspectiveCamera camera;
+	private IsoPerspectiveCamera camera;
 	private ArrayList<Effect2D> effects;
 	
-	public Effect2DLayer(Skin skin,IsoPerspectiveCamera camera) {
+	public Effect2DLayer(Skin skin) {
 		this.skin = skin;
-		this.camera = camera;
 		stage = new Stage(new ScreenViewport());
 		this.effects = new ArrayList<Effect2D>();
 	}
@@ -61,7 +60,10 @@ public class Effect2DLayer {
 		effect.actor().addAction(act);
 		
 		effect.setMovement(new Effect2DPopUpMovement(effect.life()));
-		
+	}
+	
+	public void setCam(IsoPerspectiveCamera cam) {
+		this.camera = cam;
 	}
 	
 }
