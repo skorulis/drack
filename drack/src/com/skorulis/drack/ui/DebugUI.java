@@ -9,13 +9,17 @@ public class DebugUI extends WidgetGroup {
 	private Label label;
 	
 	public DebugUI(StyleManager style) {
-		label = new Label("",style.gameSkin());
+		label = new Label("FPS",style.gameSkin());
 		this.addActor(label);
 	}
 	
 	public void act(float delta) {
 		super.act(delta);
 		label.setText("fps: " + Gdx.graphics.getFramesPerSecond());
+	}
+	
+	public void layout() {
+		label.setY(0);
 	}
 
 }

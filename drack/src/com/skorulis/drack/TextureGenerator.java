@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.BuildingDef;
 import com.skorulis.drack.def.DefManager;
@@ -33,7 +34,7 @@ public class TextureGenerator {
 	}
 	
 	public void render(Environment environment) {
-		TransparentFrameBuffer frameBuffer = new TransparentFrameBuffer(Format.RGB888,width,height,true);
+		FrameBuffer frameBuffer = new FrameBuffer(Format.RGBA8888,width,height,true);
         frameBuffer.begin();
 		
 		Gdx.gl.glViewport(0, 0, width, height);

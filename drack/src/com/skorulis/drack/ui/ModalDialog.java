@@ -1,10 +1,12 @@
 package com.skorulis.drack.ui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.skorulis.gdx.ui.LayoutHelper;
 
@@ -14,13 +16,13 @@ public class ModalDialog extends WidgetGroup {
 	protected WidgetGroup content;
 	protected LayoutHelper layoutHelper;
 	protected Image bgImage;
-	protected Image dimImage;
+	protected Button dimButton;
 	protected int padding = 10;
 	
 	public ModalDialog(Skin skin) {
 		bgImage = new Image(skin.getDrawable("off_white"));
-		dimImage = new Image(skin.getDrawable("shadow"));
-		addActor(dimImage);
+		dimButton = new Button(skin.get("dim", ButtonStyle.class));
+		addActor(dimButton);
 		addActor(bgImage);
 		
 		closeButton = new TextButton("X",skin);
@@ -33,7 +35,7 @@ public class ModalDialog extends WidgetGroup {
 				close();
 			}
 		});
-		dimImage.setFillParent(true);
+		dimButton.setFillParent(true);
 		this.setFillParent(true);
 	}
 	

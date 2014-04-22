@@ -1,9 +1,7 @@
 package com.skorulis.drack.ui.building;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.skorulis.drack.def.BuildingDef;
 import com.skorulis.drack.ui.ModalDialog;
 import com.skorulis.drack.ui.PlayerUI;
@@ -33,11 +30,8 @@ public class BuildMenuDialog extends ModalDialog {
 		ArrayList<BuildingDef> buildings = ui.def().buildableBuildings();
 		for(final BuildingDef bd : buildings) {
 			Texture texture = ui.assets().get(bd.iconName(), Texture.class);
-			TextureRegion tr = new TextureRegion(texture);
-			tr.flip(false, true);
-			TextureRegionDrawable trd = new TextureRegionDrawable(tr);
 			
-			ImageButton button = new ImageButton(trd);
+			ImageButton button = new ImageButton(ui.style().createImageStyle(texture,true));
 			horizGroup.addActor(button);
 			button.addListener(new ClickListener() {
 				public void clicked(InputEvent event, float x, float y) {
