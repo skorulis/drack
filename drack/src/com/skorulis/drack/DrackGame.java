@@ -9,7 +9,6 @@ import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.game.GameDelegate;
-import com.skorulis.drack.game.GameEventListener;
 import com.skorulis.drack.game.GameLogic;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.game.SceneGenerator;
@@ -27,7 +26,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	private boolean loading = true;
    
     private InputMultiplexer inputPlexer;
-    private GameEventListener eventListener;
+    
     private UIManager ui;
     private TextureGenerator textureGen;
     private Effect2DLayer effects2D;
@@ -39,9 +38,9 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	public void create() {
 		def = new DefManager();
 		assets = new SKAssetManager();
+		inputPlexer = new InputMultiplexer();
+		Gdx.input.setInputProcessor(inputPlexer);
 		loadAssets();
-		
-        eventListener = new GameEventListener();
 	}
 	
 	private void loadAssets() {
@@ -62,14 +61,11 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         GameScene scene = sceneGen.scene();
         
         logic = new GameLogic(scene, this, player);
-        eventListener.setLogic(logic);
         
         effects2D.setCam(logic.isoCam());
         ui = new UIManager(assets,logic,def,styleManager,this);
         
-        inputPlexer = new InputMultiplexer(ui.stage(), new GestureDetector(eventListener));
         updateInputProcessor();
-        Gdx.input.setInputProcessor(inputPlexer);
         
         textureGen = new TextureGenerator(assets, def);
     }
@@ -77,7 +73,9 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	private void updateInputProcessor() {
 		inputPlexer.clear();
 		inputPlexer.addProcessor(ui.stage());
-		inputPlexer.addProcessor(new GestureDetector(eventListener));
+		if(logic != null && subScene == null) {
+			inputPlexer.addProcessor(new GestureDetector(logic.gestureListener()));
+		}
 		if(subScene != null) {
 			inputPlexer.addProcessor(new GestureDetector(subScene.gestureListener()));
 		}

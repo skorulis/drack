@@ -26,6 +26,7 @@ public class GameLogic implements Disposable, SceneWindow {
 	private IsoPerspectiveCamera isoCam;
 	private ModelBatch modelBatch;
 	private Environment environment;
+	private GameEventListener eventListener;
 	
 	public GameLogic(GameScene scene, GameDelegate delegate, Player player) {
 		this.scene = scene;
@@ -35,6 +36,8 @@ public class GameLogic implements Disposable, SceneWindow {
 		createEnvironment();
 		isoCam = new IsoPerspectiveCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),10);
 		isoCam.setTracking(player.controllUnit());
+		
+		eventListener = new GameEventListener(this);
 	}
 	
 	private void createEnvironment() {
@@ -117,8 +120,7 @@ public class GameLogic implements Disposable, SceneWindow {
 
 	@Override
 	public GestureListener gestureListener() {
-		// TODO Auto-generated method stub
-		return null;
+		return eventListener;
 	}
 	
 }
