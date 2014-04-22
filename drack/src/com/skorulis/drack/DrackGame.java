@@ -18,6 +18,7 @@ import com.skorulis.drack.player.Player;
 import com.skorulis.drack.ui.StyleManager;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.SKAssetManager;
+import com.skorulis.scene.SceneWindow;
 
 public class DrackGame implements ApplicationListener, GameDelegate {
 	
@@ -32,7 +33,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
     private Effect2DLayer effects2D;
     private StyleManager styleManager;
     private GameLogic logic;
-    private boolean showingEditor;
+    private SceneWindow subScene;
 	
 	@Override
 	public void create() {
@@ -67,17 +68,25 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         ui = new UIManager(assets,logic,def,styleManager,this);
         
         inputPlexer = new InputMultiplexer(ui.stage(), new GestureDetector(eventListener));
-        inputPlexer.addProcessor(logic.unitEditor().gestureDetector());
+        updateInputProcessor();
         Gdx.input.setInputProcessor(inputPlexer);
         
         textureGen = new TextureGenerator(assets, def);
-        showUnitEditor();
     }
 
+	private void updateInputProcessor() {
+		inputPlexer.clear();
+		inputPlexer.addProcessor(ui.stage());
+		inputPlexer.addProcessor(new GestureDetector(eventListener));
+		if(subScene != null) {
+			inputPlexer.addProcessor(new GestureDetector(subScene.gestureListener()));
+		}
+	}
+	
 	@Override
 	public void dispose() {
 		logic.dispose();
-		assets.clear();
+		assets.dispose();
 	}
 
 	@Override
@@ -100,28 +109,29 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	private void renderMain() {
 		update();
 		
-		
         drawGame();
-        if(showingEditor) {
-        	logic.unitEditor().draw();
-        }
 	}
 	
 	private void drawGame() {
         logic.draw();
         
         effects2D.stage().draw();
-        
         ui.stage().draw();
+        
+        if(subScene != null) {
+        	subScene.draw();
+        }
 	}
 	
 	private void update() {
 		float delta = Gdx.graphics.getDeltaTime();
+		
 		logic.update(delta);
+		if(subScene != null) {
+			subScene.update(delta);
+		}
 		ui.update(delta);
 		this.effects2D.update(delta);
-		
-		logic.unitEditor().update();
 	}
 
 	@Override
@@ -152,7 +162,8 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 		ui.clearBuildingUI();
 	}
 	
-	public void showUnitEditor() {
-		showingEditor = true;
+	public void setSubScene(SceneWindow sw) {
+		this.subScene = sw;
+		updateInputProcessor();
 	}
 }

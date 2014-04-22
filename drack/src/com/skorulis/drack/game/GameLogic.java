@@ -13,7 +13,6 @@ import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
 import com.skorulis.drack.player.Player;
-import com.skorulis.drack.unit.editor.UnitEditor;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.SceneWindow;
@@ -24,7 +23,6 @@ public class GameLogic implements Disposable, SceneWindow {
 	private GameScene scene;
 	private GameDelegate delegate;
 	private Player player;
-	private UnitEditor unitEditor;
 	private IsoPerspectiveCamera isoCam;
 	private ModelBatch modelBatch;
 	private Environment environment;
@@ -33,8 +31,6 @@ public class GameLogic implements Disposable, SceneWindow {
 		this.scene = scene;
 		this.delegate = delegate;
 		this.player = player;
-		modelBatch = new ModelBatch();
-		this.unitEditor = new UnitEditor(scene.assets(),scene.def());
 		modelBatch = new ModelBatch();
 		createEnvironment();
 		isoCam = new IsoPerspectiveCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),10);
@@ -76,10 +72,6 @@ public class GameLogic implements Disposable, SceneWindow {
 	
 	public Player player() {
 		return player;
-	}
-	
-	public UnitEditor unitEditor() {
-		return unitEditor;
 	}
 	
 	public IsoPerspectiveCamera isoCam() {

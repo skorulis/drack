@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.skorulis.gdx.ui.LayoutHelper;
 
-public class ModalDialog extends WidgetGroup {
+public abstract class ModalDialog extends WidgetGroup {
 
 	protected TextButton closeButton;
 	protected WidgetGroup content;
@@ -18,8 +18,11 @@ public class ModalDialog extends WidgetGroup {
 	protected Image bgImage;
 	protected Button dimButton;
 	protected int padding = 10;
+	protected UIManager ui;
 	
-	public ModalDialog(Skin skin) {
+	public ModalDialog(UIManager ui) {
+		this.ui = ui;
+		Skin skin = ui.style().gameSkin();
 		bgImage = new Image(skin.getDrawable("off_white"));
 		dimButton = new Button(skin.get("dim", ButtonStyle.class));
 		addActor(dimButton);
@@ -49,7 +52,12 @@ public class ModalDialog extends WidgetGroup {
 	}
 	
 	public void close() {
+		willClose();
 		getParent().removeActor(this);
+	}
+	
+	public void willClose() {
+		
 	}
 	
 	public void setContent(WidgetGroup widget) {

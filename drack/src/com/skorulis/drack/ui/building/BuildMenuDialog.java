@@ -1,7 +1,6 @@
 package com.skorulis.drack.ui.building;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
@@ -23,7 +22,7 @@ public class BuildMenuDialog extends ModalDialog {
 	private UIManager ui;
 	
 	public BuildMenuDialog(final PlayerUI playerUI, Skin skin, UIManager ui) {
-		super(skin);
+		super(ui);
 		this.ui = ui;
 		horizGroup = new HorizontalGroup();
 		

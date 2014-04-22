@@ -9,24 +9,23 @@ public class EditorDialog extends ModalDialog {
 	private WidgetGroup mainContent;
 	private UnitEditor editor;
 	
+	
 	public EditorDialog(UIManager ui) {
-		super(ui.style().gameSkin());
+		super(ui);
 		
 		mainContent = new WidgetGroup();
 		this.setContent(mainContent);
 		
 		editor = new UnitEditor(ui.assets(), ui.def());
-		
+		ui.delegate().setSubScene(editor);
 	}
 	
 	public void act(float delta) {
 		super.act(delta);
-		editor.update();
 	}
 	
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-		editor.draw();
 	}
 	
 	public void layout() {
@@ -36,6 +35,10 @@ public class EditorDialog extends ModalDialog {
 	
 	public UnitEditor editor() {
 		return editor;
+	}
+	
+	public void willClose() {
+		ui.delegate().setSubScene(null);
 	}
 
 }

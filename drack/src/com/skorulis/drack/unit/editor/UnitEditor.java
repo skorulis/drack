@@ -2,7 +2,6 @@ package com.skorulis.drack.unit.editor;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
@@ -10,22 +9,22 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
-import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.unit.HullPointDef;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.composite.CompositeUnit;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
+import com.skorulis.scene.SceneWindow;
 
-public class UnitEditor {
+public class UnitEditor implements SceneWindow {
 	
 	private PerspectiveCamera cam;
 	private CompositeUnit unit;
 	private ModelBatch modelBatch;
 	private Environment environment;
 	private UnitGestureListener ugl;
-	private GestureDetector gestureDetector;
 	private Player player;
 	private DefManager def;
 	public Set<HullPointNode> pointNodes;
@@ -53,15 +52,10 @@ public class UnitEditor {
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
         
         ugl = new UnitGestureListener(this);
-        gestureDetector = new GestureDetector(ugl);
         this.assets = assets;
         this.def = def;
 	}
-	
-	public void update() {
-		cam.update();
-	}
-	
+
 	public void draw() {
 		Gdx.gl.glClear(GL20.GL_DEPTH_BUFFER_BIT);
 		modelBatch.begin(cam);
@@ -77,10 +71,6 @@ public class UnitEditor {
 		return cam;
 	}
 	
-	public GestureDetector gestureDetector() {
-		return gestureDetector;
-	}
-	
 	public CompositeUnit unit() {
 		return unit;
 	}
@@ -91,5 +81,21 @@ public class UnitEditor {
 	
 	public DefManager def() {
 		return def;
+	}
+
+	@Override
+	public void update(float delta) {
+		cam.update();
+	}
+
+	@Override
+	public void resized(int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public GestureListener gestureListener() {
+		return ugl;
 	}
 }
