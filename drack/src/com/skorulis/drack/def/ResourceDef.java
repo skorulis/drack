@@ -6,4 +6,8 @@ public class ResourceDef extends BaseDef {
 		super(name);
 	}
 	
+	public Class<? extends BaseDef> getTypeClass() {
+		return ResourceDef.class;
+	}
+	
 }

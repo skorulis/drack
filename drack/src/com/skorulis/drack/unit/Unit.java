@@ -1,9 +1,12 @@
 package com.skorulis.drack.unit;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.pathfinding.MapPath;
@@ -98,6 +101,10 @@ public class Unit implements SceneNode {
 
 	@Override
 	public SceneNode intersect(Ray ray, Vector3 point) {
+		Vector3 center = absTransform().getTranslation(new Vector3());
+		if(Intersector.intersectRaySphere(ray, center, 1, point)) {
+			return this;
+		}
 		return null;
 	}
 	

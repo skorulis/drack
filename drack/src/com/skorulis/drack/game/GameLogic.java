@@ -13,6 +13,7 @@ import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
 import com.skorulis.drack.player.Player;
+import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.SceneWindow;
@@ -62,6 +63,8 @@ public class GameLogic implements Disposable, SceneWindow {
 			if(sq.anyBuilding() != null) {
 				this.delegate.buildingSelected(sq.anyBuilding());
 			}
+		} else if(node instanceof Unit) {
+			System.out.println("UNIT");
 		}
 	}
 	

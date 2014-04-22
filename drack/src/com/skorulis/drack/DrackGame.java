@@ -83,7 +83,10 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	
 	@Override
 	public void dispose() {
-		logic.dispose();
+		if(logic != null) {
+			logic.dispose();
+		}
+		
 		assets.dispose();
 	}
 

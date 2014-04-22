@@ -20,5 +20,9 @@ public class HullDef extends BaseDef {
 	public void addPoint(HullPointDef point) {
 		this.points.add(point);
 	}
+	
+	public Class<? extends BaseDef> getTypeClass() {
+		return HullDef.class;
+	}
 
 }

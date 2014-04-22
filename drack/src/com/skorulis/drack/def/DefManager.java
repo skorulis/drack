@@ -21,6 +21,7 @@ import com.skorulis.drack.def.unit.HullAttachmentDef;
 import com.skorulis.drack.def.unit.HullDef;
 import com.skorulis.drack.def.unit.BasicUnitDef;
 import com.skorulis.drack.def.unit.HullPointDef;
+import com.skorulis.drack.def.unit.WeaponDef;
 import com.skorulis.drack.def.unit.HullPointDef.HullPointType;
 import com.skorulis.drack.ui.building.BarracksUI;
 import com.skorulis.drack.ui.building.CommandUI;
@@ -35,6 +36,7 @@ public class DefManager {
 	private Map<String, BasicUnitDef> units;
 	private Map<String, CompositeUnitDef> compositeUnits;
 	private Map<String, HullAttachmentDef> attachments;
+	private Map<String, WeaponDef> weapons;
 	
 	public DefManager() {
 		buildings = new HashMap<String, BuildingDef>();
@@ -43,6 +45,7 @@ public class DefManager {
 		compositeUnits = new HashMap<String, CompositeUnitDef>();
 		hulls = new HashMap<String, HullDef>();
 		attachments = new HashMap<String, HullAttachmentDef>();
+		weapons = new HashMap<String, WeaponDef>();
 		
 		typeMapping = new HashMap<Class<? extends BaseDef>, Map<String,? extends BaseDef>>();
 		typeMapping.put(BuildingDef.class, buildings);
@@ -51,8 +54,10 @@ public class DefManager {
 		typeMapping.put(HullDef.class, hulls);
 		typeMapping.put(CompositeUnitDef.class, compositeUnits);
 		typeMapping.put(HullAttachmentDef.class, attachments);
+		typeMapping.put(WeaponDef.class, weapons);
 		
 		createAttachments();
+		createWeapons();
 		createResources();
 		createBuildings();
 		createUnits();
@@ -60,10 +65,15 @@ public class DefManager {
 		createCompositeUnits();
 	}
 	
-	private void createAttachments() {
-		HullAttachmentDef def = new HullAttachmentDef("gun");
+	private void createWeapons() {
+		WeaponDef def = new WeaponDef("gun");
+		def.turretLoc = new Vector3(0,0,0.675f);
 		def.modelName = "gun1";
 		addDef(def);
+	}
+	
+	private void createAttachments() {
+		
 	}
 	
 	private void createHulls() {
@@ -206,6 +216,10 @@ public class DefManager {
 		return get(name,HullAttachmentDef.class);
 	}
 	
+	public WeaponDef getWeapon(String name) {
+		return get(name,WeaponDef.class);
+	}
+	
 	public HullDef getHull(String name) {
 		return get(name,HullDef.class);
 	}
@@ -266,6 +280,9 @@ public class DefManager {
 		}
 		
 		for(HullAttachmentDef d: attachments.values()) {
+			models.add(d.modelName);
+		}
+		for(WeaponDef d : weapons.values()) {
 			models.add(d.modelName);
 		}
 		

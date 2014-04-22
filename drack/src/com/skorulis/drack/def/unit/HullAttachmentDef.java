@@ -31,5 +31,9 @@ public class HullAttachmentDef extends BaseDef {
 		}
 		return null;
 	}
+	
+	public Class<? extends BaseDef> getTypeClass() {
+		return HullAttachmentDef.class;
+	}
 
 }

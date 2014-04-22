@@ -58,4 +58,8 @@ public class BasicUnitDef extends BaseDef implements UnitDef {
 		return Unit.class;
 	}
 	
+	public Class<? extends BaseDef> getTypeClass() {
+		return BasicUnitDef.class;
+	}
+	
 }

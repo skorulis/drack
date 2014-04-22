@@ -57,4 +57,8 @@ public class BuildingDef extends BaseDef {
 		return name() + "_building_icon";
 	}
 	
+	public Class<? extends BaseDef> getTypeClass() {
+		return BuildingDef.class;
+	}
+	
 }

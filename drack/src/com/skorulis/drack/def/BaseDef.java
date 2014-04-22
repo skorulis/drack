@@ -1,6 +1,6 @@
 package com.skorulis.drack.def;
 
-public class BaseDef {
+public abstract class BaseDef {
 
 	private final String name;
 	
@@ -11,5 +11,7 @@ public class BaseDef {
 	public String name() {
 		return name;
 	}
+	
+	public abstract Class<? extends BaseDef> getTypeClass();
 	
 }

@@ -15,7 +15,7 @@ public class SceneGenerator {
 		scene = new GameScene(mapGen.def(), mapGen.assets(), mapGen.map(), effects2D);
 		
 		CompositeUnit unit = (CompositeUnit) mapGen.def().getCompositeUnit("base").create(mapGen.assets(), player);
-		HullAttachment attachment = mapGen.def().getAttachment("gun").create(mapGen.assets(), unit.emptyPoint());
+		HullAttachment attachment = mapGen.def().getWeapon("gun").create(mapGen.assets(), unit.emptyPoint());
 		unit.addAttachment(attachment);
 		
 		unit.setDelegate(scene);

@@ -55,6 +55,10 @@ public class CompositeUnitDef extends BaseDef implements UnitDef{
 		return CompositeUnit.class;
 	}
 	
+	public Class<? extends BaseDef> getTypeClass() {
+		return CompositeUnitDef.class;
+	}
+	
 	
 	
 }

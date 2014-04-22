@@ -72,6 +72,12 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 	}
 	
 	public SceneNode intersect(Ray ray, Vector3 point) {
+		for(Unit unit : units) {
+			SceneNode n = unit.intersect(ray, point); 
+			if(n != null) {
+				return n;
+			}
+		}
 		return map.intersect(ray, point);
 	}
 

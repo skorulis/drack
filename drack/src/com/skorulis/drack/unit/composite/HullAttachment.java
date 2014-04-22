@@ -13,10 +13,10 @@ import com.skorulis.scene.UpdateInfo;
 
 public class HullAttachment implements SceneNode{
 
-	private HullPointDef hardPoint;
-	private HullAttachmentDef def;
-	private ModelInstance modelInstance;
-	private Matrix4 offset;
+	protected HullPointDef hardPoint;
+	protected HullAttachmentDef def;
+	protected ModelInstance modelInstance;
+	protected Matrix4 offset;
 	
 	public void loadAssets(SKAssetManager assets) {
 		modelInstance = new ModelInstance(assets.getModel(def.modelName));
