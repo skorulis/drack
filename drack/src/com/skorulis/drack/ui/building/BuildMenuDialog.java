@@ -1,6 +1,7 @@
 package com.skorulis.drack.ui.building;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
@@ -50,6 +51,12 @@ public class BuildMenuDialog extends ModalDialog {
 		Vector3 loc = ui.game().map().groundIntersection(ray);
 		ui.game().setPlacingBuilding(bd,loc);
 		playerUI.showPlacementUI(ui.game().placingBuilding().building());
+	}
+	
+	public void layout() {
+		scrollPane.setWidth(scrollPane.getPrefWidth());
+		scrollPane.setHeight(scrollPane.getPrefHeight());
+		super.layout();
 	}
 
 }

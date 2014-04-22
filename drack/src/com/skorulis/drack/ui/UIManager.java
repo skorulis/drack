@@ -45,7 +45,6 @@ public class UIManager extends WidgetGroup {
 		this.addActor(debugUI);
 		
 		resized(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		this.setFillParent(true);
 	}
 	
 	public void update(float delta) {
@@ -58,6 +57,8 @@ public class UIManager extends WidgetGroup {
 	
 	public void resized(int width, int height) {
 		stage.getViewport().update(width, height, true);
+		this.setWidth(width);
+		this.setHeight(height - 40);
 	}
 	
 	public SKAssetManager assets() {
@@ -114,5 +115,6 @@ public class UIManager extends WidgetGroup {
 	public void showDialog(ModalDialog dialog) {
 		this.addActor(dialog);
 	}
+	
 	
 }

@@ -8,6 +8,7 @@ public class LayoutHelper {
 
 	private WidgetGroup widget;
 	
+	
 	public LayoutHelper(WidgetGroup widget) {
 		this.widget = widget;
 	}
@@ -17,14 +18,14 @@ public class LayoutHelper {
 	}
 	
 	public void centreChild(Actor actor, float padding) {
-		Layout layout = (Layout) actor;
-		float w = layout.getPrefWidth();
-		float h = layout.getPrefHeight();
+		float w = actor.getWidth();
+		float h = actor.getHeight();
 		
 		w = Math.min(w, widget.getWidth() - padding * 2);
 		h = Math.min(h, widget.getHeight() - padding * 2);
 		
-		actor.setBounds( (widget.getWidth() - w)/2 , (widget.getHeight() - h)/2, w, h);
+		actor.setX((widget.getWidth() - w)/2);
+		actor.setY((widget.getHeight() - h)/2);
 	}
 	
 	public void centreChildX(Actor actor) {
@@ -49,5 +50,11 @@ public class LayoutHelper {
 		actor.setY(y + padding);
 	}
 	
+	public void centreFill(Actor actor, float padding) {
+		actor.setX(padding);
+		actor.setY(padding);
+		actor.setWidth(widget.getWidth() - padding * 2);
+		actor.setHeight(widget.getHeight() - padding * 2);
+	}
 	
 }

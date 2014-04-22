@@ -55,7 +55,7 @@ public class PlayerUI extends WidgetGroup {
 	
 	private void inventoryClicked() {
 		inventoryDialog = new InventoryDialog(ui.logic().player(), ui.style().gameSkin());
-		addActor(inventoryDialog);
+		ui.showDialog(inventoryDialog);
 	}
 	
 	private void buildClicked() {

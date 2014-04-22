@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.skorulis.drack.ui.EditorDialog;
 import com.skorulis.drack.ui.UIManager;
 
 public class CommandUI extends BuildingUI {
@@ -24,7 +25,9 @@ public class CommandUI extends BuildingUI {
 	}
 	
 	private void unitPressed() {
-		ui.delegate().showUnitEditor();
+		EditorDialog edit = new EditorDialog(ui);
+		ui.showDialog(edit);
+
 	}
 	
 	public void layout() {
