@@ -1,10 +1,12 @@
 package com.skorulis.drack.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
@@ -12,9 +14,12 @@ import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.editor.UnitEditor;
+import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
+import com.skorulis.scene.SceneWindow;
+import com.skorulis.scene.UpdateInfo;
 
-public class GameLogic implements Disposable {
+public class GameLogic implements Disposable, SceneWindow {
 
 	private GameScene scene;
 	private GameDelegate delegate;
@@ -91,6 +96,37 @@ public class GameLogic implements Disposable {
 	
 	public void dispose() {
 		modelBatch.dispose();
+	}
+
+	@Override
+	public void draw() {
+		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        
+        RenderInfo ri = new RenderInfo(batch(), environment(), isoCam().cam());
+        batch().begin(ri.cam);
+        scene.render(ri);
+        batch().end();
+	}
+
+	@Override
+	public void update(float delta) {
+		UpdateInfo info = new UpdateInfo(delta, this);
+		isoCam().update(delta);
+		scene.update(info);
+	}
+
+	@Override
+	public void resized(int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public GestureListener gestureListener() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

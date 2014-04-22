@@ -19,17 +19,23 @@ public class EditorDialog extends ModalDialog {
 		
 	}
 	
+	public void act(float delta) {
+		super.act(delta);
+		editor.update();
+	}
+	
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-	
-		
-		
 		editor.draw();
 	}
 	
 	public void layout() {
 		this.layoutHelper.centreFill(mainContent, 40);
 		super.layout();
+	}
+	
+	public UnitEditor editor() {
+		return editor;
 	}
 
 }

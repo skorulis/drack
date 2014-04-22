@@ -3,7 +3,6 @@ package com.skorulis.drack;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.input.GestureDetector;
 import com.skorulis.drack.building.Building;
@@ -19,8 +18,6 @@ import com.skorulis.drack.player.Player;
 import com.skorulis.drack.ui.StyleManager;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.SKAssetManager;
-import com.skorulis.scene.RenderInfo;
-import com.skorulis.scene.UpdateInfo;
 
 public class DrackGame implements ApplicationListener, GameDelegate {
 	
@@ -30,7 +27,6 @@ public class DrackGame implements ApplicationListener, GameDelegate {
    
     private InputMultiplexer inputPlexer;
     private GameEventListener eventListener;
-    private GameScene scene;
     private UIManager ui;
     private TextureGenerator textureGen;
     private Effect2DLayer effects2D;
@@ -62,7 +58,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         
         SceneGenerator sceneGen = new SceneGenerator(mapGen, effects2D, player);
         
-        scene = sceneGen.scene();
+        GameScene scene = sceneGen.scene();
         
         logic = new GameLogic(scene, this, player);
         eventListener.setLogic(logic);
@@ -75,6 +71,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         Gdx.input.setInputProcessor(inputPlexer);
         
         textureGen = new TextureGenerator(assets, def);
+        showUnitEditor();
     }
 
 	@Override
@@ -101,11 +98,9 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	}
 	
 	private void renderMain() {
-		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        
-        update();
+		update();
+		
+		
         drawGame();
         if(showingEditor) {
         	logic.unitEditor().draw();
@@ -113,11 +108,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	}
 	
 	private void drawGame() {
-		logic.isoCam().cam().update();
-        RenderInfo ri = new RenderInfo(logic.batch(), logic.environment(), logic.isoCam().cam());
-        logic.batch().begin(logic.isoCam().cam());
-        scene.render(ri);
-        logic.batch().end();
+        logic.draw();
         
         effects2D.stage().draw();
         
@@ -125,11 +116,10 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	}
 	
 	private void update() {
-		UpdateInfo info = new UpdateInfo(Gdx.graphics.getDeltaTime(), logic);
-		logic.isoCam().update(info.delta);
-		scene.update(info);
-		ui.update(info.delta);
-		this.effects2D.update(info.delta);
+		float delta = Gdx.graphics.getDeltaTime();
+		logic.update(delta);
+		ui.update(delta);
+		this.effects2D.update(delta);
 		
 		logic.unitEditor().update();
 	}
