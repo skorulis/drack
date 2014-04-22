@@ -3,7 +3,6 @@ package com.skorulis.drack;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.input.GestureDetector;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
@@ -44,7 +43,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	}
 	
 	private void loadAssets() {
-		assets.loadAll(def.allTextures(), Texture.class);
+		assets.loadAllTextures(def.allTextures());
 		assets.loadAllModels(def.allModels());
 	}
 	
@@ -133,6 +132,8 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 		}
 		ui.update(delta);
 		this.effects2D.update(delta);
+		
+		
 	}
 
 	@Override

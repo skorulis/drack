@@ -4,12 +4,14 @@ import java.util.Map;
 import java.util.Set;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Model;
 
 
 public class SKAssetManager extends AssetManager {
 	
 	private static String MODEL_DIR = "data/models/";
+	private static String TEXTURE_DIR = "data/textures/";
 	private static String MODEL_SUFFIX = "g3db";
 	
 	public SKAssetManager() {
@@ -40,9 +42,21 @@ public class SKAssetManager extends AssetManager {
 		}
 	}
 	
+	public synchronized <T> void loadAllTextures(Set<String> items) {
+		for(String s : items) {
+			String textureName = TEXTURE_DIR + s;
+			super.load(textureName, Texture.class);
+		}
+	}
+	
 	public synchronized Model getModel(String shortName) {
 		String modelName = MODEL_DIR + shortName + "." + MODEL_SUFFIX;
 		return super.get(modelName, Model.class);
+	}
+	
+	public synchronized Texture getTexture(String shortName) {
+		String textureName = TEXTURE_DIR + shortName;
+		return super.get(textureName, Texture.class);
 	}
 	
 	

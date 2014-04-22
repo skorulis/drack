@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
+import com.skorulis.drack.effects.LaserEffect;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
@@ -28,6 +30,7 @@ public class GameLogic implements Disposable, SceneWindow {
 	private ModelBatch modelBatch;
 	private Environment environment;
 	private GameEventListener eventListener;
+	private LaserEffect laser;
 	
 	public GameLogic(GameScene scene, GameDelegate delegate, Player player) {
 		this.scene = scene;
@@ -39,6 +42,7 @@ public class GameLogic implements Disposable, SceneWindow {
 		isoCam.setTracking(player.controllUnit());
 		
 		eventListener = new GameEventListener(this);
+		laser = new LaserEffect(scene.assets(), new Vector3(10,2,10), new Vector3(14,2,10));
 	}
 	
 	private void createEnvironment() {
@@ -105,7 +109,9 @@ public class GameLogic implements Disposable, SceneWindow {
         RenderInfo ri = new RenderInfo(batch(), environment(), isoCam().cam());
         batch().begin(ri.cam);
         scene.render(ri);
+        laser.render(ri);
         batch().end();
+        
 	}
 
 	@Override

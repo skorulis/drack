@@ -255,7 +255,8 @@ public class DefManager {
 	
 	public Set<String> allTextures() {
 		HashSet<String> textures = new HashSet<String>();
-
+		textures.add("laser.png");
+		textures.add("floor1.png");
 		return textures;
 	}
 	
