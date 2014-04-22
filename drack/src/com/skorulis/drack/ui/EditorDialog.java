@@ -2,6 +2,7 @@ package com.skorulis.drack.ui;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
+import com.skorulis.drack.unit.composite.CompositeUnit;
 import com.skorulis.drack.unit.editor.UnitEditor;
 
 public class EditorDialog extends ModalDialog {
@@ -10,13 +11,13 @@ public class EditorDialog extends ModalDialog {
 	private UnitEditor editor;
 	
 	
-	public EditorDialog(UIManager ui) {
+	public EditorDialog(UIManager ui, CompositeUnit unit) {
 		super(ui);
 		
 		mainContent = new WidgetGroup();
 		this.setContent(mainContent);
 		
-		editor = new UnitEditor(ui.assets(), ui.def());
+		editor = new UnitEditor(ui.assets(), ui.def(),unit);
 		ui.delegate().setSubScene(editor);
 	}
 	
@@ -38,6 +39,7 @@ public class EditorDialog extends ModalDialog {
 	}
 	
 	public void willClose() {
+		editor.returnUnitToMap();
 		ui.delegate().setSubScene(null);
 	}
 

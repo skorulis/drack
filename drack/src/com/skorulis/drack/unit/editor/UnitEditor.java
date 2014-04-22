@@ -10,10 +10,11 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
+import com.badlogic.gdx.math.Matrix4;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.unit.HullPointDef;
-import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.composite.CompositeUnit;
+import com.skorulis.drack.unit.composite.HullAttachment;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneWindow;
@@ -25,24 +26,28 @@ public class UnitEditor implements SceneWindow {
 	private ModelBatch modelBatch;
 	private Environment environment;
 	private UnitGestureListener ugl;
-	private Player player;
 	private DefManager def;
 	public Set<HullPointNode> pointNodes;
 	private SKAssetManager assets;
+	private Matrix4 oldTransform;
 	
-	public UnitEditor(SKAssetManager assets, DefManager def) {
+	public UnitEditor(SKAssetManager assets, DefManager def, CompositeUnit unit) {
 		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.position.set(2f, 2f, 2f);
         cam.lookAt(0,0,0);
         cam.near = 0.1f;
         cam.far = 300f;
         cam.update();
-        player = new Player();
-        unit = new CompositeUnit(assets, player, def.getCompositeUnit("base"));
+        this.unit = unit;
+        oldTransform = unit.relTransform().cpy();
+        unit.relTransform().idt();
         
         pointNodes = new HashSet<HullPointNode>();
         for(HullPointDef hpd : unit.compDef().hull.points) {
-        	pointNodes.add(new HullPointNode(assets, hpd));
+        	HullPointNode hpn = new HullPointNode(assets, hpd);
+        	HullAttachment att = unit.attachmentAt(hpd);
+        	hpn.setHidden(att != null);
+        	pointNodes.add(hpn);
         }
         
         modelBatch = new ModelBatch();
@@ -91,11 +96,18 @@ public class UnitEditor implements SceneWindow {
 	@Override
 	public void resized(int width, int height) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public GestureListener gestureListener() {
 		return ugl;
+	}
+	
+	public Matrix4 oldTransform() {
+		return oldTransform;
+	}
+	
+	public void returnUnitToMap() {
+		unit.relTransform().set(oldTransform);
 	}
 }

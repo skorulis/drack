@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.skorulis.drack.ui.EditorDialog;
 import com.skorulis.drack.ui.UIManager;
+import com.skorulis.drack.unit.composite.CompositeUnit;
 
 public class CommandUI extends BuildingUI {
 
@@ -25,7 +26,8 @@ public class CommandUI extends BuildingUI {
 	}
 	
 	private void unitPressed() {
-		EditorDialog edit = new EditorDialog(ui);
+		CompositeUnit unit = (CompositeUnit) ui.logic().player().controllUnit();
+		EditorDialog edit = new EditorDialog(ui,unit);
 		ui.showDialog(edit);
 
 	}
