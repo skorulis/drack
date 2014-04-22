@@ -69,7 +69,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         eventListener.setLogic(logic);
         
         effects2D.setCam(logic.isoCam());
-        ui = new UIManager(assets,logic,def,styleManager);
+        ui = new UIManager(assets,logic,def,styleManager,this);
         
         inputPlexer = new InputMultiplexer(ui.stage(), new GestureDetector(eventListener));
         inputPlexer.addProcessor(logic.unitEditor().gestureDetector());
@@ -107,10 +107,9 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         
         update();
+        drawGame();
         if(showingEditor) {
         	logic.unitEditor().draw();
-        } else {
-        	drawGame();
         }
 	}
 	

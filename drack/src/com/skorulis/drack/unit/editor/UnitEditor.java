@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
@@ -62,6 +63,7 @@ public class UnitEditor {
 	}
 	
 	public void draw() {
+		Gdx.gl.glClear(GL20.GL_DEPTH_BUFFER_BIT);
 		modelBatch.begin(cam);
 		RenderInfo ri = new RenderInfo(modelBatch, environment, cam);
 		unit.render(ri);

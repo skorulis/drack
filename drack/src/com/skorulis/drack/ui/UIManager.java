@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.game.GameDelegate;
 import com.skorulis.drack.game.GameLogic;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.game.IsoPerspectiveCamera;
@@ -21,11 +22,13 @@ public class UIManager {
 	private DefManager def;
 	private SKAssetManager assets;
 	private BuildingUI buildingUI;
+	private GameDelegate delegate;
 	
-	public UIManager(SKAssetManager assets,GameLogic logic,DefManager def, StyleManager style) {
+	public UIManager(SKAssetManager assets,GameLogic logic,DefManager def, StyleManager style, GameDelegate delegate) {
 		this.assets = assets;
 		this.logic = logic;
 		this.def = def;
+		this.delegate = delegate;
 		
 		this.style = new StyleManager();
 		stage = new Stage(new ScreenViewport());
@@ -90,6 +93,10 @@ public class UIManager {
 			buildingUI.getParent().removeActor(buildingUI);
 		}
 		buildingUI = null;
+	}
+	
+	public GameDelegate delegate() {
+		return delegate;
 	}
 	
 }

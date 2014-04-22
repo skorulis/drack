@@ -24,7 +24,7 @@ public class CommandUI extends BuildingUI {
 	}
 	
 	private void unitPressed() {
-		
+		ui.delegate().showUnitEditor();
 	}
 	
 	public void layout() {

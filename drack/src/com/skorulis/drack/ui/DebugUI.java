@@ -9,7 +9,7 @@ public class DebugUI extends WidgetGroup {
 	private Label label;
 	
 	public DebugUI(StyleManager style) {
-		label = new Label("TEST",style.defaultSkin());
+		label = new Label("",style.gameSkin());
 		this.addActor(label);
 	}
 	
