@@ -49,27 +49,26 @@ public class PlayerUI extends WidgetGroup {
 			}
 		});
 		
-		
 		this.setWidth(100);
-		this.setHeight(200);
+		this.setHeight(176);
 	}
 	
 	private void inventoryClicked() {
-		inventoryDialog = new InventoryDialog(ui.logic().player(), ui.style().defaultSkin());
+		inventoryDialog = new InventoryDialog(ui.logic().player(), ui.style().gameSkin());
 		addActor(inventoryDialog);
 	}
 	
 	private void buildClicked() {
-		buildDialog = new BuildMenuDialog(this, ui.style().defaultSkin(),ui);
-		addActor(buildDialog);
+		buildDialog = new BuildMenuDialog(this, ui.style().gameSkin(),ui);
+		ui.showDialog(buildDialog);
 	}
 	
 	public void layout() {
 		helper.centreChildX(buildButton);
 		helper.centreChildX(inventoryButton);
-		helper.alignBottom(buildButton, 8);
+		helper.alignBottom(buildButton, 16);
 		
-		helper.alignTopOf(inventoryButton, buildButton, 8);
+		helper.alignTopOf(inventoryButton, buildButton, 16);
 		if(buildDialog != null) {
 			//buildDialog.setBounds(0, 0, this.getWidth(), this.getHeight());
 		}
@@ -80,11 +79,11 @@ public class PlayerUI extends WidgetGroup {
 	
 	public void showPlacementUI(Building building) {
 		buildingPlacement = new BuildingPlacementUI(ui, this,building);
-		this.addActor(buildingPlacement);
+		this.ui.addActor(buildingPlacement);
 	}
 	
 	public void placementFinished() {
-		this.removeActor(buildingPlacement);
+		this.ui.removeActor(buildingPlacement);
 		this.buildingPlacement = null;
 	}
 	

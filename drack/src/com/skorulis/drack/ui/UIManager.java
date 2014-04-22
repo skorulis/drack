@@ -111,4 +111,8 @@ public class UIManager extends WidgetGroup {
 		helper.alignBottom(playerUI, 10);
 	}
 	
+	public void showDialog(ModalDialog dialog) {
+		this.addActor(dialog);
+	}
+	
 }

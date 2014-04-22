@@ -16,9 +16,7 @@ public class StyleManager {
 		gameSkin = new Skin(Gdx.files.internal("data/game_skin/ui.json")); 
 	}
 	
-	public Skin defaultSkin() {
-		return defaultSkin;
-	}
+	
 	
 	public Skin gameSkin() {
 		return gameSkin;

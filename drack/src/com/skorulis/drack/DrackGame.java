@@ -13,7 +13,6 @@ import com.skorulis.drack.game.GameDelegate;
 import com.skorulis.drack.game.GameEventListener;
 import com.skorulis.drack.game.GameLogic;
 import com.skorulis.drack.game.GameScene;
-import com.skorulis.drack.game.IsoPerspectiveCamera;
 import com.skorulis.drack.game.SceneGenerator;
 import com.skorulis.drack.map.MapGenerator;
 import com.skorulis.drack.player.Player;
@@ -57,7 +56,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         loading = false;
         styleManager = new StyleManager();
         Player player = new Player();
-        effects2D = new Effect2DLayer(styleManager.defaultSkin());
+        effects2D = new Effect2DLayer(styleManager.gameSkin());
         
         MapGenerator mapGen = new MapGenerator(50, 50, assets, def, player);
         

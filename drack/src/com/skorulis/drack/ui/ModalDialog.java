@@ -14,15 +14,18 @@ public class ModalDialog extends WidgetGroup {
 	protected WidgetGroup content;
 	protected LayoutHelper layoutHelper;
 	protected Image bgImage;
+	protected Image dimImage;
 	protected int padding = 10;
 	
 	public ModalDialog(Skin skin) {
-		bgImage = new Image(skin.getDrawable("default-round-down"));
+		bgImage = new Image(skin.getDrawable("off_white"));
+		dimImage = new Image(skin.getDrawable("shadow"));
+		addActor(dimImage);
 		addActor(bgImage);
 		
 		closeButton = new TextButton("X",skin);
 		this.addActor(closeButton);
-		this.setFillParent(true);
+		
 		this.layoutHelper = new LayoutHelper(this);
 		
 		closeButton.addListener(new ClickListener() {
@@ -30,8 +33,8 @@ public class ModalDialog extends WidgetGroup {
 				close();
 			}
 		});
-		
-		
+		dimImage.setFillParent(true);
+		this.setFillParent(true);
 	}
 	
 	public void layout() {
