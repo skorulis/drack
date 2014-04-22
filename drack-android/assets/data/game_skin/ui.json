@@ -8,7 +8,8 @@ com.badlogic.gdx.graphics.Color: {
 	black: { a: 1, b: 0, g: 0, r: 0 }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-	default: { down: grey_light, up: blue_pale },
+	default: { down: grey_bg, up: blue_pale_bg },
+	close: { down: grey_bg, up: red_pale_bg },
 	dim: {down: shadow, up: shadow}
 },
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {

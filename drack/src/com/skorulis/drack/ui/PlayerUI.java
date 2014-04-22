@@ -26,7 +26,7 @@ public class PlayerUI extends WidgetGroup {
 		this.ui = uiManager;
 		this.helper = new LayoutHelper(this);
 		
-		this.bgImage = new Image(uiManager.style().gameSkin().getDrawable("off_white"));
+		this.bgImage = new Image(uiManager.style().gameSkin().getDrawable("off_white_bg"));
 		this.bgImage.setFillParent(true);
 		addActor(bgImage);
 		
@@ -50,7 +50,7 @@ public class PlayerUI extends WidgetGroup {
 		});
 		
 		this.setWidth(100);
-		this.setHeight(176);
+		this.setHeight(196);
 	}
 	
 	private void inventoryClicked() {

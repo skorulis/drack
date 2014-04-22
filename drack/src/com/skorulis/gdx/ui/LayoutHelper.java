@@ -26,6 +26,8 @@ public class LayoutHelper {
 		
 		actor.setX((widget.getWidth() - w)/2);
 		actor.setY((widget.getHeight() - h)/2);
+		actor.setWidth(w);
+		actor.setHeight(h);
 	}
 	
 	public void centreChildX(Actor actor) {

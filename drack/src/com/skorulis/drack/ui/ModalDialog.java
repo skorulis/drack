@@ -3,8 +3,8 @@ package com.skorulis.drack.ui;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -12,7 +12,7 @@ import com.skorulis.gdx.ui.LayoutHelper;
 
 public abstract class ModalDialog extends WidgetGroup {
 
-	protected TextButton closeButton;
+	protected ImageButton closeButton;
 	protected WidgetGroup content;
 	protected LayoutHelper layoutHelper;
 	protected Image bgImage;
@@ -23,12 +23,12 @@ public abstract class ModalDialog extends WidgetGroup {
 	public ModalDialog(UIManager ui) {
 		this.ui = ui;
 		Skin skin = ui.style().gameSkin();
-		bgImage = new Image(skin.getDrawable("off_white"));
+		bgImage = new Image(skin.getDrawable("off_white_bg"));
 		dimButton = new Button(skin.get("dim", ButtonStyle.class));
 		addActor(dimButton);
 		addActor(bgImage);
 		
-		closeButton = new TextButton("X",skin);
+		closeButton = new ImageButton(ui.style().createImageStyle("close", "cross_white"));
 		this.addActor(closeButton);
 		
 		this.layoutHelper = new LayoutHelper(this);
@@ -45,7 +45,8 @@ public abstract class ModalDialog extends WidgetGroup {
 	public void layout() {
 		assert content != null;
 		layoutHelper.centreChild(this.content,20);
-		closeButton.setBounds(content.getRight() - closeButton.getWidth(), content.getTop(), closeButton.getPrefWidth(), closeButton.getPrefHeight());
+		closeButton.setX(content.getRight() - closeButton.getWidth());
+		closeButton.setY(content.getTop() + 10);
 		float height = closeButton.getTop() - content.getY() + padding * 2;
 		
 		bgImage.setBounds(content.getX() - padding, content.getY() - padding, content.getWidth() + padding * 2, height);

@@ -21,7 +21,11 @@ public class StyleManager {
 	}
 	
 	public ImageButtonStyle createImageStyle(String imageName) {
-		ButtonStyle buttonStyle = gameSkin.get("default",ButtonStyle.class);
+		return createImageStyle("default", imageName);
+	}
+	
+	public ImageButtonStyle createImageStyle(String buttonName, String imageName) {
+		ButtonStyle buttonStyle = gameSkin.get(buttonName,ButtonStyle.class);
 		ImageButtonStyle ibs = new ImageButtonStyle(buttonStyle);
 		ibs.imageUp = ibs.imageDown = new TextureRegionDrawable(gameSkin.getRegion(imageName));
 		return ibs;
