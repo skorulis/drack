@@ -1,6 +1,7 @@
 package com.skorulis.drack.ui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -19,10 +20,15 @@ public class PlayerUI extends WidgetGroup {
 	private InventoryDialog inventoryDialog;
 	private UIManager ui;
 	private final LayoutHelper helper;
+	private Image bgImage;
 	
 	public PlayerUI(UIManager uiManager) {
 		this.ui = uiManager;
 		this.helper = new LayoutHelper(this);
+		
+		this.bgImage = new Image(uiManager.style().gameSkin().getDrawable("off_white"));
+		this.bgImage.setFillParent(true);
+		addActor(bgImage);
 		
 		buildButton = new ImageButton(uiManager.style().createImageStyle("hammer_dark"));
 		this.addActor(buildButton);
@@ -43,7 +49,9 @@ public class PlayerUI extends WidgetGroup {
 			}
 		});
 		
-		this.setFillParent(true);
+		
+		this.setWidth(100);
+		this.setHeight(200);
 	}
 	
 	private void inventoryClicked() {
@@ -57,9 +65,10 @@ public class PlayerUI extends WidgetGroup {
 	}
 	
 	public void layout() {
+		helper.centreChildX(buildButton);
+		helper.centreChildX(inventoryButton);
 		helper.alignBottom(buildButton, 8);
-		helper.alignRight(buildButton, 8);
-		helper.alignRight(inventoryButton, 8);
+		
 		helper.alignTopOf(inventoryButton, buildButton, 8);
 		if(buildDialog != null) {
 			//buildDialog.setBounds(0, 0, this.getWidth(), this.getHeight());

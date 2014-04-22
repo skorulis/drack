@@ -3,16 +3,37 @@ ui.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-check
+blue_pale
   rotate: false
   xy: 2, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-cross_white
+check
   rotate: false
   xy: 200, 68
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+cross_white
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+green_light
+  rotate: false
+  xy: 234, 68
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+grey_light
+  rotate: false
+  xy: 70, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -38,9 +59,16 @@ inventory_dark
   orig: 64, 64
   offset: 0, 0
   index: -1
+off_white
+  rotate: false
+  xy: 268, 68
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 red_dark2
   rotate: false
-  xy: 36, 2
+  xy: 104, 2
   size: 32, 32
   split: 5, 5, 5, 5
   orig: 32, 32
@@ -48,9 +76,23 @@ red_dark2
   index: -1
 red_light2
   rotate: false
-  xy: 70, 2
+  xy: 302, 68
   size: 32, 32
   split: 5, 5, 5, 5
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: false
+  xy: 138, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+yellow_pale
+  rotate: false
+  xy: 336, 68
+  size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1

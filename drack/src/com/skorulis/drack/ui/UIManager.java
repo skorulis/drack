@@ -2,6 +2,7 @@ package com.skorulis.drack.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
@@ -11,8 +12,9 @@ import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.game.IsoPerspectiveCamera;
 import com.skorulis.drack.ui.building.BuildingUI;
 import com.skorulis.gdx.SKAssetManager;
+import com.skorulis.gdx.ui.LayoutHelper;
 
-public class UIManager {
+public class UIManager extends WidgetGroup {
 
 	private final Stage stage;
 	private final StyleManager style;
@@ -23,22 +25,27 @@ public class UIManager {
 	private SKAssetManager assets;
 	private BuildingUI buildingUI;
 	private GameDelegate delegate;
+	private LayoutHelper helper;
 	
 	public UIManager(SKAssetManager assets,GameLogic logic,DefManager def, StyleManager style, GameDelegate delegate) {
 		this.assets = assets;
 		this.logic = logic;
 		this.def = def;
 		this.delegate = delegate;
+		helper = new LayoutHelper(this);
 		
 		this.style = new StyleManager();
 		stage = new Stage(new ScreenViewport());
 		debugUI = new DebugUI(style);
 		playerUI = new PlayerUI(this);
-
-		stage.addActor(playerUI);
 		
-		stage.addActor(debugUI);
+		stage.addActor(this);
+		
+		this.addActor(playerUI);
+		this.addActor(debugUI);
+		
 		resized(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		this.setFillParent(true);
 	}
 	
 	public void update(float delta) {
@@ -83,7 +90,7 @@ public class UIManager {
 		if(buildingUI != null) {
 			buildingUI.init(style.gameSkin(), this);
 			buildingUI.setBuilding(building);
-			stage.addActor(buildingUI);
+			this.addActor(buildingUI);
 		}
 		
 	}
@@ -97,6 +104,11 @@ public class UIManager {
 	
 	public GameDelegate delegate() {
 		return delegate;
+	}
+	
+	public void layout() {
+		helper.alignRight(playerUI, 10);
+		helper.alignBottom(playerUI, 10);
 	}
 	
 }
