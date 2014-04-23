@@ -50,7 +50,7 @@ public class LaserEffect implements Disposable {
 		
 		ColorAttribute ca = ColorAttribute.createDiffuse(0.5f, 1, 0.5f, 1.0f);
 		
-		Material material = new Material(TextureAttribute.createDiffuse(texture), ca, ba);
+		Material material = new Material(TextureAttribute.createDiffuse(texture), ca);
 		
 		Mesh mesh = meshBuilder.end();
 		

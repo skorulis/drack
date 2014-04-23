@@ -288,6 +288,7 @@ public class DefManager {
 		}
 		
 		models.add("cube1");
+		models.add("cube_transparent");
 		models.add("sphere");
 		models.add("hull1");
 		models.add("field1");

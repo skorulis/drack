@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
+import com.badlogic.gdx.math.Vector3;
+import com.skorulis.drack.effects.LaserEffect;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneWindow;
@@ -20,7 +22,7 @@ public class TestSceneWindow implements SceneWindow {
 	private PerspectiveCamera cam;
 	private ModelBatch modelBatch;
 	private Environment environment;
-	private ModelInstance instance;
+	private LaserEffect laser;
 	
 	public TestSceneWindow(SKAssetManager assets) {
 		tgl = new TestGestureListener(this);
@@ -32,7 +34,7 @@ public class TestSceneWindow implements SceneWindow {
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
         
-        instance = new ModelInstance(assets.getModel("cube1"));
+        laser = new LaserEffect(assets, new Vector3(0,0,0), new Vector3(5,0,0));
 	}
 	
 	@Override
@@ -42,7 +44,8 @@ public class TestSceneWindow implements SceneWindow {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		modelBatch.begin(cam);
 		RenderInfo ri = new RenderInfo(modelBatch, environment, cam);
-		modelBatch.render(instance,environment);
+		laser.render(ri);
+		
 		modelBatch.end();
 	}
 
