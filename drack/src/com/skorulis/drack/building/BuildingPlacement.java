@@ -118,4 +118,8 @@ public class BuildingPlacement implements SceneNode{
 		return map.canPlaceBuilding(building,roundAndClip(location));
 	}
 	
+	public boolean isAlive() {
+		return true;
+	}
+	
 }

@@ -72,4 +72,8 @@ public class HullPointNode implements SceneNode {
 		this.hidden = hidden;
 	}
 	
+	public boolean isAlive() {
+		return true;
+	}
+	
 }

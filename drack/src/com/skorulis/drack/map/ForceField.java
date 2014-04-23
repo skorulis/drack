@@ -105,5 +105,9 @@ public class ForceField implements SceneNode{
 	public void update(UpdateInfo info) {
 
 	}
+	
+	public boolean isAlive() {
+		return true;
+	}
 
 }

@@ -1,6 +1,7 @@
 package com.skorulis.drack.effects;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -26,11 +27,12 @@ public class Effect2DLayer {
 	}
 	
 	public void update(float delta) {
-		for(int i = effects.size() - 1; i >= 0; --i) {
-			Effect2D effect = effects.get(i);
+		Iterator<Effect2D> it = effects.iterator();
+		while(it.hasNext()) {
+			Effect2D effect = it.next();
 			effect.update(delta);
 			if(!effect.isAlive()) {
-				effects.remove(i);
+				it.remove();
 				effect.actor().remove();
 			} else {
 				if(effect.movement() != null) {
@@ -40,6 +42,7 @@ public class Effect2DLayer {
 				}
 			}
 		}
+		
 		stage.act(delta);
 	}
 	

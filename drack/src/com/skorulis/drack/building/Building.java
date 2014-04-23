@@ -86,5 +86,9 @@ public class Building implements SceneNode{
 	public Set<MapSquare> coveredSquares() {
 		return this.coveredSquares;
 	}
+	
+	public boolean isAlive() {
+		return true;
+	}
 
 }

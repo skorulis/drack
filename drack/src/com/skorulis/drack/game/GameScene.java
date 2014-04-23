@@ -1,6 +1,7 @@
 package com.skorulis.drack.game;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
@@ -62,9 +63,15 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 	}
 	
 	public void update(UpdateInfo info) {
-		for(Unit unit : units) {
-			unit.update(info);
+		Iterator<Unit> it = units.iterator();
+		while(it.hasNext()) {
+			Unit u = it.next();
+			u.update(info);
+			if(!u.isAlive()) {
+				it.remove();
+			}
 		}
+		
 		if(placingBuilding != null) {
 			placingBuilding.update(info);
 		}
@@ -121,7 +128,7 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		u.setDelegate(this);
 		u.absTransform().setTranslation(sq.getCentreLoc());
 		
-		effects2D.createHealthBar(u);
+		u.setHealthBar(effects2D.createHealthBar(u));
 		
 	}
 	
@@ -131,6 +138,10 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 	
 	public SKAssetManager assets() {
 		return assets;
+	}
+	
+	public boolean isAlive() {
+		return true;
 	}
 	
 }

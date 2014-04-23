@@ -68,6 +68,8 @@ public class HullAttachment implements SceneNode{
 		return hardPoint;
 	}
 	
-	
+	public boolean isAlive() {
+		return true;
+	}
 
 }

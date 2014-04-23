@@ -27,6 +27,11 @@ public class Effect2D {
 	}
 	
 	public boolean isAlive() {
+		if(nodeAnchor != null) {
+			if(!nodeAnchor.isAlive()) {
+				return false;
+			}
+		}
 		return life > 0;
 	}
 	

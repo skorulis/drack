@@ -234,4 +234,8 @@ public class GameMap implements SceneNode, Disposable{
 		return depth;
 	}
 	
+	public boolean isAlive() {
+		return true;
+	}
+	
 }

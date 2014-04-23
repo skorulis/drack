@@ -1,7 +1,6 @@
 package com.skorulis.drack.unit;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
@@ -13,6 +12,7 @@ import com.skorulis.drack.player.Player;
 import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.drack.ui.effects.HealthBar;
+import com.skorulis.drack.unit.action.AttackAction;
 import com.skorulis.drack.unit.action.MovementAction;
 import com.skorulis.drack.unit.action.UnitAction;
 import com.skorulis.gdx.SKAssetManager;
@@ -24,16 +24,17 @@ public class Unit implements SceneNode {
 
 	private ModelInstance instance;
 	private ArrayList<UnitAction> actions;
-	
 	private ResourceBatch resources;
 	private UnitDelegate delegate;
 	protected Player owner;
 	protected UnitDef def;
 	protected HealthBar healthBar;
+	protected float currentHealth;
 	
 	public Unit() {
 		resources = new ResourceBatch();
 		this.actions = new ArrayList<UnitAction>();
+		this.currentHealth = maxHealth();
 	}
 	
 	public Unit(SKAssetManager assets, Player owner, UnitDef def) {
@@ -163,12 +164,26 @@ public class Unit implements SceneNode {
 		return 100;
 	}
 	
-	public int health() {
-		return 50;
+	public float health() {
+		return currentHealth;
 	}
 	
 	public void setHealthBar(HealthBar healthBar) {
 		this.healthBar = healthBar;
 	}
+	
+	public void attack(Unit unit) {
+		AttackAction action = new AttackAction(this, unit);
+		this.addAction(action);
+	}
+	
+	public void takeDamage(float damange) {
+		currentHealth -= damange;
+		healthBar.setPct(health() / maxHealth());
+	}
 
+	public boolean isAlive() {
+		return currentHealth > 0;
+	}
+	
 }

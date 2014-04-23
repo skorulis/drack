@@ -8,6 +8,7 @@ public class HealthBar extends WidgetGroup {
 
 	private Image innerImage;
 	private Image bgImage;
+	private float pct;
 	
 	public HealthBar(Skin skin) {
 		innerImage = new Image(skin.getDrawable("green_sq"));
@@ -16,11 +17,12 @@ public class HealthBar extends WidgetGroup {
 		addActor(innerImage);
 		addActor(bgImage);
 		
-		this.innerImage.setFillParent(true);
 		this.bgImage.setFillParent(true);
 		
 		this.setWidth(64);
 		this.setHeight(12);		
+		
+		pct = 1;
 	}
 	
 	public void layout() {
@@ -28,6 +30,13 @@ public class HealthBar extends WidgetGroup {
 		this.innerImage.setX(-this.getWidth()/2);
 		this.bgImage.setY(24);
 		this.innerImage.setY(24);
+		this.innerImage.setHeight(this.getHeight());
+		this.innerImage.setWidth(this.getWidth() * pct);
+	}
+	
+	public void setPct(float pct) {
+		this.pct = pct;
+		this.innerImage.setWidth(this.getWidth() * pct);
 	}
 	
 	

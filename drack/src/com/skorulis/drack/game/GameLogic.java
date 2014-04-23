@@ -68,6 +68,10 @@ public class GameLogic implements Disposable, SceneWindow {
 				this.delegate.buildingSelected(sq.anyBuilding());
 			}
 		} else if(node instanceof Unit) {
+			Unit unit = (Unit) node;
+			if(unit != player.controllUnit()) {
+				player.controllUnit().attack(unit);
+			}
 			System.out.println("UNIT");
 		}
 	}

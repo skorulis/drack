@@ -11,6 +11,7 @@ public interface SceneNode {
 	public void render(RenderInfo ri);
 	public SceneNode intersect(Ray ray, Vector3 point);
 	public void update(UpdateInfo delta);
+	public boolean isAlive();
 	
 }
 

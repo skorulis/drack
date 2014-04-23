@@ -146,5 +146,8 @@ public class MapSquare implements SceneNode {
 		b.addCoveredSquare(this);
 	}
 	
+	public boolean isAlive() {
+		return true;
+	}
 	
 }
