@@ -1,6 +1,7 @@
 package com.skorulis.drack.unit;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
@@ -13,6 +14,7 @@ import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.drack.ui.effects.HealthBar;
 import com.skorulis.drack.unit.action.AttackAction;
+import com.skorulis.drack.unit.action.FaceAction;
 import com.skorulis.drack.unit.action.MovementAction;
 import com.skorulis.drack.unit.action.UnitAction;
 import com.skorulis.gdx.SKAssetManager;
@@ -173,6 +175,8 @@ public class Unit implements SceneNode {
 	}
 	
 	public void attack(Unit unit) {
+		FaceAction face = new FaceAction(this, unit.currentPosition());
+		this.addAction(face);
 		AttackAction action = new AttackAction(this, unit);
 		this.addAction(action);
 	}
