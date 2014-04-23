@@ -40,7 +40,7 @@ public class TestSceneWindow implements SceneWindow {
 	@Override
 	public void draw() {
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(0.4f, 0.4f, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		modelBatch.begin(cam);
 		RenderInfo ri = new RenderInfo(modelBatch, environment, cam);

@@ -23,6 +23,7 @@ import com.skorulis.drack.def.unit.BasicUnitDef;
 import com.skorulis.drack.def.unit.HullPointDef;
 import com.skorulis.drack.def.unit.WeaponDef;
 import com.skorulis.drack.def.unit.HullPointDef.HullPointType;
+import com.skorulis.drack.effects.LaserEffect;
 import com.skorulis.drack.ui.building.BarracksUI;
 import com.skorulis.drack.ui.building.CommandUI;
 import com.skorulis.drack.ui.building.MineUI;
@@ -255,8 +256,7 @@ public class DefManager {
 	
 	public Set<String> allTextures() {
 		HashSet<String> textures = new HashSet<String>();
-		textures.add("laser.png");
-		textures.add("floor1.png");
+		textures.addAll(LaserEffect.textures());
 		return textures;
 	}
 	

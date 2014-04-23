@@ -68,7 +68,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         ui = new UIManager(assets,logic,def,styleManager,this);
         
         mainScene = logic;
-        mainScene = new TestSceneWindow(assets);
+        //mainScene = new TestSceneWindow(assets);
         updateInputProcessor();
         
         textureGen = new TextureGenerator(assets, def);
