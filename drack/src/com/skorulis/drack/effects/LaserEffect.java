@@ -19,12 +19,15 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
+import com.skorulis.scene.UpdateInfo;
 
 public class LaserEffect implements Disposable {
 
 	private Vector3 startPos;
 	private Vector3 endPos;
 	private Vector3 dir;
+	private Vector3 spriteAxis;
+	private Vector3 forward;
 	private Model model;
 	private ModelInstance instance;
 	
@@ -32,6 +35,10 @@ public class LaserEffect implements Disposable {
 		this.startPos = start;
 		this.endPos = end;
 		dir = end.cpy().sub(start).nor();
+		forward = new Vector3(0,0,1);
+		spriteAxis = forward.cpy().crs(dir).nor();
+		
+		System.out.println("AXIS " + spriteAxis);
 		
 		buildGeometry(assets);
 	}
@@ -51,9 +58,9 @@ public class LaserEffect implements Disposable {
 	
 	private void buildGeometry(SKAssetManager assets) {
 		
-		Mesh midMesh = createQuad(startPos, endPos);
-		Mesh startMesh = createQuad(startPos.cpy().sub(dir.x, dir.y, dir.z), startPos);
-		Mesh endMesh = createQuad(endPos, endPos.cpy().add(dir.x, dir.y, dir.z));
+		Mesh midMesh = createQuad(startPos.cpy().add(dir), endPos.cpy().sub(dir));
+		Mesh startMesh = createQuad(startPos, startPos.cpy().add(dir));
+		Mesh endMesh = createQuad(endPos.cpy().sub(dir), endPos);
 		
 		Texture texture1 = assets.getTexture("laser_mid.png");
 		Texture texture2 = assets.getTexture("laser_start.png");
@@ -77,12 +84,9 @@ public class LaserEffect implements Disposable {
 	
 	public Mesh createQuad(Vector3 start, Vector3 end) {
 		float[] verts = new float[20];
-		Vector3 fwd = new Vector3(0,0,1);
+
+		Vector3 axis = spriteAxis.cpy().scl(0.5f);
 		
-		Vector3 axis = fwd.cpy().crs(dir).nor();
-		
-		System.out.println("AXIS " + axis);
-		axis.scl(0.5f);
 		
 		int i = 0;
 		verts[i++] = start.x - axis.x; // x1
@@ -123,6 +127,12 @@ public class LaserEffect implements Disposable {
 		ri.batch.render(instance, ri.environment);
 		//mesh.render(shader, primitiveType);
 		
+	}
+	
+	public void update(UpdateInfo ui) {
+		Vector3 dir = ui.cam.direction.cpy();
+		
+		//instance.transform.setToLookAt(dir, spriteAxis);
 	}
 	
 	public void dispose() {

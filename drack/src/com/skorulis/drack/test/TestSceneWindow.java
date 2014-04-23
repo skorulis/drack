@@ -1,5 +1,7 @@
 package com.skorulis.drack.test;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
@@ -14,6 +16,7 @@ import com.skorulis.drack.effects.LaserEffect;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneWindow;
+import com.skorulis.scene.UpdateInfo;
 
 public class TestSceneWindow implements SceneWindow {
 
@@ -21,9 +24,11 @@ public class TestSceneWindow implements SceneWindow {
 	private PerspectiveCamera cam;
 	private ModelBatch modelBatch;
 	private Environment environment;
-	private LaserEffect laser;
+	private ArrayList<LaserEffect> lasers;
+	private SKAssetManager assets;
 	
 	public TestSceneWindow(SKAssetManager assets) {
+		this.assets = assets;
 		tgl = new TestGestureListener(this);
 		resized(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
@@ -33,7 +38,14 @@ public class TestSceneWindow implements SceneWindow {
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
         
-        laser = new LaserEffect(assets, new Vector3(2,0,0), new Vector3(-2,0,0));
+        lasers = new ArrayList<LaserEffect>();
+        addLaser(new Vector3(2,0,0), new Vector3(-2,0,0));
+        addLaser(new Vector3(2,0,0), new Vector3(-2,0,5));
+	}
+	
+	private void addLaser(Vector3 start, Vector3 end) {
+		LaserEffect laser = new LaserEffect(assets, start, end );
+		lasers.add(laser);
 	}
 	
 	@Override
@@ -43,7 +55,9 @@ public class TestSceneWindow implements SceneWindow {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		modelBatch.begin(cam);
 		RenderInfo ri = new RenderInfo(modelBatch, environment, cam);
-		laser.render(ri);
+		for(LaserEffect l : lasers) {
+			l.render(ri);
+		}
 		
 		modelBatch.end();
 	}
@@ -51,12 +65,18 @@ public class TestSceneWindow implements SceneWindow {
 	@Override
 	public void update(float delta) {
 		cam.update();
+		UpdateInfo ui = new UpdateInfo(delta, null);
+		ui.cam = cam;
+		
+		for(LaserEffect l : lasers) {
+			l.update(ui);
+		}
 	}
 
 	@Override
 	public void resized(int width, int height) {
 		cam = new PerspectiveCamera(67, width,height);
-        cam.position.set(2f, 2f, 2f);
+        cam.position.set(8f, 8f, 8f);
         cam.lookAt(0,0,0);
         cam.near = 0.1f;
         cam.far = 300f;

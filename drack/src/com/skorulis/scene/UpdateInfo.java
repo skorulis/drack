@@ -1,5 +1,6 @@
 package com.skorulis.scene;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.game.GameLogic;
 import com.skorulis.drack.game.GameScene;
@@ -10,6 +11,7 @@ public class UpdateInfo {
 
 	public float delta;
 	public GameLogic logic;
+	public Camera cam;
 	
 	public UpdateInfo(float delta, GameLogic logic) {
 		this.delta = delta;

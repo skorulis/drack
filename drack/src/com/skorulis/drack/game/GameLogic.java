@@ -116,9 +116,11 @@ public class GameLogic implements Disposable, SceneWindow {
 
 	@Override
 	public void update(float delta) {
-		UpdateInfo info = new UpdateInfo(delta, this);
 		isoCam().update(delta);
+		UpdateInfo info = new UpdateInfo(delta, this);
+		info.cam = isoCam.cam();
 		scene.update(info);
+		laser.update(info);
 	}
 
 	@Override
