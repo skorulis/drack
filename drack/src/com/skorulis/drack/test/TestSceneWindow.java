@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
@@ -34,7 +33,7 @@ public class TestSceneWindow implements SceneWindow {
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
         
-        laser = new LaserEffect(assets, new Vector3(0,0,0), new Vector3(5,0,0));
+        laser = new LaserEffect(assets, new Vector3(2,0,0), new Vector3(-2,0,0));
 	}
 	
 	@Override
