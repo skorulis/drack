@@ -123,8 +123,7 @@ public class GameLogic implements Disposable, SceneWindow {
 
 	@Override
 	public void resized(int width, int height) {
-		// TODO Auto-generated method stub
-		
+		isoCam().resize(width, height);
 	}
 
 	@Override

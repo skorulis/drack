@@ -13,6 +13,7 @@ import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.game.SceneGenerator;
 import com.skorulis.drack.map.MapGenerator;
 import com.skorulis.drack.player.Player;
+import com.skorulis.drack.test.TestSceneWindow;
 import com.skorulis.drack.ui.StyleManager;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.SKAssetManager;
@@ -31,6 +32,8 @@ public class DrackGame implements ApplicationListener, GameDelegate {
     private Effect2DLayer effects2D;
     private StyleManager styleManager;
     private GameLogic logic;
+    
+    private SceneWindow mainScene;
     private SceneWindow subScene;
 	
 	@Override
@@ -64,16 +67,19 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         effects2D.setCam(logic.isoCam());
         ui = new UIManager(assets,logic,def,styleManager,this);
         
+        mainScene = logic;
+        mainScene = new TestSceneWindow(assets);
         updateInputProcessor();
         
         textureGen = new TextureGenerator(assets, def);
+        
     }
 
 	private void updateInputProcessor() {
 		inputPlexer.clear();
 		inputPlexer.addProcessor(ui.stage());
-		if(logic != null && subScene == null) {
-			inputPlexer.addProcessor(new GestureDetector(logic.gestureListener()));
+		if(mainScene != null && subScene == null) {
+			inputPlexer.addProcessor(new GestureDetector(mainScene.gestureListener()));
 		}
 		if(subScene != null) {
 			inputPlexer.addProcessor(new GestureDetector(subScene.gestureListener()));
@@ -113,7 +119,9 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	}
 	
 	private void drawGame() {
-        logic.draw();
+        if(mainScene != null) {
+        	mainScene.draw();
+        }
         
         effects2D.stage().draw();
         ui.stage().draw();
@@ -126,6 +134,9 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	private void update() {
 		float delta = Gdx.graphics.getDeltaTime();
 		
+		if(mainScene != null) {
+			mainScene.update(delta);
+		}
 		logic.update(delta);
 		if(subScene != null) {
 			subScene.update(delta);
@@ -142,8 +153,11 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 		if(ui != null) {
 			ui.resized(width, height);
 		}
-		if(logic != null) {
-			logic.isoCam().resize(width, height);
+		if(mainScene != null) {
+			mainScene.resized(width, height);
+		}
+		if(subScene != null) {
+			subScene.resized(width, height);
 		}
 	}
 

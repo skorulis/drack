@@ -32,12 +32,7 @@ public class UnitEditor implements SceneWindow {
 	private Matrix4 oldTransform;
 	
 	public UnitEditor(SKAssetManager assets, DefManager def, CompositeUnit unit) {
-		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        cam.position.set(2f, 2f, 2f);
-        cam.lookAt(0,0,0);
-        cam.near = 0.1f;
-        cam.far = 300f;
-        cam.update();
+		resized(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.unit = unit;
         oldTransform = unit.relTransform().cpy();
         unit.relTransform().idt();
@@ -95,7 +90,12 @@ public class UnitEditor implements SceneWindow {
 
 	@Override
 	public void resized(int width, int height) {
-		// TODO Auto-generated method stub
+		cam = new PerspectiveCamera(67, width,height);
+        cam.position.set(2f, 2f, 2f);
+        cam.lookAt(0,0,0);
+        cam.near = 0.1f;
+        cam.far = 300f;
+        cam.update();
 	}
 
 	@Override
