@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
@@ -26,6 +27,7 @@ public class TestSceneWindow implements SceneWindow {
 	private Environment environment;
 	private ArrayList<LaserEffect> lasers;
 	private SKAssetManager assets;
+	private ModelInstance sphere;
 	
 	public TestSceneWindow(SKAssetManager assets) {
 		this.assets = assets;
@@ -39,8 +41,11 @@ public class TestSceneWindow implements SceneWindow {
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
         
         lasers = new ArrayList<LaserEffect>();
-        addLaser(new Vector3(2,0,0), new Vector3(-2,0,0));
-        addLaser(new Vector3(2,0,0), new Vector3(-2,0,5));
+        addLaser(new Vector3(1,0,0), new Vector3(4,0,0));
+        addLaser(new Vector3(0,1,0), new Vector3(0,4,0));
+        //addLaser(new Vector3(1.2f,0,0), new Vector3(-2,0,5));
+        
+        sphere = new ModelInstance(assets.getModel("cube1"));
 	}
 	
 	private void addLaser(Vector3 start, Vector3 end) {
@@ -58,7 +63,7 @@ public class TestSceneWindow implements SceneWindow {
 		for(LaserEffect l : lasers) {
 			l.render(ri);
 		}
-		
+		modelBatch.render(sphere,ri.environment);
 		modelBatch.end();
 	}
 
