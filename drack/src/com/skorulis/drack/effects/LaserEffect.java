@@ -147,7 +147,7 @@ public class LaserEffect implements Disposable {
 	}
 	
 	public void update(UpdateInfo ui) {
-		Vector3 camDir = ui.cam.direction.cpy();
+		/*Vector3 camDir = ui.cam.direction.cpy();
 		
 		Vector2 v1 = new Vector2(0,-1);
 		Vector2 v2 = new Vector2(camDir.x,camDir.z);
@@ -163,7 +163,7 @@ public class LaserEffect implements Disposable {
 			angle -= Math.PI;
 		}
 		
-		instance.transform.setToRotationRad(dir, angle);
+		instance.transform.setToRotationRad(dir, angle);*/
 		
 		//instance.transform.setToRotation(dir, 5);
 		//System.out.println("dir " + dir);

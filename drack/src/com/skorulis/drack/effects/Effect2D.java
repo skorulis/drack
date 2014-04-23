@@ -3,10 +3,12 @@ package com.skorulis.drack.effects;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.skorulis.scene.SceneNode;
 
 public class Effect2D {
 
 	private Actor actor;
+	private SceneNode nodeAnchor;
 	private Vector3 anchor;
 	private float life;
 	private Effect2DMovement movement;
@@ -36,11 +38,18 @@ public class Effect2D {
 		return anchor;
 	}
 	
+	public void setNodeAnchor(SceneNode node) {
+		this.nodeAnchor = node;
+	}
+	
 	public Actor actor() {
 		return actor;
 	}
 	
 	public void position(Camera camera) {
+		if(nodeAnchor != null) {
+			anchor = nodeAnchor.absTransform().getTranslation(new Vector3());
+		}
 		Vector3 screenPos = camera.project(anchor.cpy());
 		actor.setX(screenPos.x);
 		actor.setY(screenPos.y);

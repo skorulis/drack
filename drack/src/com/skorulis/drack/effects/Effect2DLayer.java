@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.skorulis.drack.game.IsoPerspectiveCamera;
+import com.skorulis.drack.ui.effects.HealthBar;
+import com.skorulis.drack.unit.Unit;
 
 public class Effect2DLayer {
 
@@ -50,9 +52,7 @@ public class Effect2DLayer {
 		Effect2D effect = new Effect2D(label,2);
 		effect.setAnchor(worldPos);
 		
-		effect.position(camera.cam());
-		effects.add(effect);
-		stage.addActor(effect.actor());
+		addEffect(effect);
 		
 		AlphaAction act = new AlphaAction();
 		act.setDuration(effect.life());
@@ -60,6 +60,23 @@ public class Effect2DLayer {
 		effect.actor().addAction(act);
 		
 		effect.setMovement(new Effect2DPopUpMovement(effect.life()));
+	}
+	
+	public HealthBar createHealthBar(Unit unit) {
+		HealthBar hb = new HealthBar(skin);
+		Effect2D effect = new Effect2D(hb, Integer.MAX_VALUE);
+		effect.setNodeAnchor(unit);
+		
+		addEffect(effect);
+		return hb;
+	}
+	
+	private void addEffect(Effect2D effect) {
+		effects.add(effect);
+		stage.addActor(effect.actor());
+		if(camera != null) {
+			effect.position(camera.cam());
+		}
 	}
 	
 	public void setCam(IsoPerspectiveCamera cam) {

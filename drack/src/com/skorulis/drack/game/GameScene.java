@@ -120,6 +120,9 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		this.units.add(u);
 		u.setDelegate(this);
 		u.absTransform().setTranslation(sq.getCentreLoc());
+		
+		effects2D.createHealthBar(u);
+		
 	}
 	
 	public DefManager def() {
