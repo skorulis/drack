@@ -23,6 +23,7 @@ import com.skorulis.drack.def.unit.BasicUnitDef;
 import com.skorulis.drack.def.unit.HullPointDef;
 import com.skorulis.drack.def.unit.WeaponDef;
 import com.skorulis.drack.def.unit.HullPointDef.HullPointType;
+import com.skorulis.drack.def.unit.WeaponDef.WeaponType;
 import com.skorulis.drack.effects.LaserEffect;
 import com.skorulis.drack.ui.building.BarracksUI;
 import com.skorulis.drack.ui.building.CommandUI;
@@ -70,6 +71,7 @@ public class DefManager {
 		WeaponDef def = new WeaponDef("gun");
 		def.turretLoc = new Vector3(0,0,0.675f);
 		def.modelName = "gun1";
+		def.type = WeaponType.WEAPON_MISSILE;
 		addDef(def);
 	}
 	

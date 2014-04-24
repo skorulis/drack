@@ -13,7 +13,6 @@ import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.game.SceneGenerator;
 import com.skorulis.drack.map.MapGenerator;
 import com.skorulis.drack.player.Player;
-import com.skorulis.drack.test.TestSceneWindow;
 import com.skorulis.drack.ui.StyleManager;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.SKAssetManager;
@@ -68,7 +67,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         ui = new UIManager(assets,logic,def,styleManager,this);
         
         mainScene = logic;
-        //mainScene = new TestSceneWindow(assets);
+        //mainScene = new com.skorulis.drack.test.TestSceneWindow(assets);
         updateInputProcessor();
         
         textureGen = new TextureGenerator(assets, def);

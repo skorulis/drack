@@ -146,9 +146,9 @@ public class LaserEffect implements Disposable {
 	}
 	
 	public void update(UpdateInfo ui) {
-		/*Vector3 camDir = ui.cam.direction.cpy();
+		Vector3 camDir = ui.cam.direction.cpy();
 		
-		Vector2 v1 = new Vector2(0,-1);
+		/*Vector2 v1 = new Vector2(0,-1);
 		Vector2 v2 = new Vector2(camDir.x,camDir.z);
 		
 		float cosX = v1.dot(v2) / v1.len() * v2.len();
@@ -169,6 +169,10 @@ public class LaserEffect implements Disposable {
 		//instance.transform.rotate(dir, ui.delta * 5);
 		
 		//instance.transform.setToLookAt(dir, spriteAxis);
+		
+		//camDir.scl(-1);
+		
+		//instance.transform.setToWorld(new Vector3(0,0,0), camDir , dir);
 	}
 	
 	public void dispose() {
