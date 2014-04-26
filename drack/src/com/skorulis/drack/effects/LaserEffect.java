@@ -35,7 +35,6 @@ public class LaserEffect implements Disposable {
 		this.startPos = start;
 		this.endPos = end;
 		dir = end.cpy().sub(start).nor();
-		System.out.println("DIR " + dir);
 		buildGeometry(assets);
 	}
 	
@@ -54,7 +53,7 @@ public class LaserEffect implements Disposable {
 	
 	private void buildGeometry(SKAssetManager assets) {
 		
-		Vector3 fwd = new Vector3(0,0,1);
+		Vector3 fwd = new Vector3(0,1,0);
 		Vector3 left = new Vector3(1,0,0);
 		
 		Mesh midMesh = createQuad(startPos.cpy().add(dir), endPos.cpy().sub(dir),fwd);
@@ -103,7 +102,6 @@ public class LaserEffect implements Disposable {
 		
 		Vector3 axis = spriteAxis.cpy().scl(0.5f);
 		
-		
 		int i = 0;
 		verts[i++] = start.x - axis.x; // x1
 		verts[i++] = start.y - axis.y; // y1
@@ -139,14 +137,13 @@ public class LaserEffect implements Disposable {
 	}
 	
 	public void render(RenderInfo ri) {
-		//ri.batch.getRenderContext().setBlending(true, GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		ri.batch.render(instance, ri.environment);
-		//mesh.render(shader, primitiveType);
-		
 	}
 	
 	public void update(UpdateInfo ui) {
 		Vector3 camDir = ui.cam.direction.cpy();
+		
+		
 		
 		/*Vector2 v1 = new Vector2(0,-1);
 		Vector2 v2 = new Vector2(camDir.x,camDir.z);
@@ -173,6 +170,8 @@ public class LaserEffect implements Disposable {
 		//camDir.scl(-1);
 		
 		//instance.transform.setToWorld(new Vector3(0,0,0), camDir , dir);
+	
+		//instance.transform.rotate(dir, 50*ui.delta);
 	}
 	
 	public void dispose() {

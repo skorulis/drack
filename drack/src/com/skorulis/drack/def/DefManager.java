@@ -24,6 +24,7 @@ import com.skorulis.drack.def.unit.HullPointDef;
 import com.skorulis.drack.def.unit.WeaponDef;
 import com.skorulis.drack.def.unit.HullPointDef.HullPointType;
 import com.skorulis.drack.def.unit.WeaponDef.WeaponType;
+import com.skorulis.drack.effects.BulletEffect;
 import com.skorulis.drack.effects.LaserEffect;
 import com.skorulis.drack.ui.building.BarracksUI;
 import com.skorulis.drack.ui.building.CommandUI;
@@ -282,6 +283,7 @@ public class DefManager {
 		for(HullAttachmentDef d: attachments.values()) {
 			models.add(d.modelName);
 		}
+		models.addAll(BulletEffect.models());
 		
 		models.add("cube1");
 		models.add("cube_transparent");

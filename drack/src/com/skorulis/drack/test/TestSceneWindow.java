@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector3;
+import com.skorulis.drack.effects.BulletEffect;
 import com.skorulis.drack.effects.LaserEffect;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
@@ -26,6 +27,7 @@ public class TestSceneWindow implements SceneWindow {
 	private ModelBatch modelBatch;
 	private Environment environment;
 	private ArrayList<LaserEffect> lasers;
+	private ArrayList<BulletEffect> bullets;
 	private SKAssetManager assets;
 	private ModelInstance sphere;
 	
@@ -41,16 +43,26 @@ public class TestSceneWindow implements SceneWindow {
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
         
         lasers = new ArrayList<LaserEffect>();
+        bullets = new ArrayList<BulletEffect>();
         addLaser(new Vector3(1,0,0), new Vector3(4,0,0));
-        addLaser(new Vector3(0,1,0), new Vector3(0,4,0));
+        //addLaser(new Vector3(0,0,1), new Vector3(0,0,4));
+        //addLaser(new Vector3(0,0,1), new Vector3(0,0,4));
         //addLaser(new Vector3(1.2f,0,0), new Vector3(-2,0,5));
         
         sphere = new ModelInstance(assets.getModel("cube1"));
+        
+        addBullet(new Vector3(0,0,5) ,new Vector3());
+        
 	}
 	
 	private void addLaser(Vector3 start, Vector3 end) {
 		LaserEffect laser = new LaserEffect(assets, start, end );
 		lasers.add(laser);
+	}
+	
+	private void addBullet(Vector3 start, Vector3 end) {
+		BulletEffect bullet = new BulletEffect(assets, start, end);
+		bullets.add(bullet);
 	}
 	
 	@Override
@@ -63,6 +75,10 @@ public class TestSceneWindow implements SceneWindow {
 		for(LaserEffect l : lasers) {
 			l.render(ri);
 		}
+		for(BulletEffect b : bullets) {
+			b.render(ri);
+		}
+		
 		modelBatch.render(sphere,ri.environment);
 		modelBatch.end();
 	}
@@ -75,6 +91,9 @@ public class TestSceneWindow implements SceneWindow {
 		
 		for(LaserEffect l : lasers) {
 			l.update(ui);
+		}
+		for(BulletEffect b : bullets) {
+			b.update(ui);
 		}
 	}
 

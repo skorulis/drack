@@ -67,7 +67,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         ui = new UIManager(assets,logic,def,styleManager,this);
         
         mainScene = logic;
-        //mainScene = new com.skorulis.drack.test.TestSceneWindow(assets);
+        mainScene = new com.skorulis.drack.test.TestSceneWindow(assets);
         updateInputProcessor();
         
         textureGen = new TextureGenerator(assets, def);
