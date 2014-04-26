@@ -1,6 +1,8 @@
 package com.skorulis.drack.unit;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Intersector;
@@ -17,6 +19,7 @@ import com.skorulis.drack.unit.action.AttackAction;
 import com.skorulis.drack.unit.action.FaceAction;
 import com.skorulis.drack.unit.action.MovementAction;
 import com.skorulis.drack.unit.action.UnitAction;
+import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
@@ -92,8 +95,9 @@ public class Unit implements SceneNode {
 	public void update(UpdateInfo info) {
 		UnitAction action = currentAction();
 		if(action != null) {
-			action.update(info.delta);
+			action.update(info);
 			if(action.finished()) {
+				action.stopAction();
 				actions.remove(0);
 				ArrayList<UnitAction> following = action.followingActions(info);
 				if(following != null) {
@@ -130,7 +134,7 @@ public class Unit implements SceneNode {
 	
 	public void addAction(UnitAction action) {
 		if(action.shouldReplace()) {
-			this.actions.clear();
+			clearActions();
 		}
 		this.actions.add(action);
 	}
@@ -141,6 +145,14 @@ public class Unit implements SceneNode {
 		for(ResourceQuantity rq : all) {
 			this.delegate.resourceAdded(this,rq);
 		}
+	}
+	
+	public void clearActions() {
+		UnitAction action = this.currentAction();
+		if(action != null) {
+			action.stopAction();
+		}
+		this.actions.clear();
 	}
 	
 	public void setDelegate(UnitDelegate delegate) {
@@ -188,6 +200,10 @@ public class Unit implements SceneNode {
 
 	public boolean isAlive() {
 		return currentHealth > 0;
+	}
+	
+	public Set<Weapon> allWeapons() {
+		return new HashSet<Weapon>();
 	}
 	
 }

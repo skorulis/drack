@@ -22,7 +22,7 @@ public class DungeonTower extends Building{
 			
 			info.logic.scene().addUnit(unit, squares.iterator().next());
 		}
-
+		this.owner.update(info.delta); //HACK, players need to be put somewhere else
 	}
 	
 	public Player dungeonEnemy() {

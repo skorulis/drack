@@ -1,8 +1,10 @@
 package com.skorulis.drack.unit.action;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import com.skorulis.drack.unit.Unit;
+import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.scene.UpdateInfo;
 
 public class AttackAction extends UnitAction {
@@ -15,8 +17,14 @@ public class AttackAction extends UnitAction {
 	}
 	
 	@Override
-	public void update(float delta) {
-		target.takeDamage(delta * 10);
+	public void update(UpdateInfo ui) {
+		Set<Weapon> weapons = unit.allWeapons();
+		for(Weapon w : weapons) {
+			if(w.isFinished()) {
+				w.startAttack(ui.assets(), unit, target);
+			}
+		}
+		target.takeDamage(ui.delta * 10);
 	}
 
 	@Override
@@ -36,6 +44,14 @@ public class AttackAction extends UnitAction {
 	
 	public Unit target() {
 		return target;
+	}
+	
+	public void stopAction() {
+		System.out.println("FINISH");
+		Set<Weapon> weapons = unit.allWeapons();
+		for(Weapon w : weapons) {
+			w.finishAttack();
+		}
 	}
 
 }

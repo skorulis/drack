@@ -22,8 +22,8 @@ public class MineAction extends UnitAction {
 		this.chunkSize = 2;
 	}
 	
-	public void update(float delta) {
-		time += delta;
+	public void update(UpdateInfo ui) {
+		time += ui.delta;
 		if(time > chunkSize) {
 			unit.addResources(mine.mine(chunkSize));
 			if(unit.resources().full()) {
@@ -63,5 +63,7 @@ public class MineAction extends UnitAction {
 		
 		return ret;
 	}
+	
+	public void stopAction() { }
 	
 }

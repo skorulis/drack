@@ -13,9 +13,10 @@ public abstract class UnitAction {
 		this.unit = avatar;
 	}
 	
-	public abstract void update(float delta);
+	public abstract void update(UpdateInfo ui);
 	public abstract boolean finished();
 	public abstract boolean shouldReplace();
+	public abstract void stopAction();
 	public abstract ArrayList<UnitAction> followingActions(UpdateInfo info);
 	
 }

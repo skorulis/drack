@@ -11,7 +11,7 @@ import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
 
-public class HullAttachment implements SceneNode{
+public class HullAttachment implements SceneNode {
 
 	protected HullPointDef hardPoint;
 	protected HullAttachmentDef def;

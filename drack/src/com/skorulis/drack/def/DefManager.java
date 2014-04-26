@@ -38,7 +38,6 @@ public class DefManager {
 	private Map<String, BasicUnitDef> units;
 	private Map<String, CompositeUnitDef> compositeUnits;
 	private Map<String, HullAttachmentDef> attachments;
-	private Map<String, WeaponDef> weapons;
 	
 	public DefManager() {
 		buildings = new HashMap<String, BuildingDef>();
@@ -47,7 +46,6 @@ public class DefManager {
 		compositeUnits = new HashMap<String, CompositeUnitDef>();
 		hulls = new HashMap<String, HullDef>();
 		attachments = new HashMap<String, HullAttachmentDef>();
-		weapons = new HashMap<String, WeaponDef>();
 		
 		typeMapping = new HashMap<Class<? extends BaseDef>, Map<String,? extends BaseDef>>();
 		typeMapping.put(BuildingDef.class, buildings);
@@ -56,7 +54,6 @@ public class DefManager {
 		typeMapping.put(HullDef.class, hulls);
 		typeMapping.put(CompositeUnitDef.class, compositeUnits);
 		typeMapping.put(HullAttachmentDef.class, attachments);
-		typeMapping.put(WeaponDef.class, weapons);
 		
 		createAttachments();
 		createWeapons();
@@ -208,7 +205,7 @@ public class DefManager {
 	
 	private <T extends BaseDef> void addDef(T def) {
 		@SuppressWarnings("unchecked")
-		Map<String, T> map = (Map<String, T>) typeMapping.get(def.getClass());
+		Map<String, T> map = (Map<String, T>) typeMapping.get(def.getTypeClass());
 		if(map == null) {
 			throw new IllegalArgumentException("Don't know where to put " + def);
 		}
@@ -220,7 +217,7 @@ public class DefManager {
 	}
 	
 	public WeaponDef getWeapon(String name) {
-		return get(name,WeaponDef.class);
+		return (WeaponDef) get(name,HullAttachmentDef.class);
 	}
 	
 	public HullDef getHull(String name) {
@@ -283,9 +280,6 @@ public class DefManager {
 		}
 		
 		for(HullAttachmentDef d: attachments.values()) {
-			models.add(d.modelName);
-		}
-		for(WeaponDef d : weapons.values()) {
 			models.add(d.modelName);
 		}
 		

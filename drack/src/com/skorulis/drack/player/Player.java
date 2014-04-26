@@ -1,6 +1,7 @@
 package com.skorulis.drack.player;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import com.badlogic.gdx.math.Vector3;
@@ -68,6 +69,16 @@ public class Player {
 			}
 		}
 		return best;
+	}
+	
+	public void update(float delta) {
+		Iterator<Unit> it = ownedUnits.iterator();
+		while(it.hasNext()) {
+			Unit u = it.next();
+			if(!u.isAlive()) {
+				it.remove();
+			}
+		}
 	}
 	
 	

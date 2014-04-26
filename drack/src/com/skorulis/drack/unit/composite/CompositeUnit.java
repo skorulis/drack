@@ -63,6 +63,16 @@ public class CompositeUnit extends Unit {
 		}
 		return null;
 	}
+	
+	public Set<Weapon> allWeapons() {
+		HashSet<Weapon> all = new HashSet<Weapon>();
+		for(HullAttachment att : attachments) {
+			if(att instanceof Weapon) {
+				all.add((Weapon)att);
+			}
+		}
+		return all;
+	}
 
 
 }

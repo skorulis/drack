@@ -13,7 +13,7 @@ public class DepositAction extends UnitAction {
 		super(avatar);
 	}
 
-	public void update(float delta) {
+	public void update(UpdateInfo ui) {
 		this.unit.owner().resources().add(this.unit.resources());
 		this.unit.resources().clear();
 		this.finished = true;
@@ -30,5 +30,7 @@ public class DepositAction extends UnitAction {
 	public ArrayList<UnitAction> followingActions(UpdateInfo info) {
 		return null;
 	}
+	
+	public void stopAction() { }
 	
 }

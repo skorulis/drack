@@ -17,7 +17,7 @@ public class FaceAction extends UnitAction {
 	}
 
 	@Override
-	public void update(float delta) {
+	public void update(UpdateInfo ui) {
 		Vector3 loc = unit.currentPosition();
 		Vector3 dir = target.cpy().sub(loc);
 		dir.y = 0;
@@ -41,5 +41,7 @@ public class FaceAction extends UnitAction {
 	public ArrayList<UnitAction> followingActions(UpdateInfo info) {
 		return null;
 	}
+	
+	public void stopAction() { }
 	
 }
