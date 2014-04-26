@@ -91,6 +91,7 @@ public class UIManager extends WidgetGroup {
 		if(buildingUI != null) {
 			buildingUI.init(style.gameSkin(), this);
 			buildingUI.setBuilding(building);
+			
 			this.addActor(buildingUI);
 		}
 		
@@ -110,6 +111,11 @@ public class UIManager extends WidgetGroup {
 	public void layout() {
 		helper.alignRight(playerUI, 10);
 		helper.alignBottom(playerUI, 10);
+		
+		if(buildingUI != null) {
+			helper.centreChildX(buildingUI);
+			
+		}
 	}
 	
 	public void showDialog(ModalDialog dialog) {

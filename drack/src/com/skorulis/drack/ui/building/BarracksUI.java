@@ -25,7 +25,8 @@ public class BarracksUI extends BuildingUI {
 			}
 		});
 		
-		this.addActor(hireButton);
+		buttonGroup.addActor(hireButton);
+		layout();
 	}
 	
 	private void hirePressed() {
@@ -38,7 +39,6 @@ public class BarracksUI extends BuildingUI {
 	
 	public void layout() {
 		super.layout();
-		helper.centreChildX(hireButton);
 	}
 	
 }

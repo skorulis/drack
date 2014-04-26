@@ -45,6 +45,7 @@ public class MineUI extends BuildingUI {
 				assignClicked();
 			}
 		});	
+		layout();
 	}
 	
 	public void assignClicked() {

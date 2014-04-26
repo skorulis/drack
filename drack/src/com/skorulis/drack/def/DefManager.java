@@ -23,6 +23,7 @@ import com.skorulis.drack.def.attachment.WeaponDef;
 import com.skorulis.drack.def.attachment.HullPointDef.HullPointType;
 import com.skorulis.drack.def.attachment.WeaponDef.WeaponType;
 import com.skorulis.drack.def.building.BuildingDef;
+import com.skorulis.drack.def.building.CompositeBuildingDef;
 import com.skorulis.drack.def.unit.CompositeUnitDef;
 import com.skorulis.drack.def.unit.HullDef;
 import com.skorulis.drack.def.unit.BasicUnitDef;
@@ -66,6 +67,7 @@ public class DefManager {
 		createUnits();
 		createHulls();
 		createCompositeUnits();
+		createCompositeBuildings();
 	}
 	
 	private void createWeapons() {
@@ -184,14 +186,15 @@ public class DefManager {
 		def.modelName = "round_tower";
 		def.width = def.depth = 2;
 		addDef(def);
-		
-		def = new BuildingDef("turret");
+	}
+	
+	private void createCompositeBuildings() {
+		CompositeBuildingDef def = new CompositeBuildingDef("turret");
 		def.buildingClass = TurretBuilding.class;
 		def.uiClass = TurretUI.class;
 		def.modelName = "turret";
 		def.isBuildable = true;
 		addDef(def);
-		
 	}
 	
 	private void createResources() {

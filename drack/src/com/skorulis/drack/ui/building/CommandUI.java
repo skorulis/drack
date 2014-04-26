@@ -22,7 +22,8 @@ public class CommandUI extends BuildingUI {
 			}
 		});
 		
-		this.addActor(unitButton);
+		buttonGroup.addActor(unitButton);
+		layout();
 	}
 	
 	private void unitPressed() {
@@ -34,7 +35,6 @@ public class CommandUI extends BuildingUI {
 	
 	public void layout() {
 		super.layout();
-		helper.centreChildX(unitButton);
 	}
 	
 }
