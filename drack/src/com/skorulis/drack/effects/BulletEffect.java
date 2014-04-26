@@ -21,18 +21,28 @@ public class BulletEffect {
 		this.startPos = start;
 		this.endPos = end;
 		dir = end.cpy().sub(start).nor();
-		instance = new ModelInstance(assets.getModel("cone_helper"));
+		instance = new ModelInstance(assets.getModel("ball_sprite"));
 		instance.transform.setToTranslation(startPos);
 		instance.materials.get(0).set(new BlendingAttribute());
 	}
 	
 	public void render(RenderInfo ri) {
-		ri.batch.render(instance, ri.environment);
+		ri.batch.render(instance);
 	}
 	
 	public void update(UpdateInfo ui) {
 		Vector3 loc = instance.transform.getTranslation(new Vector3());
-		Vector3 camDir = ui.cam.position.cpy().sub(loc).scl(-1);
+		Vector3 camDir = ui.cam.position.cpy().sub(loc).nor();
+		
+		Vector3 standard = new Vector3(-1,0,0);
+		
+		float angle = standard.dot(camDir);
+		
+		angle = (float) Math.acos(angle);
+		Vector3 cross = standard.crs(camDir);
+		instance.transform.setToTranslation(startPos);
+		instance.transform.rotateRad(cross, angle);
+		
 		
 		
 	}
