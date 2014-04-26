@@ -15,20 +15,23 @@ import com.skorulis.drack.building.DungeonTower;
 import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.building.Tower;
 import com.skorulis.drack.building.Tree;
+import com.skorulis.drack.building.TurretBuilding;
 import com.skorulis.drack.building.Vault;
+import com.skorulis.drack.def.attachment.HullAttachmentDef;
+import com.skorulis.drack.def.attachment.HullPointDef;
+import com.skorulis.drack.def.attachment.WeaponDef;
+import com.skorulis.drack.def.attachment.HullPointDef.HullPointType;
+import com.skorulis.drack.def.attachment.WeaponDef.WeaponType;
+import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.def.unit.CompositeUnitDef;
-import com.skorulis.drack.def.unit.HullAttachmentDef;
 import com.skorulis.drack.def.unit.HullDef;
 import com.skorulis.drack.def.unit.BasicUnitDef;
-import com.skorulis.drack.def.unit.HullPointDef;
-import com.skorulis.drack.def.unit.WeaponDef;
-import com.skorulis.drack.def.unit.HullPointDef.HullPointType;
-import com.skorulis.drack.def.unit.WeaponDef.WeaponType;
 import com.skorulis.drack.effects.BulletEffect;
 import com.skorulis.drack.effects.LaserEffect;
 import com.skorulis.drack.ui.building.BarracksUI;
 import com.skorulis.drack.ui.building.CommandUI;
 import com.skorulis.drack.ui.building.MineUI;
+import com.skorulis.drack.ui.building.TurretUI;
 
 public class DefManager {
 
@@ -89,8 +92,8 @@ public class DefManager {
 		hull.baseSpeed =  10;
 		hull.baseCapacity = 5;
 		
-		hull.addPoint(new HullPointDef(new Vector3(0.497f,0.7f,0), 90, HullPointType.SMALL));
-		hull.addPoint(new HullPointDef(new Vector3(-0.497f,0.7f,0), 270, HullPointType.SMALL));
+		hull.addPoint(new HullPointDef(new Vector3(0.497f,0.7f,0), 270, HullPointType.SMALL));
+		hull.addPoint(new HullPointDef(new Vector3(-0.497f,0.7f,0), 90, HullPointType.SMALL));
 		
 		addDef(hull);
 	}
@@ -180,6 +183,13 @@ public class DefManager {
 		def.buildingClass = DungeonTower.class;
 		def.modelName = "round_tower";
 		def.width = def.depth = 2;
+		addDef(def);
+		
+		def = new BuildingDef("turret");
+		def.buildingClass = TurretBuilding.class;
+		def.uiClass = TurretUI.class;
+		def.modelName = "turret";
+		def.isBuildable = true;
 		addDef(def);
 		
 	}

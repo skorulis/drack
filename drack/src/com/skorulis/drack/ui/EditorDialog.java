@@ -2,7 +2,7 @@ package com.skorulis.drack.ui;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
-import com.skorulis.drack.def.unit.HullAttachmentDef;
+import com.skorulis.drack.def.attachment.HullAttachmentDef;
 import com.skorulis.drack.ui.component.ComponentList;
 import com.skorulis.drack.ui.component.ComponentListDelegate;
 import com.skorulis.drack.unit.composite.CompositeUnit;

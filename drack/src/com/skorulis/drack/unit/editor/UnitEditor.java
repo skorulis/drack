@@ -2,6 +2,7 @@ package com.skorulis.drack.unit.editor;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
@@ -12,7 +13,7 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Matrix4;
 import com.skorulis.drack.def.DefManager;
-import com.skorulis.drack.def.unit.HullPointDef;
+import com.skorulis.drack.def.attachment.HullPointDef;
 import com.skorulis.drack.unit.composite.CompositeUnit;
 import com.skorulis.drack.unit.composite.HullAttachment;
 import com.skorulis.gdx.SKAssetManager;

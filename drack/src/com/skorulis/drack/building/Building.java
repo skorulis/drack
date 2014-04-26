@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
-import com.skorulis.drack.def.BuildingDef;
+import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.player.Player;
 import com.skorulis.gdx.SKAssetManager;
@@ -34,6 +34,7 @@ public class Building implements SceneNode{
 	public void setTranslation(Vector3 translation) {
 		buildingInstance.transform.setToTranslation(translation.x, 0, translation.z);
 	}
+	
 	@Override
 	public Matrix4 absTransform() {
 		return buildingInstance.transform;

@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.skorulis.drack.def.unit.HullAttachmentDef;
+import com.skorulis.drack.def.attachment.HullAttachmentDef;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.ui.LayoutHelper;
 

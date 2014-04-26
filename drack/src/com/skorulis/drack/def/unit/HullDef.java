@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.skorulis.drack.def.BaseDef;
+import com.skorulis.drack.def.attachment.HullPointDef;
 
 public class HullDef extends BaseDef {
 	

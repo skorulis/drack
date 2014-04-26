@@ -1,6 +1,6 @@
 package com.skorulis.drack.ui.component;
 
-import com.skorulis.drack.def.unit.HullAttachmentDef;
+import com.skorulis.drack.def.attachment.HullAttachmentDef;
 
 public interface ComponentListDelegate {
 

@@ -1,7 +1,7 @@
 package com.skorulis.drack.unit.composite;
 
 import com.badlogic.gdx.math.Vector3;
-import com.skorulis.drack.def.unit.HullAttachmentDef;
+import com.skorulis.drack.def.attachment.HullAttachmentDef;
 import com.skorulis.drack.effects.LaserEffect;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.gdx.SKAssetManager;

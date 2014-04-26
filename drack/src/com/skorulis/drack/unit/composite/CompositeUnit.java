@@ -3,8 +3,8 @@ package com.skorulis.drack.unit.composite;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.skorulis.drack.def.attachment.HullPointDef;
 import com.skorulis.drack.def.unit.CompositeUnitDef;
-import com.skorulis.drack.def.unit.HullPointDef;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.gdx.SKAssetManager;

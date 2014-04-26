@@ -1,6 +1,7 @@
 package com.skorulis.drack;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -10,11 +11,11 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.Building;
-import com.skorulis.drack.def.BuildingDef;
 import com.skorulis.drack.def.DefManager;
-import com.skorulis.drack.def.unit.HullAttachmentDef;
-import com.skorulis.drack.def.unit.HullPointDef;
-import com.skorulis.drack.def.unit.HullPointDef.HullPointType;
+import com.skorulis.drack.def.attachment.HullAttachmentDef;
+import com.skorulis.drack.def.attachment.HullPointDef;
+import com.skorulis.drack.def.attachment.HullPointDef.HullPointType;
+import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.game.IsoPerspectiveCamera;
 import com.skorulis.drack.unit.composite.HullAttachment;
 import com.skorulis.gdx.SKAssetManager;

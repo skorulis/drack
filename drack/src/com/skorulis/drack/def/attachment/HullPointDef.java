@@ -1,4 +1,4 @@
-package com.skorulis.drack.def.unit;
+package com.skorulis.drack.def.attachment;
 
 import com.badlogic.gdx.math.Vector3;
 

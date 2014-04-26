@@ -1,6 +1,7 @@
-package com.skorulis.drack.def;
+package com.skorulis.drack.def.building;
 
 import com.skorulis.drack.building.Building;
+import com.skorulis.drack.def.BaseDef;
 import com.skorulis.drack.ui.building.BuildingUI;
 import com.skorulis.gdx.SKAssetManager;
 
