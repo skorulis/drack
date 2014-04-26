@@ -71,6 +71,12 @@ public class DefManager {
 		def.modelName = "gun1";
 		def.type = WeaponType.WEAPON_MISSILE;
 		addDef(def);
+		
+		def = new WeaponDef("beam");
+		def.turretLoc = new Vector3(0,0,0.675f);
+		def.modelName = "beam1";
+		def.type = WeaponType.WEAPON_LASER;
+		addDef(def);
 	}
 	
 	private void createAttachments() {

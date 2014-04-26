@@ -2,14 +2,17 @@ package com.skorulis.drack.ui;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
+import com.skorulis.drack.ui.component.ComponentList;
 import com.skorulis.drack.unit.composite.CompositeUnit;
 import com.skorulis.drack.unit.editor.UnitEditor;
+import com.skorulis.gdx.ui.LayoutHelper;
 
 public class EditorDialog extends ModalDialog {
 
 	private WidgetGroup mainContent;
 	private UnitEditor editor;
-	
+	private ComponentList list;
+	private LayoutHelper contentHelper;
 	
 	public EditorDialog(UIManager ui, CompositeUnit unit) {
 		super(ui);
@@ -17,8 +20,14 @@ public class EditorDialog extends ModalDialog {
 		mainContent = new WidgetGroup();
 		this.setContent(mainContent);
 		
+		contentHelper = new LayoutHelper(mainContent);
+		
 		editor = new UnitEditor(ui.assets(), ui.def(),unit);
 		ui.delegate().setSubScene(editor);
+		
+		list = new ComponentList(ui);
+		list.setHeight(116);
+		this.mainContent.addActor(list);
 	}
 	
 	public void act(float delta) {
@@ -31,6 +40,8 @@ public class EditorDialog extends ModalDialog {
 	
 	public void layout() {
 		this.layoutHelper.centreFill(mainContent, 40);
+		contentHelper.centreFillX(list, 8);
+		
 		super.layout();
 	}
 	

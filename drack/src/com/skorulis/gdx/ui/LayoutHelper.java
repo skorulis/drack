@@ -31,9 +31,8 @@ public class LayoutHelper {
 	}
 	
 	public void centreChildX(Actor actor) {
-		Layout layout = (Layout) actor;
-		float w = layout.getPrefWidth();
-		float h = layout.getPrefHeight();
+		float w = actor.getWidth();
+		float h = actor.getHeight();
 		
 		actor.setBounds( (widget.getWidth() - w)/2 , actor.getY(), w, h);
 	}
@@ -57,6 +56,11 @@ public class LayoutHelper {
 		actor.setY(padding);
 		actor.setWidth(widget.getWidth() - padding * 2);
 		actor.setHeight(widget.getHeight() - padding * 2);
+	}
+	
+	public void centreFillX(Actor actor, float padding) {
+		actor.setX(padding);
+		actor.setWidth(widget.getWidth() - padding * 2);
 	}
 	
 }

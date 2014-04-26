@@ -1,7 +1,6 @@
 package com.skorulis.drack;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -9,10 +8,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.BuildingDef;
 import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.def.unit.HullAttachmentDef;
+import com.skorulis.drack.def.unit.HullPointDef;
+import com.skorulis.drack.def.unit.HullPointDef.HullPointType;
 import com.skorulis.drack.game.IsoPerspectiveCamera;
+import com.skorulis.drack.unit.composite.HullAttachment;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 
@@ -23,6 +27,7 @@ public class TextureGenerator {
 	private static int width = 96;
 	private static int height = 96;
 	private ArrayList<BuildingDef> buildings;
+	private ArrayList<HullAttachmentDef> attachments;
 	private SKAssetManager assets;
 	
 	public TextureGenerator(SKAssetManager assets,DefManager def) {
@@ -31,6 +36,7 @@ public class TextureGenerator {
 		modelBatch = new ModelBatch();
 		
 		buildings = def.buildableBuildings();
+		attachments = new ArrayList<HullAttachmentDef>(def.allAttachments());
 	}
 	
 	public void render(Environment environment) {
@@ -45,14 +51,30 @@ public class TextureGenerator {
         
         modelBatch.begin(isoCam.cam());
         
-        BuildingDef bd = buildings.remove(0);
-        renderBuilding(bd, ri);
+        String textureName = null;
+        if(buildings.size() > 0) {
+        	textureName = renderNextBuilding(ri);
+        } else if(attachments.size() > 0) {
+        	textureName = renderNextAttachment(ri); 
+        }
         
         modelBatch.end();
         frameBuffer.end();
         
         Texture t = frameBuffer.getColorBufferTexture();
-        assets.addAsset(bd.iconName(), Texture.class, t);
+        assets.addAsset(textureName, Texture.class, t);
+	}
+	
+	private String renderNextBuilding(RenderInfo ri) {
+		BuildingDef bd = buildings.remove(0);
+		renderBuilding(bd, ri);
+		return bd.iconName();
+	}
+	
+	private String renderNextAttachment(RenderInfo ri) {
+		HullAttachmentDef def = attachments.remove(0);
+		renderAttachment(def, ri);
+		return def.iconName();
 	}
 	
 	private void renderBuilding(BuildingDef def, RenderInfo ri) {
@@ -61,7 +83,14 @@ public class TextureGenerator {
         building.render(ri);
 	}
 	
+	private void renderAttachment(HullAttachmentDef def, RenderInfo ri) {
+		HullPointDef hpd = new HullPointDef(new Vector3(2,2,2), 0, HullPointType.SMALL);
+		HullAttachment att = def.create(assets, hpd);
+		att.absTransform().setTranslation(2.5f, 3.5f, 2.5f);
+		att.render(ri);
+	}
+	
 	public boolean finished() {
-		return buildings.size() == 0;
+		return buildings.size() == 0 && attachments.size() == 0;
 	}
 }

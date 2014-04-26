@@ -32,6 +32,10 @@ public class HullAttachmentDef extends BaseDef {
 		return null;
 	}
 	
+	public String iconName() {
+		return name() + "_attachment_icon";
+	}
+	
 	public Class<? extends BaseDef> getTypeClass() {
 		return HullAttachmentDef.class;
 	}
