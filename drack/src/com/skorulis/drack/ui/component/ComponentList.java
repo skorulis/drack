@@ -21,8 +21,10 @@ public class ComponentList extends WidgetGroup {
 	private HorizontalGroup group;
 	private Image image;
 	private LayoutHelper helper;
+	private ComponentListDelegate delegate;
 	
-	public ComponentList(UIManager ui) {
+	public ComponentList(UIManager ui,ComponentListDelegate delegate) {
+		this.delegate = delegate;
 		image = new Image(ui.style().gameSkin().getDrawable("off_white_bg"));
 		
 		this.addActor(image);
@@ -39,14 +41,14 @@ public class ComponentList extends WidgetGroup {
 		Collection<HullAttachmentDef> attachments = ui.def().allAttachments();
 		Iterator<HullAttachmentDef> it = attachments.iterator();
 		while(it.hasNext()) {
-			HullAttachmentDef had = it.next();
+			final HullAttachmentDef had = it.next();
 			Texture texture = ui.assets().get(had.iconName(), Texture.class);
 			
 			ImageButton button = new ImageButton(ui.style().createImageStyle(texture,true));
 			group.addActor(button);
 			button.addListener(new ClickListener() {
 				public void clicked(InputEvent event, float x, float y) {
-					
+					ComponentList.this.delegate.componentSelected(had);
 				}
 			});
 			

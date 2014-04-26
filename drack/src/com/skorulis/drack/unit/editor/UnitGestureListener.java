@@ -27,10 +27,7 @@ public class UnitGestureListener implements GestureListener {
 		for(HullPointNode hpn : editor.pointNodes) {
 			if(hpn.intersect(ray, new Vector3()) != null) {
 				hpn.setSelected(true);
-				HullAttachmentDef had = editor.def().getAttachment("gun");
-				HullAttachment att = had.create(editor.assets(), hpn.def());
-				editor.unit().addAttachment(att);
-				hpn.setHidden(true);
+				
 			} else {
 				hpn.setSelected(false);
 			}

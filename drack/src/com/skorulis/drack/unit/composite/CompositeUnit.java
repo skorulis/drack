@@ -36,6 +36,10 @@ public class CompositeUnit extends Unit {
 	}
 	
 	public void addAttachment(HullAttachment att) {
+		HullAttachment old = attachmentAt(att.hardPoint());
+		if(old != null) {
+			attachments.remove(old);
+		}
 		attachments.add(att);
 	}
 	

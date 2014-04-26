@@ -2,7 +2,6 @@ package com.skorulis.gdx.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
-import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 
 public class LayoutHelper {
 

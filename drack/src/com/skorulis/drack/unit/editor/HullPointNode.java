@@ -18,6 +18,7 @@ public class HullPointNode implements SceneNode {
 	private HullPointDef def;
 	private ModelInstance instance;
 	private boolean hidden;
+	private boolean isSelected;
 	
 	public HullPointNode(SKAssetManager assets, HullPointDef def) {
 		this.def = def;
@@ -57,11 +58,16 @@ public class HullPointNode implements SceneNode {
 	}
 	
 	public void setSelected(boolean selected) {
+		this.isSelected = selected;
 		if(selected) {
 			this.instance.materials.get(0).set(new ColorAttribute(ColorAttribute.Diffuse,Color.RED));
 		} else {
 			this.instance.materials.get(0).set(new ColorAttribute(ColorAttribute.Diffuse,Color.BLACK));
 		}
+	}
+	
+	public boolean isSelected() {
+		return isSelected;
 	}
 	
 	public HullPointDef def() {

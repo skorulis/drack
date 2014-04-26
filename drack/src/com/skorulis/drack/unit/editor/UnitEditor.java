@@ -110,4 +110,13 @@ public class UnitEditor implements SceneWindow {
 	public void returnUnitToMap() {
 		unit.relTransform().set(oldTransform);
 	}
+	
+	public HullPointNode selectedNode() {
+		for(HullPointNode hpn : pointNodes) {
+			if(hpn.isSelected()) {
+				return hpn;
+			}
+		}
+		return null;
+	}
 }
