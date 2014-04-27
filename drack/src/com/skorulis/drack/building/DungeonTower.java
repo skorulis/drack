@@ -17,8 +17,7 @@ public class DungeonTower extends Building{
 	public void update(UpdateInfo info) {
 		if(this.owner.ownedUnits().size() < 1) {
 			Set<MapSquare> squares = info.map().squaresAround(this);
-			
-			Unit unit = new Unit(info.assets(), dungeonEnemy(), info.def().getUnit("enemy")); 
+			Unit unit = info.def().getUnit("enemy").create(info.assets(), dungeonEnemy()); 
 			
 			info.logic.scene().addUnit(unit, squares.iterator().next());
 		}

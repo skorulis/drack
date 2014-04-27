@@ -42,14 +42,6 @@ public class Unit implements SceneNode {
 		this.currentHealth = maxHealth();
 	}
 	
-	public Unit(SKAssetManager assets, Player owner, UnitDef def) {
-		this();
-		
-		setDef(def);
-		setOwner(owner);
-		loadAssets(assets);
-	}
-	
 	public void loadAssets(SKAssetManager assets) { 
 		instance = new ModelInstance(assets.getModel(def.modelName()));
 	}

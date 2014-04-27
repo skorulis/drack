@@ -1,35 +1,39 @@
-package com.skorulis.drack.unit.composite;
+package com.skorulis.drack.composite;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.skorulis.drack.composite.AttachmentContainer;
 import com.skorulis.drack.def.attachment.HardPointDef;
-import com.skorulis.drack.def.unit.CompositeUnitDef;
-import com.skorulis.drack.player.Player;
-import com.skorulis.drack.unit.Unit;
-import com.skorulis.gdx.SKAssetManager;
+import com.skorulis.drack.unit.composite.HullAttachment;
+import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.scene.RenderInfo;
+import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
 
-public class CompositeUnit extends Unit {
+public class AttachmentContainer {
 
-	private AttachmentContainer attContainer;
-	private Set<HullAttachment> attachments;
+	private Set<HardPointDef> hardPoints;
+	private final Set<HullAttachment> attachments;
+	private final SceneNode node;
 	
-	public CompositeUnit() {
+	public AttachmentContainer(SceneNode node) {
+		this.node = node;
 		this.attachments = new HashSet<HullAttachment>();
-		attContainer = new AttachmentContainer(this);
 	}
 	
-	public CompositeUnitDef compDef() {
-		return (CompositeUnitDef) this.def;
+	public void setHardPoints(Set<HardPointDef> hardPoints) {
+		this.hardPoints = hardPoints;
 	}
 	
 	public void render(RenderInfo ri) {
-		super.render(ri);
 		for(HullAttachment att: attachments) {
 			att.render(ri);
+		}
+	}
+	
+	public void update(UpdateInfo ui) {
+		for(HullAttachment att: attachments) {
+			att.updatePosition(node);
 		}
 	}
 	
@@ -50,15 +54,8 @@ public class CompositeUnit extends Unit {
 		return null;
 	}
 	
-	public void update(UpdateInfo ui) {
-		super.update(ui);
-		for(HullAttachment att: attachments) {
-			att.updatePosition(this);
-		}
-	}
-	
 	public HardPointDef emptyPoint() {
-		for(HardPointDef hpd: compDef().hull.hardPoints) {
+		for(HardPointDef hpd: hardPoints) {
 			if(attachmentAt(hpd) == null) {
 				return hpd;
 			}
@@ -75,6 +72,5 @@ public class CompositeUnit extends Unit {
 		}
 		return all;
 	}
-
-
+	
 }

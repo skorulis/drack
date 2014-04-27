@@ -23,7 +23,6 @@ import com.skorulis.scene.SceneWindow;
 public class CompositeEditor implements SceneWindow {
 	
 	private PerspectiveCamera cam;
-	private CompositeUnit unit;
 	private ModelBatch modelBatch;
 	private Environment environment;
 	private UnitGestureListener ugl;
@@ -31,6 +30,8 @@ public class CompositeEditor implements SceneWindow {
 	public Set<HardPointNode> pointNodes;
 	private SKAssetManager assets;
 	private Matrix4 oldTransform;
+	
+	private CompositeUnit unit;
 	
 	public CompositeEditor(SKAssetManager assets, DefManager def, CompositeUnit unit) {
 		resized(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
