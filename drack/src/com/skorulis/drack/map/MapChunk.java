@@ -13,23 +13,25 @@ import com.skorulis.scene.UpdateInfo;
 
 public class MapChunk implements SceneNode {
 	
-	private Vector2 offset;
+	private int offsetX;
+	private int offsetZ;
 	private MapSquare[][] squares;
 	private Matrix4 transform;
 	public static final int CHUNK_SIZE = 32;
 	public BoundingBox boundingBox;
 	
 	public MapChunk(Vector2 offset, SKAssetManager assets) {
-		this.offset = offset;
+		this.offsetX = (int) offset.x;
+		this.offsetZ = (int) offset.y;
 		squares = new MapSquare[CHUNK_SIZE][CHUNK_SIZE];
 		
 		for(int i = 0; i < CHUNK_SIZE; ++i) {
 			for(int j = 0; j < CHUNK_SIZE; ++j) {
-				squares[i][j] = new MapSquare(assets,(int)offset.x + j,(int)offset.y + i);
+				squares[i][j] = new MapSquare(assets,offsetX + j,offsetZ + i);
 			}
 		}
 		transform = new Matrix4();
-		boundingBox = new BoundingBox(new Vector3(offset.x,-1,offset.y), new Vector3(offset.x + CHUNK_SIZE, 5, offset.y + CHUNK_SIZE));
+		boundingBox = new BoundingBox(new Vector3(offsetX - 0.5f,-1,offsetZ - 0.5f), new Vector3(offsetX + CHUNK_SIZE, 5, offsetZ + CHUNK_SIZE));
 	}
 
 	@Override
@@ -84,6 +86,10 @@ public class MapChunk implements SceneNode {
 				squares[i][j].update(info);
 			}
 		}
+	}
+	
+	public MapSquare squareAt(int x, int z) {
+		return squares[z - offsetZ][x - offsetX];
 	}
 
 	@Override

@@ -30,7 +30,6 @@ public class MapSquare implements SceneNode {
 		groundInstance = new ModelInstance(assets.getModel("block"));
 		groundInstance.transform.setToTranslation(translation);
 		boundingBox = new BoundingBox(new Vector3(x-0.5f,-1,z-0.5f), new Vector3(x+0.5f,0,z+0.5f));
-		
 	}
 	
 	@Override

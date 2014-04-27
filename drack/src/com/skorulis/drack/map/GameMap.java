@@ -20,7 +20,6 @@ public class GameMap implements SceneNode, Disposable{
 
 	private Matrix4 transform;
 	private int width,depth;
-	private MapSquare[][] squares;
 	private SKAssetManager assets;
 	private MapChunk[][] chunks;
 	
@@ -28,12 +27,6 @@ public class GameMap implements SceneNode, Disposable{
 		this.width = width;
 		this.depth = depth;
 		this.assets = assets;
-		squares = new MapSquare[depth][width];
-		for(int i = 0; i < depth; ++i) {
-			for(int j = 0; j < width; ++j) {
-				squares[i][j] = new MapSquare(assets,j,i);
-			}
-		}
 		
 		chunks = new MapChunk[depth / MapChunk.CHUNK_SIZE][width / MapChunk.CHUNK_SIZE];
 		for(int i = 0; i < chunks.length; ++i) {
@@ -64,17 +57,17 @@ public class GameMap implements SceneNode, Disposable{
 
 	@Override
 	public void render(RenderInfo ri) {
-		for(int i = 0; i < depth; ++i) {
-			for(int j = 0; j < width; ++j) {
-				squares[i][j].render(ri);
+		for(int i = 0; i < chunks.length; ++i) {
+			for(int j = 0; j < chunks[i].length; ++j) {
+				chunks[i][j].render(ri);
 			}
 		}
 	}
 	
 	public void update(UpdateInfo info) {
-		for(int i = 0; i < depth; ++i) {
-			for(int j = 0; j < width; ++j) {
-				squares[i][j].update(info);
+		for(int i = 0; i < chunks.length; ++i) {
+			for(int j = 0; j < chunks[i].length; ++j) {
+				chunks[i][j].update(info);
 			}
 		}
 	}
@@ -82,18 +75,18 @@ public class GameMap implements SceneNode, Disposable{
 	public SceneNode intersect(Ray ray, Vector3 point) {
 		float bestDist = 100000;
 		Vector3 bestPoint = null;
-		MapSquare best = null;
-		for(int i = 0; i < depth; ++i) {
-			for(int j = 0; j < width; ++j) {
-				if(Intersector.intersectRayBounds(ray, squares[i][j].boundingBox(), point)) {
+		SceneNode best = null;
+		for(int i = 0; i < chunks.length; ++i) {
+			for(int j = 0; j < chunks[i].length; ++j) {
+				SceneNode n = chunks[i][j].intersect(ray, point);
+				if(n != null) {
 					float dist = point.sub(ray.origin).len();
 					if(dist < bestDist) {
 						bestDist = dist;
 						bestPoint = point.cpy();
-						best = squares[i][j];
+						best = n;
 					}
 				}
-				
 			}
 		}
 		if(best != null) {
@@ -117,7 +110,7 @@ public class GameMap implements SceneNode, Disposable{
 				if(i == y && j == x) {
 					continue;
 				}
-				ret.add(squares[i][j]);
+				ret.add(this.squareAt(j, i));
 			}
 		}
 		return ret;
@@ -140,7 +133,7 @@ public class GameMap implements SceneNode, Disposable{
 		for(int i = z - size; i <= z + size; ++i) {
 			for(int j = x - size; j <= x + size; ++j) {
 				if(i >= 0 && j >= 0 && i < depth && j < width) {
-					block[i - z + size][j - x + size] = squares[i][j];
+					block[i - z + size][j - x + size] = squareAt(j, i);
 				}
 			}
 		}
@@ -163,7 +156,11 @@ public class GameMap implements SceneNode, Disposable{
 	
 	public MapSquare squareAt(int x, int z) {
 		if(x >= 0 && z >= 0 && x < width && z < depth) {
-			return squares[z][x];
+			int cx = x / MapChunk.CHUNK_SIZE;
+			int cz = z / MapChunk.CHUNK_SIZE;
+			
+			MapChunk chunk = chunks[cz][cx];
+			return chunk.squareAt(x, z);
 		}
 		return null;
 	}
@@ -173,7 +170,11 @@ public class GameMap implements SceneNode, Disposable{
 		int z = Math.round(loc.z);
 		
 		if(x >= 0 && z >= 0 && x < width && z < depth) {
-			return squares[z][x];
+			int cx = x / MapChunk.CHUNK_SIZE;
+			int cz = z / MapChunk.CHUNK_SIZE;
+			
+			MapChunk chunk = chunks[cz][cx];
+			return chunk.squareAt(x, z);
 		}
 		return null;
 	}
