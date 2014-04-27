@@ -18,9 +18,9 @@ import com.skorulis.drack.building.Tree;
 import com.skorulis.drack.building.TurretBuilding;
 import com.skorulis.drack.building.Vault;
 import com.skorulis.drack.def.attachment.HullAttachmentDef;
-import com.skorulis.drack.def.attachment.HullPointDef;
+import com.skorulis.drack.def.attachment.HardPointDef;
 import com.skorulis.drack.def.attachment.WeaponDef;
-import com.skorulis.drack.def.attachment.HullPointDef.HullPointType;
+import com.skorulis.drack.def.attachment.HardPointDef.HullPointType;
 import com.skorulis.drack.def.attachment.WeaponDef.WeaponType;
 import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.def.building.CompositeBuildingDef;
@@ -94,8 +94,8 @@ public class DefManager {
 		hull.baseSpeed =  10;
 		hull.baseCapacity = 5;
 		
-		hull.addPoint(new HullPointDef(new Vector3(0.497f,0.7f,0), 270, HullPointType.SMALL));
-		hull.addPoint(new HullPointDef(new Vector3(-0.497f,0.7f,0), 90, HullPointType.SMALL));
+		hull.addPoint(new HardPointDef(new Vector3(0.497f,0.7f,0), 270, HullPointType.SMALL));
+		hull.addPoint(new HardPointDef(new Vector3(-0.497f,0.7f,0), 90, HullPointType.SMALL));
 		
 		addDef(hull);
 	}
@@ -190,7 +190,7 @@ public class DefManager {
 	
 	private void createCompositeBuildings() {
 		CompositeBuildingDef def = new CompositeBuildingDef("turret");
-		def.addHardPoint(new HullPointDef(new Vector3(0,1.05f,0), 0, HullPointType.SMALL));
+		def.addHardPoint(new HardPointDef(new Vector3(0,1.05f,0), 0, HullPointType.SMALL));
 		def.buildingClass = TurretBuilding.class;
 		def.uiClass = TurretUI.class;
 		def.modelName = "turret";

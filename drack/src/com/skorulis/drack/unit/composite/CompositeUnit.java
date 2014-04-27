@@ -3,7 +3,7 @@ package com.skorulis.drack.unit.composite;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.skorulis.drack.def.attachment.HullPointDef;
+import com.skorulis.drack.def.attachment.HardPointDef;
 import com.skorulis.drack.def.unit.CompositeUnitDef;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.Unit;
@@ -43,7 +43,7 @@ public class CompositeUnit extends Unit {
 		attachments.add(att);
 	}
 	
-	public HullAttachment attachmentAt(HullPointDef hpd) {
+	public HullAttachment attachmentAt(HardPointDef hpd) {
 		for(HullAttachment att : attachments) {
 			if(att.hardPoint() == hpd) {
 				return att;
@@ -59,8 +59,8 @@ public class CompositeUnit extends Unit {
 		}
 	}
 	
-	public HullPointDef emptyPoint() {
-		for(HullPointDef hpd: compDef().hull.hardPoints) {
+	public HardPointDef emptyPoint() {
+		for(HardPointDef hpd: compDef().hull.hardPoints) {
 			if(attachmentAt(hpd) == null) {
 				return hpd;
 			}

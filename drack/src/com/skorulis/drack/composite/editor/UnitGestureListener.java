@@ -1,4 +1,4 @@
-package com.skorulis.drack.unit.editor;
+package com.skorulis.drack.composite.editor;
 
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
@@ -9,9 +9,9 @@ import com.skorulis.drack.unit.composite.HullAttachment;
 
 public class UnitGestureListener implements GestureListener {
 
-	private UnitEditor editor;
+	private CompositeEditor editor;
 	
-	public UnitGestureListener(UnitEditor editor) {
+	public UnitGestureListener(CompositeEditor editor) {
 		this.editor = editor;
 	}
 	
@@ -24,7 +24,7 @@ public class UnitGestureListener implements GestureListener {
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
 		Ray ray = editor.cam().getPickRay(x, y);
-		for(HullPointNode hpn : editor.pointNodes) {
+		for(HardPointNode hpn : editor.pointNodes) {
 			if(hpn.intersect(ray, new Vector3()) != null) {
 				hpn.setSelected(true);
 				

@@ -2,19 +2,19 @@ package com.skorulis.drack.ui.component;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
+import com.skorulis.drack.composite.editor.HardPointNode;
+import com.skorulis.drack.composite.editor.CompositeEditor;
 import com.skorulis.drack.def.attachment.HullAttachmentDef;
 import com.skorulis.drack.ui.ModalDialog;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.drack.unit.composite.CompositeUnit;
 import com.skorulis.drack.unit.composite.HullAttachment;
-import com.skorulis.drack.unit.editor.HullPointNode;
-import com.skorulis.drack.unit.editor.UnitEditor;
 import com.skorulis.gdx.ui.LayoutHelper;
 
 public class CompositeEditorDialog extends ModalDialog implements ComponentListDelegate {
 
 	private WidgetGroup mainContent;
-	private UnitEditor editor;
+	private CompositeEditor editor;
 	private ComponentList list;
 	private LayoutHelper contentHelper;
 	
@@ -26,7 +26,7 @@ public class CompositeEditorDialog extends ModalDialog implements ComponentListD
 		
 		contentHelper = new LayoutHelper(mainContent);
 		
-		editor = new UnitEditor(ui.assets(), ui.def(),unit);
+		editor = new CompositeEditor(ui.assets(), ui.def(),unit);
 		ui.delegate().setSubScene(editor);
 		
 		list = new ComponentList(ui, this);
@@ -49,7 +49,7 @@ public class CompositeEditorDialog extends ModalDialog implements ComponentListD
 		super.layout();
 	}
 	
-	public UnitEditor editor() {
+	public CompositeEditor editor() {
 		return editor;
 	}
 	
@@ -61,7 +61,7 @@ public class CompositeEditorDialog extends ModalDialog implements ComponentListD
 	@Override
 	public void componentSelected(HullAttachmentDef def) {
 		System.out.println("SELECTED " + def);
-		HullPointNode selected = editor.selectedNode();
+		HardPointNode selected = editor.selectedNode();
 		if(selected != null) {
 			HullAttachment att = def.create(editor.assets(), selected.def());
 			editor.unit().addAttachment(att);

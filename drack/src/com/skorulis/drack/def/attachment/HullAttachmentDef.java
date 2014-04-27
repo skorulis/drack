@@ -17,7 +17,7 @@ public class HullAttachmentDef extends BaseDef {
 		forwardAxis = new Vector3(0,0,1);
 	}
 	
-	public HullAttachment create(SKAssetManager assets, HullPointDef hullPoint) {
+	public HullAttachment create(SKAssetManager assets, HardPointDef hullPoint) {
 		try {
 			HullAttachment ret = attachmentClass.newInstance();
 			ret.setDef(this);

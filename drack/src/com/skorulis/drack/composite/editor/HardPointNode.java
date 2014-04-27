@@ -1,4 +1,4 @@
-package com.skorulis.drack.unit.editor;
+package com.skorulis.drack.composite.editor;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
@@ -7,20 +7,20 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
-import com.skorulis.drack.def.attachment.HullPointDef;
+import com.skorulis.drack.def.attachment.HardPointDef;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
 
-public class HullPointNode implements SceneNode {
+public class HardPointNode implements SceneNode {
 
-	private HullPointDef def;
+	private HardPointDef def;
 	private ModelInstance instance;
 	private boolean hidden;
 	private boolean isSelected;
 	
-	public HullPointNode(SKAssetManager assets, HullPointDef def) {
+	public HardPointNode(SKAssetManager assets, HardPointDef def) {
 		this.def = def;
 		this.instance = new ModelInstance(assets.getModel("sphere"));
 		this.instance.transform.setTranslation(this.def.loc);
@@ -70,7 +70,7 @@ public class HullPointNode implements SceneNode {
 		return isSelected;
 	}
 	
-	public HullPointDef def() {
+	public HardPointDef def() {
 		return def;
 	}
 	

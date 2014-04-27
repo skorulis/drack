@@ -2,7 +2,7 @@ package com.skorulis.drack.def.attachment;
 
 import com.badlogic.gdx.math.Vector3;
 
-public class HullPointDef {
+public class HardPointDef {
 
 	public enum HullPointType {
 		SMALL (0.2f);
@@ -20,7 +20,7 @@ public class HullPointDef {
 	public float rotation;
 	public HullPointType type;
 	
-	public HullPointDef(Vector3 loc, float rotation, HullPointType type) {
+	public HardPointDef(Vector3 loc, float rotation, HullPointType type) {
 		this.loc = loc;
 		this.rotation = rotation;
 		this.type = type;

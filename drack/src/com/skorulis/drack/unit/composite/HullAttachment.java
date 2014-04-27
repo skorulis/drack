@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.def.attachment.HullAttachmentDef;
-import com.skorulis.drack.def.attachment.HullPointDef;
+import com.skorulis.drack.def.attachment.HardPointDef;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
@@ -13,7 +13,7 @@ import com.skorulis.scene.UpdateInfo;
 
 public class HullAttachment implements SceneNode {
 
-	protected HullPointDef hardPoint;
+	protected HardPointDef hardPoint;
 	protected HullAttachmentDef def;
 	protected ModelInstance modelInstance;
 	protected Matrix4 offset;
@@ -56,7 +56,7 @@ public class HullAttachment implements SceneNode {
 		this.def = def;
 	}
 	
-	public void setHullPoint(HullPointDef hpd) {
+	public void setHullPoint(HardPointDef hpd) {
 		this.hardPoint = hpd;
 		if(hpd != null) {
 			this.offset.setTranslation(hpd.loc);
@@ -64,7 +64,7 @@ public class HullAttachment implements SceneNode {
 		}
 	}
 	
-	public HullPointDef hardPoint() {
+	public HardPointDef hardPoint() {
 		return hardPoint;
 	}
 	

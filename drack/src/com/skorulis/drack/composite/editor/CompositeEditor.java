@@ -1,4 +1,4 @@
-package com.skorulis.drack.unit.editor;
+package com.skorulis.drack.composite.editor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,14 +13,14 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Matrix4;
 import com.skorulis.drack.def.DefManager;
-import com.skorulis.drack.def.attachment.HullPointDef;
+import com.skorulis.drack.def.attachment.HardPointDef;
 import com.skorulis.drack.unit.composite.CompositeUnit;
 import com.skorulis.drack.unit.composite.HullAttachment;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneWindow;
 
-public class UnitEditor implements SceneWindow {
+public class CompositeEditor implements SceneWindow {
 	
 	private PerspectiveCamera cam;
 	private CompositeUnit unit;
@@ -28,19 +28,19 @@ public class UnitEditor implements SceneWindow {
 	private Environment environment;
 	private UnitGestureListener ugl;
 	private DefManager def;
-	public Set<HullPointNode> pointNodes;
+	public Set<HardPointNode> pointNodes;
 	private SKAssetManager assets;
 	private Matrix4 oldTransform;
 	
-	public UnitEditor(SKAssetManager assets, DefManager def, CompositeUnit unit) {
+	public CompositeEditor(SKAssetManager assets, DefManager def, CompositeUnit unit) {
 		resized(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.unit = unit;
         oldTransform = unit.relTransform().cpy();
         unit.relTransform().idt();
         
-        pointNodes = new HashSet<HullPointNode>();
-        for(HullPointDef hpd : unit.compDef().hull.hardPoints) {
-        	HullPointNode hpn = new HullPointNode(assets, hpd);
+        pointNodes = new HashSet<HardPointNode>();
+        for(HardPointDef hpd : unit.compDef().hull.hardPoints) {
+        	HardPointNode hpn = new HardPointNode(assets, hpd);
         	HullAttachment att = unit.attachmentAt(hpd);
         	hpn.setHidden(att != null);
         	pointNodes.add(hpn);
@@ -62,7 +62,7 @@ public class UnitEditor implements SceneWindow {
 		modelBatch.begin(cam);
 		RenderInfo ri = new RenderInfo(modelBatch, environment, cam);
 		unit.render(ri);
-		for(HullPointNode hpn : pointNodes) {
+		for(HardPointNode hpn : pointNodes) {
 			hpn.render(ri);
 		}
 		modelBatch.end();
@@ -112,8 +112,8 @@ public class UnitEditor implements SceneWindow {
 		unit.relTransform().set(oldTransform);
 	}
 	
-	public HullPointNode selectedNode() {
-		for(HullPointNode hpn : pointNodes) {
+	public HardPointNode selectedNode() {
+		for(HardPointNode hpn : pointNodes) {
 			if(hpn.isSelected()) {
 				return hpn;
 			}

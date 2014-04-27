@@ -13,8 +13,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.attachment.HullAttachmentDef;
-import com.skorulis.drack.def.attachment.HullPointDef;
-import com.skorulis.drack.def.attachment.HullPointDef.HullPointType;
+import com.skorulis.drack.def.attachment.HardPointDef;
+import com.skorulis.drack.def.attachment.HardPointDef.HullPointType;
 import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.game.IsoPerspectiveCamera;
 import com.skorulis.drack.unit.composite.HullAttachment;
@@ -85,7 +85,7 @@ public class TextureGenerator {
 	}
 	
 	private void renderAttachment(HullAttachmentDef def, RenderInfo ri) {
-		HullPointDef hpd = new HullPointDef(new Vector3(2,2,2), 0, HullPointType.SMALL);
+		HardPointDef hpd = new HardPointDef(new Vector3(2,2,2), 0, HullPointType.SMALL);
 		HullAttachment att = def.create(assets, hpd);
 		att.absTransform().setTranslation(2.5f, 3.5f, 2.5f);
 		att.render(ri);
