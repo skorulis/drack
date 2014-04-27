@@ -73,4 +73,8 @@ public class AttachmentContainer {
 		return all;
 	}
 	
+	public Set<HardPointDef> hardPoints() {
+		return hardPoints;
+	}
+	
 }

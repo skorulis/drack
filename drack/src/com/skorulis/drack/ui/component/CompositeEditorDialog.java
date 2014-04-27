@@ -63,7 +63,7 @@ public class CompositeEditorDialog extends ModalDialog implements ComponentListD
 		HardPointNode selected = editor.selectedNode();
 		if(selected != null) {
 			HullAttachment att = def.create(editor.assets(), selected.def());
-			editor.unit().attachmentContainer().addAttachment(att);
+			editor.object().attachmentContainer().addAttachment(att);
 		}
 	}
 

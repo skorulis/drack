@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Matrix4;
+import com.skorulis.drack.composite.CompositeObject;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.attachment.HardPointDef;
 import com.skorulis.drack.unit.composite.CompositeUnit;
@@ -31,16 +32,16 @@ public class CompositeEditor implements SceneWindow {
 	private SKAssetManager assets;
 	private Matrix4 oldTransform;
 	
-	private CompositeUnit unit;
+	private CompositeObject unit;
 	
-	public CompositeEditor(SKAssetManager assets, DefManager def, CompositeUnit unit) {
+	public CompositeEditor(SKAssetManager assets, DefManager def, CompositeObject unit) {
 		resized(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.unit = unit;
         oldTransform = unit.relTransform().cpy();
         unit.relTransform().idt();
         
         pointNodes = new HashSet<HardPointNode>();
-        for(HardPointDef hpd : unit.compDef().hull.hardPoints) {
+        for(HardPointDef hpd : unit.attachmentContainer().hardPoints()) {
         	HardPointNode hpn = new HardPointNode(assets, hpd);
         	HullAttachment att = unit.attachmentContainer().attachmentAt(hpd);
         	hpn.setHidden(att != null);
@@ -73,7 +74,7 @@ public class CompositeEditor implements SceneWindow {
 		return cam;
 	}
 	
-	public CompositeUnit unit() {
+	public CompositeObject object() {
 		return unit;
 	}
 	

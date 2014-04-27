@@ -1,13 +1,14 @@
 package com.skorulis.drack.unit.composite;
 
 import com.skorulis.drack.composite.AttachmentContainer;
+import com.skorulis.drack.composite.CompositeObject;
 import com.skorulis.drack.def.unit.CompositeUnitDef;
 import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.UpdateInfo;
 
-public class CompositeUnit extends Unit {
+public class CompositeUnit extends Unit implements CompositeObject {
 
 	private AttachmentContainer attContainer;
 	
