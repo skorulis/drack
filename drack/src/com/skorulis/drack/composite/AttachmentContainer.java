@@ -34,6 +34,7 @@ public class AttachmentContainer {
 	public void update(UpdateInfo ui) {
 		for(HullAttachment att: attachments) {
 			att.updatePosition(node);
+			att.update(ui);
 		}
 	}
 	

@@ -43,8 +43,6 @@ public class BulletEffect {
 		instance.transform.setToTranslation(startPos);
 		instance.transform.rotateRad(cross, angle);
 		
-		
-		
 	}
 	
 	public static Set<String> models() {

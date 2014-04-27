@@ -33,6 +33,8 @@ import com.skorulis.drack.ui.building.BarracksUI;
 import com.skorulis.drack.ui.building.CommandUI;
 import com.skorulis.drack.ui.building.MineUI;
 import com.skorulis.drack.ui.building.TurretUI;
+import com.skorulis.drack.unit.composite.BulletWeapon;
+import com.skorulis.drack.unit.composite.LaserWeapon;
 
 public class DefManager {
 
@@ -74,13 +76,15 @@ public class DefManager {
 		WeaponDef def = new WeaponDef("gun");
 		def.turretLoc = new Vector3(0,0,0.35f);
 		def.modelName = "gun1";
-		def.type = WeaponType.WEAPON_MISSILE;
+		def.type = WeaponType.WEAPON_BULLET;
+		def.attachmentClass = BulletWeapon.class;
 		addDef(def);
 		
 		def = new WeaponDef("beam");
 		def.turretLoc = new Vector3(0,0,0.675f);
 		def.modelName = "beam1";
 		def.type = WeaponType.WEAPON_LASER;
+		def.attachmentClass = LaserWeapon.class;
 		addDef(def);
 	}
 	
