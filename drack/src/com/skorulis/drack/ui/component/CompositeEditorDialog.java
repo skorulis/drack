@@ -1,24 +1,24 @@
-package com.skorulis.drack.ui;
+package com.skorulis.drack.ui.component;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.skorulis.drack.def.attachment.HullAttachmentDef;
-import com.skorulis.drack.ui.component.ComponentList;
-import com.skorulis.drack.ui.component.ComponentListDelegate;
+import com.skorulis.drack.ui.ModalDialog;
+import com.skorulis.drack.ui.UIManager;
 import com.skorulis.drack.unit.composite.CompositeUnit;
 import com.skorulis.drack.unit.composite.HullAttachment;
 import com.skorulis.drack.unit.editor.HullPointNode;
 import com.skorulis.drack.unit.editor.UnitEditor;
 import com.skorulis.gdx.ui.LayoutHelper;
 
-public class EditorDialog extends ModalDialog implements ComponentListDelegate {
+public class CompositeEditorDialog extends ModalDialog implements ComponentListDelegate {
 
 	private WidgetGroup mainContent;
 	private UnitEditor editor;
 	private ComponentList list;
 	private LayoutHelper contentHelper;
 	
-	public EditorDialog(UIManager ui, CompositeUnit unit) {
+	public CompositeEditorDialog(UIManager ui, CompositeUnit unit) {
 		super(ui);
 		
 		mainContent = new WidgetGroup();
