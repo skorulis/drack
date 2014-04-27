@@ -46,6 +46,9 @@ public class MapChunk implements SceneNode {
 
 	@Override
 	public void render(RenderInfo ri) {
+		if(!ri.cam.frustum.boundsInFrustum(boundingBox)) {
+			return;
+		}
 		for(int i = 0; i < CHUNK_SIZE; ++i) {
 			for(int j = 0; j < CHUNK_SIZE; ++j) {
 				squares[i][j].render(ri);
