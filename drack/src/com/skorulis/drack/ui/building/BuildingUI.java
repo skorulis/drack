@@ -32,6 +32,7 @@ public class BuildingUI extends Stack {
 		add(bgImage);
 		
 		verticalLayout = new VerticalGroup();
+		verticalLayout.space(8);
 		add(verticalLayout);
 		
 		this.nameLabel = new Label("name",skin);

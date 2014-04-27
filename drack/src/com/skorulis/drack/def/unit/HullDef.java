@@ -9,17 +9,17 @@ import com.skorulis.drack.def.attachment.HullPointDef;
 public class HullDef extends BaseDef {
 	
 	public String modelName;
-	public Set<HullPointDef> points;
+	public Set<HullPointDef> hardPoints;
 	public int baseCapacity;
 	public float baseSpeed;
 	
 	public HullDef(String name) {
 		super(name);
-		this.points = new HashSet<HullPointDef>();
+		this.hardPoints = new HashSet<HullPointDef>();
 	}
 	
 	public void addPoint(HullPointDef point) {
-		this.points.add(point);
+		this.hardPoints.add(point);
 	}
 	
 	public Class<? extends BaseDef> getTypeClass() {

@@ -7,11 +7,15 @@ import com.skorulis.drack.def.attachment.HullPointDef;
 
 public class CompositeBuildingDef extends BuildingDef {
 
-	public Set<HullPointDef> points;
+	public Set<HullPointDef> hardPoints;
 	
 	public CompositeBuildingDef(String name) {
 		super(name);
-		this.points = new HashSet<HullPointDef>();
+		this.hardPoints = new HashSet<HullPointDef>();
+	}
+	
+	public void addHardPoint(HullPointDef point) {
+		hardPoints.add(point);
 	}
 	
 }

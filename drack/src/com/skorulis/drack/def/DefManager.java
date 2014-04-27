@@ -190,6 +190,7 @@ public class DefManager {
 	
 	private void createCompositeBuildings() {
 		CompositeBuildingDef def = new CompositeBuildingDef("turret");
+		def.addHardPoint(new HullPointDef(new Vector3(0,1.05f,0), 0, HullPointType.SMALL));
 		def.buildingClass = TurretBuilding.class;
 		def.uiClass = TurretUI.class;
 		def.modelName = "turret";

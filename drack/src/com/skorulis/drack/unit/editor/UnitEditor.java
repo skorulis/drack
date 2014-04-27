@@ -39,7 +39,7 @@ public class UnitEditor implements SceneWindow {
         unit.relTransform().idt();
         
         pointNodes = new HashSet<HullPointNode>();
-        for(HullPointDef hpd : unit.compDef().hull.points) {
+        for(HullPointDef hpd : unit.compDef().hull.hardPoints) {
         	HullPointNode hpn = new HullPointNode(assets, hpd);
         	HullAttachment att = unit.attachmentAt(hpd);
         	hpn.setHidden(att != null);

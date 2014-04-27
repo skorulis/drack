@@ -60,7 +60,7 @@ public class CompositeUnit extends Unit {
 	}
 	
 	public HullPointDef emptyPoint() {
-		for(HullPointDef hpd: compDef().hull.points) {
+		for(HullPointDef hpd: compDef().hull.hardPoints) {
 			if(attachmentAt(hpd) == null) {
 				return hpd;
 			}
