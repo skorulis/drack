@@ -38,19 +38,6 @@ public class LaserEffect implements Disposable {
 		buildGeometry(assets);
 	}
 	
-	/*private void buildGeometry2(SKAssetManager assets) {
-		Texture texture = assets.getTexture("laser.png");
-		
-		BlendingAttribute ba = new BlendingAttribute();
-		Material material = new Material(TextureAttribute.createDiffuse(texture), ba );
-		
-		ModelBuilder builder = new ModelBuilder();
-		model = builder.createBox(1, 1, 1, material, Usage.Position | Usage.Normal | Usage.TextureCoordinates);
-
-		instance = new ModelInstance(model);
-		instance.transform.rotate(Vector3.X, 45);
-	}*/
-	
 	private void buildGeometry(SKAssetManager assets) {
 		
 		Vector3 fwd = new Vector3(0,1,0);

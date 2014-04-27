@@ -49,7 +49,7 @@ public class MovementAction extends UnitAction {
 	}
 	
 	public Vector3 movingTo() {
-		return movement.endLoc;
+		return movement.endLoc.cpy();
 	}
 	
 	public boolean shouldReplace() {

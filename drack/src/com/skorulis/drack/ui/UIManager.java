@@ -114,7 +114,6 @@ public class UIManager extends WidgetGroup {
 		
 		if(buildingUI != null) {
 			helper.centreChildX(buildingUI);
-			
 		}
 	}
 	

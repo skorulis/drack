@@ -72,7 +72,7 @@ public class DefManager {
 	
 	private void createWeapons() {
 		WeaponDef def = new WeaponDef("gun");
-		def.turretLoc = new Vector3(0,0,0.675f);
+		def.turretLoc = new Vector3(0,0,0.35f);
 		def.modelName = "gun1";
 		def.type = WeaponType.WEAPON_MISSILE;
 		addDef(def);

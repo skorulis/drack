@@ -2,6 +2,7 @@ package com.skorulis.drack.unit.composite;
 
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.def.attachment.HullAttachmentDef;
+import com.skorulis.drack.def.attachment.WeaponDef;
 import com.skorulis.drack.effects.LaserEffect;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.gdx.SKAssetManager;
@@ -35,13 +36,29 @@ public class Weapon extends HullAttachment {
 		currentEffect = null;
 	}
 	
+	public Vector3 turretPosition(Unit unit) {
+		Vector3 pos = unit.currentPosition();
+		
+		Vector3 offset = this.hardPoint.loc.cpy().add(weaponDef().turretLoc);
+		
+		System.out.println("Offset " + offset);
+		
+		offset = offset.rot(unit.absTransform());
+		
+		System.out.println("Offset " + offset);
+		
+		return pos.add(offset);
+	}
+	
 	public void startAttack(SKAssetManager assets, Unit unit, Unit target) {
-		Vector3 start = unit.currentPosition();
+		Vector3 start = turretPosition(unit);
 		Vector3 end = target.currentPosition();
-		start.y += 0.5f;
 		end.y += 0.5f;
 		currentEffect = new LaserEffect(assets, start, end);
-		System.out.println("STart attack");
+	}
+	
+	public WeaponDef weaponDef() {
+		return (WeaponDef) this.def;
 	}
 	
 	
