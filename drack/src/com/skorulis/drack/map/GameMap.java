@@ -6,6 +6,7 @@ import java.util.Set;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Plane;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
@@ -21,6 +22,7 @@ public class GameMap implements SceneNode, Disposable{
 	private int width,depth;
 	private MapSquare[][] squares;
 	private SKAssetManager assets;
+	private MapChunk[][] chunks;
 	
 	public GameMap(int width, int depth, SKAssetManager assets) {
 		this.width = width;
@@ -30,6 +32,13 @@ public class GameMap implements SceneNode, Disposable{
 		for(int i = 0; i < depth; ++i) {
 			for(int j = 0; j < width; ++j) {
 				squares[i][j] = new MapSquare(assets,j,i);
+			}
+		}
+		
+		chunks = new MapChunk[depth / MapChunk.CHUNK_SIZE][width / MapChunk.CHUNK_SIZE];
+		for(int i = 0; i < chunks.length; ++i) {
+			for(int j = 0; j < chunks[i].length; ++j) {
+				chunks[i][j] = new MapChunk(new Vector2(j * MapChunk.CHUNK_SIZE, i * MapChunk.CHUNK_SIZE), assets);
 			}
 		}
 		
@@ -55,35 +64,9 @@ public class GameMap implements SceneNode, Disposable{
 
 	@Override
 	public void render(RenderInfo ri) {
-		renderSquares(ri);
-		renderBuildings(ri);
-		renderFields(ri);
-	}
-	
-	private void renderSquares(RenderInfo ri) {
 		for(int i = 0; i < depth; ++i) {
 			for(int j = 0; j < width; ++j) {
-				squares[i][j].renderBlock(ri);
-			}
-		}
-	}
-	
-	private void renderFields(RenderInfo ri) {
-		for(int i = 0; i < depth; ++i) {
-			for(int j = 0; j < width; ++j) {
-				if(squares[i][j].field() != null) {
-					squares[i][j].field().render(ri);
-				}
-			}
-		}
-	}
-	
-	private void renderBuildings(RenderInfo ri) {
-		for(int i = 0; i < depth; ++i) {
-			for(int j = 0; j < width; ++j) {
-				if(squares[i][j].building() != null) {
-					squares[i][j].building().render(ri);
-				}
+				squares[i][j].render(ri);
 			}
 		}
 	}
@@ -217,6 +200,5 @@ public class GameMap implements SceneNode, Disposable{
 	
 	public boolean isAlive() {
 		return true;
-	}
-	
+	}	
 }
