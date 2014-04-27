@@ -16,11 +16,19 @@ public class BulletEffect {
 	private final Vector3 endPos;
 	private final Vector3 dir;
 	private ModelInstance instance;
+	private float life;
+	private float speed = 10;
+	private float timePos;
 	
 	public BulletEffect(SKAssetManager assets, Vector3 start, Vector3 end) {
 		this.startPos = start;
 		this.endPos = end;
-		dir = end.cpy().sub(start).nor();
+		dir = end.cpy().sub(start);
+		life = dir.len() / speed; 
+		timePos = 0;
+		System.out.println("TIME " + life);
+		dir.nor();
+		
 		instance = new ModelInstance(assets.getModel("ball_sprite"));
 		instance.transform.setToTranslation(startPos);
 		instance.materials.get(0).set(new BlendingAttribute());
@@ -31,7 +39,10 @@ public class BulletEffect {
 	}
 	
 	public void update(UpdateInfo ui) {
-		Vector3 loc = instance.transform.getTranslation(new Vector3());
+		timePos += ui.delta;
+		
+		Vector3 loc = startPos.cpy().add(dir.cpy().scl(timePos*speed));
+		
 		Vector3 camDir = ui.cam.position.cpy().sub(loc).nor();
 		
 		Vector3 standard = new Vector3(-1,0,0);
@@ -40,7 +51,7 @@ public class BulletEffect {
 		
 		angle = (float) Math.acos(angle);
 		Vector3 cross = standard.crs(camDir);
-		instance.transform.setToTranslation(startPos);
+		instance.transform.setToTranslation(loc);
 		instance.transform.rotateRad(cross, angle);
 		
 	}
@@ -51,6 +62,10 @@ public class BulletEffect {
 		ret.add("floor_sprite");
 		ret.add("cone_helper");
 		return ret;
+	}
+	
+	public boolean isAlive() {
+		return timePos < life;
 	}
 	
 }

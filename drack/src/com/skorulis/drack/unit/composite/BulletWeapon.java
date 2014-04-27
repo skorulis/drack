@@ -1,6 +1,7 @@
 package com.skorulis.drack.unit.composite;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import com.badlogic.gdx.math.Vector3;
@@ -27,8 +28,13 @@ public class BulletWeapon extends Weapon {
 	
 	public void update(UpdateInfo ui) {
 		super.update(ui);
-		for(BulletEffect be: effects) {
+		Iterator<BulletEffect> it = effects.iterator();
+		while(it.hasNext()) {
+			BulletEffect be = it.next();
 			be.update(ui);
+			if(!be.isAlive()) {
+				it.remove();
+			}
 		}
 	}
 	
