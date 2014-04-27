@@ -95,26 +95,7 @@ public class GameMap implements SceneNode, Disposable{
 			}
 		}
 	}
-	
-	public MapSquare intersectRay(Ray ray) {
-		float bestDist = 100000;
-		MapSquare best = null;
-		Vector3 point = new Vector3();
-		for(int i = 0; i < depth; ++i) {
-			for(int j = 0; j < width; ++j) {
-				if(Intersector.intersectRayBounds(ray, squares[i][j].boundingBox(), point)) {
-					float dist = point.sub(ray.origin).len();
-					if(dist < bestDist) {
-						bestDist = dist;
-						best = squares[i][j];
-					}
-				}
-				
-			}
-		}
-		return best;
-	}
-	
+
 	public SceneNode intersect(Ray ray, Vector3 point) {
 		float bestDist = 100000;
 		Vector3 bestPoint = null;
