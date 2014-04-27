@@ -42,7 +42,7 @@ public class CompositeEditor implements SceneWindow {
         pointNodes = new HashSet<HardPointNode>();
         for(HardPointDef hpd : unit.compDef().hull.hardPoints) {
         	HardPointNode hpn = new HardPointNode(assets, hpd);
-        	HullAttachment att = unit.attachmentAt(hpd);
+        	HullAttachment att = unit.attachmentContainer().attachmentAt(hpd);
         	hpn.setHidden(att != null);
         	pointNodes.add(hpn);
         }

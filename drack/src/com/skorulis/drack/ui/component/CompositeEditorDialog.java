@@ -60,11 +60,10 @@ public class CompositeEditorDialog extends ModalDialog implements ComponentListD
 
 	@Override
 	public void componentSelected(HullAttachmentDef def) {
-		System.out.println("SELECTED " + def);
 		HardPointNode selected = editor.selectedNode();
 		if(selected != null) {
 			HullAttachment att = def.create(editor.assets(), selected.def());
-			editor.unit().addAttachment(att);
+			editor.unit().attachmentContainer().addAttachment(att);
 		}
 	}
 
