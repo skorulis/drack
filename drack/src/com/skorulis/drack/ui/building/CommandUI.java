@@ -30,7 +30,6 @@ public class CommandUI extends BuildingUI {
 		CompositeUnit unit = (CompositeUnit) ui.logic().player().controllUnit();
 		CompositeEditorDialog edit = new CompositeEditorDialog(ui,unit);
 		ui.showDialog(edit);
-
 	}
 	
 	public void layout() {

@@ -2,7 +2,6 @@ package com.skorulis.drack.composite.editor;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
@@ -15,7 +14,6 @@ import com.badlogic.gdx.math.Matrix4;
 import com.skorulis.drack.composite.CompositeObject;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.attachment.HardPointDef;
-import com.skorulis.drack.unit.composite.CompositeUnit;
 import com.skorulis.drack.unit.composite.HullAttachment;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
@@ -32,11 +30,11 @@ public class CompositeEditor implements SceneWindow {
 	private SKAssetManager assets;
 	private Matrix4 oldTransform;
 	
-	private CompositeObject unit;
+	private CompositeObject object;
 	
 	public CompositeEditor(SKAssetManager assets, DefManager def, CompositeObject unit) {
 		resized(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        this.unit = unit;
+        this.object = unit;
         oldTransform = unit.relTransform().cpy();
         unit.relTransform().idt();
         
@@ -63,7 +61,7 @@ public class CompositeEditor implements SceneWindow {
 		Gdx.gl.glClear(GL20.GL_DEPTH_BUFFER_BIT);
 		modelBatch.begin(cam);
 		RenderInfo ri = new RenderInfo(modelBatch, environment, cam);
-		unit.render(ri);
+		object.render(ri);
 		for(HardPointNode hpn : pointNodes) {
 			hpn.render(ri);
 		}
@@ -75,7 +73,7 @@ public class CompositeEditor implements SceneWindow {
 	}
 	
 	public CompositeObject object() {
-		return unit;
+		return object;
 	}
 	
 	public SKAssetManager assets() {
@@ -111,7 +109,7 @@ public class CompositeEditor implements SceneWindow {
 	}
 	
 	public void returnUnitToMap() {
-		unit.relTransform().set(oldTransform);
+		object.relTransform().set(oldTransform);
 	}
 	
 	public HardPointNode selectedNode() {

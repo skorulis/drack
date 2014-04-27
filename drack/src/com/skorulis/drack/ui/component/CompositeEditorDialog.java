@@ -2,6 +2,7 @@ package com.skorulis.drack.ui.component;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
+import com.skorulis.drack.composite.CompositeObject;
 import com.skorulis.drack.composite.editor.HardPointNode;
 import com.skorulis.drack.composite.editor.CompositeEditor;
 import com.skorulis.drack.def.attachment.HullAttachmentDef;
@@ -18,7 +19,7 @@ public class CompositeEditorDialog extends ModalDialog implements ComponentListD
 	private ComponentList list;
 	private LayoutHelper contentHelper;
 	
-	public CompositeEditorDialog(UIManager ui, CompositeUnit unit) {
+	public CompositeEditorDialog(UIManager ui, CompositeObject unit) {
 		super(ui);
 		
 		mainContent = new WidgetGroup();

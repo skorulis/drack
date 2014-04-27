@@ -1,5 +1,7 @@
 package com.skorulis.drack.building;
 
-public class TurretBuilding extends Building {
+import com.skorulis.drack.building.composite.CompositeBuilding;
+
+public class TurretBuilding extends CompositeBuilding {
 
 }

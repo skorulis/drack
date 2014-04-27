@@ -4,7 +4,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.skorulis.drack.building.TurretBuilding;
 import com.skorulis.drack.ui.UIManager;
+import com.skorulis.drack.ui.component.CompositeEditorDialog;
 
 public class TurretUI extends BuildingUI {
 
@@ -24,8 +26,13 @@ public class TurretUI extends BuildingUI {
 		layout();
 	}
 	
+	public TurretBuilding turret() {
+		return (TurretBuilding) this.building;
+	}
+	
 	private void unitPressed() {
-		
+		CompositeEditorDialog edit = new CompositeEditorDialog(ui,turret());
+		ui.showDialog(edit);
 	}
 	
 }
