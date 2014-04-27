@@ -100,7 +100,14 @@ public class DefManager {
 		
 		hull.addPoint(new HardPointDef(new Vector3(0.497f,0.7f,0), 270, HullPointType.SMALL));
 		hull.addPoint(new HardPointDef(new Vector3(-0.497f,0.7f,0), 90, HullPointType.SMALL));
+		addDef(hull);
 		
+		hull = new HullDef("tank");
+		hull.modelName = "tank";
+		hull.baseSpeed =  10;
+		hull.baseCapacity = 5;
+		
+		hull.addPoint(new HardPointDef(new Vector3(0,0.25f,0), 0, HullPointType.SMALL));
 		addDef(hull);
 	}
 	
@@ -335,6 +342,12 @@ public class DefManager {
 		return attachments.values();
 	}
 	
+	public CompositeUnitDef createCompositeDefWithHull(String name) {
+		CompositeUnitDef def = new CompositeUnitDef(name);
+		def.hull = getHull(name);
+		
+		return def;
+	}
 	
 	
 }

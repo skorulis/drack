@@ -18,15 +18,13 @@ public class BulletEffect {
 	private ModelInstance instance;
 	private float life;
 	private float speed = 10;
-	private float timePos;
+	private float timePos = 0;
 	
 	public BulletEffect(SKAssetManager assets, Vector3 start, Vector3 end) {
 		this.startPos = start;
 		this.endPos = end;
 		dir = end.cpy().sub(start);
 		life = dir.len() / speed; 
-		timePos = 0;
-		System.out.println("TIME " + life);
 		dir.nor();
 		
 		instance = new ModelInstance(assets.getModel("ball_sprite"));
