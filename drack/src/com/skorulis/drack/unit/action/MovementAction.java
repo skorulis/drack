@@ -1,13 +1,10 @@
 package com.skorulis.drack.unit.action;
 
 import java.util.ArrayList;
-import java.util.Set;
-
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.MovementInfo;
 import com.skorulis.drack.unit.Unit;
-import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.scene.UpdateInfo;
 
 public class MovementAction extends UnitAction {

@@ -1,5 +1,6 @@
 package com.skorulis.drack.unit.composite;
 
+import java.util.Set;
 import com.skorulis.drack.composite.AttachmentContainer;
 import com.skorulis.drack.composite.CompositeObject;
 import com.skorulis.drack.def.unit.CompositeUnitDef;
@@ -37,6 +38,10 @@ public class CompositeUnit extends Unit implements CompositeObject {
 	public void update(UpdateInfo ui) {
 		super.update(ui);
 		attContainer.update(ui);
+	}
+	
+	public Set<Weapon> allWeapons() {
+		return attContainer.allWeapons();
 	}
 
 }
