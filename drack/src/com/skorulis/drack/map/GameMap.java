@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.building.Building;
+import com.skorulis.drack.serialisation.MapJson;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
@@ -202,4 +203,16 @@ public class GameMap implements SceneNode, Disposable{
 	public boolean isAlive() {
 		return true;
 	}	
+	
+	public MapJson getSerialisation() {
+		MapJson ret = new MapJson();
+		ret.width = width;
+		ret.depth = depth;
+		for(int i = 0; i < chunks.length; ++i) {
+			for(int j = 0; j < chunks[i].length; ++j) {
+				ret.chunks.add(chunks[i][j].getSerialisation());
+			}
+		}
+		return ret;
+	}
 }

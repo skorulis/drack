@@ -13,6 +13,7 @@ import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.game.SceneGenerator;
 import com.skorulis.drack.map.MapGenerator;
 import com.skorulis.drack.player.Player;
+import com.skorulis.drack.serialisation.GameSerialiser;
 import com.skorulis.drack.ui.StyleManager;
 import com.skorulis.drack.ui.UIManager;
 import com.skorulis.gdx.SKAssetManager;
@@ -55,11 +56,14 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         Player player = new Player();
         effects2D = new Effect2DLayer(styleManager.gameSkin());
         
-        MapGenerator mapGen = new MapGenerator(64, 64, assets, def, player);
+        GameSerialiser serialiser = new GameSerialiser(def,assets,effects2D);
         
-        SceneGenerator sceneGen = new SceneGenerator(mapGen, effects2D, player);
-        
-        GameScene scene = sceneGen.scene();
+        GameScene scene = serialiser.read();
+        if(scene == null) {
+        	MapGenerator mapGen = new MapGenerator(64, 64, assets, def, player);
+            SceneGenerator sceneGen = new SceneGenerator(mapGen, effects2D, player);
+            scene = sceneGen.scene();
+        }
         
         logic = new GameLogic(scene, this, player);
         
@@ -71,6 +75,9 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         updateInputProcessor();
         
         textureGen = new TextureGenerator(assets, def);
+        
+        
+        serialiser.save(logic.scene());
         
     }
 

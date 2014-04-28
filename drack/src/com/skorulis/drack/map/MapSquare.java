@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.building.Building;
+import com.skorulis.drack.serialisation.MapSquareJson;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
@@ -147,6 +148,12 @@ public class MapSquare implements SceneNode {
 	
 	public boolean isAlive() {
 		return true;
+	}
+	
+	public MapSquareJson getSerialisation() {
+		MapSquareJson json = new MapSquareJson();
+		
+		return json;
 	}
 	
 }

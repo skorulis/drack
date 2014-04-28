@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
+import com.skorulis.drack.serialisation.MapChunkJson;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
@@ -64,7 +65,7 @@ public class MapChunk implements SceneNode {
 		}
 		
 		float bestDist = 100000;
-		MapSquare best = null;
+		SceneNode best = null;
 		
 		for(int i = 0; i < CHUNK_SIZE; ++i) {
 			for(int j = 0; j < CHUNK_SIZE; ++j) {
@@ -98,6 +99,22 @@ public class MapChunk implements SceneNode {
 	@Override
 	public boolean isAlive() {
 		return true;
+	}
+	
+	public MapChunkJson getSerialisation() {
+		MapChunkJson json = new MapChunkJson();
+		json.offsetX = offsetX;
+		json.offsetZ = offsetZ;
+		
+		for(int i = 0; i < CHUNK_SIZE; ++i) {
+			for(int j = 0; j < CHUNK_SIZE; ++j) {
+				json.squares.add(squares[i][j].getSerialisation());
+			}
+		}
+		
+		
+		return json;
+		
 	}
 
 }

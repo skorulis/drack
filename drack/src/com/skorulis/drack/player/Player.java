@@ -12,6 +12,7 @@ import com.skorulis.scene.SceneHelper;
 
 public class Player {
 
+	private String playerId;
 	private ResourceBatch resources;
 	private Unit controllingUnit;
 	private Set<Unit> ownedUnits;
@@ -79,6 +80,10 @@ public class Player {
 				it.remove();
 			}
 		}
+	}
+	
+	public String playerId() {
+		return playerId;
 	}
 	
 	

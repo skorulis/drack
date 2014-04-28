@@ -14,6 +14,7 @@ import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.resource.ResourceQuantity;
+import com.skorulis.drack.serialisation.GameSceneJson;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.drack.unit.UnitDelegate;
 import com.skorulis.gdx.SKAssetManager;
@@ -144,5 +145,14 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 	public boolean isAlive() {
 		return true;
 	}
+	
+	public GameSceneJson getSerialisation() {
+		GameSceneJson json = new GameSceneJson();
+		json.map = map.getSerialisation();
+		
+		
+		return json;
+	}
+
 	
 }
