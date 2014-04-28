@@ -77,9 +77,6 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         
         textureGen = new TextureGenerator(assets, def);
         
-        
-        serialiser.save(logic.scene());
-        
     }
 
 	private void updateInputProcessor() {
@@ -95,10 +92,12 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	
 	@Override
 	public void dispose() {
+		GameSerialiser serialiser = new GameSerialiser(def,assets,effects2D);
+		serialiser.save(logic.scene());
+		
 		if(logic != null) {
 			logic.dispose();
 		}
-		
 		assets.dispose();
 	}
 

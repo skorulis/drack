@@ -6,11 +6,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
+import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.map.GameMap;
+import com.skorulis.drack.map.MapChunk;
+import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.gdx.SKAssetManager;
@@ -85,6 +89,21 @@ public class GameSerialiser {
 	
 	public GameMap createMap(MapJson json) {
 		GameMap map = new GameMap(json.width, json.depth, assets);
+		
+		for(MapChunkJson mcj : json.chunks) {
+			MapChunk chunk = map.getChunk(mcj.offsetX, mcj.offsetZ);
+			int squareIndex = 0;
+			for(MapSquareJson msj : mcj.squares) {
+				MapSquare square = chunk.squareAtIndex(squareIndex);
+				if(msj.building != null) {
+					BuildingDef bd = def.getBuilding(msj.building.defName);
+					Building b = bd.create(assets);
+					
+				}
+				
+				squareIndex++;
+			}
+		}
 		
 		return map;
 	}

@@ -113,6 +113,10 @@ public class DefManager {
 		CompositeUnitDef def = new CompositeUnitDef("base");
 		def.hull = getHull("cube");
 		addDef(def);
+		
+		def = new CompositeUnitDef("tank");
+		def.hull = getHull("tank");
+		addDef(def);
 	}
 	
 	private void createUnits() {
@@ -335,13 +339,5 @@ public class DefManager {
 	public Collection<HullAttachmentDef> allAttachments() {
 		return attachments.values();
 	}
-	
-	public CompositeUnitDef createCompositeDefWithHull(String name) {
-		CompositeUnitDef def = new CompositeUnitDef(name);
-		def.hull = getHull(name);
-		
-		return def;
-	}
-	
 	
 }

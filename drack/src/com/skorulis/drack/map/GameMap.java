@@ -192,6 +192,15 @@ public class GameMap implements SceneNode, Disposable{
 		return true;
 	}
 	
+	public MapChunk getChunk(int x, int z) {
+		if(x >= 0 && z >= 0 && x < width && z < depth) {
+			int cx = x / MapChunk.CHUNK_SIZE;
+			int cz = z / MapChunk.CHUNK_SIZE;
+			return chunks[cz][cx];
+		}
+		return null;
+	}
+	
 	public int width() {
 		return width;
 	}

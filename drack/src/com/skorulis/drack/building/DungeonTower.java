@@ -2,8 +2,7 @@ package com.skorulis.drack.building;
 
 import java.util.Set;
 import java.util.UUID;
-
-import com.skorulis.drack.def.unit.CompositeUnitDef;
+import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.composite.CompositeUnit;
@@ -21,7 +20,7 @@ public class DungeonTower extends Building{
 		if(this.owner.ownedUnits().size() < 1) {
 			Set<MapSquare> squares = info.map().squaresAround(this);
 			
-			CompositeUnitDef cud = info.def().createCompositeDefWithHull("tank");
+			UnitDef cud = info.def().getUnit("tank");
 			CompositeUnit unit = (CompositeUnit) cud.create(info.assets(), dungeonEnemy());
 			
 			HullAttachment att = info.def().getAttachment("gun").create(info.assets(), unit.attachmentContainer().emptyPoint());

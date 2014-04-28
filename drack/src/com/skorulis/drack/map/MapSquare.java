@@ -153,6 +153,10 @@ public class MapSquare implements SceneNode {
 	public MapSquareJson getSerialisation() {
 		MapSquareJson json = new MapSquareJson();
 		
+		if(building != null) {
+			json.building = building.getSerialisation();
+		}
+		
 		return json;
 	}
 	

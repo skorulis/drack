@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.player.Player;
+import com.skorulis.drack.serialisation.BuildingJson;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
@@ -92,4 +93,14 @@ public class Building implements SceneNode{
 		return true;
 	}
 
+	public BuildingJson getSerialisation() {
+		BuildingJson json = new BuildingJson();
+		json.defName = this.def.name();
+		if(this.owner != null) {
+			json.playerId = this.owner.playerId();
+		}
+		
+		return json;
+	}
+	
 }

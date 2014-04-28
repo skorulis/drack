@@ -95,6 +95,15 @@ public class MapChunk implements SceneNode {
 	public MapSquare squareAt(int x, int z) {
 		return squares[z - offsetZ][x - offsetX];
 	}
+	
+	public MapSquare squareAtIndex(int index) {
+		if(index >= CHUNK_SIZE * CHUNK_SIZE) {
+			throw new IndexOutOfBoundsException("Index " + index + " out of chunk bounds");
+		}
+		int z = index / CHUNK_SIZE;
+		int x = index - z * CHUNK_SIZE;
+		return squares[z][x];
+	}
 
 	@Override
 	public boolean isAlive() {
@@ -111,7 +120,6 @@ public class MapChunk implements SceneNode {
 				json.squares.add(squares[i][j].getSerialisation());
 			}
 		}
-		
 		
 		return json;
 		
