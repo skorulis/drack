@@ -2,6 +2,8 @@ package com.skorulis.drack.resource;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.serialisation.ResourceBatchJson;
 
 public class ResourceBatch {
 	
@@ -14,6 +16,14 @@ public class ResourceBatch {
 		resources = new HashMap<String, ResourceQuantity>();
 		maxQuantity = 0;
 		clear();
+	}
+	
+	public ResourceBatch(ResourceBatchJson json, DefManager def) {
+		this();
+		for(String s : json.values.keySet()) {
+			ResourceQuantity rq = new ResourceQuantity(def.getResource(s), json.values.get(s));
+			add(rq);
+		}
 	}
 	
 	public ResourceBatch(ResourceQuantity rq) {
@@ -97,6 +107,16 @@ public class ResourceBatch {
 			return false;
 		}
 		return totalQuantity >= maxQuantity;
+	}
+	
+	public ResourceBatchJson getSerialisation() {
+		ResourceBatchJson ret = new ResourceBatchJson();
+		
+		for(ResourceQuantity rq : allResources()) {
+			ret.values.put(rq.resource().name(), rq.quantity());
+		}
+		
+		return ret;
 	}
 	
 }

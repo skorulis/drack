@@ -27,7 +27,6 @@ public class MapGenerator {
 		this.def = def;
 		this.players = players;
 		map = new GameMap(width, depth, assets);
-		
 	}
 	
 	public void generateMap() {
@@ -61,14 +60,12 @@ public class MapGenerator {
 				MapSquare square = chunk.squareAtIndex(squareIndex);
 				if(msj.building != null) {
 					Building b = addBuilding(msj.building.defName, square.x(), square.z());
+					b.load(msj.building, def, assets);
 					if(msj.building.playerId != null) {
 						Player p = players.findPlayer(msj.building.playerId);
 						p.addBuilding(b);
 					}
-					
-					
 				}
-				
 				squareIndex++;
 			}
 		}

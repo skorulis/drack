@@ -3,20 +3,22 @@ package com.skorulis.drack.building;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.player.Player;
-import com.skorulis.drack.serialisation.BuildingJson;
+import com.skorulis.drack.serialisation.building.BuildingJson;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
 
-public class Building implements SceneNode{
+public class Building implements SceneNode {
 
 	protected ModelInstance buildingInstance;
 	protected BuildingDef def;
@@ -26,6 +28,10 @@ public class Building implements SceneNode{
 	
 	public Building() {
 		coveredSquares = new HashSet<MapSquare>();
+	}
+	
+	public void load(BuildingJson json, DefManager def, AssetManager assets) {
+		//Empty by default
 	}
 	
 	public void loadModel(SKAssetManager assets) {
@@ -95,12 +101,15 @@ public class Building implements SceneNode{
 
 	public BuildingJson getSerialisation() {
 		BuildingJson json = new BuildingJson();
+		setBasicJsonFields(json);
+		return json;
+	}
+	
+	protected void setBasicJsonFields(BuildingJson json) {
 		json.defName = this.def.name();
 		if(this.owner != null) {
 			json.playerId = this.owner.playerId();
 		}
-		
-		return json;
 	}
 	
 }

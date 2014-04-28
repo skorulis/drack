@@ -23,7 +23,6 @@ public class MapSquare implements SceneNode {
 	private final int x;
 	private final int z;
 	
-	
 	public MapSquare(SKAssetManager assets,int x, int z) {
 		this.x = x;
 		this.z = z;
