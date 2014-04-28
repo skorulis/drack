@@ -1,9 +1,11 @@
 package com.skorulis.drack.composite;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 import com.skorulis.drack.def.attachment.HardPointDef;
+import com.skorulis.drack.serialisation.AttachmentJson;
 import com.skorulis.drack.unit.composite.HullAttachment;
 import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.scene.RenderInfo;
@@ -23,6 +25,15 @@ public class AttachmentContainer {
 	
 	public void setHardPoints(Set<HardPointDef> hardPoints) {
 		this.hardPoints = hardPoints;
+	}
+	
+	public HardPointDef getHardPoint(int number) {
+		for(HardPointDef hpd : this.hardPoints) {
+			if(hpd.number == number) {
+				return hpd;
+			}
+		}
+		return null;
 	}
 	
 	public void render(RenderInfo ri) {
@@ -76,6 +87,14 @@ public class AttachmentContainer {
 	
 	public Set<HardPointDef> hardPoints() {
 		return hardPoints;
+	}
+	
+	public ArrayList<AttachmentJson> getSerialisation() {
+		ArrayList<AttachmentJson> ret = new ArrayList<AttachmentJson>();
+		for(HullAttachment att : attachments) {
+			ret.add(att.getSerialisation());
+		}
+		return ret;
 	}
 	
 }

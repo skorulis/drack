@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.def.attachment.HullAttachmentDef;
 import com.skorulis.drack.def.attachment.HardPointDef;
+import com.skorulis.drack.serialisation.AttachmentJson;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
@@ -70,6 +71,13 @@ public class HullAttachment implements SceneNode {
 	
 	public boolean isAlive() {
 		return true;
+	}
+	
+	public AttachmentJson getSerialisation() {
+		AttachmentJson ret = new AttachmentJson();
+		ret.hardPoint = hardPoint.number;
+		ret.defName = def.name();
+		return ret;
 	}
 
 }

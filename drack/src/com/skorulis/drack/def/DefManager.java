@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.Barracks;
 import com.skorulis.drack.building.Building;
@@ -18,7 +17,6 @@ import com.skorulis.drack.building.Tree;
 import com.skorulis.drack.building.TurretBuilding;
 import com.skorulis.drack.building.Vault;
 import com.skorulis.drack.def.attachment.HullAttachmentDef;
-import com.skorulis.drack.def.attachment.HardPointDef;
 import com.skorulis.drack.def.attachment.WeaponDef;
 import com.skorulis.drack.def.attachment.HardPointDef.HullPointType;
 import com.skorulis.drack.def.attachment.WeaponDef.WeaponType;

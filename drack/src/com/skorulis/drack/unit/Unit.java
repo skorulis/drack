@@ -9,12 +9,13 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.resource.ResourceQuantity;
-import com.skorulis.drack.serialisation.UnitJson;
+import com.skorulis.drack.serialisation.unit.UnitJson;
 import com.skorulis.drack.ui.effects.HealthBar;
 import com.skorulis.drack.unit.action.AttackAction;
 import com.skorulis.drack.unit.action.FaceAction;
@@ -45,6 +46,10 @@ public class Unit implements SceneNode {
 	
 	public void loadAssets(SKAssetManager assets) { 
 		instance = new ModelInstance(assets.getModel(def.modelName()));
+	}
+	
+	public void load(UnitJson json, DefManager def, SKAssetManager assets) {
+		//Empty implementation
 	}
 	
 	public void setOwner(Player owner) {
@@ -201,6 +206,11 @@ public class Unit implements SceneNode {
 	
 	public UnitJson getSerialisation() {
 		UnitJson json = new UnitJson();
+		setBasicJsonFields(json);
+		return json;
+	}
+	
+	public void setBasicJsonFields(UnitJson json) {
 		json.defName = def.name();
 		json.playerId = owner.playerId();
 		
@@ -209,8 +219,6 @@ public class Unit implements SceneNode {
 		json.z = (int)loc.z;
 		
 		json.controlled = this.owner.controllUnit() == this;
-		
-		return json;
 	}
 	
 }

@@ -1,4 +1,4 @@
-package com.skorulis.drack.serialisation;
+package com.skorulis.drack.serialisation.unit;
 
 public class UnitJson {
 

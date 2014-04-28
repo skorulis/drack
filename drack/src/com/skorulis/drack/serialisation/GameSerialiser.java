@@ -14,6 +14,7 @@ import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapGenerator;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.player.PlayerContainer;
+import com.skorulis.drack.serialisation.unit.UnitJson;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.gdx.SKAssetManager;
 
@@ -77,6 +78,7 @@ public class GameSerialiser {
 			if(uj.controlled) {
 				p.setControllingUnit(u);
 			}
+			u.load(uj, def, assets);
 			scene.addUnit(u, uj.x, uj.z);
 		}
 		
