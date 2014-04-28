@@ -96,8 +96,8 @@ public class DefManager {
 		hull.baseSpeed =  10;
 		hull.baseCapacity = 5;
 		
-		hull.addPoint(new HardPointDef(new Vector3(0.497f,0.7f,0), 270, HullPointType.SMALL));
-		hull.addPoint(new HardPointDef(new Vector3(-0.497f,0.7f,0), 90, HullPointType.SMALL));
+		hull.addHardPoint(new Vector3(0.497f,0.7f,0), 270, HullPointType.SMALL);
+		hull.addHardPoint(new Vector3(-0.497f,0.7f,0), 90, HullPointType.SMALL);
 		addDef(hull);
 		
 		hull = new HullDef("tank");
@@ -105,7 +105,7 @@ public class DefManager {
 		hull.baseSpeed =  10;
 		hull.baseCapacity = 5;
 		
-		hull.addPoint(new HardPointDef(new Vector3(0,0.25f,0), 0, HullPointType.SMALL));
+		hull.addHardPoint(new Vector3(0,0.25f,0), 0, HullPointType.SMALL);
 		addDef(hull);
 	}
 	
@@ -203,7 +203,7 @@ public class DefManager {
 	
 	private void createCompositeBuildings() {
 		CompositeBuildingDef def = new CompositeBuildingDef("turret");
-		def.addHardPoint(new HardPointDef(new Vector3(0,1.05f,0), 0, HullPointType.SMALL));
+		def.addHardPoint(new Vector3(0,1.05f,0), 0, HullPointType.SMALL);
 		def.buildingClass = TurretBuilding.class;
 		def.uiClass = TurretUI.class;
 		def.modelName = "turret";

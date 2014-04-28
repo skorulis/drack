@@ -19,11 +19,13 @@ public class HardPointDef {
 	public Vector3 loc;
 	public float rotation;
 	public HullPointType type;
+	public int number;
 	
-	public HardPointDef(Vector3 loc, float rotation, HullPointType type) {
+	public HardPointDef(Vector3 loc, float rotation, HullPointType type, int number) {
 		this.loc = loc;
 		this.rotation = rotation;
 		this.type = type;
+		this.number = number;
 	}
 	
 }

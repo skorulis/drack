@@ -85,7 +85,7 @@ public class TextureGenerator {
 	}
 	
 	private void renderAttachment(HullAttachmentDef def, RenderInfo ri) {
-		HardPointDef hpd = new HardPointDef(new Vector3(2,2,2), 0, HullPointType.SMALL);
+		HardPointDef hpd = new HardPointDef(new Vector3(2,2,2), 0, HullPointType.SMALL,0);
 		HullAttachment att = def.create(assets, hpd);
 		att.absTransform().setTranslation(2.5f, 3.5f, 2.5f);
 		att.render(ri);
