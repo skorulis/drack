@@ -6,7 +6,7 @@ import com.skorulis.drack.unit.Unit;
 import com.skorulis.gdx.SKAssetManager;
 
 public interface UnitDef extends BaseDef {
-
+	
 	public String modelName();
 	public float speed();
 	public int resourceCapacity();

@@ -203,6 +203,13 @@ public class Unit implements SceneNode {
 		UnitJson json = new UnitJson();
 		json.defName = def.name();
 		json.playerId = owner.playerId();
+		
+		Vector3 loc = currentPosition();
+		json.x = (int)loc.x;
+		json.z = (int)loc.z;
+		
+		json.controlled = this.owner.controllUnit() == this;
+		
 		return json;
 	}
 	

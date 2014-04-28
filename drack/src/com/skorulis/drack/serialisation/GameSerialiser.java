@@ -72,6 +72,12 @@ public class GameSerialiser {
 		
 		for(UnitJson uj : json.units) {
 			UnitDef ud = def.getUnit(uj.defName);
+			Player p = scene.findPlayer(uj.playerId);
+			Unit u = ud.create(assets, p);
+			if(uj.controlled) {
+				p.setControllingUnit(u);
+			}
+			scene.addUnit(u, uj.x, uj.z);
 		}
 		
 		return scene;

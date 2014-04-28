@@ -141,7 +141,11 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		u.absTransform().setTranslation(sq.getCentreLoc());
 		
 		u.setHealthBar(effects2D.createHealthBar(u));
-		
+	}
+	
+	public void addUnit(Unit u, int x ,int z) {
+		MapSquare sq = map.squareAt(x, z);
+		addUnit(u,sq);
 	}
 	
 	public DefManager def() {
@@ -161,6 +165,9 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		json.map = map.getSerialisation();
 		for(Player p : players) {
 			json.players.add(p.getSerialisation());
+		}
+		for(Unit u : units) {
+			json.units.add(u.getSerialisation());
 		}
 		
 		return json;
