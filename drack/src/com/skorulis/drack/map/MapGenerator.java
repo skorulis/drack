@@ -10,6 +10,7 @@ import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.player.PlayerContainer;
+import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.serialisation.MapChunkJson;
 import com.skorulis.drack.serialisation.MapJson;
 import com.skorulis.drack.serialisation.MapSquareJson;
@@ -53,6 +54,12 @@ public class MapGenerator {
 	}
 	
 	public void loadMap(MapJson json) {
+		LoadData ld = new LoadData();
+		ld.assets = assets;
+		ld.def = def;
+		ld.map = map;
+		
+		
 		for(MapChunkJson mcj : json.chunks) {
 			MapChunk chunk = map.getChunk(mcj.offsetX, mcj.offsetZ);
 			int squareIndex = 0;
@@ -60,7 +67,7 @@ public class MapGenerator {
 				MapSquare square = chunk.squareAtIndex(squareIndex);
 				if(msj.building != null) {
 					Building b = addBuilding(msj.building.defName, square.x(), square.z());
-					b.load(msj.building, def, assets);
+					b.load(msj.building, ld);
 					if(msj.building.playerId != null) {
 						Player p = players.findPlayer(msj.building.playerId);
 						p.addBuilding(b);

@@ -3,18 +3,17 @@ package com.skorulis.drack.unit;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
-import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.resource.ResourceQuantity;
+import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.serialisation.unit.UnitJson;
 import com.skorulis.drack.ui.effects.HealthBar;
 import com.skorulis.drack.unit.action.AttackAction;
@@ -48,7 +47,7 @@ public class Unit implements SceneNode {
 		instance = new ModelInstance(assets.getModel(def.modelName()));
 	}
 	
-	public void load(UnitJson json, DefManager def, SKAssetManager assets) {
+	public void load(UnitJson json, LoadData ld) {
 		//Empty implementation
 	}
 	

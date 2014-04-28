@@ -1,10 +1,9 @@
 package com.skorulis.drack.building;
 
-import com.badlogic.gdx.assets.AssetManager;
-import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.ResourceDef;
 import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.resource.ResourceQuantity;
+import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.serialisation.building.BuildingJson;
 import com.skorulis.drack.serialisation.building.MineBuildingJson;
 
@@ -16,9 +15,9 @@ public class Mine extends Building {
 		resources = new ResourceBatch();
 	}
 	
-	public void load(BuildingJson json, DefManager def, AssetManager assets) {
+	public void load(BuildingJson json, LoadData ld) {
 		MineBuildingJson mbj = (MineBuildingJson) json;
-		resources = new ResourceBatch(mbj.resources, def);
+		resources = new ResourceBatch(mbj.resources, ld.def);
 	}
 	
 	public ResourceBatch mine(int rate) {

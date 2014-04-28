@@ -71,6 +71,11 @@ public class GameSerialiser {
 		
 		GameScene scene = new GameScene(def, assets, map, effects2D, players);
 		
+		LoadData ld = new LoadData();
+		ld.assets = assets;
+		ld.def = def;
+		ld.map = map;
+		
 		for(UnitJson uj : json.units) {
 			UnitDef ud = def.getUnit(uj.defName);
 			Player p = scene.players().findPlayer(uj.playerId);
@@ -78,7 +83,7 @@ public class GameSerialiser {
 			if(uj.controlled) {
 				p.setControllingUnit(u);
 			}
-			u.load(uj, def, assets);
+			u.load(uj, ld);
 			scene.addUnit(u, uj.x, uj.z);
 		}
 		

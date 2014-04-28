@@ -1,18 +1,18 @@
 package com.skorulis.drack.unit.composite;
 
 import java.util.Set;
+
 import com.skorulis.drack.composite.AttachmentContainer;
 import com.skorulis.drack.composite.CompositeObject;
-import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.attachment.HardPointDef;
 import com.skorulis.drack.def.attachment.HullAttachmentDef;
 import com.skorulis.drack.def.unit.CompositeUnitDef;
 import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.serialisation.AttachmentJson;
+import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.serialisation.unit.CompositeUnitJson;
 import com.skorulis.drack.serialisation.unit.UnitJson;
 import com.skorulis.drack.unit.Unit;
-import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.UpdateInfo;
 
@@ -28,12 +28,12 @@ public class CompositeUnit extends Unit implements CompositeObject {
 		return (CompositeUnitDef) this.def;
 	}
 	
-	public void load(UnitJson json, DefManager def, SKAssetManager assets) {
+	public void load(UnitJson json, LoadData ld) {
 		CompositeUnitJson cuj = (CompositeUnitJson) json;
 		for(AttachmentJson aj : cuj.attachments) {
-			HullAttachmentDef attDef = def.getAttachment(aj.defName);
+			HullAttachmentDef attDef = ld.def.getAttachment(aj.defName);
 			HardPointDef hardPoint = attContainer.getHardPoint(aj.hardPoint);
-			HullAttachment att = attDef.create(assets, hardPoint);
+			HullAttachment att = attDef.create(ld.assets, hardPoint);
 			attContainer.addAttachment(att);
 		}
 	}

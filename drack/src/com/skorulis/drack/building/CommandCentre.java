@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.map.ForceField;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
+import com.skorulis.drack.serialisation.LoadData;
+import com.skorulis.drack.serialisation.building.BuildingJson;
 
 public class CommandCentre extends Building {
 
@@ -12,6 +14,10 @@ public class CommandCentre extends Building {
 	
 	public CommandCentre() {
 		
+	}
+	
+	public void load(BuildingJson json, LoadData ld) {
+		generateField(fieldSize, ld.map);
 	}
 	
 	public void generateField(int size, GameMap map) {
