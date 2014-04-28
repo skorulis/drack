@@ -1,7 +1,6 @@
 package com.skorulis.drack.building;
 
 import java.util.Set;
-import java.util.UUID;
 import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.player.Player;
@@ -12,8 +11,7 @@ import com.skorulis.scene.UpdateInfo;
 public class DungeonTower extends Building{
 
 	public DungeonTower() {
-		this.owner = new Player(UUID.randomUUID().toString());
-		this.owner.addBuilding(this);
+		
 	}
 	
 	public void update(UpdateInfo info) {

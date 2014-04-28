@@ -1,12 +1,14 @@
 package com.skorulis.drack.map;
 
+import java.util.UUID;
+
 import com.skorulis.drack.building.Barracks;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.CommandCentre;
 import com.skorulis.drack.building.DungeonTower;
 import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.def.DefManager;
-import com.skorulis.drack.def.building.BuildingDef;
+import com.skorulis.drack.player.Player;
 import com.skorulis.drack.player.PlayerContainer;
 import com.skorulis.drack.serialisation.MapChunkJson;
 import com.skorulis.drack.serialisation.MapJson;
@@ -46,7 +48,9 @@ public class MapGenerator {
 		
 		DungeonTower tower = (DungeonTower) addBuilding("round tower", 20, 20);
 		
-		players.addPlayer(tower.owner());
+		Player compPlayer = new Player(UUID.randomUUID().toString());
+		players.addPlayer(compPlayer);
+		compPlayer.addBuilding(tower);
 	}
 	
 	public void loadMap(MapJson json) {
@@ -56,7 +60,13 @@ public class MapGenerator {
 			for(MapSquareJson msj : mcj.squares) {
 				MapSquare square = chunk.squareAtIndex(squareIndex);
 				if(msj.building != null) {
-					addBuilding(msj.building.defName, square.x(), square.z());
+					Building b = addBuilding(msj.building.defName, square.x(), square.z());
+					if(msj.building.playerId != null) {
+						Player p = players.findPlayer(msj.building.playerId);
+						p.addBuilding(b);
+					}
+					
+					
 				}
 				
 				squareIndex++;
