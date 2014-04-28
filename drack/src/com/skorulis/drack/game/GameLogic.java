@@ -32,7 +32,7 @@ public class GameLogic implements Disposable, SceneWindow {
 	public GameLogic(GameScene scene, GameDelegate delegate) {
 		this.scene = scene;
 		this.delegate = delegate;
-		this.player = scene.findPlayer("user");
+		this.player = scene.players().humanPlayer();
 		modelBatch = new ModelBatch();
 		createEnvironment();
 		isoCam = new IsoPerspectiveCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),10);

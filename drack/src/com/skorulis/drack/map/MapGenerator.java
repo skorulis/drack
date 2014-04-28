@@ -1,31 +1,36 @@
 package com.skorulis.drack.map;
 
-import java.util.ArrayList;
-
 import com.skorulis.drack.building.Barracks;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.CommandCentre;
 import com.skorulis.drack.building.DungeonTower;
 import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.def.DefManager;
-import com.skorulis.drack.player.Player;
+import com.skorulis.drack.def.building.BuildingDef;
+import com.skorulis.drack.player.PlayerContainer;
+import com.skorulis.drack.serialisation.MapChunkJson;
+import com.skorulis.drack.serialisation.MapJson;
+import com.skorulis.drack.serialisation.MapSquareJson;
 import com.skorulis.gdx.SKAssetManager;
 
 public class MapGenerator {
 
-	private GameMap map;
-	private SKAssetManager assets;
-	private DefManager def;
-	private ArrayList<Player> generatedPlayers;
+	private final GameMap map;
+	private final SKAssetManager assets;
+	private final DefManager def;
+	private final PlayerContainer players;
 	
-	public MapGenerator(int width , int depth, SKAssetManager assets,DefManager def, Player player) {
+	public MapGenerator(int width , int depth, SKAssetManager assets,DefManager def, PlayerContainer players) {
 		this.assets = assets;
 		this.def = def;
-		this.generatedPlayers = new ArrayList<Player>();
+		this.players = players;
 		map = new GameMap(width, depth, assets);
 		
+	}
+	
+	public void generateMap() {
 		CommandCentre b = (CommandCentre) addBuilding("command", 5, 5);
-		player.addBuilding(b);
+		players.humanPlayer().addBuilding(b);
 		b.generateField(b.fieldSize(), map);
 		
 		addBuilding("tree", 2, 5);
@@ -33,14 +38,30 @@ public class MapGenerator {
 		addBuilding("tree", 8, 15);
 		
 		Barracks barracks = (Barracks) addBuilding("barracks", 8, 8);
-		player.addBuilding(barracks);
+		players.humanPlayer().addBuilding(barracks);
 		
 		Mine mine = (Mine) addBuilding("mine", 11, 3);
 		mine.addResource(def.getResource("iron"), 1);
 		mine.addResource(def.getResource("gold"), 1);
 		
 		DungeonTower tower = (DungeonTower) addBuilding("round tower", 20, 20);
-		generatedPlayers.add(tower.owner());
+		
+		players.addPlayer(tower.owner());
+	}
+	
+	public void loadMap(MapJson json) {
+		for(MapChunkJson mcj : json.chunks) {
+			MapChunk chunk = map.getChunk(mcj.offsetX, mcj.offsetZ);
+			int squareIndex = 0;
+			for(MapSquareJson msj : mcj.squares) {
+				MapSquare square = chunk.squareAtIndex(squareIndex);
+				if(msj.building != null) {
+					addBuilding(msj.building.defName, square.x(), square.z());
+				}
+				
+				squareIndex++;
+			}
+		}
 	}
 	
 	private Building addBuilding(String name, int x, int z) {
@@ -70,9 +91,5 @@ public class MapGenerator {
 	
 	public SKAssetManager assets() {
 		return assets;
-	}
-	
-	public ArrayList<Player> generatedPlayers() {
-		return generatedPlayers;
 	}
 }

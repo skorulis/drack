@@ -14,8 +14,10 @@ import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapChunk;
+import com.skorulis.drack.map.MapGenerator;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.player.Player;
+import com.skorulis.drack.player.PlayerContainer;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.gdx.SKAssetManager;
 
@@ -66,17 +68,15 @@ public class GameSerialiser {
 	}
 	
 	public GameScene createScene(GameSceneJson json) {
-		GameMap map = createMap(json.map);
+		PlayerContainer players = new PlayerContainer(json.players);
 		
-		GameScene scene = new GameScene(def, assets, map, effects2D);
-		for(PlayerJson pj : json.players) {
-			Player p = new Player(pj.playerId);
-			scene.addPlayer(p);
-		}
+		GameMap map = createMap(json.map, players);
+		
+		GameScene scene = new GameScene(def, assets, map, effects2D, players);
 		
 		for(UnitJson uj : json.units) {
 			UnitDef ud = def.getUnit(uj.defName);
-			Player p = scene.findPlayer(uj.playerId);
+			Player p = scene.players().findPlayer(uj.playerId);
 			Unit u = ud.create(assets, p);
 			if(uj.controlled) {
 				p.setControllingUnit(u);
@@ -87,25 +87,14 @@ public class GameSerialiser {
 		return scene;
 	}
 	
-	public GameMap createMap(MapJson json) {
-		GameMap map = new GameMap(json.width, json.depth, assets);
+	public GameMap createMap(MapJson json, PlayerContainer players) {
+		MapGenerator mapGen = new MapGenerator(json.width, json.depth, assets, def, players);
 		
-		for(MapChunkJson mcj : json.chunks) {
-			MapChunk chunk = map.getChunk(mcj.offsetX, mcj.offsetZ);
-			int squareIndex = 0;
-			for(MapSquareJson msj : mcj.squares) {
-				MapSquare square = chunk.squareAtIndex(squareIndex);
-				if(msj.building != null) {
-					BuildingDef bd = def.getBuilding(msj.building.defName);
-					Building b = bd.create(assets);
-					
-				}
-				
-				squareIndex++;
-			}
-		}
+		mapGen.loadMap(json);
 		
-		return map;
+		
+		
+		return mapGen.map();
 	}
 	
 }

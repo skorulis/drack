@@ -1,10 +1,7 @@
 package com.skorulis.drack.game;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
-
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
@@ -15,7 +12,7 @@ import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
-import com.skorulis.drack.player.Player;
+import com.skorulis.drack.player.PlayerContainer;
 import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.drack.serialisation.GameSceneJson;
 import com.skorulis.drack.unit.Unit;
@@ -28,15 +25,15 @@ import com.skorulis.scene.UpdateInfo;
 public class GameScene implements SceneNode, Disposable, UnitDelegate {
 
 	private ArrayList<Unit> units;
-	private Set<Player> players;
 	private GameMap map;
 	private Matrix4 transform;
 	private BuildingPlacement placingBuilding;
 	private SKAssetManager assets;
 	private Effect2DLayer effects2D;
 	private DefManager def;
+	private PlayerContainer players;
 	
-	public GameScene(DefManager def, SKAssetManager assets,GameMap map, Effect2DLayer effects2D) {
+	public GameScene(DefManager def, SKAssetManager assets,GameMap map, Effect2DLayer effects2D, PlayerContainer players) {
 		this.assets = assets;
 		this.map = map;
 		this.effects2D = effects2D;
@@ -44,7 +41,7 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		
 		transform = new Matrix4();		
 		units = new ArrayList<Unit>();
-		players = new HashSet<Player>();
+		this.players = players;
 	}
 
 	@Override
@@ -78,10 +75,7 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 			}
 		}
 		
-		Iterator<Player> playerIt = players.iterator();
-		while(playerIt.hasNext()) {
-			playerIt.next().update(info);
-		}
+		players.update(info);
 		
 		if(placingBuilding != null) {
 			placingBuilding.update(info);
@@ -163,9 +157,9 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 	public GameSceneJson getSerialisation() {
 		GameSceneJson json = new GameSceneJson();
 		json.map = map.getSerialisation();
-		for(Player p : players) {
-			json.players.add(p.getSerialisation());
-		}
+		
+		json.players = players.getSerialisation();
+		
 		for(Unit u : units) {
 			json.units.add(u.getSerialisation());
 		}
@@ -173,17 +167,8 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		return json;
 	}
 	
-	public void addPlayer(Player player) {
-		this.players.add(player);
-	}
-	
-	public Player findPlayer(String id) {
-		for(Player p : players) {
-			if(p.playerId().equals(id)) {
-				return p;
-			}
-		}
-		return null;
+	public PlayerContainer players() {
+		return players;
 	}
 
 }
