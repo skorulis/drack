@@ -5,6 +5,9 @@ import com.skorulis.drack.composite.AttachmentContainer;
 import com.skorulis.drack.composite.CompositeObject;
 import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.def.building.CompositeBuildingDef;
+import com.skorulis.drack.serialisation.LoadData;
+import com.skorulis.drack.serialisation.building.BuildingJson;
+import com.skorulis.drack.serialisation.building.CompositeBuildingJson;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.UpdateInfo;
 
@@ -14,6 +17,11 @@ public class CompositeBuilding extends Building implements CompositeObject {
 	
 	public CompositeBuilding() {
 		attContainer = new AttachmentContainer(this);
+	}
+	
+	public void load(BuildingJson json, LoadData ld) {
+		CompositeBuildingJson cbj = (CompositeBuildingJson) json;
+		attContainer.load(cbj.attachments, ld);
 	}
 	
 	public AttachmentContainer attachmentContainer() {
@@ -37,6 +45,13 @@ public class CompositeBuilding extends Building implements CompositeObject {
 	public void update(UpdateInfo ui) {
 		super.update(ui);
 		attContainer.update(ui);
+	}
+	
+	public CompositeBuildingJson getSerialisation() {
+		CompositeBuildingJson json = new CompositeBuildingJson();
+		setBasicJsonFields(json);
+		json.attachments = attContainer.getSerialisation();
+		return json;
 	}
 	
 }

@@ -4,11 +4,8 @@ import java.util.Set;
 
 import com.skorulis.drack.composite.AttachmentContainer;
 import com.skorulis.drack.composite.CompositeObject;
-import com.skorulis.drack.def.attachment.HardPointDef;
-import com.skorulis.drack.def.attachment.HullAttachmentDef;
 import com.skorulis.drack.def.unit.CompositeUnitDef;
 import com.skorulis.drack.def.unit.UnitDef;
-import com.skorulis.drack.serialisation.AttachmentJson;
 import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.serialisation.unit.CompositeUnitJson;
 import com.skorulis.drack.serialisation.unit.UnitJson;
@@ -30,12 +27,7 @@ public class CompositeUnit extends Unit implements CompositeObject {
 	
 	public void load(UnitJson json, LoadData ld) {
 		CompositeUnitJson cuj = (CompositeUnitJson) json;
-		for(AttachmentJson aj : cuj.attachments) {
-			HullAttachmentDef attDef = ld.def.getAttachment(aj.defName);
-			HardPointDef hardPoint = attContainer.getHardPoint(aj.hardPoint);
-			HullAttachment att = attDef.create(ld.assets, hardPoint);
-			attContainer.addAttachment(att);
-		}
+		attContainer.load(cuj.attachments, ld);
 	}
 	
 	public void setDef(UnitDef def) {

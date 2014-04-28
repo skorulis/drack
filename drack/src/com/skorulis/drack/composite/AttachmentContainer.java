@@ -5,7 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.skorulis.drack.def.attachment.HardPointDef;
+import com.skorulis.drack.def.attachment.HullAttachmentDef;
 import com.skorulis.drack.serialisation.AttachmentJson;
+import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.unit.composite.HullAttachment;
 import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.scene.RenderInfo;
@@ -22,6 +24,16 @@ public class AttachmentContainer {
 		this.node = node;
 		this.attachments = new HashSet<HullAttachment>();
 	}
+	
+	public void load(ArrayList<AttachmentJson> attachments, LoadData ld) {
+		for(AttachmentJson aj : attachments) {
+			HullAttachmentDef attDef = ld.def.getAttachment(aj.defName);
+			HardPointDef hardPoint = getHardPoint(aj.hardPoint);
+			HullAttachment att = attDef.create(ld.assets, hardPoint);
+			addAttachment(att);
+		}
+	}
+	
 	
 	public void setHardPoints(Set<HardPointDef> hardPoints) {
 		this.hardPoints = hardPoints;
