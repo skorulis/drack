@@ -7,9 +7,12 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.game.GameScene;
 import com.skorulis.drack.map.GameMap;
+import com.skorulis.drack.player.Player;
+import com.skorulis.drack.unit.Unit;
 import com.skorulis.gdx.SKAssetManager;
 
 public class GameSerialiser {
@@ -60,7 +63,18 @@ public class GameSerialiser {
 	
 	public GameScene createScene(GameSceneJson json) {
 		GameMap map = createMap(json.map);
-		return new GameScene(def, assets, map, effects2D);
+		
+		GameScene scene = new GameScene(def, assets, map, effects2D);
+		for(PlayerJson pj : json.players) {
+			Player p = new Player(pj.playerId);
+			scene.addPlayer(p);
+		}
+		
+		for(UnitJson uj : json.units) {
+			UnitDef ud = def.getUnit(uj.defName);
+		}
+		
+		return scene;
 	}
 	
 	public GameMap createMap(MapJson json) {

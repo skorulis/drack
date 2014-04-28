@@ -1,13 +1,14 @@
 package com.skorulis.drack.def.unit;
 
 import com.skorulis.drack.def.BaseDef;
+import com.skorulis.drack.def.BaseDefImp;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.drack.unit.composite.CompositeUnit;
 import com.skorulis.gdx.SKAssetManager;
 
 
-public class CompositeUnitDef extends BaseDef implements UnitDef{
+public class CompositeUnitDef extends BaseDefImp implements UnitDef{
 
 	public HullDef hull;
 	
@@ -56,7 +57,7 @@ public class CompositeUnitDef extends BaseDef implements UnitDef{
 	}
 	
 	public Class<? extends BaseDef> getTypeClass() {
-		return CompositeUnitDef.class;
+		return UnitDef.class;
 	}
 	
 	

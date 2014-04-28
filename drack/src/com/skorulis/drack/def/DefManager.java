@@ -27,6 +27,7 @@ import com.skorulis.drack.def.building.CompositeBuildingDef;
 import com.skorulis.drack.def.unit.CompositeUnitDef;
 import com.skorulis.drack.def.unit.HullDef;
 import com.skorulis.drack.def.unit.BasicUnitDef;
+import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.effects.BulletEffect;
 import com.skorulis.drack.effects.LaserEffect;
 import com.skorulis.drack.ui.building.BarracksUI;
@@ -43,23 +44,20 @@ public class DefManager {
 	private Map<String, ResourceDef> resources;
 	private Map<String, HullDef> hulls;
 	private Map<String, BasicUnitDef> units;
-	private Map<String, CompositeUnitDef> compositeUnits;
 	private Map<String, HullAttachmentDef> attachments;
 	
 	public DefManager() {
 		buildings = new HashMap<String, BuildingDef>();
 		resources = new HashMap<String, ResourceDef>();
 		units = new HashMap<String, BasicUnitDef>();
-		compositeUnits = new HashMap<String, CompositeUnitDef>();
 		hulls = new HashMap<String, HullDef>();
 		attachments = new HashMap<String, HullAttachmentDef>();
 		
 		typeMapping = new HashMap<Class<? extends BaseDef>, Map<String,? extends BaseDef>>();
 		typeMapping.put(BuildingDef.class, buildings);
 		typeMapping.put(ResourceDef.class, resources);
-		typeMapping.put(BasicUnitDef.class, units);
+		typeMapping.put(UnitDef.class, units);
 		typeMapping.put(HullDef.class, hulls);
-		typeMapping.put(CompositeUnitDef.class, compositeUnits);
 		typeMapping.put(HullAttachmentDef.class, attachments);
 		
 		createAttachments();
@@ -264,12 +262,8 @@ public class DefManager {
 		return get(name,ResourceDef.class);
 	}
 	
-	public BasicUnitDef getUnit(String name) {
-		return get(name,BasicUnitDef.class);
-	}
-	
-	public CompositeUnitDef getCompositeUnit(String name) {
-		return get(name,CompositeUnitDef.class);
+	public UnitDef getUnit(String name) {
+		return get(name,UnitDef.class);
 	}
 	
 	public <T extends BaseDef> T get(String name, Class<T> type) {
@@ -303,7 +297,7 @@ public class DefManager {
 		for(BuildingDef d : buildings.values()) {
 			models.add(d.modelName);
 		}
-		for(BasicUnitDef d : units.values()) {
+		for(UnitDef d : units.values()) {
 			models.add(d.modelName());
 		}
 		

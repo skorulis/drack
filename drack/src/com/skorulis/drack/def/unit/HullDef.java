@@ -4,9 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.skorulis.drack.def.BaseDef;
+import com.skorulis.drack.def.BaseDefImp;
 import com.skorulis.drack.def.attachment.HardPointDef;
 
-public class HullDef extends BaseDef {
+public class HullDef extends BaseDefImp {
 	
 	public String modelName;
 	public Set<HardPointDef> hardPoints;

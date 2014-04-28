@@ -14,6 +14,7 @@ import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.resource.ResourceQuantity;
+import com.skorulis.drack.serialisation.UnitJson;
 import com.skorulis.drack.ui.effects.HealthBar;
 import com.skorulis.drack.unit.action.AttackAction;
 import com.skorulis.drack.unit.action.FaceAction;
@@ -196,6 +197,13 @@ public class Unit implements SceneNode {
 	
 	public Set<Weapon> allWeapons() {
 		return new HashSet<Weapon>();
+	}
+	
+	public UnitJson getSerialisation() {
+		UnitJson json = new UnitJson();
+		json.defName = def.name();
+		json.playerId = owner.playerId();
+		return json;
 	}
 	
 }

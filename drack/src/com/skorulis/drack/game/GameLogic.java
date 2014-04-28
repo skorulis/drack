@@ -29,10 +29,10 @@ public class GameLogic implements Disposable, SceneWindow {
 	private Environment environment;
 	private GameEventListener eventListener;
 	
-	public GameLogic(GameScene scene, GameDelegate delegate, Player player) {
+	public GameLogic(GameScene scene, GameDelegate delegate) {
 		this.scene = scene;
 		this.delegate = delegate;
-		this.player = player;
+		this.player = scene.findPlayer("user");
 		modelBatch = new ModelBatch();
 		createEnvironment();
 		isoCam = new IsoPerspectiveCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),10);

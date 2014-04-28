@@ -53,19 +53,20 @@ public class DrackGame implements ApplicationListener, GameDelegate {
 	private void doneLoading() {
         loading = false;
         styleManager = new StyleManager();
-        Player player = new Player();
+        
         effects2D = new Effect2DLayer(styleManager.gameSkin());
         
         GameSerialiser serialiser = new GameSerialiser(def,assets,effects2D);
         
         GameScene scene = serialiser.read();
         if(scene == null) {
+        	Player player = new Player("user");
         	MapGenerator mapGen = new MapGenerator(64, 64, assets, def, player);
             SceneGenerator sceneGen = new SceneGenerator(mapGen, effects2D, player);
             scene = sceneGen.scene();
         }
         
-        logic = new GameLogic(scene, this, player);
+        logic = new GameLogic(scene, this);
         
         effects2D.setCam(logic.isoCam());
         ui = new UIManager(assets,logic,def,styleManager,this);

@@ -2,10 +2,11 @@ package com.skorulis.drack.def.building;
 
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.BaseDef;
+import com.skorulis.drack.def.BaseDefImp;
 import com.skorulis.drack.ui.building.BuildingUI;
 import com.skorulis.gdx.SKAssetManager;
 
-public class BuildingDef extends BaseDef {
+public class BuildingDef extends BaseDefImp {
 
 	public Class<? extends Building> buildingClass;
 	public Class<? extends BuildingUI> uiClass;

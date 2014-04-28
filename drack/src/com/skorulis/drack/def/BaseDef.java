@@ -1,17 +1,8 @@
 package com.skorulis.drack.def;
 
-public abstract class BaseDef {
+public interface BaseDef {
 
-	private final String name;
-	
-	public BaseDef(String name) {
-		this.name = name;
-	}
-	
-	public String name() {
-		return name;
-	}
-	
-	public abstract Class<? extends BaseDef> getTypeClass();
+	public String name();
+	public Class<? extends BaseDef> getTypeClass();
 	
 }

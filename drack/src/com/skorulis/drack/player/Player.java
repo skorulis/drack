@@ -7,18 +7,21 @@ import java.util.Set;
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.resource.ResourceBatch;
+import com.skorulis.drack.serialisation.PlayerJson;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.SceneHelper;
+import com.skorulis.scene.UpdateInfo;
 
 public class Player {
 
-	private String playerId;
+	private final String playerId;
 	private ResourceBatch resources;
 	private Unit controllingUnit;
 	private Set<Unit> ownedUnits;
 	private Set<Building> ownedBuildings;
 	
-	public Player() {
+	public Player(String playerId) {
+		this.playerId = playerId;
 		resources = new ResourceBatch();
 		ownedUnits = new HashSet<Unit>();
 		ownedBuildings = new HashSet<Building>();
@@ -72,7 +75,7 @@ public class Player {
 		return best;
 	}
 	
-	public void update(float delta) {
+	public void update(UpdateInfo ui) {
 		Iterator<Unit> it = ownedUnits.iterator();
 		while(it.hasNext()) {
 			Unit u = it.next();
@@ -86,5 +89,10 @@ public class Player {
 		return playerId;
 	}
 	
+	public PlayerJson getSerialisation() {
+		PlayerJson json = new PlayerJson();
+		json.playerId = playerId;
+		return json;
+	}
 	
 }

@@ -1,6 +1,6 @@
 package com.skorulis.drack.def;
 
-public class ResourceDef extends BaseDef {
+public class ResourceDef extends BaseDefImp {
 
 	public ResourceDef(String name) {
 		super(name);

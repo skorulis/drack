@@ -1,8 +1,11 @@
 package com.skorulis.drack.map;
 
+import java.util.ArrayList;
+
 import com.skorulis.drack.building.Barracks;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.CommandCentre;
+import com.skorulis.drack.building.DungeonTower;
 import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.player.Player;
@@ -13,10 +16,12 @@ public class MapGenerator {
 	private GameMap map;
 	private SKAssetManager assets;
 	private DefManager def;
+	private ArrayList<Player> generatedPlayers;
 	
 	public MapGenerator(int width , int depth, SKAssetManager assets,DefManager def, Player player) {
 		this.assets = assets;
 		this.def = def;
+		this.generatedPlayers = new ArrayList<Player>();
 		map = new GameMap(width, depth, assets);
 		
 		CommandCentre b = (CommandCentre) addBuilding("command", 5, 5);
@@ -34,7 +39,8 @@ public class MapGenerator {
 		mine.addResource(def.getResource("iron"), 1);
 		mine.addResource(def.getResource("gold"), 1);
 		
-		addBuilding("round tower", 20, 20);
+		DungeonTower tower = (DungeonTower) addBuilding("round tower", 20, 20);
+		generatedPlayers.add(tower.owner());
 	}
 	
 	private Building addBuilding(String name, int x, int z) {
@@ -64,5 +70,9 @@ public class MapGenerator {
 	
 	public SKAssetManager assets() {
 		return assets;
+	}
+	
+	public ArrayList<Player> generatedPlayers() {
+		return generatedPlayers;
 	}
 }

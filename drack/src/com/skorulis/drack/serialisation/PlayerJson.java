@@ -1,8 +1,7 @@
 package com.skorulis.drack.serialisation;
 
-public class UnitJson {
+public class PlayerJson {
 
-	public String defName;
 	public String playerId;
 	
 }

@@ -1,6 +1,7 @@
 package com.skorulis.drack.building;
 
 import java.util.Set;
+import java.util.UUID;
 
 import com.skorulis.drack.def.unit.CompositeUnitDef;
 import com.skorulis.drack.map.MapSquare;
@@ -12,7 +13,7 @@ import com.skorulis.scene.UpdateInfo;
 public class DungeonTower extends Building{
 
 	public DungeonTower() {
-		this.owner = new Player();
+		this.owner = new Player(UUID.randomUUID().toString());
 		this.owner.addBuilding(this);
 	}
 	
@@ -29,7 +30,6 @@ public class DungeonTower extends Building{
 			
 			info.logic.scene().addUnit(unit, squares.iterator().next());
 		}
-		this.owner.update(info.delta); //HACK, players need to be put somewhere else
 	}
 	
 	public Player dungeonEnemy() {
