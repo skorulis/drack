@@ -5,12 +5,15 @@ import java.util.Set;
 
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.gdx.SKAssetManager;
+import com.skorulis.scene.IntersectionList;
 import com.skorulis.scene.RenderInfo;
+import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
 
-public class BulletEffect {
+public class BulletEffect implements SceneNode {
 
 	private final Vector3 startPos;
 	private final Vector3 endPos;
@@ -64,6 +67,21 @@ public class BulletEffect {
 	
 	public boolean isAlive() {
 		return timePos < life;
+	}
+
+	@Override
+	public Matrix4 absTransform() {
+		return instance.transform;
+	}
+
+	@Override
+	public Matrix4 relTransform() {
+		return instance.transform;
+	}
+
+	@Override
+	public boolean intersect(IntersectionList list) {
+		return false;
 	}
 	
 }

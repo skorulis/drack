@@ -66,7 +66,8 @@ public class MapChunk implements SceneNode {
 		boolean hit = false;
 		for(int i = 0; i < CHUNK_SIZE; ++i) {
 			for(int j = 0; j < CHUNK_SIZE; ++j) {
-				hit = hit || squares[i][j].intersect(list);
+				boolean intersects = squares[i][j].intersect(list); 
+				hit = hit || intersects;
 			}
 		}
 		return hit;

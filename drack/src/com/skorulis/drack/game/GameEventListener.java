@@ -29,12 +29,14 @@ public class GameEventListener implements GestureListener {
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
 		Ray ray = logic.isoCam().cam().getPickRay(x, y);
+		
 		IntersectionList list = new IntersectionList(ray);
 		if(logic.scene().intersect(list)) {
 			ArrayList<IntersectionResult> sorted = list.sortedResults();
-			System.out.println("Intersections " + sorted);
-			IntersectionResult first = sorted.get(0);
-			logic.nodeSelected(first.node());
+			
+			//System.out.println(sorted);
+			logic.handleIntersections(sorted);
+			
 		}
 		
 		return false;

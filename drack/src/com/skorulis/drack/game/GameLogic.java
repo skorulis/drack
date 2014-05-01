@@ -1,5 +1,6 @@
 package com.skorulis.drack.game;
 
+import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.Environment;
@@ -14,8 +15,8 @@ import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.Unit;
+import com.skorulis.scene.IntersectionResult;
 import com.skorulis.scene.RenderInfo;
-import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.SceneWindow;
 import com.skorulis.scene.UpdateInfo;
 
@@ -47,12 +48,27 @@ public class GameLogic implements Disposable, SceneWindow {
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 	}
 	
-	public void nodeSelected(SceneNode node) {
-		if(node instanceof MapSquare) {
-			MapSquare sq = (MapSquare) node;
+	public void handleIntersections(ArrayList<IntersectionResult> hits) {
+		for(IntersectionResult ir : hits) {
+			if(this.handleHit(ir)) {
+				return;
+			}
+		}
+	}
+	
+	private boolean handleHit(IntersectionResult hit) {
+		if(hit.node() instanceof Unit) {
+			Unit unit = (Unit) hit.node();
+			if(unit != player.controllUnit() && player.controllUnit().owner() != unit.owner()) {
+				player.controllUnit().attack(unit);
+				return true;
+			}
+			return false;
+		} else if(hit.node() instanceof MapSquare) {
+			MapSquare sq = (MapSquare) hit.node();
 			MapSquare current = map().squareAt(player.controllUnit().currentPosition());
 			if(sq == current) {
-				return;
+				return false;
 			}
 			
 			PathFinder finder = new PathFinder(map());
@@ -63,13 +79,9 @@ public class GameLogic implements Disposable, SceneWindow {
 			if(sq.anyBuilding() != null) {
 				this.delegate.buildingSelected(sq.anyBuilding());
 			}
-		} else if(node instanceof Unit) {
-			Unit unit = (Unit) node;
-			if(unit != player.controllUnit() && player.controllUnit().owner() != unit.owner()) {
-				player.controllUnit().attack(unit);
-			}
-			System.out.println("UNIT");
+			return true;
 		}
+		return false;
 	}
 	
 	public GameMap map() {

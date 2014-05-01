@@ -23,6 +23,7 @@ import com.skorulis.scene.UpdateInfo;
 public class GameScene implements SceneNode, Disposable {
 
 	private ArrayList<Unit> units;
+	public ArrayList<SceneNode> effects;
 	private GameMap map;
 	private Matrix4 transform;
 	private BuildingPlacement placingBuilding;
@@ -39,6 +40,7 @@ public class GameScene implements SceneNode, Disposable {
 		
 		transform = new Matrix4();		
 		units = new ArrayList<Unit>();
+		effects = new ArrayList<SceneNode>();
 		this.players = players;
 	}
 
@@ -58,6 +60,10 @@ public class GameScene implements SceneNode, Disposable {
 		for(Unit unit : units) {
 			unit.render(ri);
 		}
+		for(SceneNode node : effects) {
+			node.render(ri);
+		}
+		
 		if(placingBuilding != null) {
 			placingBuilding.render(ri);
 		}
@@ -70,6 +76,15 @@ public class GameScene implements SceneNode, Disposable {
 			u.update(info);
 			if(!u.isAlive()) {
 				it.remove();
+			}
+		}
+		
+		Iterator<SceneNode> effectIt = effects.iterator();
+		while(effectIt.hasNext()) {
+			SceneNode node = effectIt.next();
+			node.update(info);
+			if(!node.isAlive()) {
+				effectIt.remove();
 			}
 		}
 		
