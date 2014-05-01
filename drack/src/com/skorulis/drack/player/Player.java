@@ -3,6 +3,7 @@ package com.skorulis.drack.player;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
@@ -10,6 +11,7 @@ import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.serialisation.PlayerJson;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.SceneHelper;
+import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
 
 public class Player {
@@ -19,6 +21,7 @@ public class Player {
 	private Unit controllingUnit;
 	private Set<Unit> ownedUnits;
 	private Set<Building> ownedBuildings;
+	private PlayerDelegate delegate;
 	
 	public Player(String playerId) {
 		this.playerId = playerId;
@@ -101,6 +104,16 @@ public class Player {
 		json.playerId = playerId;
 		json.resources = this.resources.getSerialisation();
 		return json;
+	}
+	
+	public void setDelegate(PlayerDelegate delegate) {
+		this.delegate = delegate;
+	}
+	
+	public void addResources(ResourceBatch batch, SceneNode at) {
+		this.resources.add(batch);
+		Vector3 loc = at.absTransform().getTranslation(new Vector3());
+		this.delegate.resourcesAdded(this, loc, batch);
 	}
 	
 }

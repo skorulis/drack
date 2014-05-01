@@ -14,7 +14,7 @@ public class DepositAction extends UnitAction {
 	}
 
 	public void update(UpdateInfo ui) {
-		this.unit.owner().resources().add(this.unit.resources());
+		this.unit.owner().addResources(this.unit.resources(), this.unit);
 		this.unit.resources().clear();
 		this.finished = true;
 	}

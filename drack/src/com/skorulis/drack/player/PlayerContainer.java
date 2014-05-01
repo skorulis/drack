@@ -5,11 +5,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.serialisation.PlayerJson;
 import com.skorulis.scene.UpdateInfo;
 
-public class PlayerContainer {
+public class PlayerContainer implements PlayerDelegate {
 
 	private Player humanPlayer;
 	private Set<Player> players;
@@ -24,7 +26,7 @@ public class PlayerContainer {
 		players = new HashSet<Player>();
 		for(PlayerJson pj : json) {
 			Player p = new Player(pj,def);
-			players.add(p);
+			addPlayer(p);
 			if(p.playerId().equals("human")) {
 				humanPlayer = p;
 			}
@@ -33,6 +35,7 @@ public class PlayerContainer {
 	
 	public void addPlayer(Player p) {
 		players.add(p);
+		p.setDelegate(this);
 	}
 	
 	public Player findPlayer(String id) {
@@ -63,6 +66,12 @@ public class PlayerContainer {
 	
 	public Player humanPlayer() {
 		return humanPlayer;
+	}
+
+	@Override
+	public void resourcesAdded(Player player, Vector3 loc,
+			ResourceBatch resources) {
+		System.out.println("Adding " + resources.count());
 	}
 	
 }
