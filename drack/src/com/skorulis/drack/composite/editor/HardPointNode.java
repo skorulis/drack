@@ -5,10 +5,9 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.def.attachment.HardPointDef;
 import com.skorulis.gdx.SKAssetManager;
+import com.skorulis.scene.IntersectionList;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
@@ -45,11 +44,12 @@ public class HardPointNode implements SceneNode {
 	}
 
 	@Override
-	public SceneNode intersect(Ray ray, Vector3 point) {
-		if(Intersector.intersectRaySphere(ray, this.def.loc, this.def.type.size(), point)) {
-			return this;
+	public boolean intersect(IntersectionList list) {
+		if(Intersector.intersectRaySphere(list.ray(), this.def.loc, this.def.type.size(), list.tmpPoint)) {
+			list.addIntersection(this, list.tmpPoint);
+			return true;
 		}
-		return null;
+		return false;
 	}
 
 	@Override

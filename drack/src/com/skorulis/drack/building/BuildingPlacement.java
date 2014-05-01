@@ -10,6 +10,7 @@ import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.gdx.SKAssetManager;
+import com.skorulis.scene.IntersectionList;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
@@ -46,9 +47,10 @@ public class BuildingPlacement implements SceneNode{
 		ri.batch.render(cube,ri.environment);
 	}
 	@Override
-	public SceneNode intersect(Ray ray, Vector3 point) {
-		return null;
+	public boolean intersect(IntersectionList list) {
+		return false;
 	}
+	
 	@Override
 	public void update(UpdateInfo info) {
 		

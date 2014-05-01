@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.serialisation.PlayerJson;
 import com.skorulis.scene.UpdateInfo;
 
@@ -19,10 +20,10 @@ public class PlayerContainer {
 		players.add(humanPlayer);
 	}
 	
-	public PlayerContainer(ArrayList<PlayerJson> json) {
+	public PlayerContainer(ArrayList<PlayerJson> json, DefManager def) {
 		players = new HashSet<Player>();
 		for(PlayerJson pj : json) {
-			Player p = new Player(pj.playerId);
+			Player p = new Player(pj,def);
 			players.add(p);
 			if(p.playerId().equals("human")) {
 				humanPlayer = p;

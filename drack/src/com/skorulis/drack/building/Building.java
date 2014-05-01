@@ -2,6 +2,7 @@ package com.skorulis.drack.building;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
@@ -12,6 +13,7 @@ import com.skorulis.drack.player.Player;
 import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.serialisation.building.BuildingJson;
 import com.skorulis.gdx.SKAssetManager;
+import com.skorulis.scene.IntersectionList;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
@@ -56,8 +58,8 @@ public class Building implements SceneNode {
 	}
 
 	@Override
-	public SceneNode intersect(Ray ray, Vector3 point) {
-		return null;
+	public boolean intersect(IntersectionList list) {
+		return false;
 	}
 
 	@Override

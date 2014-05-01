@@ -5,10 +5,10 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
-import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.serialisation.MapSquareJson;
 import com.skorulis.gdx.SKAssetManager;
+import com.skorulis.scene.IntersectionList;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
@@ -92,11 +92,13 @@ public class MapSquare implements SceneNode {
 		return "MS " + x + "," + z;
 	}
 	
-	public SceneNode intersect(Ray ray, Vector3 point) {
-		if(Intersector.intersectRayBounds(ray, boundingBox(), point)) {
-			return this;
+	@Override
+	public boolean intersect(IntersectionList list) {
+		if(Intersector.intersectRayBounds(list.ray(), boundingBox(), list.tmpPoint)) {
+			list.addIntersection(this, list.tmpPoint);
+			return true;
 		}
-		return null;
+		return false;
 	}
 	
 	public boolean isPassable() {

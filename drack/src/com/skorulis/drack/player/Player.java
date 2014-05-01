@@ -3,9 +3,9 @@ package com.skorulis.drack.player;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.Building;
+import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.serialisation.PlayerJson;
 import com.skorulis.drack.unit.Unit;
@@ -23,6 +23,13 @@ public class Player {
 	public Player(String playerId) {
 		this.playerId = playerId;
 		resources = new ResourceBatch();
+		ownedUnits = new HashSet<Unit>();
+		ownedBuildings = new HashSet<Building>();
+	}
+	
+	public Player(PlayerJson json, DefManager def) {
+		this.playerId = json.playerId;
+		this.resources = new ResourceBatch(json.resources,def);
 		ownedUnits = new HashSet<Unit>();
 		ownedBuildings = new HashSet<Building>();
 	}
@@ -92,6 +99,7 @@ public class Player {
 	public PlayerJson getSerialisation() {
 		PlayerJson json = new PlayerJson();
 		json.playerId = playerId;
+		json.resources = this.resources.getSerialisation();
 		return json;
 	}
 	

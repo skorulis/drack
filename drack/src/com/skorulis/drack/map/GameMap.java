@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.serialisation.MapJson;
 import com.skorulis.gdx.SKAssetManager;
+import com.skorulis.scene.IntersectionList;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
@@ -73,28 +74,16 @@ public class GameMap implements SceneNode, Disposable{
 		}
 	}
 
-	public SceneNode intersect(Ray ray, Vector3 point) {
-		float bestDist = 100000;
-		Vector3 bestPoint = null;
-		SceneNode best = null;
+	@Override
+	public boolean intersect(IntersectionList list) {
+		int count = list.intersectionCount();
 		for(int i = 0; i < chunks.length; ++i) {
 			for(int j = 0; j < chunks[i].length; ++j) {
-				SceneNode n = chunks[i][j].intersect(ray, point);
-				if(n != null) {
-					float dist = point.sub(ray.origin).len();
-					if(dist < bestDist) {
-						bestDist = dist;
-						bestPoint = point.cpy();
-						best = n;
-					}
-				}
+				chunks[i][j].intersect(list);
 			}
 		}
-		if(best != null) {
-			point.set(bestPoint);
-		}
 		
-		return best;
+		return list.intersectionCount() > count;
 	}
 	
 	public Set<MapSquare> adjacentSquares(MapSquare square) {

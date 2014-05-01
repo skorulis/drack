@@ -21,7 +21,6 @@ public class SceneGenerator {
 		HullAttachment gun2 = mapGen.def().getWeapon("beam").create(mapGen.assets(), unit.attachmentContainer().emptyPoint());
 		unit.attachmentContainer().addAttachment(gun2);
 		
-		unit.setDelegate(scene);
 		MapSquare sq = scene.map().squareAt(10, 10);
 		scene.addUnit(unit, sq);
 		

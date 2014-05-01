@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
 import com.skorulis.drack.building.BuildingPlacement;
 import com.skorulis.drack.def.DefManager;
@@ -13,16 +12,15 @@ import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.player.PlayerContainer;
-import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.drack.serialisation.GameSceneJson;
 import com.skorulis.drack.unit.Unit;
-import com.skorulis.drack.unit.UnitDelegate;
 import com.skorulis.gdx.SKAssetManager;
+import com.skorulis.scene.IntersectionList;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
 
-public class GameScene implements SceneNode, Disposable, UnitDelegate {
+public class GameScene implements SceneNode, Disposable {
 
 	private ArrayList<Unit> units;
 	private GameMap map;
@@ -83,15 +81,14 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		map.update(info);
 	}
 	
-	public SceneNode intersect(Ray ray, Vector3 point) {
+	@Override
+	public boolean intersect(IntersectionList list) {
+		int oldCount = list.intersectionCount();
 		for(Unit unit : units) {
-			SceneNode n = unit.intersect(ray, point);
-			
-			if(n != null) {
-				return n;
-			}
+			unit.intersect(list);
 		}
-		return map.intersect(ray, point);
+		map.intersect(list);
+		return list.intersectionCount() > oldCount;
 	}
 
 	@Override
@@ -120,18 +117,12 @@ public class GameScene implements SceneNode, Disposable, UnitDelegate {
 		this.placingBuilding = null;
 	}
 
-	@Override
-	public void resourceAdded(Unit avatar, ResourceQuantity rq) {
-		effects2D.addTextEffect(avatar.absTransform().getTranslation(new Vector3()), rq.displayText());
-	}
-	
 	public GameMap map() {
 		return map;
 	}
 	
 	public void addUnit(Unit u, MapSquare sq) {
 		this.units.add(u);
-		u.setDelegate(this);
 		u.absTransform().setTranslation(sq.getCentreLoc());
 		
 		u.setHealthBar(effects2D.createHealthBar(u));

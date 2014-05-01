@@ -5,9 +5,9 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
-import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.serialisation.MapChunkJson;
 import com.skorulis.gdx.SKAssetManager;
+import com.skorulis.scene.IntersectionList;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
@@ -58,29 +58,18 @@ public class MapChunk implements SceneNode {
 	}
 
 	@Override
-	public SceneNode intersect(Ray ray, Vector3 point) {
-		Vector3 point2 = new Vector3();
-		if(!Intersector.intersectRayBounds(ray, boundingBox, point2)) {
-			return null;
+	public boolean intersect(IntersectionList list) {
+		if(!Intersector.intersectRayBounds(list.ray(), boundingBox, list.tmpPoint)) {
+			return false;
 		}
-		
-		float bestDist = 100000;
-		SceneNode best = null;
-		
+
+		boolean hit = false;
 		for(int i = 0; i < CHUNK_SIZE; ++i) {
 			for(int j = 0; j < CHUNK_SIZE; ++j) {
-				if(Intersector.intersectRayBounds(ray, squares[i][j].boundingBox(), point2)) {
-					float dist = point.sub(ray.origin).len();
-					if(dist < bestDist) {
-						bestDist = dist;
-						best = squares[i][j];
-						point.set(point2);
-					}
-				}
-				
+				hit = hit || squares[i][j].intersect(list);
 			}
 		}
-		return best;
+		return hit;
 	}
 
 	@Override

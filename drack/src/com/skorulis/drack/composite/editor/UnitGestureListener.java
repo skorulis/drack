@@ -4,6 +4,7 @@ import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.skorulis.scene.IntersectionList;
 
 public class UnitGestureListener implements GestureListener {
 
@@ -22,8 +23,9 @@ public class UnitGestureListener implements GestureListener {
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
 		Ray ray = editor.cam().getPickRay(x, y);
+		IntersectionList list = new IntersectionList(ray);
 		for(HardPointNode hpn : editor.pointNodes) {
-			if(hpn.intersect(ray, new Vector3()) != null) {
+			if(hpn.intersect(list)) {
 				hpn.setSelected(true);
 				
 			} else {

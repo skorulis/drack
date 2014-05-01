@@ -1,10 +1,12 @@
 package com.skorulis.drack.game;
 
+import java.util.ArrayList;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
-import com.skorulis.scene.SceneNode;
+import com.skorulis.scene.IntersectionList;
+import com.skorulis.scene.IntersectionResult;
 
 public class GameEventListener implements GestureListener {
 
@@ -27,9 +29,12 @@ public class GameEventListener implements GestureListener {
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
 		Ray ray = logic.isoCam().cam().getPickRay(x, y);
-		SceneNode node = logic.scene().intersect(ray, new Vector3());
-		if(node != null) {
-			logic.nodeSelected(node);
+		IntersectionList list = new IntersectionList(ray);
+		if(logic.scene().intersect(list)) {
+			ArrayList<IntersectionResult> sorted = list.sortedResults();
+			System.out.println("Intersections " + sorted);
+			IntersectionResult first = sorted.get(0);
+			logic.nodeSelected(first.node());
 		}
 		
 		return false;

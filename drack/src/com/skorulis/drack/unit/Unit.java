@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.collision.Ray;
 import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.player.Player;
@@ -22,6 +21,7 @@ import com.skorulis.drack.unit.action.MovementAction;
 import com.skorulis.drack.unit.action.UnitAction;
 import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.gdx.SKAssetManager;
+import com.skorulis.scene.IntersectionList;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
@@ -31,7 +31,6 @@ public class Unit implements SceneNode {
 	private ModelInstance instance;
 	private ArrayList<UnitAction> actions;
 	private ResourceBatch resources;
-	private UnitDelegate delegate;
 	protected Player owner;
 	protected UnitDef def;
 	protected HealthBar healthBar;
@@ -105,12 +104,13 @@ public class Unit implements SceneNode {
 	}
 
 	@Override
-	public SceneNode intersect(Ray ray, Vector3 point) {
+	public boolean intersect(IntersectionList list) {
 		Vector3 center = absTransform().getTranslation(new Vector3());
-		if(Intersector.intersectRaySphere(ray, center, 1, point)) {
-			return this;
+		if(Intersector.intersectRaySphere(list.ray(), center, 1, list.tmpPoint)) {
+			list.addIntersection(this, list.tmpPoint);
+			return true;
 		}
-		return null;
+		return false;
 	}
 	
 	public Vector3 currentPosition() {
@@ -138,10 +138,6 @@ public class Unit implements SceneNode {
 	
 	public void addResources(ResourceBatch batch) {
 		this.resources.add(batch); 
-		ArrayList<ResourceQuantity> all = batch.allResources();
-		for(ResourceQuantity rq : all) {
-			this.delegate.resourceAdded(this,rq);
-		}
 	}
 	
 	public void clearActions() {
@@ -150,10 +146,6 @@ public class Unit implements SceneNode {
 			action.stopAction();
 		}
 		this.actions.clear();
-	}
-	
-	public void setDelegate(UnitDelegate delegate) {
-		this.delegate = delegate;
 	}
 	
 	public float speed() {
