@@ -7,15 +7,23 @@ import com.skorulis.scene.SceneNode;
 
 public class Effect2D {
 
+	private static final int TEXT_HEIGHT = 30;
+	
 	private Actor actor;
 	private SceneNode nodeAnchor;
 	private Vector3 anchor;
 	private float life;
 	private Effect2DMovement movement;
+	private int lineOffset;
 	
 	public Effect2D(Actor actor, float life) {
 		this.actor = actor;
 		this.life = life;
+	}
+	
+	public void setLineOffset(int offset) {
+		this.lineOffset = offset;
+		System.out.println("Offset " + this.lineOffset);
 	}
 	
 	public void update(float delta) {
@@ -57,7 +65,7 @@ public class Effect2D {
 		}
 		Vector3 screenPos = camera.project(anchor.cpy());
 		actor.setX(screenPos.x);
-		actor.setY(screenPos.y);
+		actor.setY(screenPos.y + lineOffset * TEXT_HEIGHT);
 	}
 	
 	public void setMovement(Effect2DMovement movement) {

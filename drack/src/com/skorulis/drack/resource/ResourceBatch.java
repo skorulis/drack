@@ -37,7 +37,6 @@ public class ResourceBatch {
 		if(maxQuantity > 0) {
 			int space =  maxQuantity - totalQuantity;
 			amount = Math.min(space, amount);
-			System.out.println("Adding " + amount);
 			
 			if(amount <= 0) {
 				return 0;

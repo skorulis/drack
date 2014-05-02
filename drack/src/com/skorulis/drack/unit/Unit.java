@@ -3,6 +3,7 @@ package com.skorulis.drack.unit;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
@@ -14,6 +15,7 @@ import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.serialisation.unit.UnitJson;
+import com.skorulis.drack.serialisation.unit.action.UnitActionJson;
 import com.skorulis.drack.ui.effects.HealthBar;
 import com.skorulis.drack.unit.action.AttackAction;
 import com.skorulis.drack.unit.action.FaceAction;
@@ -47,7 +49,10 @@ public class Unit implements SceneNode {
 	}
 	
 	public void load(UnitJson json, LoadData ld) {
-		//Empty implementation
+		for(UnitActionJson act : json.actions) {
+			UnitAction action = act.load(ld, this);
+			actions.add(action);
+		}
 	}
 	
 	public void setOwner(Player owner) {
@@ -210,6 +215,14 @@ public class Unit implements SceneNode {
 		json.z = (int)loc.z;
 		
 		json.controlled = this.owner.controllUnit() == this;
+		
+		for(UnitAction action : this.actions) {
+			UnitActionJson actionJson = action.getSerialisation();
+			if(actionJson != null) {
+				json.actions.add(actionJson);
+			}
+		}
 	}
+	
 	
 }

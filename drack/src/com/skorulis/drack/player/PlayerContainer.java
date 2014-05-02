@@ -7,7 +7,9 @@ import java.util.Set;
 
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.def.DefManager;
+import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.resource.ResourceBatch;
+import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.drack.serialisation.PlayerJson;
 import com.skorulis.scene.UpdateInfo;
 
@@ -15,15 +17,18 @@ public class PlayerContainer implements PlayerDelegate {
 
 	private Player humanPlayer;
 	private Set<Player> players;
+	private Effect2DLayer effects;
 	
-	public PlayerContainer() {
+	public PlayerContainer(Effect2DLayer effects) {
 		players = new HashSet<Player>();
 		humanPlayer = new Player("human");
 		players.add(humanPlayer);
+		this.effects = effects;
 	}
 	
-	public PlayerContainer(ArrayList<PlayerJson> json, DefManager def) {
+	public PlayerContainer(ArrayList<PlayerJson> json, DefManager def, Effect2DLayer effects) {
 		players = new HashSet<Player>();
+		this.effects = effects;
 		for(PlayerJson pj : json) {
 			Player p = new Player(pj,def);
 			addPlayer(p);
@@ -71,7 +76,13 @@ public class PlayerContainer implements PlayerDelegate {
 	@Override
 	public void resourcesAdded(Player player, Vector3 loc,
 			ResourceBatch resources) {
-		System.out.println("Adding " + resources.count());
+		
+		ArrayList<ResourceQuantity> all = resources.allResources();
+		for(int i = 0; i < all.size(); ++i) {
+			effects.addTextEffect(loc, all.get(i).displayText(),i);
+		}
+		
+		System.out.println("taking " + resources.count());
 	}
 	
 }

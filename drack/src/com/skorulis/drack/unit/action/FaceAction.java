@@ -3,6 +3,7 @@ package com.skorulis.drack.unit.action;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector3;
+import com.skorulis.drack.serialisation.unit.action.FaceActionJson;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.UpdateInfo;
 
@@ -43,5 +44,11 @@ public class FaceAction extends UnitAction {
 	}
 	
 	public void stopAction() { }
+	
+	public FaceActionJson getSerialisation() {
+		FaceActionJson json = new FaceActionJson();
+		json.target = this.target;
+		return json;
+	}
 	
 }

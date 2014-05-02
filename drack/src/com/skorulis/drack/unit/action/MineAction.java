@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.Mine;
+import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
+import com.skorulis.drack.serialisation.unit.action.MineActionJson;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.UpdateInfo;
 
@@ -65,5 +67,14 @@ public class MineAction extends UnitAction {
 	}
 	
 	public void stopAction() { }
+	
+	
+	public MineActionJson getSerialisation() {
+		MineActionJson json = new MineActionJson();
+		MapSquare square = this.mine.mainSquare();
+		json.squareX = square.x();
+		json.squareZ = square.z();
+		return json;
+	}
 	
 }

@@ -14,7 +14,7 @@ import com.skorulis.drack.ui.effects.HealthBar;
 import com.skorulis.drack.unit.Unit;
 
 public class Effect2DLayer {
-
+	
 	private final Stage stage;
 	private final Skin skin;
 	private IsoPerspectiveCamera camera;
@@ -51,8 +51,13 @@ public class Effect2DLayer {
 	}
 	
 	public void addTextEffect(Vector3 worldPos, String text) {
+		addTextEffect(worldPos, text, 0);
+	}
+	
+	public void addTextEffect(Vector3 worldPos, String text,int offset) {
 		Label label = new Label(text,this.skin);
 		Effect2D effect = new Effect2D(label,2);
+		effect.setLineOffset(offset);
 		effect.setAnchor(worldPos);
 		
 		addEffect(effect);

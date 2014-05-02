@@ -2,6 +2,7 @@ package com.skorulis.drack.unit.action;
 
 import java.util.ArrayList;
 
+import com.skorulis.drack.serialisation.unit.action.UnitActionJson;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.UpdateInfo;
 
@@ -18,5 +19,9 @@ public abstract class UnitAction {
 	public abstract boolean shouldReplace();
 	public abstract void stopAction();
 	public abstract ArrayList<UnitAction> followingActions(UpdateInfo info);
+	
+	public UnitActionJson getSerialisation() {
+		return null;
+	}
 	
 }

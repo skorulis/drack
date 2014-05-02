@@ -53,5 +53,5 @@ public class AttackAction extends UnitAction {
 			w.finishAttack();
 		}
 	}
-
+	
 }

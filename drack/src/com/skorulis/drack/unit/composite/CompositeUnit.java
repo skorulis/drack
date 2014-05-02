@@ -26,6 +26,7 @@ public class CompositeUnit extends Unit implements CompositeObject {
 	}
 	
 	public void load(UnitJson json, LoadData ld) {
+		super.load(json, ld);
 		CompositeUnitJson cuj = (CompositeUnitJson) json;
 		attContainer.load(cuj.attachments, ld);
 	}

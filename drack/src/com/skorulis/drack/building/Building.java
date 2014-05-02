@@ -2,6 +2,7 @@ package com.skorulis.drack.building;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
@@ -108,6 +109,15 @@ public class Building implements SceneNode {
 		if(this.owner != null) {
 			json.playerId = this.owner.playerId();
 		}
+	}
+	
+	public MapSquare mainSquare() {
+		for(MapSquare ms : coveredSquares) {
+			if(ms.building() == this) {
+				return ms;
+			}
+		}
+		throw new IllegalStateException("Building does not have a main square " + this);
 	}
 	
 }

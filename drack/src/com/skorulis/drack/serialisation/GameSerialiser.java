@@ -65,7 +65,7 @@ public class GameSerialiser {
 	}
 	
 	public GameScene createScene(GameSceneJson json) {
-		PlayerContainer players = new PlayerContainer(json.players,def);
+		PlayerContainer players = new PlayerContainer(json.players,def,effects2D);
 		
 		GameMap map = createMap(json.map, players);
 		

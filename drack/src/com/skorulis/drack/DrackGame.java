@@ -60,7 +60,7 @@ public class DrackGame implements ApplicationListener, GameDelegate {
         
         GameScene scene = serialiser.read();
         if(scene == null) {
-        	PlayerContainer players = new PlayerContainer();
+        	PlayerContainer players = new PlayerContainer(effects2D);
         	MapGenerator mapGen = new MapGenerator(64, 64, assets, def, players);
         	mapGen.generateMap();
             SceneGenerator sceneGen = new SceneGenerator(mapGen, effects2D, players);

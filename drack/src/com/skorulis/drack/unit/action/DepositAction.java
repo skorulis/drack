@@ -2,6 +2,8 @@ package com.skorulis.drack.unit.action;
 
 import java.util.ArrayList;
 
+import com.skorulis.drack.serialisation.unit.action.DepositActionJson;
+import com.skorulis.drack.serialisation.unit.action.UnitActionJson;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.UpdateInfo;
 
@@ -32,5 +34,10 @@ public class DepositAction extends UnitAction {
 	}
 	
 	public void stopAction() { }
+
+	@Override
+	public UnitActionJson getSerialisation() {
+		return new DepositActionJson();
+	}
 	
 }
