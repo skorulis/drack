@@ -142,7 +142,11 @@ public class Unit implements SceneNode {
 	}
 	
 	public void addResources(ResourceBatch batch) {
-		this.resources.add(batch); 
+		if(this.owner.controllUnit() == this) {
+			this.owner.addResources(batch, this);
+		} else {
+			this.resources.add(batch);
+		}
 	}
 	
 	public void clearActions() {

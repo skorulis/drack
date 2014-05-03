@@ -2,6 +2,7 @@ package com.skorulis.drack.game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
@@ -11,6 +12,7 @@ import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
+import com.skorulis.drack.player.Player;
 import com.skorulis.drack.player.PlayerContainer;
 import com.skorulis.drack.serialisation.GameSceneJson;
 import com.skorulis.drack.unit.Unit;
@@ -175,6 +177,15 @@ public class GameScene implements SceneNode, Disposable {
 	
 	public PlayerContainer players() {
 		return players;
+	}
+	
+	public Unit findEnemyUnit(Player player) {
+		for(Unit unit : this.units) {
+			if(player != unit.owner()) {
+				return unit;
+			}
+		}
+		return null;
 	}
 
 }
