@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.effects.BulletEffect;
+import com.skorulis.drack.scene.DrackActorNode;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
@@ -49,7 +50,7 @@ public class BulletWeapon extends Weapon {
 	}
 
 	@Override
-	public void startAttack(SKAssetManager assets, Unit unit, Unit target) {
+	public void startAttack(SKAssetManager assets, DrackActorNode unit, Unit target) {
 		Vector3 start = turretPosition(unit);
 		Vector3 end = target.currentPosition();
 		

@@ -7,8 +7,8 @@ import com.skorulis.drack.building.Mine;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
+import com.skorulis.drack.scene.DrackMoveableActor;
 import com.skorulis.drack.serialisation.unit.action.MineActionJson;
-import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.UpdateInfo;
 
 public class MineAction extends UnitAction {
@@ -18,7 +18,7 @@ public class MineAction extends UnitAction {
 	private int chunkSize;
 	private boolean finished;
 	
-	public MineAction(Unit avatar, Mine mine) {
+	public MineAction(DrackMoveableActor avatar, Mine mine) {
 		super(avatar);
 		this.mine = mine;
 		this.chunkSize = 2;
@@ -27,8 +27,8 @@ public class MineAction extends UnitAction {
 	public void update(UpdateInfo ui) {
 		time += ui.delta;
 		if(time > chunkSize) {
-			unit.addResources(mine.mine(chunkSize));
-			if(unit.resources().full()) {
+			actor.addResources(mine.mine(chunkSize));
+			if(actor.resources().full()) {
 				finished = true;
 			}
 			time -= chunkSize;
@@ -44,22 +44,22 @@ public class MineAction extends UnitAction {
 	}
 	
 	public ArrayList<UnitAction> followingActions(UpdateInfo info) {
-		Building b = unit.owner().findBuilding("command", unit.currentPosition());
+		Building b = actor.owner().findBuilding("command", actor.currentPosition());
 		
 		PathFinder finder = new PathFinder(info.map());
 		
-		MapPath path1 = finder.navigate(unit, b);
+		MapPath path1 = finder.navigate(actor, b);
 		MapPath path2 = finder.navigate(path1.finalSquare(), mine);
 		
-		MovementAction move1 = new MovementAction(unit, path1);
-		MovementAction move2 = new MovementAction(unit, path2);
+		MovementAction move1 = new MovementAction(moveableActor(), path1);
+		MovementAction move2 = new MovementAction(moveableActor(), path2);
 		
-		MineAction mineAction = new MineAction(unit, mine);
+		MineAction mineAction = new MineAction(moveableActor(), mine);
 		
 		ArrayList<UnitAction> ret = new ArrayList<UnitAction>();
 		
 		ret.add(move1);
-		ret.add(new DepositAction(unit));
+		ret.add(new DepositAction(actor));
 		ret.add(move2);
 		ret.add(mineAction);
 		
@@ -75,6 +75,10 @@ public class MineAction extends UnitAction {
 		json.squareX = square.x();
 		json.squareZ = square.z();
 		return json;
+	}
+	
+	public DrackMoveableActor moveableActor() {
+		return (DrackMoveableActor) this.actor;
 	}
 	
 }

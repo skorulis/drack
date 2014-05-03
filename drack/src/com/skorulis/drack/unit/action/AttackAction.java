@@ -18,10 +18,10 @@ public class AttackAction extends UnitAction {
 	
 	@Override
 	public void update(UpdateInfo ui) {
-		Set<Weapon> weapons = unit.allWeapons();
+		Set<Weapon> weapons = actor.allWeapons();
 		for(Weapon w : weapons) {
 			if(w.isFinished()) {
-				w.startAttack(ui.assets(), unit, target);
+				w.startAttack(ui.assets(), actor, target);
 			}
 		}
 		target.takeDamage(ui.delta * 10);
@@ -48,7 +48,7 @@ public class AttackAction extends UnitAction {
 	
 	public void stopAction() {
 		System.out.println("FINISH");
-		Set<Weapon> weapons = unit.allWeapons();
+		Set<Weapon> weapons = actor.allWeapons();
 		for(Weapon w : weapons) {
 			w.finishAttack();
 		}

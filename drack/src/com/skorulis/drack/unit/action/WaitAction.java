@@ -1,16 +1,15 @@
 package com.skorulis.drack.unit.action;
 
 import java.util.ArrayList;
-
+import com.skorulis.drack.scene.DrackActorNode;
 import com.skorulis.drack.serialisation.unit.action.WaitActionJson;
-import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.UpdateInfo;
 
 public class WaitAction extends UnitAction {
 
 	private float timeRemaining;
 	
-	public WaitAction(Unit unit, float timeRemaining) {
+	public WaitAction(DrackActorNode unit, float timeRemaining) {
 		super(unit);
 		this.timeRemaining = timeRemaining;
 	}

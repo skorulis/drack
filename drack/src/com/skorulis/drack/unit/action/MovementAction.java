@@ -5,8 +5,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.MovementInfo;
+import com.skorulis.drack.scene.DrackMoveableActor;
 import com.skorulis.drack.serialisation.unit.action.MovementActionJson;
-import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.UpdateInfo;
 
 public class MovementAction extends UnitAction {
@@ -14,7 +14,7 @@ public class MovementAction extends UnitAction {
 	private MapPath path;
 	private MovementInfo movement;
 	
-	public MovementAction(Unit avatar, MapPath path) {
+	public MovementAction(DrackMoveableActor avatar, MapPath path) {
 		super(avatar);
 		setPath(path);
 	}
@@ -22,7 +22,7 @@ public class MovementAction extends UnitAction {
 	public void setPath(MapPath path) {
 		this.path = path;
 		if (movement == null) {
-			movement = path.getMovement(unit.speed());
+			movement = path.getMovement(moveableActor().speed());
 		}
 	}
 
@@ -31,16 +31,16 @@ public class MovementAction extends UnitAction {
 		if(movement == null) {
 			return;
 		}
-		unit.absTransform().setToWorld(movement.update(ui.delta), movement.direction(),new Vector3(0,1,0));
+		actor.absTransform().setToWorld(movement.update(ui.delta), movement.direction(),new Vector3(0,1,0));
 		if (movement.finished()) {
 			if (path.finished()) {
 				movement = null;
 				path = null;
 			} else {
 				if (movement.destSquare == path.nextNode()) {
-					movement = path.next(unit.speed());
+					movement = path.next(moveableActor().speed());
 				} else {
-					movement = path.getMovement(unit.speed());
+					movement = path.getMovement(moveableActor().speed());
 				}
 			}
 		}
@@ -71,6 +71,10 @@ public class MovementAction extends UnitAction {
 		json.squareZ = square.z();
 		
 		return json;
+	}
+	
+	public DrackMoveableActor moveableActor() {
+		return (DrackMoveableActor) actor;
 	}
 
 }

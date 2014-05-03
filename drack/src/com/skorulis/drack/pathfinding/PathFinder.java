@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
-import com.skorulis.drack.unit.Unit;
+import com.skorulis.drack.scene.DrackActorNode;
 
 public class PathFinder {
 
@@ -36,7 +35,7 @@ public class PathFinder {
 		closedList = new ArrayList<PathNodeInfo>();	
 	}
 	
-	public MapPath navigate(Unit unit, Building to) {
+	public MapPath navigate(DrackActorNode unit, Building to) {
 		Vector3 pos = unit.currentPosition();
 		MapSquare from = map.squareAt(pos);
 		return navigate(from, to);

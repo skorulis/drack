@@ -3,7 +3,6 @@ package com.skorulis.drack.unit;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
@@ -13,6 +12,7 @@ import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.resource.ResourceQuantity;
+import com.skorulis.drack.scene.DrackMoveableActor;
 import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.serialisation.unit.UnitJson;
 import com.skorulis.drack.serialisation.unit.action.UnitActionJson;
@@ -25,10 +25,9 @@ import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.IntersectionList;
 import com.skorulis.scene.RenderInfo;
-import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
 
-public class Unit implements SceneNode {
+public class Unit implements DrackMoveableActor {
 
 	private ModelInstance instance;
 	private ArrayList<UnitAction> actions;
@@ -141,6 +140,7 @@ public class Unit implements SceneNode {
 		this.actions.add(action);
 	}
 	
+	@Override
 	public void addResources(ResourceBatch batch) {
 		if(this.owner.controllUnit() == this) {
 			this.owner.addResources(batch, this);
