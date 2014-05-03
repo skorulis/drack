@@ -2,22 +2,23 @@ package com.skorulis.drack.building;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.player.Player;
+import com.skorulis.drack.resource.ResourceBatch;
+import com.skorulis.drack.scene.DrackActorNode;
 import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.serialisation.building.BuildingJson;
+import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.IntersectionList;
 import com.skorulis.scene.RenderInfo;
-import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;
 
-public class Building implements SceneNode {
+public class Building implements DrackActorNode {
 
 	protected ModelInstance buildingInstance;
 	protected BuildingDef def;
@@ -118,6 +119,27 @@ public class Building implements SceneNode {
 			}
 		}
 		throw new IllegalStateException("Building does not have a main square " + this);
+	}
+
+	@Override
+	public Set<Weapon> allWeapons() {
+		return new HashSet<Weapon>();
+	}
+
+	@Override
+	public ResourceBatch resources() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector3 currentPosition() {
+		return absTransform().getTranslation(new Vector3());
+	}
+
+	@Override
+	public void addResources(ResourceBatch batch) {
+		
 	}
 	
 }

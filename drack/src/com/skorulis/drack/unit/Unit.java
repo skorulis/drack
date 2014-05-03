@@ -15,8 +15,8 @@ import com.skorulis.drack.resource.ResourceQuantity;
 import com.skorulis.drack.scene.DrackMoveableActor;
 import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.serialisation.unit.UnitJson;
-import com.skorulis.drack.serialisation.unit.action.UnitActionJson;
 import com.skorulis.drack.ui.effects.HealthBar;
+import com.skorulis.drack.unit.action.ActionContainer;
 import com.skorulis.drack.unit.action.AttackAction;
 import com.skorulis.drack.unit.action.FaceAction;
 import com.skorulis.drack.unit.action.MovementAction;
@@ -30,7 +30,7 @@ import com.skorulis.scene.UpdateInfo;
 public class Unit implements DrackMoveableActor {
 
 	private ModelInstance instance;
-	private ArrayList<UnitAction> actions;
+	private ActionContainer actions;
 	private ResourceBatch resources;
 	protected Player owner;
 	protected UnitDef def;
@@ -39,7 +39,7 @@ public class Unit implements DrackMoveableActor {
 	
 	public Unit() {
 		resources = new ResourceBatch();
-		this.actions = new ArrayList<UnitAction>();
+		this.actions = new ActionContainer(this);
 		this.currentHealth = maxHealth();
 	}
 	
@@ -48,10 +48,7 @@ public class Unit implements DrackMoveableActor {
 	}
 	
 	public void load(UnitJson json, LoadData ld) {
-		for(UnitActionJson act : json.actions) {
-			UnitAction action = act.load(ld, this);
-			actions.add(action);
-		}
+		actions.load(json.actions, ld);
 	}
 	
 	public void setOwner(Player owner) {
@@ -68,7 +65,7 @@ public class Unit implements DrackMoveableActor {
 		if(path == null || path.length() == 0) {
 			return;
 		}
-		UnitAction action = currentAction();
+		UnitAction action = actions.currentAction();
 		if(action != null && action instanceof MovementAction) {
 			((MovementAction)action).setPath(path);
 		} else {
@@ -93,18 +90,7 @@ public class Unit implements DrackMoveableActor {
 	}
 	
 	public void update(UpdateInfo info) {
-		UnitAction action = currentAction();
-		if(action != null) {
-			action.update(info);
-			if(action.finished()) {
-				action.stopAction();
-				actions.remove(0);
-				ArrayList<UnitAction> following = action.followingActions(info);
-				if(following != null) {
-					actions.addAll(0, following);
-				}
-			}
-		}
+		actions.update(info);
 	}
 
 	@Override
@@ -118,7 +104,7 @@ public class Unit implements DrackMoveableActor {
 	}
 	
 	public Vector3 currentPosition() {
-		UnitAction action = currentAction();
+		UnitAction action = actions.currentAction();
 		if(action != null && action instanceof MovementAction) {
 			return ((MovementAction) action).movingTo();
 		}
@@ -134,10 +120,7 @@ public class Unit implements DrackMoveableActor {
 	}
 	
 	public void addAction(UnitAction action) {
-		if(action.shouldReplace()) {
-			clearActions();
-		}
-		this.actions.add(action);
+		actions.addAction(action);
 	}
 	
 	@Override
@@ -149,27 +132,12 @@ public class Unit implements DrackMoveableActor {
 		}
 	}
 	
-	public void clearActions() {
-		UnitAction action = this.currentAction();
-		if(action != null) {
-			action.stopAction();
-		}
-		this.actions.clear();
-	}
-	
 	public float speed() {
 		return def.speed();
 	}
 	
 	public Player owner() {
 		return owner;
-	}
-	
-	public UnitAction currentAction() {
-		if(actions.size() > 0) {
-			return actions.get(0);
-		}
-		return null;
 	}
 	
 	public int maxHealth() {
@@ -220,12 +188,7 @@ public class Unit implements DrackMoveableActor {
 		
 		json.controlled = this.owner.controllUnit() == this;
 		
-		for(UnitAction action : this.actions) {
-			UnitActionJson actionJson = action.getSerialisation();
-			if(actionJson != null) {
-				json.actions.add(actionJson);
-			}
-		}
+		json.actions = this.actions.getSerialisation();
 	}
 	
 	
