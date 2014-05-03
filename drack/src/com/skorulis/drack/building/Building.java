@@ -2,6 +2,7 @@ package com.skorulis.drack.building;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
@@ -12,6 +13,7 @@ import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.scene.DrackActorNode;
 import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.serialisation.building.BuildingJson;
+import com.skorulis.drack.unit.action.ActionContainer;
 import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.IntersectionList;
@@ -25,13 +27,15 @@ public class Building implements DrackActorNode {
 	protected boolean beingPlaced;
 	protected Player owner;
 	protected Set<MapSquare> coveredSquares;
+	protected ActionContainer actions;
 	
 	public Building() {
 		coveredSquares = new HashSet<MapSquare>();
+		actions = new ActionContainer(this);
 	}
 	
 	public void load(BuildingJson json, LoadData ld) {
-		//Empty by default
+		actions.load(json.actions, ld);
 	}
 	
 	public void loadModel(SKAssetManager assets) {
@@ -64,7 +68,7 @@ public class Building implements DrackActorNode {
 
 	@Override
 	public void update(UpdateInfo info) {
-		
+		actions.update(info);
 	}
 	
 	public BuildingDef def() {
@@ -110,6 +114,7 @@ public class Building implements DrackActorNode {
 		if(this.owner != null) {
 			json.playerId = this.owner.playerId();
 		}
+		json.actions = actions.getSerialisation();
 	}
 	
 	public MapSquare mainSquare() {
@@ -139,6 +144,11 @@ public class Building implements DrackActorNode {
 
 	@Override
 	public void addResources(ResourceBatch batch) {
+		
+	}
+
+	@Override
+	public void takeDamage(float damage) {
 		
 	}
 	

@@ -119,6 +119,7 @@ public class GameScene implements SceneNode, Disposable {
 	
 	public void setPlacingBuilding(BuildingDef def, Vector3 pos) {
 		this.placingBuilding = new BuildingPlacement(assets,map,def,pos);
+		this.placingBuilding.building().setOwner(this.players.humanPlayer());
 	}
 	
 	public void movePlacementBuilding(float x, float z) {

@@ -22,6 +22,7 @@ public class CompositeBuilding extends Building implements CompositeObject {
 	}
 	
 	public void load(BuildingJson json, LoadData ld) {
+		super.load(json, ld);
 		CompositeBuildingJson cbj = (CompositeBuildingJson) json;
 		attContainer.load(cbj.attachments, ld);
 	}

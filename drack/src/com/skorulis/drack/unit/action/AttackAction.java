@@ -2,16 +2,15 @@ package com.skorulis.drack.unit.action;
 
 import java.util.ArrayList;
 import java.util.Set;
-
-import com.skorulis.drack.unit.Unit;
+import com.skorulis.drack.scene.DrackActorNode;
 import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.scene.UpdateInfo;
 
 public class AttackAction extends UnitAction {
 
-	private final Unit target;
+	private final DrackActorNode target;
 	
-	public AttackAction(Unit unit, Unit target) {
+	public AttackAction(DrackActorNode unit, DrackActorNode target) {
 		super(unit);
 		this.target = target;
 	}
@@ -42,7 +41,7 @@ public class AttackAction extends UnitAction {
 		return null;
 	}
 	
-	public Unit target() {
+	public DrackActorNode target() {
 		return target;
 	}
 	

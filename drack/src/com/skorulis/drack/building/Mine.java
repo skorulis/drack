@@ -16,6 +16,7 @@ public class Mine extends Building {
 	}
 	
 	public void load(BuildingJson json, LoadData ld) {
+		super.load(json, ld);
 		MineBuildingJson mbj = (MineBuildingJson) json;
 		resources = new ResourceBatch(mbj.resources, ld.def);
 	}

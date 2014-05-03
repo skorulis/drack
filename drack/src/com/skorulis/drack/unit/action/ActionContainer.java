@@ -32,7 +32,7 @@ public class ActionContainer {
 			if(action.finished()) {
 				action.stopAction();
 				actions.remove(0);
-				ArrayList<UnitAction> following = action.followingActions(info);
+				List<UnitAction> following = action.followingActions(info);
 				if(following != null) {
 					actions.addAll(0, following);
 				}
