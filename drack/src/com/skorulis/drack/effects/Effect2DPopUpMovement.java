@@ -27,6 +27,10 @@ public class Effect2DPopUpMovement implements Effect2DMovement{
 		this.time ++;
 		Vector3 screenPos = cam.project(effect.getAnchor().cpy());
 		screenPos.y += (time / duration) * 2;
+		
+		screenPos.x += effect.offset().x;
+		screenPos.y += effect.offset().y;
+		
 		effect.actor().setPosition(screenPos.x, screenPos.y);
 	}
 	

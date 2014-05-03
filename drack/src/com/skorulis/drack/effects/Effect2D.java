@@ -1,6 +1,7 @@
 package com.skorulis.drack.effects;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.skorulis.scene.SceneNode;
@@ -14,16 +15,16 @@ public class Effect2D {
 	private Vector3 anchor;
 	private float life;
 	private Effect2DMovement movement;
-	private int lineOffset;
+	private Vector2 offset;
 	
 	public Effect2D(Actor actor, float life) {
 		this.actor = actor;
 		this.life = life;
+		this.offset = new Vector2();
 	}
 	
 	public void setLineOffset(int offset) {
-		this.lineOffset = offset;
-		System.out.println("Offset " + this.lineOffset);
+		this.offset.y = offset * TEXT_HEIGHT;
 	}
 	
 	public void update(float delta) {
@@ -64,8 +65,8 @@ public class Effect2D {
 			anchor = nodeAnchor.absTransform().getTranslation(new Vector3());
 		}
 		Vector3 screenPos = camera.project(anchor.cpy());
-		actor.setX(screenPos.x);
-		actor.setY(screenPos.y + lineOffset * TEXT_HEIGHT);
+		actor.setX(screenPos.x + offset.x);
+		actor.setY(screenPos.y + offset.y);
 	}
 	
 	public void setMovement(Effect2DMovement movement) {
@@ -75,6 +76,10 @@ public class Effect2D {
 	
 	public Effect2DMovement movement() {
 		return movement;
+	}
+	
+	public Vector2 offset() {
+		return offset;
 	}
 	
 }
