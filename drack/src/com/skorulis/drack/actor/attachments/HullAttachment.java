@@ -78,5 +78,9 @@ public class HullAttachment implements SceneNode {
 		ret.defName = def.name();
 		return ret;
 	}
+	
+	public Matrix4 offset() {
+		return offset;
+	}
 
 }

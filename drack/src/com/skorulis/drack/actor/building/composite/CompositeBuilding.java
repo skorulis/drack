@@ -1,4 +1,4 @@
-package com.skorulis.drack.building.composite;
+package com.skorulis.drack.actor.building.composite;
 
 import java.util.Set;
 

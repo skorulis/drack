@@ -7,7 +7,7 @@ import com.skorulis.drack.actor.action.FindTargetAction;
 import com.skorulis.drack.actor.action.ActorAction;
 import com.skorulis.drack.actor.attachments.HullAttachment;
 import com.skorulis.drack.actor.attachments.Weapon;
-import com.skorulis.drack.building.composite.CompositeBuilding;
+import com.skorulis.drack.actor.building.composite.CompositeBuilding;
 import com.skorulis.drack.def.attachment.HardPointDef;
 import com.skorulis.drack.scene.DrackActorNode;
 import com.skorulis.scene.UpdateInfo;
@@ -42,8 +42,8 @@ public class TurretBuilding extends CompositeBuilding {
 	public void faceDirection(Vector3 dir) {
 		Weapon weapon = this.turretWeapon();
 		
-		Vector3 loc = weapon.absTransform().getTranslation(new Vector3());
-		weapon.absTransform().setToWorld(loc, dir, new Vector3(0,1,0));
+		Vector3 loc = weapon.offset().getTranslation(new Vector3());
+		weapon.offset().setToWorld(loc, dir, new Vector3(0,1,0));
 	}
 	
 	public Weapon turretWeapon() {
