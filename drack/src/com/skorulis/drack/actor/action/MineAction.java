@@ -2,8 +2,8 @@ package com.skorulis.drack.actor.action;
 
 import java.util.ArrayList;
 
-import com.skorulis.drack.building.Building;
-import com.skorulis.drack.building.Mine;
+import com.skorulis.drack.actor.building.Building;
+import com.skorulis.drack.actor.building.Mine;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;

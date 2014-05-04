@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
 import com.badlogic.gdx.math.Vector3;
-import com.skorulis.drack.building.Building;
+import com.skorulis.drack.actor.building.Building;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.scene.DrackActorNode;

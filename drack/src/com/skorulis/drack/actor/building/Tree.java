@@ -1,4 +1,4 @@
-package com.skorulis.drack.building;
+package com.skorulis.drack.actor.building;
 
 public class Tree extends Building {
 	

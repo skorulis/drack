@@ -1,6 +1,6 @@
 package com.skorulis.drack.game;
 
-import com.skorulis.drack.attachments.HullAttachment;
+import com.skorulis.drack.actor.attachments.HullAttachment;
 import com.skorulis.drack.effects.Effect2DLayer;
 import com.skorulis.drack.map.MapGenerator;
 import com.skorulis.drack.map.MapSquare;

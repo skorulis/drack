@@ -1,7 +1,7 @@
 package com.skorulis.drack.actor.action;
 
+import com.skorulis.drack.actor.unit.Unit;
 import com.skorulis.drack.scene.DrackActorNode;
-import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.UpdateInfo;
 
 public class FindTargetAction extends ActorAction {

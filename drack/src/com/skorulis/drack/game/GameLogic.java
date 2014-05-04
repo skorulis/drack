@@ -1,6 +1,7 @@
 package com.skorulis.drack.game;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.Environment;
@@ -9,12 +10,12 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.utils.Disposable;
+import com.skorulis.drack.actor.unit.Unit;
 import com.skorulis.drack.map.GameMap;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.pathfinding.PathFinder;
 import com.skorulis.drack.player.Player;
-import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.IntersectionResult;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneWindow;

@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.skorulis.drack.building.Building;
+import com.skorulis.drack.actor.building.Building;
 import com.skorulis.drack.ui.building.BuildMenuDialog;
 import com.skorulis.drack.ui.building.BuildingPlacementUI;
 import com.skorulis.drack.ui.inventory.InventoryDialog;

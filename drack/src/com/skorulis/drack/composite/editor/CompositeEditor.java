@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Matrix4;
-import com.skorulis.drack.attachments.HullAttachment;
+import com.skorulis.drack.actor.attachments.HullAttachment;
 import com.skorulis.drack.composite.CompositeObject;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.attachment.HardPointDef;

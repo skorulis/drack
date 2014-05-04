@@ -1,4 +1,4 @@
-package com.skorulis.drack.building;
+package com.skorulis.drack.actor.building;
 
 import com.skorulis.drack.actor.action.AttackAction;
 import com.skorulis.drack.actor.action.FindTargetAction;

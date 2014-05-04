@@ -3,7 +3,7 @@ package com.skorulis.drack.actor.action;
 import java.util.ArrayList;
 import java.util.Set;
 
-import com.skorulis.drack.attachments.Weapon;
+import com.skorulis.drack.actor.attachments.Weapon;
 import com.skorulis.drack.scene.DrackActorNode;
 import com.skorulis.scene.UpdateInfo;
 

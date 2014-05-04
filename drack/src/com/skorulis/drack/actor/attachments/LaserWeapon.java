@@ -1,4 +1,4 @@
-package com.skorulis.drack.attachments;
+package com.skorulis.drack.actor.attachments;
 
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.effects.LaserEffect;

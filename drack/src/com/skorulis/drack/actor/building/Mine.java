@@ -1,4 +1,4 @@
-package com.skorulis.drack.building;
+package com.skorulis.drack.actor.building;
 
 import com.skorulis.drack.def.ResourceDef;
 import com.skorulis.drack.resource.ResourceBatch;

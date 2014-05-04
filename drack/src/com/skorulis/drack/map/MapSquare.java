@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
-import com.skorulis.drack.building.Building;
+import com.skorulis.drack.actor.building.Building;
 import com.skorulis.drack.serialisation.MapSquareJson;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.IntersectionList;

@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Disposable;
-import com.skorulis.drack.building.Building;
+import com.skorulis.drack.actor.building.Building;
 import com.skorulis.drack.serialisation.MapJson;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.IntersectionList;

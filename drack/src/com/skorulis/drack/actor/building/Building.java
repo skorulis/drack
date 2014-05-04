@@ -1,4 +1,4 @@
-package com.skorulis.drack.building;
+package com.skorulis.drack.actor.building;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.actor.action.ActionContainer;
-import com.skorulis.drack.attachments.Weapon;
+import com.skorulis.drack.actor.attachments.Weapon;
 import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.player.Player;

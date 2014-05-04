@@ -1,7 +1,7 @@
 package com.skorulis.drack.def.attachment;
 
 import com.badlogic.gdx.math.Vector3;
-import com.skorulis.drack.attachments.HullAttachment;
+import com.skorulis.drack.actor.attachments.HullAttachment;
 import com.skorulis.drack.def.BaseDef;
 import com.skorulis.drack.def.BaseDefImp;
 import com.skorulis.gdx.SKAssetManager;

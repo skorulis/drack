@@ -1,4 +1,4 @@
-package com.skorulis.drack.attachments;
+package com.skorulis.drack.actor.attachments;
 
 import java.util.HashSet;
 import java.util.Iterator;

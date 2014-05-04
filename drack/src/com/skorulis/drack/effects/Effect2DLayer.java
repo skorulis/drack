@@ -9,9 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.skorulis.drack.actor.unit.Unit;
 import com.skorulis.drack.game.IsoPerspectiveCamera;
 import com.skorulis.drack.ui.effects.HealthBar;
-import com.skorulis.drack.unit.Unit;
 
 public class Effect2DLayer {
 	

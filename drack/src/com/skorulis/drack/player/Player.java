@@ -5,11 +5,11 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.badlogic.gdx.math.Vector3;
-import com.skorulis.drack.building.Building;
+import com.skorulis.drack.actor.building.Building;
+import com.skorulis.drack.actor.unit.Unit;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.resource.ResourceBatch;
 import com.skorulis.drack.serialisation.PlayerJson;
-import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.SceneHelper;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;

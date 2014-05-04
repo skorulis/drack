@@ -1,8 +1,8 @@
-package com.skorulis.drack.building;
+package com.skorulis.drack.actor.building;
 
 import java.util.Set;
 
-import com.skorulis.drack.attachments.HullAttachment;
+import com.skorulis.drack.actor.attachments.HullAttachment;
 import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.player.Player;

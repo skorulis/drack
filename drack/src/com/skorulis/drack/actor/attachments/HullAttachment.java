@@ -1,4 +1,4 @@
-package com.skorulis.drack.attachments;
+package com.skorulis.drack.actor.attachments;
 
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;

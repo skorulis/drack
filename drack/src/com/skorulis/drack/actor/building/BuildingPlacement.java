@@ -1,4 +1,4 @@
-package com.skorulis.drack.building;
+package com.skorulis.drack.actor.building;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;

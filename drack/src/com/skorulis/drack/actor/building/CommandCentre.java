@@ -1,4 +1,4 @@
-package com.skorulis.drack.building;
+package com.skorulis.drack.actor.building;
 
 import com.badlogic.gdx.math.Vector3;
 import com.skorulis.drack.map.ForceField;

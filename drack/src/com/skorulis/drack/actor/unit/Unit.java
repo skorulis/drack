@@ -1,4 +1,4 @@
-package com.skorulis.drack.unit;
+package com.skorulis.drack.actor.unit;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,7 +13,7 @@ import com.skorulis.drack.actor.action.AttackAction;
 import com.skorulis.drack.actor.action.FaceAction;
 import com.skorulis.drack.actor.action.MovementAction;
 import com.skorulis.drack.actor.action.ActorAction;
-import com.skorulis.drack.attachments.Weapon;
+import com.skorulis.drack.actor.attachments.Weapon;
 import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.player.Player;

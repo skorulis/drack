@@ -2,8 +2,8 @@ package com.skorulis.drack.building.composite;
 
 import java.util.Set;
 
-import com.skorulis.drack.attachments.Weapon;
-import com.skorulis.drack.building.Building;
+import com.skorulis.drack.actor.attachments.Weapon;
+import com.skorulis.drack.actor.building.Building;
 import com.skorulis.drack.composite.AttachmentContainer;
 import com.skorulis.drack.composite.CompositeObject;
 import com.skorulis.drack.def.building.BuildingDef;

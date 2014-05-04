@@ -2,11 +2,11 @@ package com.skorulis.drack.map;
 
 import java.util.UUID;
 
-import com.skorulis.drack.building.Barracks;
-import com.skorulis.drack.building.Building;
-import com.skorulis.drack.building.CommandCentre;
-import com.skorulis.drack.building.DungeonTower;
-import com.skorulis.drack.building.Mine;
+import com.skorulis.drack.actor.building.Barracks;
+import com.skorulis.drack.actor.building.Building;
+import com.skorulis.drack.actor.building.CommandCentre;
+import com.skorulis.drack.actor.building.DungeonTower;
+import com.skorulis.drack.actor.building.Mine;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.player.PlayerContainer;

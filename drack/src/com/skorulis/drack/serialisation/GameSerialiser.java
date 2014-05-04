@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
+import com.skorulis.drack.actor.unit.Unit;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.effects.Effect2DLayer;
@@ -15,7 +16,6 @@ import com.skorulis.drack.map.MapGenerator;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.player.PlayerContainer;
 import com.skorulis.drack.serialisation.unit.UnitJson;
-import com.skorulis.drack.unit.Unit;
 import com.skorulis.gdx.SKAssetManager;
 
 public class GameSerialiser {

@@ -1,6 +1,6 @@
 package com.skorulis.drack.def.building;
 
-import com.skorulis.drack.building.Building;
+import com.skorulis.drack.actor.building.Building;
 import com.skorulis.drack.def.BaseDef;
 import com.skorulis.drack.def.BaseDefImp;
 import com.skorulis.drack.ui.building.BuildingUI;

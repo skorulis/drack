@@ -1,9 +1,9 @@
 package com.skorulis.drack.def.unit;
 
+import com.skorulis.drack.actor.unit.Unit;
 import com.skorulis.drack.def.BaseDef;
 import com.skorulis.drack.def.BaseDefImp;
 import com.skorulis.drack.player.Player;
-import com.skorulis.drack.unit.Unit;
 import com.skorulis.drack.unit.composite.CompositeUnit;
 import com.skorulis.gdx.SKAssetManager;
 
