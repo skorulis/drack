@@ -1,6 +1,8 @@
 package com.skorulis.drack.building.composite;
 
 import java.util.Set;
+
+import com.skorulis.drack.attachments.Weapon;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.composite.AttachmentContainer;
 import com.skorulis.drack.composite.CompositeObject;
@@ -9,7 +11,6 @@ import com.skorulis.drack.def.building.CompositeBuildingDef;
 import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.serialisation.building.BuildingJson;
 import com.skorulis.drack.serialisation.building.CompositeBuildingJson;
-import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.UpdateInfo;
 

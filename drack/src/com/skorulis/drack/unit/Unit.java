@@ -3,10 +3,17 @@ package com.skorulis.drack.unit;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
+import com.skorulis.drack.actor.action.ActionContainer;
+import com.skorulis.drack.actor.action.AttackAction;
+import com.skorulis.drack.actor.action.FaceAction;
+import com.skorulis.drack.actor.action.MovementAction;
+import com.skorulis.drack.actor.action.ActorAction;
+import com.skorulis.drack.attachments.Weapon;
 import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.pathfinding.MapPath;
 import com.skorulis.drack.player.Player;
@@ -16,12 +23,6 @@ import com.skorulis.drack.scene.DrackMoveableActor;
 import com.skorulis.drack.serialisation.LoadData;
 import com.skorulis.drack.serialisation.unit.UnitJson;
 import com.skorulis.drack.ui.effects.HealthBar;
-import com.skorulis.drack.unit.action.ActionContainer;
-import com.skorulis.drack.unit.action.AttackAction;
-import com.skorulis.drack.unit.action.FaceAction;
-import com.skorulis.drack.unit.action.MovementAction;
-import com.skorulis.drack.unit.action.UnitAction;
-import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.IntersectionList;
 import com.skorulis.scene.RenderInfo;
@@ -65,11 +66,11 @@ public class Unit implements DrackMoveableActor {
 		if(path == null || path.length() == 0) {
 			return;
 		}
-		UnitAction action = actions.currentAction();
+		ActorAction action = actions.currentAction();
 		if(action != null && action instanceof MovementAction) {
 			((MovementAction)action).setPath(path);
 		} else {
-			UnitAction newAction = new MovementAction(this,path);
+			ActorAction newAction = new MovementAction(this,path);
 			addAction(newAction);
 		}
 	}
@@ -104,7 +105,7 @@ public class Unit implements DrackMoveableActor {
 	}
 	
 	public Vector3 currentPosition() {
-		UnitAction action = actions.currentAction();
+		ActorAction action = actions.currentAction();
 		if(action != null && action instanceof MovementAction) {
 			return ((MovementAction) action).movingTo();
 		}
@@ -119,7 +120,7 @@ public class Unit implements DrackMoveableActor {
 		return resources.allResources();
 	}
 	
-	public void addAction(UnitAction action) {
+	public void addAction(ActorAction action) {
 		actions.addAction(action);
 	}
 	

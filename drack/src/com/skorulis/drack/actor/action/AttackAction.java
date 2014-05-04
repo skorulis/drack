@@ -1,12 +1,13 @@
-package com.skorulis.drack.unit.action;
+package com.skorulis.drack.actor.action;
 
 import java.util.ArrayList;
 import java.util.Set;
+
+import com.skorulis.drack.attachments.Weapon;
 import com.skorulis.drack.scene.DrackActorNode;
-import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.scene.UpdateInfo;
 
-public class AttackAction extends UnitAction {
+public class AttackAction extends ActorAction {
 
 	private final DrackActorNode target;
 	
@@ -36,7 +37,7 @@ public class AttackAction extends UnitAction {
 	}
 
 	@Override
-	public ArrayList<UnitAction> followingActions(UpdateInfo info) {
+	public ArrayList<ActorAction> followingActions(UpdateInfo info) {
 		return null;
 	}
 	

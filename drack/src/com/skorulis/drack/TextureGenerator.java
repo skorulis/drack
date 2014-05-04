@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Vector3;
+import com.skorulis.drack.attachments.HullAttachment;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.attachment.HullAttachmentDef;
@@ -17,7 +18,6 @@ import com.skorulis.drack.def.attachment.HardPointDef;
 import com.skorulis.drack.def.attachment.HardPointDef.HullPointType;
 import com.skorulis.drack.def.building.BuildingDef;
 import com.skorulis.drack.game.IsoPerspectiveCamera;
-import com.skorulis.drack.unit.composite.HullAttachment;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 

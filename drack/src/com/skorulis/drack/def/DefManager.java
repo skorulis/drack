@@ -6,7 +6,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
 import com.badlogic.gdx.math.Vector3;
+import com.skorulis.drack.attachments.BulletWeapon;
+import com.skorulis.drack.attachments.LaserWeapon;
 import com.skorulis.drack.building.Barracks;
 import com.skorulis.drack.building.Building;
 import com.skorulis.drack.building.CommandCentre;
@@ -32,8 +35,6 @@ import com.skorulis.drack.ui.building.BarracksUI;
 import com.skorulis.drack.ui.building.CommandUI;
 import com.skorulis.drack.ui.building.MineUI;
 import com.skorulis.drack.ui.building.TurretUI;
-import com.skorulis.drack.unit.composite.BulletWeapon;
-import com.skorulis.drack.unit.composite.LaserWeapon;
 
 public class DefManager {
 

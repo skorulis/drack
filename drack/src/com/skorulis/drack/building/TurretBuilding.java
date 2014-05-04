@@ -1,10 +1,10 @@
 package com.skorulis.drack.building;
 
+import com.skorulis.drack.actor.action.AttackAction;
+import com.skorulis.drack.actor.action.FindTargetAction;
+import com.skorulis.drack.actor.action.ActorAction;
 import com.skorulis.drack.building.composite.CompositeBuilding;
 import com.skorulis.drack.scene.DrackActorNode;
-import com.skorulis.drack.unit.action.AttackAction;
-import com.skorulis.drack.unit.action.FindTargetAction;
-import com.skorulis.drack.unit.action.UnitAction;
 import com.skorulis.scene.UpdateInfo;
 
 public class TurretBuilding extends CompositeBuilding {
@@ -16,7 +16,7 @@ public class TurretBuilding extends CompositeBuilding {
 	public void update(UpdateInfo ui) {
 		super.update(ui);
 		
-		UnitAction action = this.actions.currentAction();
+		ActorAction action = this.actions.currentAction();
 		if(action == null) {
 			this.actions.addAction(new FindTargetAction(this));
 		} else if(action instanceof FindTargetAction) {

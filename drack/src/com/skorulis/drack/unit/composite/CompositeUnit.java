@@ -2,6 +2,7 @@ package com.skorulis.drack.unit.composite;
 
 import java.util.Set;
 
+import com.skorulis.drack.attachments.Weapon;
 import com.skorulis.drack.composite.AttachmentContainer;
 import com.skorulis.drack.composite.CompositeObject;
 import com.skorulis.drack.def.unit.CompositeUnitDef;

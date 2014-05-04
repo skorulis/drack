@@ -1,10 +1,10 @@
-package com.skorulis.drack.unit.action;
+package com.skorulis.drack.actor.action;
 
 import com.skorulis.drack.scene.DrackActorNode;
 import com.skorulis.drack.unit.Unit;
 import com.skorulis.scene.UpdateInfo;
 
-public class FindTargetAction extends UnitAction {
+public class FindTargetAction extends ActorAction {
 
 	private Unit discovered;
 	

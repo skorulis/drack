@@ -1,4 +1,4 @@
-package com.skorulis.drack.unit.action;
+package com.skorulis.drack.actor.action;
 
 import java.util.ArrayList;
 import com.badlogic.gdx.math.Vector3;
@@ -9,7 +9,7 @@ import com.skorulis.drack.scene.DrackMoveableActor;
 import com.skorulis.drack.serialisation.unit.action.MovementActionJson;
 import com.skorulis.scene.UpdateInfo;
 
-public class MovementAction extends UnitAction {
+public class MovementAction extends ActorAction {
 	
 	private MapPath path;
 	private MovementInfo movement;
@@ -58,8 +58,8 @@ public class MovementAction extends UnitAction {
 		return true;
 	}
 	
-	public ArrayList<UnitAction> followingActions(UpdateInfo info) {
-		return new ArrayList<UnitAction>();
+	public ArrayList<ActorAction> followingActions(UpdateInfo info) {
+		return new ArrayList<ActorAction>();
 	}
 	
 	public void stopAction() { }

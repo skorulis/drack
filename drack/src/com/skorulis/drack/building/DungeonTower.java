@@ -1,11 +1,12 @@
 package com.skorulis.drack.building;
 
 import java.util.Set;
+
+import com.skorulis.drack.attachments.HullAttachment;
 import com.skorulis.drack.def.unit.UnitDef;
 import com.skorulis.drack.map.MapSquare;
 import com.skorulis.drack.player.Player;
 import com.skorulis.drack.unit.composite.CompositeUnit;
-import com.skorulis.drack.unit.composite.HullAttachment;
 import com.skorulis.scene.UpdateInfo;
 
 public class DungeonTower extends Building{

@@ -2,6 +2,7 @@ package com.skorulis.drack.composite.editor;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
@@ -11,10 +12,10 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Matrix4;
+import com.skorulis.drack.attachments.HullAttachment;
 import com.skorulis.drack.composite.CompositeObject;
 import com.skorulis.drack.def.DefManager;
 import com.skorulis.drack.def.attachment.HardPointDef;
-import com.skorulis.drack.unit.composite.HullAttachment;
 import com.skorulis.gdx.SKAssetManager;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneWindow;

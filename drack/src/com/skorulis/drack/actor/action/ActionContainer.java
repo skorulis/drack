@@ -1,4 +1,4 @@
-package com.skorulis.drack.unit.action;
+package com.skorulis.drack.actor.action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,28 +11,28 @@ import com.skorulis.scene.UpdateInfo;
 public class ActionContainer {
 
 	private DrackActorNode node;
-	private ArrayList<UnitAction> actions;
+	private ArrayList<ActorAction> actions;
 	
 	public ActionContainer(DrackActorNode node) {
 		this.node = node;
-		this.actions = new ArrayList<UnitAction>();
+		this.actions = new ArrayList<ActorAction>();
 	}
 	
 	public void load(List<UnitActionJson> list, LoadData ld) {
 		for(UnitActionJson act : list) {
-			UnitAction action = act.load(ld, this.node);
+			ActorAction action = act.load(ld, this.node);
 			actions.add(action);
 		}
 	}
 	
 	public void update(UpdateInfo info) {
-		UnitAction action = currentAction();
+		ActorAction action = currentAction();
 		if(action != null) {
 			action.update(info);
 			if(action.finished()) {
 				action.stopAction();
 				actions.remove(0);
-				List<UnitAction> following = action.followingActions(info);
+				List<ActorAction> following = action.followingActions(info);
 				if(following != null) {
 					actions.addAll(0, following);
 				}
@@ -40,14 +40,14 @@ public class ActionContainer {
 		}
 	}
 	
-	public UnitAction currentAction() {
+	public ActorAction currentAction() {
 		if(actions.size() > 0) {
 			return actions.get(0);
 		}
 		return null;
 	}
 	
-	public void addAction(UnitAction action) {
+	public void addAction(ActorAction action) {
 		if(action.shouldReplace()) {
 			clearActions();
 		}
@@ -55,7 +55,7 @@ public class ActionContainer {
 	}
 	
 	public void clearActions() {
-		UnitAction action = this.currentAction();
+		ActorAction action = this.currentAction();
 		if(action != null) {
 			action.stopAction();
 		}
@@ -64,7 +64,7 @@ public class ActionContainer {
 	
 	public ArrayList<UnitActionJson> getSerialisation() {
 		ArrayList<UnitActionJson> ret = new ArrayList<UnitActionJson>();
-		for(UnitAction action : this.actions) {
+		for(ActorAction action : this.actions) {
 			UnitActionJson actionJson = action.getSerialisation();
 			if(actionJson != null) {
 				ret.add(actionJson);

@@ -1,0 +1,1 @@
+rm drack-desktop/data/savefile.json

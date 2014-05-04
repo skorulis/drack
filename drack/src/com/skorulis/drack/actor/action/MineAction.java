@@ -1,4 +1,4 @@
-package com.skorulis.drack.unit.action;
+package com.skorulis.drack.actor.action;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import com.skorulis.drack.scene.DrackMoveableActor;
 import com.skorulis.drack.serialisation.unit.action.MineActionJson;
 import com.skorulis.scene.UpdateInfo;
 
-public class MineAction extends UnitAction {
+public class MineAction extends ActorAction {
 
 	private Mine mine;
 	private float time;
@@ -43,7 +43,7 @@ public class MineAction extends UnitAction {
 		return false;
 	}
 	
-	public ArrayList<UnitAction> followingActions(UpdateInfo info) {
+	public ArrayList<ActorAction> followingActions(UpdateInfo info) {
 		Building b = actor.owner().findBuilding("command", actor.currentPosition());
 		
 		PathFinder finder = new PathFinder(info.map());
@@ -56,7 +56,7 @@ public class MineAction extends UnitAction {
 		
 		MineAction mineAction = new MineAction(moveableActor(), mine);
 		
-		ArrayList<UnitAction> ret = new ArrayList<UnitAction>();
+		ArrayList<ActorAction> ret = new ArrayList<ActorAction>();
 		
 		ret.add(move1);
 		ret.add(new DepositAction(actor));

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.skorulis.drack.attachments.HullAttachment;
+import com.skorulis.drack.attachments.Weapon;
 import com.skorulis.drack.def.attachment.HardPointDef;
 import com.skorulis.drack.def.attachment.HullAttachmentDef;
 import com.skorulis.drack.serialisation.AttachmentJson;
 import com.skorulis.drack.serialisation.LoadData;
-import com.skorulis.drack.unit.composite.HullAttachment;
-import com.skorulis.drack.unit.composite.Weapon;
 import com.skorulis.scene.RenderInfo;
 import com.skorulis.scene.SceneNode;
 import com.skorulis.scene.UpdateInfo;

@@ -1,4 +1,4 @@
-package com.skorulis.drack.unit.action;
+package com.skorulis.drack.actor.action;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import com.skorulis.drack.scene.DrackActorNode;
 import com.skorulis.drack.serialisation.unit.action.FaceActionJson;
 import com.skorulis.scene.UpdateInfo;
 
-public class FaceAction extends UnitAction {
+public class FaceAction extends ActorAction {
 
 	private boolean finished;
 	private Vector3 target;
@@ -39,7 +39,7 @@ public class FaceAction extends UnitAction {
 	}
 
 	@Override
-	public ArrayList<UnitAction> followingActions(UpdateInfo info) {
+	public ArrayList<ActorAction> followingActions(UpdateInfo info) {
 		return null;
 	}
 	
