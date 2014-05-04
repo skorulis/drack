@@ -8,6 +8,8 @@ import com.skorulis.scene.UpdateInfo;
 
 public abstract class Weapon extends HullAttachment {
 	
+	protected DrackActorNode target;
+	
 	public void update(UpdateInfo info) {
 		super.update(info);
 	}
@@ -26,7 +28,13 @@ public abstract class Weapon extends HullAttachment {
 	}
 	
 	public abstract boolean isFinished();
-	public abstract void finishAttack();
-	public abstract void startAttack(SKAssetManager assets, DrackActorNode unit, DrackActorNode target);
+	
+	public void finishAttack() {
+		this.target = null;
+	}
+	
+	public void startAttack(SKAssetManager assets, DrackActorNode unit, DrackActorNode target) {
+		this.target = target;
+	}
 	
 }

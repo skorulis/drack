@@ -10,7 +10,6 @@ import com.skorulis.scene.UpdateInfo;
 public class TurretBuilding extends CompositeBuilding {
 
 	public TurretBuilding() {
-		System.out.println("Created turret");
 	}
 	
 	@Override
@@ -18,7 +17,6 @@ public class TurretBuilding extends CompositeBuilding {
 		super.update(ui);
 		
 		UnitAction action = this.actions.currentAction();
-		System.out.println("ACTION " + this.owner);
 		if(action == null) {
 			this.actions.addAction(new FindTargetAction(this));
 		} else if(action instanceof FindTargetAction) {

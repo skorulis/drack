@@ -33,6 +33,9 @@ public class BulletWeapon extends Weapon {
 			be.update(ui);
 			if(!be.isAlive()) {
 				it.remove();
+				if(this.target != null) {
+					this.target.takeDamage(2);
+				}
 			}
 		}
 	}
@@ -44,11 +47,13 @@ public class BulletWeapon extends Weapon {
 
 	@Override
 	public void finishAttack() {
+		super.finishAttack();
 		effects.clear();
 	}
 
 	@Override
 	public void startAttack(SKAssetManager assets, DrackActorNode unit, DrackActorNode target) {
+		super.startAttack(assets, unit, target);
 		Vector3 start = turretPosition(unit);
 		Vector3 end = target.currentPosition();
 		

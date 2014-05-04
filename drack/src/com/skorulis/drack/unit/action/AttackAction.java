@@ -23,7 +23,6 @@ public class AttackAction extends UnitAction {
 				w.startAttack(ui.assets(), actor, target);
 			}
 		}
-		target.takeDamage(ui.delta * 10);
 	}
 
 	@Override
