@@ -24,7 +24,7 @@ public class FaceAction extends ActorAction {
 		dir.y = 0;
 		dir.z *= -1;
 		dir.nor();
-		actor.absTransform().setToWorld(loc, dir, new Vector3(0,1,0));
+		actor.faceDirection(dir);
 		finished = true;
 	}
 

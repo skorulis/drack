@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.skorulis.drack.actor.attachments.HullAttachment;
 import com.skorulis.drack.actor.attachments.Weapon;
+import com.skorulis.drack.def.attachment.HardPointContainer;
 import com.skorulis.drack.def.attachment.HardPointDef;
 import com.skorulis.drack.def.attachment.HullAttachmentDef;
 import com.skorulis.drack.serialisation.AttachmentJson;
@@ -16,7 +17,7 @@ import com.skorulis.scene.UpdateInfo;
 
 public class AttachmentContainer {
 
-	private Set<HardPointDef> hardPoints;
+	private HardPointContainer hardPoints;
 	private final Set<HullAttachment> attachments;
 	private final SceneNode node;
 	
@@ -35,17 +36,12 @@ public class AttachmentContainer {
 	}
 	
 	
-	public void setHardPoints(Set<HardPointDef> hardPoints) {
+	public void setHardPoints(HardPointContainer hardPoints) {
 		this.hardPoints = hardPoints;
 	}
 	
 	public HardPointDef getHardPoint(int number) {
-		for(HardPointDef hpd : this.hardPoints) {
-			if(hpd.number == number) {
-				return hpd;
-			}
-		}
-		return null;
+		return this.hardPoints.getHardPoint(number);
 	}
 	
 	public void render(RenderInfo ri) {
@@ -79,7 +75,7 @@ public class AttachmentContainer {
 	}
 	
 	public HardPointDef emptyPoint() {
-		for(HardPointDef hpd: hardPoints) {
+		for(HardPointDef hpd: hardPoints.points) {
 			if(attachmentAt(hpd) == null) {
 				return hpd;
 			}
@@ -97,7 +93,7 @@ public class AttachmentContainer {
 		return all;
 	}
 	
-	public Set<HardPointDef> hardPoints() {
+	public HardPointContainer hardPoints() {
 		return hardPoints;
 	}
 	
@@ -107,6 +103,10 @@ public class AttachmentContainer {
 			ret.add(att.getSerialisation());
 		}
 		return ret;
+	}
+	
+	public int size() {
+		return this.attachments.size();
 	}
 	
 }

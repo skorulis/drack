@@ -192,5 +192,11 @@ public class Unit implements DrackMoveableActor {
 		json.actions = this.actions.getSerialisation();
 	}
 	
+	@Override
+	public void faceDirection(Vector3 dir) {
+		Vector3 loc = this.currentPosition();
+		this.absTransform().setToWorld(loc, dir, new Vector3(0,1,0));
+	}
+	
 	
 }

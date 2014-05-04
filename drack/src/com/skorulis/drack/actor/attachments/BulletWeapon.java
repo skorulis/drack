@@ -59,8 +59,6 @@ public class BulletWeapon extends Weapon {
 		
 		BulletEffect effect = new BulletEffect(assets, start, end);
 		effects.add(effect);
-		
-		System.out.println("Start attack");
 	}
 
 }

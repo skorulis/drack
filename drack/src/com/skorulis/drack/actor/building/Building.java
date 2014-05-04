@@ -152,4 +152,8 @@ public class Building implements DrackActorNode {
 		
 	}
 	
+	public void faceDirection(Vector3 dir) {
+		//By default buildings can't move
+	}
+	
 }

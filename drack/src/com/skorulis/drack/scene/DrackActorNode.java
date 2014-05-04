@@ -16,5 +16,6 @@ public interface DrackActorNode extends SceneNode {
 	public Vector3 currentPosition();
 	public void addResources(ResourceBatch batch);
 	public void takeDamage(float damage);
+	public void faceDirection(Vector3 dir);
 	
 }
